@@ -1,0 +1,47 @@
+[
+  {
+    "subject": "Astronomy",
+    "predicate": "related_to",
+    "object": "Astrophotography",
+    "confidence": 1.0,
+    "source": "memory_inference",
+    "created_at": "2026-08-05T18:15:16.410378Z",
+    "metadata": {}
+  },
+  {
+    "subject": "Astrophotography",
+    "predicate": "requires",
+    "object": "Telescope",
+    "confidence": 1.0,
+    "source": "memory_inference",
+    "created_at": "2026-08-05T18:15:16.410402Z",
+    "metadata": {}
+  },
+  {
+    "subject": "Telescope",
+    "predicate": "utilizes",
+    "object": "Optics",
+    "confidence": 1.0,
+    "source": "memory_inference",
+    "created_at": "2026-08-05T18:15:16.410408Z",
+    "metadata": {}
+  },
+  {
+    "subject": "Python",
+    "predicate": "related_to",
+    "object": "Data Science",
+    "confidence": 1.0,
+    "source": "memory_inference",
+    "created_at": "2026-08-05T18:15:16.410413Z",
+    "metadata": {}
+  },
+  {
+    "subject": "Data Science",
+    "predicate": "utilizes",
+    "object": "Machine Learning",
+    "confidence": 1.0,
+    "source": "memory_inference",
+    "created_at": "2026-08-05T18:15:16.410418Z",
+    "metadata": {}
+  }
+]

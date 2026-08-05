@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "theo-core"
-version = "0.1.0"
+version = "0.2.0"
 description = "THEO — The Poet: A cognitive operating system for exploring artificial cognition, memory, creativity, reasoning, and identity."
 readme = "README.md"
 license = { text = "MIT" }
@@ -25,6 +25,7 @@ dependencies = [
     "typer>=0.15",
     "pluggy>=1.5",
     "apscheduler>=3.10",
+    "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
@@ -39,6 +40,7 @@ dev = [
     "hypothesis>=6.0",
     "pre-commit>=4.0",
     "factory-boy>=3.3",
+    "types-PyYAML>=6.0",
 ]
 
 [project.scripts]
@@ -101,7 +103,7 @@ warn_redundant_casts = true
 warn_unused_ignores = true
 
 [[tool.mypy.overrides]]
-module = ["mlflow.*", "wandb.*"]
+module = ["mlflow.*", "wandb.*", "yaml.*"]
 ignore_missing_imports = true
 
 # ---------- Pytest ----------

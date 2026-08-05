@@ -1,0 +1,119 @@
+{
+  "trace_id": "8f2e0f27-47e5-4a38-8c17-77111852be4e",
+  "cycle_id": "146cf0aa-1084-4801-a16b-b300824fa937",
+  "raw_input": "Hello Theo",
+  "response_text": "Hello! How can I assist you today?",
+  "spans": [
+    {
+      "span_id": "56a89c6d-9e15-4207-be50-41513e227702",
+      "stage_name": "perception",
+      "timestamp": "2026-08-05T18:10:29.774860Z",
+      "duration_ms": 1.083,
+      "input_summary": "Hello Theo",
+      "output_summary": "intent=greeting",
+      "metadata": {}
+    },
+    {
+      "span_id": "26b47fa1-a12c-4b19-8df4-969dcf8a7817",
+      "stage_name": "context",
+      "timestamp": "2026-08-05T18:10:29.775278Z",
+      "duration_ms": 0.035,
+      "input_summary": "turn=1",
+      "output_summary": "user=anonymous",
+      "metadata": {}
+    },
+    {
+      "span_id": "cfb9cb10-6e19-4f53-98d1-1ada570b90b9",
+      "stage_name": "memory_classifier",
+      "timestamp": "2026-08-05T18:10:29.775600Z",
+      "duration_ms": 0.058,
+      "input_summary": "",
+      "output_summary": "category=working",
+      "metadata": {}
+    },
+    {
+      "span_id": "1c1ab824-bb11-4595-8f90-a40c990676fb",
+      "stage_name": "memory_retrieval",
+      "timestamp": "2026-08-05T18:10:29.775718Z",
+      "duration_ms": 0.091,
+      "input_summary": "",
+      "output_summary": "retrieved_count=0",
+      "metadata": {}
+    },
+    {
+      "span_id": "a21bdac0-47c1-4a32-8838-22c5039aff54",
+      "stage_name": "knowledge_retrieval",
+      "timestamp": "2026-08-05T18:10:29.775974Z",
+      "duration_ms": 0.003,
+      "input_summary": "",
+      "output_summary": "stubbed",
+      "metadata": {}
+    },
+    {
+      "span_id": "3c84777b-6eb9-4a78-be2d-94002304e9f5",
+      "stage_name": "goal_selection",
+      "timestamp": "2026-08-05T18:10:29.776370Z",
+      "duration_ms": 0.349,
+      "input_summary": "",
+      "output_summary": "goal=AcknowledgeGreeting",
+      "metadata": {}
+    },
+    {
+      "span_id": "c87ce9aa-dc99-4ab7-a118-f8a7c416dc86",
+      "stage_name": "planning",
+      "timestamp": "2026-08-05T18:10:29.776978Z",
+      "duration_ms": 0.163,
+      "input_summary": "",
+      "output_summary": "actions_count=2",
+      "metadata": {}
+    },
+    {
+      "span_id": "52219231-c0a2-49a3-ab5c-648162ca46f7",
+      "stage_name": "inference",
+      "timestamp": "2026-08-05T18:10:29.777394Z",
+      "duration_ms": 0.096,
+      "input_summary": "",
+      "output_summary": "strategy=RuleBasedStrategy",
+      "metadata": {}
+    },
+    {
+      "span_id": "c93c6f10-0199-4767-b106-1bb83a11e052",
+      "stage_name": "reflection",
+      "timestamp": "2026-08-05T18:10:29.777757Z",
+      "duration_ms": 0.066,
+      "input_summary": "",
+      "output_summary": "satisfied=True",
+      "metadata": {}
+    },
+    {
+      "span_id": "d7d1d656-31ea-4c31-9250-e631c7fca2ab",
+      "stage_name": "decision",
+      "timestamp": "2026-08-05T18:10:29.777951Z",
+      "duration_ms": 0.163,
+      "input_summary": "",
+      "output_summary": "decision_id=5b857cf7-280b-4b14-a54d-a75b4f751eea",
+      "metadata": {}
+    },
+    {
+      "span_id": "031e3054-1281-4dc6-9525-3819ab697f35",
+      "stage_name": "response_generator",
+      "timestamp": "2026-08-05T18:10:29.778298Z",
+      "duration_ms": 0.031,
+      "input_summary": "",
+      "output_summary": "length=34",
+      "metadata": {}
+    },
+    {
+      "span_id": "8fff4081-cd3f-4fdf-96d9-717c34c716f6",
+      "stage_name": "learning",
+      "timestamp": "2026-08-05T18:10:29.778567Z",
+      "duration_ms": 0.033,
+      "input_summary": "",
+      "output_summary": "facts_stored",
+      "metadata": {}
+    }
+  ],
+  "total_duration_ms": 4.89,
+  "created_at": "2026-08-05T18:10:29.778610Z",
+  "metadata": {}
+}

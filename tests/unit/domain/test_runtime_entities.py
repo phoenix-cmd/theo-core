@@ -120,9 +120,11 @@ class TestCognitiveState:
     """Tests for the CognitiveState entity."""
 
     def test_create_state(self) -> None:
-        """A cognitive state should snapshot working memory and goals."""
+        """A cognitive state should track context and visited stages."""
         state = CognitiveState(
-            active_context="conversation about weather",
-            working_memory_keys=["weather", "user_pref"],
+            raw_input="hello",
+            context={"active_user": "test_user"},
         )
-        assert len(state.working_memory_keys) == 2
+        state.visit_stage("perception")
+        assert state.context["active_user"] == "test_user"
+        assert state.cognitive_depth == 1

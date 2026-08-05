@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from theo_core.events.bus import EventBus
-from theo_core.events.events import DomainEvent, SubsystemStarted, SystemReady
+from theo_core.events.events import DomainEvent, SubsystemStartedV1, SystemReadyV1
 from theo_core.kernel.boot import Kernel
 from theo_core.kernel.lifecycle import LifecycleManager
 from theo_core.kernel.registry import SubsystemRegistry, SubsystemState
@@ -38,15 +38,15 @@ class TestKernel:
         registry.register("test_sub", sub)
 
         events_received: list[DomainEvent] = []
-        event_bus.subscribe(SubsystemStarted, lambda e: events_received.append(e))
-        event_bus.subscribe(SystemReady, lambda e: events_received.append(e))
+        event_bus.subscribe(SubsystemStartedV1, lambda e: events_received.append(e))
+        event_bus.subscribe(SystemReadyV1, lambda e: events_received.append(e))
 
         kernel = Kernel(registry, event_bus, lifecycle, start_order=["test_sub"])
         kernel.boot()
 
         assert sub.started
         assert kernel.is_booted
-        assert len(events_received) == 2  # SubsystemStarted + SystemReady
+        assert len(events_received) == 2  # SubsystemStartedV1 + SystemReadyV1
 
     def test_shutdown_stops_subsystems(self) -> None:
         """Shutdown should stop all running subsystems."""

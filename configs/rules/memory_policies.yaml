@@ -1,0 +1,16 @@
+# Memory Storage & Retention Policies
+policies:
+  store:
+    - "user.name"
+    - "user.preference.*"
+    - "user.identity.*"
+    - "long_term_projects"
+
+  ignore:
+    - "greetings"
+    - "small_talk"
+    - "filler"
+
+  expire:
+    - "temporary_context"
+    - "transient_query"

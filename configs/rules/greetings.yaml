@@ -1,0 +1,11 @@
+# Greeting Rules & Response Templates
+default_greeting_goal: "AcknowledgeGreeting"
+
+templates:
+  anonymous:
+    - "Hello! How can I assist you today?"
+    - "Greetings! How may I help you?"
+  personalized:
+    - "Nice to meet you, {name}."
+    - "Hello {name}! Great to speak with you."
+    - "Welcome back, {name}!"

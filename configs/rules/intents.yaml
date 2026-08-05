@@ -1,0 +1,43 @@
+# Intent Detection Patterns with Stable Rule IDs
+intents:
+  - rule_id: "RULE-0001"
+    name: "greeting"
+    patterns:
+      - "^hello.*"
+      - "^hi\\b.*"
+      - "^hey\\b.*"
+      - "^good morning.*"
+      - "^good evening.*"
+      - "^greetings.*"
+
+  - rule_id: "RULE-0002"
+    name: "introduce_identity"
+    patterns:
+      - "my name is (?P<name>[A-Za-z]+)"
+      - "i am (?P<name>[A-Za-z]+)"
+      - "call me (?P<name>[A-Za-z]+)"
+
+  - rule_id: "RULE-0003"
+    name: "express_preference"
+    patterns:
+      - "i like (?P<topic>.+)"
+      - "i love (?P<topic>.+)"
+      - "i prefer (?P<topic>.+)"
+      - "my favorite (?P<category>[a-z]+) is (?P<topic>.+)"
+
+  - rule_id: "RULE-0004"
+    name: "ask_recommendation"
+    patterns:
+      - "recommend.*"
+      - "suggest.*"
+      - "what should i.*"
+
+  - rule_id: "RULE-0005"
+    name: "ask_question"
+    patterns:
+      - "what is.*"
+      - "who is.*"
+      - "where is.*"
+      - "why.*"
+      - "how.*"
+      - "remind me.*"

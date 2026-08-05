@@ -1,0 +1,21 @@
+# Recommendation Rules & Concept Connections
+concept_recommendations:
+  astronomy:
+    recommendation: "astrophotography"
+    reason: "it combines your interest in astronomy with photography"
+    category: "hobby"
+
+  python:
+    recommendation: "building a cognitive operating system like THEO"
+    reason: "it leverages your Python skills for AI architecture"
+    category: "project"
+
+  ai:
+    recommendation: "Artificial Intelligence: A Modern Approach by Russell & Norvig"
+    reason: "it provides foundational knowledge in artificial cognition"
+    category: "book"
+
+default_recommendation:
+  recommendation: "exploring cognitive systems architecture"
+  reason: "it provides deep insights into artificial intelligence"
+  category: "general"

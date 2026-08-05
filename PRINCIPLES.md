@@ -3,6 +3,9 @@
 > *Theo is a cognitive operating system whose purpose is to understand, reason,
 > remember, create, and grow. Every component exists to support cognition;
 > models, tools, and infrastructure are replaceable implementations of that purpose.*
+>
+> *Theo's intelligence is an emergent property of interacting cognitive systems,
+> not of any single model.*
 
 Every future contributor should read this before writing a line of code.
 
@@ -70,12 +73,16 @@ architecture without evidence of cognitive improvement is insufficient.
 
 ---
 
-## Architectural Stability
+## Architectural Stability & Repositories
 
 **Architecture is stable. Research is experimental.**
+
+Workspace repositories:
+- `theo-core`: Stable cognitive operating system engine.
+- `theo-lab`: Experimental research sandbox for novel architectures.
+- `theo-platform`: Application APIs, desktop/web UI, and deployment gateway.
+- `theo-data`: Datasets, corpora, synthetic data, and evaluation sets (reserved).
 
 New cognitive ideas should first be explored in `theo-lab`. Only after they
 demonstrate measurable value should they be proposed through an ADR for
 inclusion in `theo-core`.
-
-This protects the stability of Theo while encouraging experimentation.

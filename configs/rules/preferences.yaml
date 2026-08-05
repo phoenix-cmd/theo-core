@@ -1,0 +1,9 @@
+# Preference Extraction & Mapping Rules
+preference_mappings:
+  - pattern: "i (like|love|prefer) (?P<topic>.+)"
+    memory_key: "user.preference.{topic}"
+    response_template: "I'll remember that you like {topic}."
+
+  - pattern: "my name is (?P<name>[A-Za-z]+)"
+    memory_key: "user.name"
+    response_template: "Nice to meet you, {name}."

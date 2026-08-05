@@ -1,0 +1,119 @@
+{
+  "trace_id": "dda9a8a2-0e26-4543-8ec0-2c44b905f4fd",
+  "cycle_id": "f39379ff-ea15-4edd-8739-b7536410e6ae",
+  "raw_input": "Hello",
+  "response_text": "Hello Falcon! Great to speak with you.",
+  "spans": [
+    {
+      "span_id": "b342ecdb-4c2f-4044-861c-e69cd88f2a0e",
+      "stage_name": "perception",
+      "timestamp": "2026-08-05T18:10:29.863786Z",
+      "duration_ms": 0.235,
+      "input_summary": "Hello",
+      "output_summary": "intent=greeting",
+      "metadata": {}
+    },
+    {
+      "span_id": "212ac589-ebc9-44a7-a407-6aeb86b86099",
+      "stage_name": "context",
+      "timestamp": "2026-08-05T18:10:29.864827Z",
+      "duration_ms": 0.034,
+      "input_summary": "turn=2",
+      "output_summary": "user=anonymous",
+      "metadata": {}
+    },
+    {
+      "span_id": "c2452a1d-48f8-41ad-a12e-b5e06444f3c7",
+      "stage_name": "memory_classifier",
+      "timestamp": "2026-08-05T18:10:29.865784Z",
+      "duration_ms": 0.06,
+      "input_summary": "",
+      "output_summary": "category=working",
+      "metadata": {}
+    },
+    {
+      "span_id": "a5c2259d-3476-4752-a9ef-8498077401f5",
+      "stage_name": "memory_retrieval",
+      "timestamp": "2026-08-05T18:10:29.866073Z",
+      "duration_ms": 0.21,
+      "input_summary": "",
+      "output_summary": "retrieved_count=1",
+      "metadata": {}
+    },
+    {
+      "span_id": "000876f6-2c62-4892-b93e-cd6bf3969145",
+      "stage_name": "knowledge_retrieval",
+      "timestamp": "2026-08-05T18:10:29.866646Z",
+      "duration_ms": 0.005,
+      "input_summary": "",
+      "output_summary": "stubbed",
+      "metadata": {}
+    },
+    {
+      "span_id": "48113e4f-2889-4317-9721-0838b5f71672",
+      "stage_name": "goal_selection",
+      "timestamp": "2026-08-05T18:10:29.866874Z",
+      "duration_ms": 0.189,
+      "input_summary": "",
+      "output_summary": "goal=AcknowledgeGreeting",
+      "metadata": {}
+    },
+    {
+      "span_id": "6148cc88-5796-45a4-a520-8ee90a5151bf",
+      "stage_name": "planning",
+      "timestamp": "2026-08-05T18:10:29.867399Z",
+      "duration_ms": 0.095,
+      "input_summary": "",
+      "output_summary": "actions_count=2",
+      "metadata": {}
+    },
+    {
+      "span_id": "f9be50a1-65f0-4fa7-8b68-42e078833069",
+      "stage_name": "inference",
+      "timestamp": "2026-08-05T18:10:29.867855Z",
+      "duration_ms": 0.046,
+      "input_summary": "",
+      "output_summary": "strategy=RuleBasedStrategy",
+      "metadata": {}
+    },
+    {
+      "span_id": "9ab4bd1b-fb0c-4081-9528-5fe7d9211871",
+      "stage_name": "reflection",
+      "timestamp": "2026-08-05T18:10:29.868141Z",
+      "duration_ms": 0.008,
+      "input_summary": "",
+      "output_summary": "satisfied=True",
+      "metadata": {}
+    },
+    {
+      "span_id": "50b0440e-8973-48a1-85ca-d550984817d4",
+      "stage_name": "decision",
+      "timestamp": "2026-08-05T18:10:29.868235Z",
+      "duration_ms": 0.072,
+      "input_summary": "",
+      "output_summary": "decision_id=3e9d46ec-2841-4d12-a9a7-da617f4c62f5",
+      "metadata": {}
+    },
+    {
+      "span_id": "833357ae-a77f-499c-9dd1-2ad8d963ea7a",
+      "stage_name": "response_generator",
+      "timestamp": "2026-08-05T18:10:29.868519Z",
+      "duration_ms": 0.009,
+      "input_summary": "",
+      "output_summary": "length=38",
+      "metadata": {}
+    },
+    {
+      "span_id": "b571a2d9-cf49-4cf2-9a24-d270fa79d383",
+      "stage_name": "learning",
+      "timestamp": "2026-08-05T18:10:29.868901Z",
+      "duration_ms": 0.032,
+      "input_summary": "",
+      "output_summary": "facts_stored",
+      "metadata": {}
+    }
+  ],
+  "total_duration_ms": 5.435,
+  "created_at": "2026-08-05T18:10:29.868940Z",
+  "metadata": {}
+}

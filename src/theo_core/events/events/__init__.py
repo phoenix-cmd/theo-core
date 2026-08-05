@@ -1,4 +1,4 @@
-"""Domain events — all events that flow through the event bus.
+"""Domain events — versioned V1 events and domain event definitions.
 
 Events are immutable Pydantic models. They carry data but no behavior.
 No subsystem imports another subsystem; they communicate only through events.
@@ -7,7 +7,6 @@ No subsystem imports another subsystem; they communicate only through events.
 from __future__ import annotations
 
 from datetime import UTC, datetime
-from typing import Any
 from uuid import UUID, uuid4
 
 from pydantic import BaseModel, Field
@@ -24,40 +23,60 @@ class DomainEvent(BaseModel, frozen=True):
         event_id: Unique event identifier.
         timestamp: UTC timestamp of event creation.
         source: Name of the subsystem that emitted this event.
+        schema_version: Version string for event schema stability.
 
     """
 
     event_id: UUID = Field(default_factory=uuid4)
     timestamp: datetime = Field(default_factory=lambda: datetime.now(UTC))
     source: str = "unknown"
+    schema_version: str = "1.0"
 
 
 # ---------------------------------------------------------------------------
-# System events
+# Core Domain events
 # ---------------------------------------------------------------------------
 
 
-class SubsystemStarted(DomainEvent, frozen=True):
+class ConversationStarted(DomainEvent, frozen=True):
+    """Emitted when a new conversation session begins."""
+
+    conversation_id: UUID
+
+
+class MemoryStored(DomainEvent, frozen=True):
+    """Emitted when a memory item is stored."""
+
+    memory_id: str
+    memory_type: str = "general"
+
+
+# ---------------------------------------------------------------------------
+# System V1 events
+# ---------------------------------------------------------------------------
+
+
+class SubsystemStartedV1(DomainEvent, frozen=True):
     """Emitted when a subsystem finishes initialization."""
 
     subsystem_name: str
-    version: str = "0.1.0"
+    version: str = "0.2.0"
 
 
-class SubsystemStopped(DomainEvent, frozen=True):
+class SubsystemStoppedV1(DomainEvent, frozen=True):
     """Emitted when a subsystem shuts down."""
 
     subsystem_name: str
     reason: str = "shutdown"
 
 
-class SystemReady(DomainEvent, frozen=True):
+class SystemReadyV1(DomainEvent, frozen=True):
     """Emitted when the kernel has finished booting all subsystems."""
 
     subsystem_count: int = 0
 
 
-class ErrorOccurred(DomainEvent, frozen=True):
+class ErrorOccurredV1(DomainEvent, frozen=True):
     """Emitted when an unhandled error occurs in any subsystem."""
 
     subsystem: str
@@ -65,183 +84,102 @@ class ErrorOccurred(DomainEvent, frozen=True):
     message: str
 
 
-class HealthCheckRequested(DomainEvent, frozen=True):
-    """Emitted to request a health report from a subsystem."""
-
-    subsystem_name: str
-
-
-class PluginLoaded(DomainEvent, frozen=True):
-    """Emitted when a plugin is successfully loaded."""
-
-    plugin_name: str
-    version: str = "0.1.0"
-
-
 # ---------------------------------------------------------------------------
-# Cognitive events
+# Pipeline Stage V1 events
 # ---------------------------------------------------------------------------
 
 
-class ConversationStarted(DomainEvent, frozen=True):
-    """Emitted when a new conversation begins."""
+class PerceptAnalyzedV1(DomainEvent, frozen=True):
+    """Emitted when raw text is normalized into a Percept object."""
 
-    conversation_id: UUID
-
-
-class MessageReceived(DomainEvent, frozen=True):
-    """Emitted when a new message is added to a conversation."""
-
-    conversation_id: UUID
-    message_id: UUID
-    role: str
+    percept_id: UUID
+    intent: str
+    fact_count: int = 0
 
 
-class ThoughtGenerated(DomainEvent, frozen=True):
-    """Emitted when a new thought is produced during reasoning."""
+class ContextUpdatedV1(DomainEvent, frozen=True):
+    """Emitted when active session context is updated."""
 
-    thought_id: UUID
-    confidence: float = 0.5
-
-
-class ReflectionCompleted(DomainEvent, frozen=True):
-    """Emitted when a self-reflection cycle finishes."""
-
-    reflection_id: UUID
-    insights_count: int = 0
+    turn_count: int
+    active_user: str = "anonymous"
 
 
-class PlanCreated(DomainEvent, frozen=True):
-    """Emitted when a new plan is generated."""
+class MemoryRetrievedV1(DomainEvent, frozen=True):
+    """Emitted when memory items are retrieved."""
 
-    plan_id: UUID
-    goal: str
-    action_count: int = 0
-
-
-class ActionExecuted(DomainEvent, frozen=True):
-    """Emitted when an action within a plan is executed."""
-
-    action_id: UUID
-    capability: str
-    result_summary: str = ""
+    query: str
+    retrieved_count: int = 0
 
 
-# ---------------------------------------------------------------------------
-# Memory events
-# ---------------------------------------------------------------------------
+class KnowledgeRetrievedV1(DomainEvent, frozen=True):
+    """Emitted when knowledge graph items are retrieved."""
+
+    concept: str
+    facts_count: int = 0
 
 
-class MemoryStored(DomainEvent, frozen=True):
-    """Emitted when a new memory entry is stored."""
-
-    memory_id: str
-    memory_type: str = "general"
-
-
-class MemoryRetrieved(DomainEvent, frozen=True):
-    """Emitted when a memory entry is retrieved."""
-
-    query_id: UUID = Field(default_factory=uuid4)
-    memory_id: str
-    similarity_score: float = 0.0
-
-
-class MemoryConsolidated(DomainEvent, frozen=True):
-    """Emitted when multiple memories are consolidated."""
-
-    source_ids: tuple[str, ...] = Field(default_factory=tuple)
-    target_id: str = ""
-
-
-class MemoryForgotten(DomainEvent, frozen=True):
-    """Emitted when a memory is pruned or expired."""
-
-    memory_id: str
-    reason: str = "decay"
-
-
-# ---------------------------------------------------------------------------
-# Knowledge events
-# ---------------------------------------------------------------------------
-
-
-class FactAdded(DomainEvent, frozen=True):
-    """Emitted when a new fact is added to the knowledge graph."""
-
-    fact_id: str
-    subject: str
-    predicate: str
-    obj: str
-
-
-class RelationshipCreated(DomainEvent, frozen=True):
-    """Emitted when a new relationship is created in the knowledge graph."""
-
-    source_id: str
-    target_id: str
-    relation_type: str
-
-
-# ---------------------------------------------------------------------------
-# Research events
-# ---------------------------------------------------------------------------
-
-
-class ExperimentStarted(DomainEvent, frozen=True):
-    """Emitted when an experiment begins."""
-
-    experiment_id: UUID
-    config_hash: str = ""
-
-
-class MetricLogged(DomainEvent, frozen=True):
-    """Emitted when a metric is logged during a training run."""
-
-    run_id: UUID
-    metric_name: str
-    value: float
-    step: int = 0
-
-
-class CheckpointSaved(DomainEvent, frozen=True):
-    """Emitted when a model checkpoint is saved."""
-
-    checkpoint_id: UUID
-    model_version: str = "0.1.0"
-
-
-class EvaluationCompleted(DomainEvent, frozen=True):
-    """Emitted when an evaluation run completes."""
-
-    evaluation_id: UUID
-    benchmark: str
-    score: float = 0.0
-
-
-class DatasetRegistered(DomainEvent, frozen=True):
-    """Emitted when a dataset is registered in the registry."""
-
-    dataset_id: UUID
-    version: str
-    checksum: str = ""
-
-
-# ---------------------------------------------------------------------------
-# Goal events
-# ---------------------------------------------------------------------------
-
-
-class GoalActivated(DomainEvent, frozen=True):
-    """Emitted when a goal is added to the active stack."""
+class GoalSelectedV1(DomainEvent, frozen=True):
+    """Emitted when an active goal is selected by the Goal Engine."""
 
     goal_id: UUID
-    description: str
+    goal_description: str
     priority: str = "medium"
 
 
-class GoalCompleted(DomainEvent, frozen=True):
-    """Emitted when a goal is marked as completed."""
+class PlanGeneratedV1(DomainEvent, frozen=True):
+    """Emitted when a cognitive plan is generated."""
 
-    goal_id: UUID
-    metadata: dict[str, Any] = Field(default_factory=dict)
+    plan_id: UUID
+    action_count: int = 0
+
+
+class InferenceCompletedV1(DomainEvent, frozen=True):
+    """Emitted when the Cognitive Inference Engine completes strategy evaluation."""
+
+    strategy_name: str = "RuleBasedStrategy"
+    confidence: float = 1.0
+
+
+class ReflectionEvaluatedV1(DomainEvent, frozen=True):
+    """Emitted when the Reflection Engine finishes evaluating inference quality."""
+
+    satisfied: bool = True
+    confidence: float = 1.0
+
+
+class DecisionMadeV1(DomainEvent, frozen=True):
+    """Emitted when the Decision Engine formulates a Decision object."""
+
+    decision_id: UUID
+    response_summary: str
+    confidence: float = 1.0
+
+
+class ResponseGeneratedV1(DomainEvent, frozen=True):
+    """Emitted when Response Generator formats final output text."""
+
+    response_length: int
+    generator_type: str = "TemplateResponseGenerator"
+
+
+class MemoryStoredV1(DomainEvent, frozen=True):
+    """Emitted when a memory entry is stored or updated."""
+
+    memory_key: str
+    category: str = "semantic"
+
+
+class KnowledgeValidatedV1(DomainEvent, frozen=True):
+    """Emitted when a knowledge candidate is validated and committed."""
+
+    subject: str
+    predicate: str
+    object: str
+
+
+class TraceRecordedV1(DomainEvent, frozen=True):
+    """Emitted when a CognitiveTrace is closed and saved to JSON."""
+
+    trace_id: UUID
+    file_path: str
+    cognitive_depth: int = 12

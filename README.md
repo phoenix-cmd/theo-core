@@ -1,6 +1,6 @@
 # THEO — The Poet (Core Engine)
 
-> **Version 0.1.0** — Cognitive Operating System Infrastructure
+> **Version 0.2.0** — The Deterministic Cognitive Runtime
 
 *Theo is a cognitive operating system whose purpose is to understand, reason, remember, create, and grow. Every component exists to support cognition; models, tools, and infrastructure are replaceable implementations of that purpose.*
 
@@ -16,20 +16,26 @@ New cognitive concepts and experimental model architectures should be explored i
 ### Mental Model & Data Flow
 
 ```
-Input → Perception → Context → Memory → Knowledge → Identity → Goals → Planning → Reasoning → Creativity → Reflection → Decision → Action → Learning
+Input → Perception → Context → Memory → Knowledge → Goals → Planning → Inference → Reflection → Decision → Response Generator → Learning & Trace
 ```
 
-### Cognitive Stack
+---
 
-```
-1. THEO (Cognitive OS Core)
-2. Kernel (Boot, Lifecycle, Registry, Scheduler)
-3. Event Bus (Pub/Sub Event Dispatcher)
-4. Subsystem Stack (Perception, Context, Memory, Knowledge, Identity, Goals, Capabilities, Models)
-5. Cognitive Cycle Engine (Iterative Reasoning Loop)
-6. Services & Lab Integrations
-7. Infrastructure (Config, Logging, Tracking, Security, Telemetry)
-```
+## 🚦 Subsystem Maturity Table (v0.2.0)
+
+| Subsystem | Status | Implementation Details |
+|---|---|---|
+| **Pipeline Execution** | ✅ Functional | 12-stage sequential execution (`CognitiveEngine`) |
+| **Perception** | ✅ Functional | Data-driven regex rules & entity extraction (`intents.yaml`, `preferences.yaml`) |
+| **Context** | ✅ Functional | Ephemeral session context buffer (`InMemoryContextManager`) |
+| **Goals** | ✅ Functional | Priority GoalStack manager (`GoalManager`) |
+| **Planning** | ✅ Functional | Rule-based action sequence planner (`RuleBasedPlanner`) |
+| **Inference** | ✅ Functional | Strategy-based policy evaluation (`InferenceEngine` / `RuleBasedStrategy`) |
+| **Response Generation** | ✅ Functional | Template response generator (`TemplateResponseGenerator`) |
+| **Memory** | ✅ Functional | 4-layer engine with append-only history & JSON persistence (`DeterministicMemoryEngine`) |
+| **Knowledge** | 🚧 Stub | Graph knowledge & concept traversal (Milestone 4) |
+| **Reflection** | 🚧 Minimal | Inferred confidence & satisfaction evaluation |
+| **Learning & Trace** | 🚧 Minimal | Context recording & memory persistence |
 
 ---
 
@@ -38,26 +44,11 @@ Input → Perception → Context → Memory → Knowledge → Identity → Goals
 - **Python**: 3.13+
 - **Package Manager**: `uv`
 - **Validation & Typing**: `pydantic` v2.10+
-- **Configuration**: `hydra-core` v1.4+
+- **Configuration**: `hydra-core` v1.4+ / `pyyaml` v6.0+
 - **Logging**: `structlog` v25.0+
 - **Plugin Engine**: `pluggy` v1.5+
 - **Scheduler**: `apscheduler` v4.0+
 - **Testing & Quality**: `pytest`, `ruff`, `mypy`
-
----
-
-## 📊 Subsystem Research Success Metrics
-
-| Subsystem | Primary Success Metric | Secondary Metric |
-|---|---|---|
-| **Memory** | Recall accuracy | Retrieval latency |
-| **Reasoning** | Benchmark accuracy | Reasoning consistency |
-| **Creativity** | Novelty & coherence score | Human evaluation |
-| **Identity** | Response consistency across sessions | Alignment fidelity |
-| **Goals** | Goal completion rate | Priority resolution efficiency |
-| **Reflection** | Self-correction frequency | Error reduction rate |
-| **Event Bus** | Throughput (events/sec) | Dispatch latency |
-| **Scheduler** | Job execution success rate | Timing precision |
 
 ---
 
@@ -74,15 +65,18 @@ cd theo-core
 uv sync --all-extras
 ```
 
-### Booting the Kernel
+### Interactive Cognitive Session (`theo chat`)
 
 ```bash
-# Boot THEO via CLI
-uv run theo boot
-
-# Or run directly via Python module
-uv run python -m theo_core
+# Start an interactive session with THEO
+uv run theo chat
 ```
+
+### REPL Commands
+- `/context` — View active session context snapshot.
+- `/goals` — View active GoalStack items.
+- `/memory` — View all active persistent memory entries stored in JSON repository.
+- `/exit` or `/quit` — Exit the REPL.
 
 ---
 
@@ -98,13 +92,6 @@ uv run pytest --cov=theo_core
 # Linting with Ruff
 uv run ruff check src/ tests/
 
-# Strict type checking with Mypy
+# Type checking with Mypy
 uv run mypy src/
 ```
-
----
-
-## 📄 License & Principles
-
-See [PRINCIPLES.md](PRINCIPLES.md) for the 10 foundational principles of THEO.
-See `adr/` for Architecture Decision Records.

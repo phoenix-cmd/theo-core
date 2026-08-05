@@ -6,7 +6,7 @@ import pytest
 
 from theo_core.composition.bootstrap import bootstrap
 from theo_core.composition.container import TheoContainer
-from theo_core.events.events import DomainEvent, SystemReady
+from theo_core.events.events import DomainEvent, SystemReadyV1
 from theo_core.infrastructure.config import TheoSettings
 
 
@@ -23,14 +23,14 @@ class TestBootSequence:
         assert container.kernel is not None
 
     def test_kernel_boots_successfully(self) -> None:
-        """The kernel should boot and emit SystemReady."""
+        """The kernel should boot and emit SystemReadyV1."""
         settings = TheoSettings(
             logging={"level": "WARNING", "format": "console"},  # type: ignore[arg-type]
         )
         container = bootstrap(settings)
 
         ready_events: list[DomainEvent] = []
-        container.event_bus.subscribe(SystemReady, lambda e: ready_events.append(e))
+        container.event_bus.subscribe(SystemReadyV1, lambda e: ready_events.append(e))
 
         container.kernel.boot()
 
