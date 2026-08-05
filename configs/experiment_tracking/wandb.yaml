@@ -1,0 +1,2 @@
+backend: "wandb"
+project_name: "theo"

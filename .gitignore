@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# UV
+uv.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# Mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# Hydra outputs
+outputs/
+multirun/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Experiment artifacts
+mlruns/
+wandb/
+
+# Logs
+*.log
+logs/
+
+# Checkpoints
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors

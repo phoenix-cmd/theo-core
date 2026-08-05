@@ -1,0 +1,3 @@
+# Logging — Development (colored console, DEBUG level)
+level: "DEBUG"
+format: "console"

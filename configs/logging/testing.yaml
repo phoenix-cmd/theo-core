@@ -1,0 +1,3 @@
+# Logging — Testing (quiet, WARNING level)
+level: "WARNING"
+format: "console"

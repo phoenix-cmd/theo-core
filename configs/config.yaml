@@ -1,0 +1,14 @@
+defaults:
+  - theo: default
+  - logging: development
+  - experiment_tracking: noop
+  - memory: default
+  - knowledge: default
+  - identity: default
+  - goals: default
+  - scheduler: default
+  - security: default
+  - telemetry: default
+  - evaluation: default
+  - dataset: default
+  - kernel: default

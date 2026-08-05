@@ -1,0 +1,4 @@
+enabled: true
+metrics_enabled: true
+tracing_enabled: false
+health_check_interval_seconds: 60

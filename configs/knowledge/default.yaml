@@ -1,0 +1,2 @@
+graph_backend: "in_memory"
+max_traversal_depth: 5

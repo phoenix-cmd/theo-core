@@ -1,0 +1,4 @@
+working_memory_capacity: 100
+consolidation_interval_seconds: 3600
+forgetting_enabled: true
+default_backend: "in_memory"
