@@ -41,10 +41,10 @@ robustness and research-instrument work tracked for the wider release.
   projection that strips volatile wall-clock fields (`last_verified`, `created_at`) and the
   derived per-graph envelope checksum, which cannot be reproduced across re-execution.
   Covered by `TestStateHashInvariants`.
-- **Canon Law 4 wording (proposed minor amendment)**: Law 4 lists "Perception" among belief
+- **Canon Law 4 wording — resolved & ratified**: Law 4 previously listed "Perception" among belief
   derivation sources, while ADR-0026 fixes three mechanical sources (MEMORY / KNOWLEDGE /
-  INFERENCE) with perception entering as evidence. A clarifying sentence is proposed; ratification
-  is a governance decision under Canon §10 (minor amendment, no new Edition).
+  INFERENCE) with perception entering as evidence. Ratified 2026-08-08 under Canon §10 as a minor
+  amendment (no new Edition); see `adr/ADR-0026` (Ratification section) and `CANON.md` Law 4.
 - **Benchmark corpus expansion — resolved & tested**: the corpus grew from 26 to 35 cases across
   six domains. `contradiction` gains an equal-confidence id tie-break (CONT-006) and a
   low-confidence conflict (CONT-007); `causal_reasoning` gains adversarial negative control

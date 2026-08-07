@@ -37,3 +37,20 @@ the `percept://` evidence.
   interpretation action text "Interpretation based on belief '<percept content>'".
 - Conformance is enforced by `tests/conformance/test_belief_laws.py` (source
   validity) and the benchmark corpus's percept-based cases.
+
+## Ratification
+Ratified 2026-08-08 under Canon §10 as a **minor amendment** (clarify wording, no
+new Edition). Canon Law 4 was amended from:
+
+> Beliefs MUST be derived from Perception, Memory, Knowledge, or Inference.
+
+to:
+
+> Beliefs MUST be derived from Memory, Knowledge, or Inference. Perception enters
+> cognition as evidence and MUST NOT directly produce beliefs; beliefs about
+> percepts are mechanically derived by Inference with `source=INFERENCE` and an
+> `EvidenceTrace(source_type="perception")`.
+
+This does not change the decision's verdict (three mechanical sources; perception
+as evidence); it resolves the wording tension between the original Law 4 text and
+this ADR.
