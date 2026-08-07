@@ -1,0 +1,133 @@
+{
+  "trace_id": "c0458b58-4f96-45bd-871e-f94d2a9e91d5",
+  "cycle_id": "f5b5a9e3-56cc-433d-bc4c-89f2b04c4eb1",
+  "raw_input": "Hello Theo",
+  "response_text": "Hello! How can I assist you today?",
+  "spans": [
+    {
+      "span_id": "1d229f0c-0132-4c27-8aa3-25230adbce31",
+      "stage_name": "perception",
+      "timestamp": "2026-08-07T14:51:26.142398Z",
+      "duration_ms": 0.553,
+      "input_summary": "Hello Theo",
+      "output_summary": "intent=greeting",
+      "metadata": {}
+    },
+    {
+      "span_id": "1a2d46dc-cc9a-4b21-bf8a-2ddf48d81478",
+      "stage_name": "context",
+      "timestamp": "2026-08-07T14:51:26.142619Z",
+      "duration_ms": 0.031,
+      "input_summary": "turn=1",
+      "output_summary": "user=anonymous",
+      "metadata": {}
+    },
+    {
+      "span_id": "08169174-4adf-4dc8-b344-18671432f6bd",
+      "stage_name": "memory_classifier",
+      "timestamp": "2026-08-07T14:51:26.142747Z",
+      "duration_ms": 0.02,
+      "input_summary": "",
+      "output_summary": "category=working",
+      "metadata": {}
+    },
+    {
+      "span_id": "47026cef-57f2-4343-beae-3b963fafcb9d",
+      "stage_name": "memory_retrieval",
+      "timestamp": "2026-08-07T14:51:26.142828Z",
+      "duration_ms": 0.066,
+      "input_summary": "",
+      "output_summary": "retrieved_count=0",
+      "metadata": {}
+    },
+    {
+      "span_id": "4f7eb312-aa0d-427d-87ba-db73f66f430e",
+      "stage_name": "knowledge_retrieval",
+      "timestamp": "2026-08-07T14:51:26.142960Z",
+      "duration_ms": 0.021,
+      "input_summary": "",
+      "output_summary": "knowledge_facts_count=0",
+      "metadata": {}
+    },
+    {
+      "span_id": "7b85c567-5449-4e49-acc4-27cd77837850",
+      "stage_name": "goal_selection",
+      "timestamp": "2026-08-07T14:51:26.143104Z",
+      "duration_ms": 0.043,
+      "input_summary": "",
+      "output_summary": "goal=AcknowledgeGreeting",
+      "metadata": {}
+    },
+    {
+      "span_id": "bd3cc9a2-b8e9-4a4b-9731-f2197cbeb434",
+      "stage_name": "planning",
+      "timestamp": "2026-08-07T14:51:26.143274Z",
+      "duration_ms": 0.068,
+      "input_summary": "",
+      "output_summary": "actions_count=2",
+      "metadata": {}
+    },
+    {
+      "span_id": "9adf931e-23e7-42b4-b780-cecd7f8136b8",
+      "stage_name": "inference",
+      "timestamp": "2026-08-07T14:51:26.143394Z",
+      "duration_ms": 0.02,
+      "input_summary": "",
+      "output_summary": "strategy=RuleBasedStrategy",
+      "metadata": {}
+    },
+    {
+      "span_id": "e6239f20-d3e9-4385-a825-29dfef2ede28",
+      "stage_name": "reflection",
+      "timestamp": "2026-08-07T14:51:26.143504Z",
+      "duration_ms": 0.013,
+      "input_summary": "",
+      "output_summary": "satisfied=True",
+      "metadata": {}
+    },
+    {
+      "span_id": "c75b2563-cee3-4d9a-adec-b1893b4b6468",
+      "stage_name": "decision",
+      "timestamp": "2026-08-07T14:51:26.143635Z",
+      "duration_ms": 0.119,
+      "input_summary": "",
+      "output_summary": "decision_id=980c4329-28b8-42ed-b794-5ae5f4d7f4e4",
+      "metadata": {}
+    },
+    {
+      "span_id": "3bc2f1c9-73b3-4157-88cb-0a2bad38f1e5",
+      "stage_name": "response_generator",
+      "timestamp": "2026-08-07T14:51:26.143753Z",
+      "duration_ms": 0.012,
+      "input_summary": "",
+      "output_summary": "length=34",
+      "metadata": {}
+    },
+    {
+      "span_id": "ccae25d1-b2ac-48de-b2fb-6e25dd6f94d3",
+      "stage_name": "learning",
+      "timestamp": "2026-08-07T14:51:26.143871Z",
+      "duration_ms": 0.017,
+      "input_summary": "",
+      "output_summary": "facts_stored",
+      "metadata": {}
+    }
+  ],
+  "total_duration_ms": 2.099,
+  "config_snapshot": {
+    "theo_version": "0.2.0",
+    "rule_set_version": "v0.2.0",
+    "memory_policy_version": "v0.2.0",
+    "config_hash": "sha256-deterministic-v0.2"
+  },
+  "execution_stats": {
+    "retrieved_memories_count": 0,
+    "retrieved_knowledge_count": 0,
+    "used_memory_ids_count": 0,
+    "used_rule_ids_count": 0,
+    "pipeline_latency_ms": 2.099,
+    "stage_count": 12
+  },
+  "created_at": "2026-08-07T14:51:26.143897Z",
+  "metadata": {}
+}

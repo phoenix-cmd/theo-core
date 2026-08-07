@@ -1,8 +1,9 @@
 # THEO — The Poet (Core Engine)
 
-> **Version 0.2.0** — The Deterministic Cognitive Runtime
+> **Version 0.3.0** — The Cognitive Canon & Architecture Specification (FROZEN)
+> See [`RELEASE_v0.3.0.md`](RELEASE_v0.3.0.md) for the release checkpoint.
 
-*Theo is a cognitive operating system whose purpose is to understand, reason, remember, create, and grow. Every component exists to support cognition; models, tools, and infrastructure are replaceable implementations of that purpose.*
+*THEO is a cognitive runtime architecture and research platform for building verifiable cognitive systems. Every component exists to support cognition; models, tools, and infrastructure are replaceable implementations of that purpose.*
 
 ---
 

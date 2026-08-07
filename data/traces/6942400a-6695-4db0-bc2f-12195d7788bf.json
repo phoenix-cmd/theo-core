@@ -1,0 +1,133 @@
+{
+  "trace_id": "6942400a-6695-4db0-bc2f-12195d7788bf",
+  "cycle_id": "2c31dbc1-b844-4fc4-becc-19276b96af8b",
+  "raw_input": "My name is Falcon",
+  "response_text": "Nice to meet you, Falcon.",
+  "spans": [
+    {
+      "span_id": "416e2f36-d170-49fe-9183-319d0437b10e",
+      "stage_name": "perception",
+      "timestamp": "2026-08-07T14:49:20.028454Z",
+      "duration_ms": 0.055,
+      "input_summary": "My name is Falcon",
+      "output_summary": "intent=introduce_identity",
+      "metadata": {}
+    },
+    {
+      "span_id": "9f971f15-3a58-4235-9993-f151172a39f7",
+      "stage_name": "context",
+      "timestamp": "2026-08-07T14:49:20.028569Z",
+      "duration_ms": 0.004,
+      "input_summary": "turn=1",
+      "output_summary": "user=anonymous",
+      "metadata": {}
+    },
+    {
+      "span_id": "6b08dd61-a4e3-4c5c-8b6f-296e382757df",
+      "stage_name": "memory_classifier",
+      "timestamp": "2026-08-07T14:49:20.028662Z",
+      "duration_ms": 0.003,
+      "input_summary": "",
+      "output_summary": "category=identity",
+      "metadata": {}
+    },
+    {
+      "span_id": "1bcdf87c-ef6d-4a9f-89dc-97b9c35a69cf",
+      "stage_name": "memory_retrieval",
+      "timestamp": "2026-08-07T14:49:20.028688Z",
+      "duration_ms": 0.016,
+      "input_summary": "",
+      "output_summary": "retrieved_count=0",
+      "metadata": {}
+    },
+    {
+      "span_id": "16b92c6c-23ab-41c7-bef8-89998105fc29",
+      "stage_name": "knowledge_retrieval",
+      "timestamp": "2026-08-07T14:49:20.028784Z",
+      "duration_ms": 0.007,
+      "input_summary": "",
+      "output_summary": "knowledge_facts_count=0",
+      "metadata": {}
+    },
+    {
+      "span_id": "ecb200f1-6f17-45bb-bc20-160f6b21646f",
+      "stage_name": "goal_selection",
+      "timestamp": "2026-08-07T14:49:20.028890Z",
+      "duration_ms": 0.022,
+      "input_summary": "",
+      "output_summary": "goal=RememberFact",
+      "metadata": {}
+    },
+    {
+      "span_id": "993a19cb-5d2b-44f5-9699-dea9349e2d6f",
+      "stage_name": "planning",
+      "timestamp": "2026-08-07T14:49:20.029024Z",
+      "duration_ms": 0.045,
+      "input_summary": "",
+      "output_summary": "actions_count=4",
+      "metadata": {}
+    },
+    {
+      "span_id": "5d9c1262-d35d-4f4e-a836-84aebf785f25",
+      "stage_name": "inference",
+      "timestamp": "2026-08-07T14:49:20.029124Z",
+      "duration_ms": 0.008,
+      "input_summary": "",
+      "output_summary": "strategy=RuleBasedStrategy",
+      "metadata": {}
+    },
+    {
+      "span_id": "f679f88f-fb1d-4faa-ba0f-506cb0083193",
+      "stage_name": "reflection",
+      "timestamp": "2026-08-07T14:49:20.029214Z",
+      "duration_ms": 0.002,
+      "input_summary": "",
+      "output_summary": "satisfied=True",
+      "metadata": {}
+    },
+    {
+      "span_id": "178c9355-ce71-4ee7-95c8-deb2d354034b",
+      "stage_name": "decision",
+      "timestamp": "2026-08-07T14:49:20.029269Z",
+      "duration_ms": 0.045,
+      "input_summary": "",
+      "output_summary": "decision_id=b3d29d4c-a67b-4cff-b0fe-d8ab38d9fa14",
+      "metadata": {}
+    },
+    {
+      "span_id": "bb2f0548-3c55-4cd7-9294-f6b1c9299d31",
+      "stage_name": "response_generator",
+      "timestamp": "2026-08-07T14:49:20.029459Z",
+      "duration_ms": 0.004,
+      "input_summary": "",
+      "output_summary": "length=25",
+      "metadata": {}
+    },
+    {
+      "span_id": "616eb2e8-8b40-408d-939e-958218e6acd2",
+      "stage_name": "learning",
+      "timestamp": "2026-08-07T14:49:20.030783Z",
+      "duration_ms": 1.175,
+      "input_summary": "",
+      "output_summary": "facts_stored",
+      "metadata": {}
+    }
+  ],
+  "total_duration_ms": 2.407,
+  "config_snapshot": {
+    "theo_version": "0.2.0",
+    "rule_set_version": "v0.2.0",
+    "memory_policy_version": "v0.2.0",
+    "config_hash": "sha256-deterministic-v0.2"
+  },
+  "execution_stats": {
+    "retrieved_memories_count": 0,
+    "retrieved_knowledge_count": 0,
+    "used_memory_ids_count": 0,
+    "used_rule_ids_count": 0,
+    "pipeline_latency_ms": 2.407,
+    "stage_count": 12
+  },
+  "created_at": "2026-08-07T14:49:20.030804Z",
+  "metadata": {}
+}
