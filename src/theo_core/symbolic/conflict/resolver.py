@@ -5,7 +5,7 @@ from __future__ import annotations
 from decimal import Decimal
 
 from theo_core.symbolic._primitives.identifiers import SymbolicId
-from theo_core.symbolic.beliefs.models import Belief
+from theo_core.symbolic.beliefs.models import Belief, BeliefSource
 from theo_core.symbolic.conflict.models import ConflictPolicy, ConflictRecord
 from theo_core.symbolic.hypotheses.models import Hypothesis, HypothesisState
 
@@ -52,10 +52,23 @@ class ConflictResolver:
         elif policy == ConflictPolicy.RECENT_SOURCE:
             winner, loser = (b1, b2) if b1.last_verified >= b2.last_verified else (b2, b1)
             reason = f"Selected {winner.id} verified more recently at {winner.last_verified}"
+        elif policy == ConflictPolicy.EXPLICIT_AUTHORITY:
+            source_rank = {
+                BeliefSource.KNOWLEDGE: 4,
+                BeliefSource.INFERENCE: 3,
+                BeliefSource.MEMORY: 2,
+                BeliefSource.PERCEPTION: 1,
+            }
+            r1, r2 = source_rank.get(b1.source, 0), source_rank.get(b2.source, 0)
+            if r1 != r2:
+                winner, loser = (b1, b2) if r1 > r2 else (b2, b1)
+                reason = f"Explicit authority source rank {winner.source} > {loser.source}"
+            else:
+                winner, loser = (b1, b2) if b1.confidence >= b2.confidence else (b2, b1)
+                reason = f"Equal rank; fallback {winner.confidence} >= {loser.confidence}"
         else:
-            # Fallback to HIGHER_CONFIDENCE
             winner, loser = (b1, b2) if b1.confidence >= b2.confidence else (b2, b1)
-            reason = f"Explicit authority fallback selected {winner.id}"
+            reason = f"Fallback confidence selected {winner.id}"
 
         # Create updated deprecated loser belief with zero confidence
         deprecated_loser = Belief(
@@ -102,8 +115,14 @@ class ConflictResolver:
         if not hypotheses:
             return [], []
 
-        # Sort hypotheses deterministically by score descending, then ID
-        sorted_hyp = sorted(hypotheses, key=lambda h: (-h.score, h.id.value))
+        if policy == ConflictPolicy.EVIDENCE_COUNT:
+            sorted_hyp = sorted(
+                hypotheses,
+                key=lambda h: (-len(h.supporting_thoughts), -h.score, h.id.value),
+            )
+        else:
+            sorted_hyp = sorted(hypotheses, key=lambda h: (-h.score, h.id.value))
+
         winner = sorted_hyp[0]
 
         resolved: list[Hypothesis] = []

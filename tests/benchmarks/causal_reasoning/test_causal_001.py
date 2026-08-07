@@ -46,9 +46,12 @@ def test_causal_001_benchmark_execution() -> None:
     )
 
     pipeline = SymbolicCognitivePipeline(beliefs=beliefs, rules=[r1])
-    decision, trace = pipeline.execute_cycle(bm_case.percept_input)
+    decision, trace, golden_trace = pipeline.execute_cycle(bm_case.percept_input)
 
-    # Assert correctness against benchmark case criteria
+    # Assert correctness against benchmark case criteria and golden trace
     assert decision.action_text == bm_case.expected_action_text
     assert bm_case.min_confidence <= decision.confidence <= bm_case.max_confidence
     assert len(trace.stages_executed) == 8
+    assert golden_trace.decision_id == decision.id.to_symbolic_id()
+    assert golden_trace.response_text == decision.action_text
+    assert golden_trace.thought_dag_node_count == 1

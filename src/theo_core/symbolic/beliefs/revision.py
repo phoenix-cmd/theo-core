@@ -86,6 +86,24 @@ class BeliefRevision:
             metadata=old_belief.metadata,
         )
 
+        # Deactivate old version by setting confidence to 0.0 per Invariant 3
+        deactivated_old = Belief(
+            id=old_belief.id,
+            proposition=old_belief.proposition,
+            confidence=Decimal("0.0"),
+            uncertainty=Decimal("1.0"),
+            support=old_belief.support,
+            contradictions=old_belief.contradictions,
+            source=old_belief.source,
+            last_verified=old_belief.last_verified,
+            evidence_count=old_belief.evidence_count,
+            reasoning_depth=old_belief.reasoning_depth,
+            revision_id=old_belief.revision_id,
+            previous_version_id=old_belief.previous_version_id,
+            metadata=old_belief.metadata,
+        )
+        graph.add_belief(deactivated_old, overwrite=True)
+
         graph.add_belief(revised_belief)
         graph.add_edge(
             BeliefEdge(

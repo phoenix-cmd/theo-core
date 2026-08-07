@@ -42,7 +42,7 @@ The following terms hold formal software design definitions within THEO:
 - **Law 1**: Every Response MUST originate from exactly one Decision.
 - **Law 2**: Every Decision MUST reference one or more Thoughts.
 - **Law 3**: Every Thought MUST consume zero or more Beliefs.
-- **Law 4**: Beliefs MUST be derived from Memory, Knowledge, or Inference.
+- **Law 4**: Beliefs MUST be derived from Perception, Memory, Knowledge, or Inference.
 - **Law 5**: Knowledge MUST NOT directly produce responses. Knowledge MUST only contribute evidence.
 - **Law 6**: Language generation MUST NOT participate in cognitive computation. It is solely responsible for serializing a Decision into a communicable representation.
 - **Law 7**: Inference MUST NOT edit Memory. Only Learning edits Memory.

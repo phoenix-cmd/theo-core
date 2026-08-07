@@ -48,6 +48,8 @@ Thumbs.db
 # Experiment artifacts
 mlruns/
 wandb/
+data/traces/
+data/*.json
 
 # Logs
 *.log

@@ -27,6 +27,7 @@ from theo_core.memory.engine.deterministic_memory import DeterministicMemoryEngi
 from theo_core.memory.storage.json_repository import JSONMemoryRepository
 from theo_core.perception.text.data_driven_processor import DataDrivenPerceptionProcessor
 from theo_core.response.template.generator import TemplateResponseGenerator
+from theo_core.symbolic.pipeline import SymbolicCognitivePipeline
 from theo_core.telemetry.tracing.recorder import TraceRecorder
 
 
@@ -80,7 +81,7 @@ def bootstrap(
     response_generator = TemplateResponseGenerator()
     explain_engine = ExplainEngine()
 
-    # 5. Cognitive Pipeline Orchestrator
+    # 5. Cognitive Pipeline Orchestrators
     cognitive_engine = CognitiveEngine(
         perception=perception,
         context_mgr=context_mgr,
@@ -94,6 +95,8 @@ def bootstrap(
         trace_recorder=trace_recorder,
         event_bus=event_bus,
     )
+
+    symbolic_pipeline = SymbolicCognitivePipeline()
 
     replay_engine = ReplayEngine(
         recorder=trace_recorder,
@@ -119,6 +122,7 @@ def bootstrap(
     registry.register("explain_engine", explain_engine)
     registry.register("replay_engine", replay_engine)
     registry.register("cognitive_engine", cognitive_engine)
+    registry.register("symbolic_pipeline", symbolic_pipeline)
 
     kernel = Kernel(
         registry=registry,
@@ -145,4 +149,5 @@ def bootstrap(
         explain_engine=explain_engine,
         replay_engine=replay_engine,
         cognitive_engine=cognitive_engine,
+        symbolic_pipeline=symbolic_pipeline,
     )

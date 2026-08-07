@@ -38,18 +38,19 @@ class Graph[N, E]:
         """Return total number of edges in graph."""
         return len(self._edges)
 
-    def add_node(self, node_id: NodeId, node: N) -> None:
+    def add_node(self, node_id: NodeId, node: N, overwrite: bool = False) -> None:
         """Add a node to the graph.
 
         Args:
             node_id: SymbolicId identifier for node.
             node: The node payload.
+            overwrite: If True, overwrite existing node. Default False.
 
         Raises:
-            DuplicateIdError: If a node with node_id already exists.
+            DuplicateIdError: If a node with node_id already exists and overwrite is False.
 
         """
-        if node_id in self._nodes:
+        if not overwrite and node_id in self._nodes:
             msg = f"Node with ID {node_id.value!r} already exists in graph."
             raise DuplicateIdError(msg)
         self._nodes[node_id] = node

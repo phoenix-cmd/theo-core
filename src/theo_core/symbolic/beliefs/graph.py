@@ -34,9 +34,9 @@ class BeliefGraph:
         """Access underlying generic Graph instance."""
         return self._graph
 
-    def add_belief(self, belief: Belief) -> None:
+    def add_belief(self, belief: Belief, overwrite: bool = False) -> None:
         """Add a Belief node to graph."""
-        self._graph.add_node(belief.id.to_symbolic_id(), belief)
+        self._graph.add_node(belief.id.to_symbolic_id(), belief, overwrite=overwrite)
 
     def get_belief(self, belief_id: BeliefId) -> Belief | None:
         """Look up a Belief by BeliefId."""

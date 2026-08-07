@@ -22,6 +22,7 @@ if TYPE_CHECKING:
     from theo_core.memory.engine.deterministic_memory import DeterministicMemoryEngine
     from theo_core.perception.text.data_driven_processor import DataDrivenPerceptionProcessor
     from theo_core.response.template.generator import TemplateResponseGenerator
+    from theo_core.symbolic.pipeline import SymbolicCognitivePipeline
     from theo_core.telemetry.tracing.recorder import TraceRecorder
 
 
@@ -69,3 +70,4 @@ class TheoContainer:
     explain_engine: ExplainEngine
     replay_engine: ReplayEngine
     cognitive_engine: CognitiveEngine
+    symbolic_pipeline: SymbolicCognitivePipeline

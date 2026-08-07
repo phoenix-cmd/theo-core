@@ -60,6 +60,7 @@ class DecisionRecord(BaseModel, frozen=True):
     confidence: Decimal = Field(default=Decimal("1.0"), ge=Decimal("0.0"), le=Decimal("1.0"))
     referenced_thoughts: tuple[ThoughtId, ...] = Field(default_factory=tuple)
     accepted_hypothesis_id: HypothesisId | None = None
+    active_goal_id: SymbolicId | None = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
     metadata: dict[str, Any] = Field(default_factory=dict)
 

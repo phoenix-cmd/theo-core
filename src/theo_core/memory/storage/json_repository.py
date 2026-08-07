@@ -41,10 +41,14 @@ class JSONMemoryRepository:
 
         try:
             with open(self._file_path, encoding="utf-8") as f:
-                data: list[dict[str, Any]] = json.load(f)
+                content = f.read().strip()
+                if not content:
+                    return []
+                data: list[dict[str, Any]] = json.loads(content)
                 return [MemoryEntry(**item) for item in data]
-        except Exception:
-            return []
+        except (json.JSONDecodeError, TypeError, KeyError) as err:
+            msg = f"Corrupted memory repository file at {self._file_path!r}: {err}"
+            raise RuntimeError(msg) from err
 
     def save_all(self, entries: list[MemoryEntry]) -> None:
         """Save all memory entries to the JSON repository file.

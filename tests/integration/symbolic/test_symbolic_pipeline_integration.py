@@ -20,7 +20,7 @@ class TestSymbolicPipelineIntegration:
         pipeline = SymbolicCognitivePipeline(rules=[rule])
         budget = ComputeBudget(time_budget_ms=Decimal("2000.0"))
 
-        decision, trace = pipeline.execute_cycle("test input percept", budget)
+        decision, trace, _golden = pipeline.execute_cycle("test input percept", budget)
 
         # Verify decision selection
         assert decision.action_text is not None
@@ -38,9 +38,22 @@ class TestSymbolicPipelineIntegration:
 
         decisions = []
         for _ in range(100):
-            d, _ = pipeline.execute_cycle("determinism check input")
+            d, _, _ = pipeline.execute_cycle("determinism check input")
             decisions.append((d.id.value, d.action_text, d.confidence))
 
         # All 100 decision outputs MUST be identical
         first = decisions[0]
         assert all(item == first for item in decisions)
+
+    def test_cross_process_percept_id_determinism(self) -> None:
+        """Verify percept belief ID generation is deterministic across processes (SHA-256)."""
+        import hashlib
+        input_text = "The sky is raining heavily outside"
+        expected_hash = hashlib.sha256(input_text.encode("utf-8")).hexdigest()[:8]
+        expected_id = f"belief://percept/{expected_hash}"
+
+        p1 = SymbolicCognitivePipeline()
+        p1.execute_cycle(input_text)
+        b = p1.beliefs.get_active_beliefs()[0]
+
+        assert b.id.value == expected_id

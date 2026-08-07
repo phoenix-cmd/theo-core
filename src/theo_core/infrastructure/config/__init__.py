@@ -116,18 +116,22 @@ class KernelSettings(BaseModel):
     boot_timeout_seconds: int = 30
     subsystem_start_order: list[str] = Field(
         default_factory=lambda: [
-            "telemetry",
-            "logging",
-            "security",
             "event_bus",
-            "memory",
-            "knowledge",
-            "identity",
-            "goals",
-            "capabilities",
-            "models",
-            "scheduler",
-            "plugins",
+            "experiment_tracker",
+            "perception",
+            "context_manager",
+            "memory_engine",
+            "memory_classifier",
+            "knowledge_engine",
+            "goal_manager",
+            "planner",
+            "inference_engine",
+            "response_generator",
+            "trace_recorder",
+            "explain_engine",
+            "replay_engine",
+            "cognitive_engine",
+            "symbolic_pipeline",
         ]
     )
 

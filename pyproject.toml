@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "theo-core"
-version = "0.3.0"
+version = "0.4.1"
 description = "THEO — The Poet: A cognitive operating system for exploring artificial cognition, memory, creativity, reasoning, and identity."
 readme = "README.md"
 license = { text = "MIT" }
