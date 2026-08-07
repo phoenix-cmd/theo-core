@@ -13,6 +13,7 @@ This document outlines the living release plan for the THEO cognitive architectu
 | **v0.2.1** | Validation | Benchmark & Stress Testing Suite | 📋 Planned |
 | **v0.3** | Constitution | Formal Cognitive Specification & Architecture Freeze | ✅ Complete |
 | **v0.4** | Symbolic Runtime | Concept/Thought/Belief Graphs, Inference, Constraints, Conflicts | 🔒 FROZEN |
+| **v0.4.1** | Benchmark Corpus | Knowledge Libraries, Rule Base, Cognitive Evaluation Battery | 🔨 Active |
 | **v0.5** | Neural Runtime | Embeddings, Tokenizers, SLMs/LLMs as Proposal Engines | 📋 Planned |
 | **v0.6** | Hybrid Cognition | Parallel Symbolic + Neural, Belief Reconciliation | 📋 Planned |
 | **v0.7** | Learning Runtime | Continual Learning, Belief Revision, Rule Learning | 📋 Planned |
@@ -22,7 +23,7 @@ This document outlines the living release plan for the THEO cognitive architectu
 
 ## Detailed Focus Areas
 
-### v0.4: Symbolic Runtime
+### v0.4: Symbolic Runtime (FROZEN)
 The first reference implementation of Canon Edition C1.
 - Concept Graph (nodes, typed edges, activation).
 - Belief System (propositions, confidence, provenance).
@@ -32,6 +33,12 @@ The first reference implementation of Canon Edition C1.
 - Constraint & Conflict Resolver (consistency checking).
 - Decision Engine v2 (evidence-driven decision selection).
 - Response Generator (convert structured decisions into text).
+
+### v0.4.1: Cognitive Benchmark Corpus & Knowledge Engineering
+Standard evaluation battery and knowledge base prior to neural integration.
+- `benchmarks/`: Standardized cognitive test suites (commonsense, taxonomy, contradiction, causal reasoning, planning).
+- Knowledge Engineering: Richer concept taxonomies and production rule libraries.
+- Standard evaluation harness comparing expected vs actual Belief Graphs, Thought Graphs, and Decisions.
 
 ### v0.5: Neural Runtime
 Introducing neural models to enhance, not replace, symbolic cognition.
