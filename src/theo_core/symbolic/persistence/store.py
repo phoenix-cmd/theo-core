@@ -162,6 +162,52 @@ def deserialize_cycle_state(data: dict[str, Any]) -> CycleState:
     return CycleState(concepts=concepts, beliefs=beliefs, thoughts=thoughts, percept=percept)
 
 
+_VOLATILE_STATE_FIELDS = frozenset({"last_verified", "created_at", "checksum"})
+
+
+def _strip_volatile_state_fields(value: Any) -> Any:
+    """Recursively drop non-canonical fields from a serialized payload.
+
+    ``Belief.last_verified`` and ``Thought.created_at`` default to
+    ``datetime.now(UTC)`` at construction, so a re-executed cycle can never
+    reproduce byte-identical timestamps. The per-graph envelope ``checksum``
+    is a redundant projection of the same node data, so it inherits that
+    volatility. The replay state-hash invariants therefore hash a canonical
+    projection of the committed state that excludes these fields while
+    retaining every structurally meaningful field.
+    """
+    if isinstance(value, dict):
+        return {
+            key: _strip_volatile_state_fields(item)
+            for key, item in value.items()
+            if key not in _VOLATILE_STATE_FIELDS
+        }
+    if isinstance(value, list):
+        return [_strip_volatile_state_fields(item) for item in value]
+    return value
+
+
+def checksum_cycle_state(state: CycleState) -> str:
+    """Compute the canonical SHA-256 checksum of a committed CycleState.
+
+    Uses the same canonical checksum as the durable state envelope, so the
+    hash recorded alongside a trace (``theo_state_hash_before`` /
+    ``theo_state_hash_after``) is directly comparable across recording and
+    replay. Replay verifies both invariants:
+
+        hash(pre-state_original) == hash(pre-state_replay)
+        hash(post-state_original) == hash(post-state_replay)
+
+    The hash is computed over a canonical projection that strips volatile
+    wall-clock fields (``last_verified``, ``created_at``): those timestamps
+    cannot be reproduced across a re-execution and would otherwise make the
+    invariants unsatisfiable for any nontrivial state.
+    """
+    return compute_canonical_checksum(
+        json.dumps(_strip_volatile_state_fields(serialize_cycle_state(state)), sort_keys=True)
+    )
+
+
 class SymbolicStateStore:
     """Persists committed CycleState snapshots as checksummed JSON envelopes."""
 

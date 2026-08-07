@@ -150,4 +150,56 @@ CASES: tuple[BenchmarkCase, ...] = (
             thought_dag_node_count=0,
         ),
     ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://contradiction/006"),
+        domain="contradiction",
+        name="CONT-006: Light State Equal-Confidence Tie",
+        description="Verify that equal-confidence contradictions tie-break "
+        "deterministically on belief id (Canon Invariant 8).",
+        initial_beliefs=(
+            _belief("belief://b_light_off", "the light is off", Decimal("0.7")),
+            _belief("belief://b_light_on", "the light is on", Decimal("0.7")),
+        ),
+        initial_belief_edges=(_contradicts("belief://b_light_off", "belief://b_light_on"),),
+        percept_input="check the light",
+        expected_beliefs=("the light is off",),
+        excluded_beliefs=("the light is on",),
+        expected_action_text="Interpretation based on belief 'check the light'",
+        min_confidence=Decimal("0.5"),
+        max_confidence=Decimal("1.0"),
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(
+                SymbolicId.of("belief://b_light_off"),
+                SymbolicId.of("belief://b_light_on"),
+            ),
+            thought_dag_node_count=0,
+        ),
+    ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://contradiction/007"),
+        domain="contradiction",
+        name="CONT-007: Low-Confidence Signal Conflict",
+        description="Verify that even low-confidence conflicts are resolved "
+        "deterministically: the stronger signal belief survives.",
+        initial_beliefs=(
+            _belief("belief://b_signal_strong", "the signal is strong", Decimal("0.4")),
+            _belief("belief://b_signal_weak", "the signal is weak", Decimal("0.3")),
+        ),
+        initial_belief_edges=(
+            _contradicts("belief://b_signal_strong", "belief://b_signal_weak"),
+        ),
+        percept_input="check the signal",
+        expected_beliefs=("the signal is strong",),
+        excluded_beliefs=("the signal is weak",),
+        expected_action_text="Interpretation based on belief 'check the signal'",
+        min_confidence=Decimal("0.0"),
+        max_confidence=Decimal("1.0"),
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(
+                SymbolicId.of("belief://b_signal_strong"),
+                SymbolicId.of("belief://b_signal_weak"),
+            ),
+            thought_dag_node_count=0,
+        ),
+    ),
 )

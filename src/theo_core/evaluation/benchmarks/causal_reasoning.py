@@ -192,4 +192,66 @@ CASES: tuple[BenchmarkCase, ...] = (
             thought_dag_node_count=1,
         ),
     ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://causal_reasoning/007"),
+        domain="causal_reasoning",
+        name="CAUSAL-007: Steam Is Not Smoke",
+        description="Adversarial negative control: a steam belief must not fire "
+        "a smoke-based causal rule.",
+        initial_beliefs=(_belief("belief://c_steam", "steam is rising from the kettle"),),
+        rules=(
+            _rule(
+                "rule://causal/steam_smoke_fire",
+                "smoke",
+                "Fire is likely nearby",
+                Decimal("0.9"),
+            ),
+        ),
+        percept_input="I can see steam in the kitchen",
+        expected_beliefs=("steam is rising from the kettle",),
+        excluded_beliefs=("Fire is likely nearby",),
+        expected_action_text=(
+            "Interpretation based on belief 'steam is rising from the kettle'"
+        ),
+        min_confidence=Decimal("0.5"),
+        max_confidence=Decimal("1.0"),
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(SymbolicId.of("belief://c_steam"),),
+            fired_rule_ids=(),
+            thought_dag_node_count=0,
+        ),
+    ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://causal_reasoning/008"),
+        domain="causal_reasoning",
+        name="CAUSAL-008: Low-Confidence Premise Fails to Fire",
+        description="Negative control: a premise below the rule's min_confidence "
+        "must not fire the causal rule.",
+        initial_beliefs=(_belief("belief://c_road", "the road is icy", Decimal("0.4")),),
+        rules=(
+            InferenceRule(
+                id=RuleId.of("rule://causal/icy_road_hazard"),
+                name="Driving is hazardous",
+                conditions=(
+                    RuleCondition(
+                        premise_predicate="the road is icy",
+                        min_confidence=Decimal("0.8"),
+                    ),
+                ),
+                conclusion_template="Driving is hazardous",
+                confidence_multiplier=Decimal("0.9"),
+            ),
+        ),
+        percept_input="check the road conditions",
+        expected_beliefs=("the road is icy",),
+        excluded_beliefs=("Driving is hazardous",),
+        expected_action_text="Interpretation based on belief 'check the road conditions'",
+        min_confidence=Decimal("0.0"),
+        max_confidence=Decimal("1.0"),
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(SymbolicId.of("belief://c_road"),),
+            fired_rule_ids=(),
+            thought_dag_node_count=0,
+        ),
+    ),
 )

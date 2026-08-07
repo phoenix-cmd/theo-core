@@ -33,13 +33,25 @@ robustness and research-instrument work tracked for the wider release.
   re-executes against a live runtime's advanced state. Fingerprint comparison remains the
   authority (text match alone is insufficient). Covered by `TestMultiTurnReplayFidelity` and
   `test_container_replay_engine_drives_canonical_runtime`.
+- **Replay state-hash invariants — resolved & tested**: traces additionally record
+  `theo_state_hash_before` and `theo_state_hash_after`, canonical SHA-256 checksums of the
+  committed state before and after the cycle. Replay verifies both invariants —
+  `hash(pre)_original == hash(pre)_replay` and `hash(post)_original == hash(post)_replay` —
+  and forces a replay failure on divergence. The checksum is computed over a canonical
+  projection that strips volatile wall-clock fields (`last_verified`, `created_at`) and the
+  derived per-graph envelope checksum, which cannot be reproduced across re-execution.
+  Covered by `TestStateHashInvariants`.
 - **Canon Law 4 wording (proposed minor amendment)**: Law 4 lists "Perception" among belief
   derivation sources, while ADR-0026 fixes three mechanical sources (MEMORY / KNOWLEDGE /
   INFERENCE) with perception entering as evidence. A clarifying sentence is proposed; ratification
   is a governance decision under Canon §10 (minor amendment, no new Edition).
-- **Benchmark corpus expansion (pre-v0.5 research instrument)**: the 26-case corpus covers five
-  domains and conflicting evidence well, but is weak on adversarial, negative-control, and
-  ambiguity cases. Expand before v0.5 so neural proposal integration targets measured weaknesses.
+- **Benchmark corpus expansion — resolved & tested**: the corpus grew from 26 to 35 cases across
+  six domains. `contradiction` gains an equal-confidence id tie-break (CONT-006) and a
+  low-confidence conflict (CONT-007); `causal_reasoning` gains adversarial negative control
+  (CAUSAL-007, steam is not smoke) and a confidence-gated premise control (CAUSAL-008, premise
+  below `min_confidence` must not fire); a new `ambiguity` domain (AMB-001..005) verifies Canon
+  Law 6 — competing hypotheses per matching belief with no premature collapse. Covered by
+  `test_corpus.py`, `TestAmbiguity*`, and the per-case golden-trace tests.
 
 ## Milestones
 
@@ -73,7 +85,7 @@ The first reference implementation of Canon Edition C1.
 
 ### v0.4.1: Cognitive Benchmark Corpus & Knowledge Engineering (FROZEN)
 Standard evaluation battery and knowledge base prior to neural integration.
-- `evaluation/benchmarks/`: Standardized cognitive test suites (commonsense, taxonomy, contradiction, causal reasoning, uncertainty) — 26 cases, ≥5 per domain.
+- `evaluation/benchmarks/`: Standardized cognitive test suites (ambiguity, commonsense, taxonomy, contradiction, causal reasoning, uncertainty) — 35 cases, ≥5 per domain.
 - `evaluation/harness.py`: Deterministic harness comparing expected vs actual Belief Graphs, Decisions, and GoldenTraces.
 - `theo benchmark run` CLI: executable governance over the canonical pipeline.
 - GoldenTrace: complete per-cycle structural trace (retrieved memory, fired rules, derived beliefs, generated hypotheses, resolved conflicts, thought DAG).

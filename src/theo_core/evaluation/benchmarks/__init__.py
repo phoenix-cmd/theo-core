@@ -8,12 +8,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from . import causal_reasoning, commonsense, contradiction, taxonomy, uncertainty
+from . import ambiguity, causal_reasoning, commonsense, contradiction, taxonomy, uncertainty
 
 if TYPE_CHECKING:
     from theo_core.evaluation.benchmark_schema import BenchmarkCase
 
 DOMAIN_CASES: dict[str, tuple[BenchmarkCase, ...]] = {
+    "ambiguity": ambiguity.CASES,
     "causal_reasoning": causal_reasoning.CASES,
     "commonsense": commonsense.CASES,
     "contradiction": contradiction.CASES,

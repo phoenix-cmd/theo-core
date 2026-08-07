@@ -4,13 +4,15 @@ The engine depends on a ``ReplayableEngine`` protocol so both the legacy
 ``CognitiveEngine`` and the canonical ``SymbolicRuntime`` can be driven.
 
 For the canonical path, each recorded trace carries a structural golden
-fingerprint (decision, fired rules, derived beliefs, hypotheses, thought DAG)
-plus the pre-cycle committed state. Replay re-runs the raw input from that
-recorded pre-cycle state on a fresh runtime and compares the regenerated
-fingerprint field-for-field with the recorded one — a rendered-text match alone
-is not sufficient, and replay must never re-run against a live runtime whose
-state has already advanced. Traces without a recorded fingerprint (e.g. legacy
-spans-based traces) fall back to the response-text comparison.
+fingerprint (decision, fired rules, derived beliefs, hypotheses, thought DAG),
+the pre-cycle committed state, and checksums of the committed state before and
+after the cycle. Replay re-runs the raw input from the recorded pre-cycle state
+on a fresh runtime and verifies both state-hash invariants — hash(pre)_original
+== hash(pre)_replay and hash(post)_original == hash(post)_replay — plus the
+regenerated fingerprint field-for-field. A rendered-text match alone is not
+sufficient, and replay must never re-run against a live runtime whose state has
+already advanced. Traces without recorded fingerprints (e.g. legacy spans-based
+traces) fall back to the response-text comparison.
 """
 
 from __future__ import annotations
@@ -22,6 +24,8 @@ from pydantic import BaseModel
 from theo_core.evaluation.benchmark_schema import (
     FINGERPRINT_METADATA_KEY,
     PRE_CYCLE_STATE_METADATA_KEY,
+    STATE_HASH_AFTER_METADATA_KEY,
+    STATE_HASH_BEFORE_METADATA_KEY,
     golden_fingerprint,
 )
 from theo_core.symbolic.persistence.store import deserialize_cycle_state
@@ -73,6 +77,14 @@ class ReplayResult(BaseModel):
         variance: Output variance score (0.0 means 100% deterministic match).
         original_output: The response text from the original trace.
         replayed_output: The response text produced during replay.
+        pre_state_hash: Recorded checksum of the pre-cycle committed state.
+        post_state_hash: Recorded checksum of the post-cycle committed state.
+        pre_state_hash_replay: Checksum of the restored pre-cycle state during
+            replay (None when the trace/engine cannot compute it).
+        post_state_hash_replay: Checksum of the committed post-cycle state
+            during replay (None when the trace/engine cannot compute it).
+        state_hashes_matched: True when both state-hash invariants hold, False
+            on divergence, None when hashes were not recorded/computable.
 
     """
 
@@ -81,6 +93,11 @@ class ReplayResult(BaseModel):
     variance: float = 0.0
     original_output: str
     replayed_output: str
+    pre_state_hash: str | None = None
+    post_state_hash: str | None = None
+    pre_state_hash_replay: str | None = None
+    post_state_hash_replay: str | None = None
+    state_hashes_matched: bool | None = None
 
 
 class ReplayEngine:
@@ -139,10 +156,39 @@ class ReplayEngine:
 
         # Re-run cognitive cycle on original raw input from a faithful engine
         engine = self._build_engine(trace)
+        state_checksum = getattr(engine, "state_checksum", None)
+        recorded_pre = trace.metadata.get(STATE_HASH_BEFORE_METADATA_KEY)
+        recorded_post = trace.metadata.get(STATE_HASH_AFTER_METADATA_KEY)
+        if (recorded_pre is not None or recorded_post is not None) and state_checksum is None:
+            msg = (
+                "Trace carries state hashes but the replay engine cannot compute "
+                "them; replay would be unfaithful."
+            )
+            raise RuntimeError(msg)
+        pre_replay = (
+            state_checksum()
+            if (state_checksum is not None and recorded_pre is not None)
+            else None
+        )
+
         replayed_state = engine.process(trace.raw_input)
         replayed_output = replayed_state.response_text
         matched = replayed_output == trace.response_text
         variance = 0.0 if matched else 1.0
+
+        # State-hash invariants: hash(pre)_original == hash(pre)_replay and
+        # hash(post)_original == hash(post)_replay.
+        post_replay = (
+            state_checksum()
+            if (state_checksum is not None and recorded_post is not None)
+            else None
+        )
+        state_hashes_matched: bool | None = None
+        if recorded_pre is not None and recorded_post is not None and state_checksum is not None:
+            state_hashes_matched = (pre_replay == recorded_pre) and (post_replay == recorded_post)
+            if not state_hashes_matched:
+                matched = False
+                variance = 1.0
 
         # Canonical path: compare the full golden fingerprint when recorded.
         recorded_fingerprint = trace.metadata.get(FINGERPRINT_METADATA_KEY)
@@ -161,6 +207,11 @@ class ReplayEngine:
             variance=variance,
             original_output=trace.response_text,
             replayed_output=replayed_output,
+            pre_state_hash=recorded_pre,
+            post_state_hash=recorded_post,
+            pre_state_hash_replay=pre_replay,
+            post_state_hash_replay=post_replay,
+            state_hashes_matched=state_hashes_matched,
         )
 
     def _build_engine(self, trace: CognitiveTrace) -> ReplayableEngine:

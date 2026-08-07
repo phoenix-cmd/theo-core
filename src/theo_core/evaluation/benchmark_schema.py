@@ -78,6 +78,8 @@ class BenchmarkCase(BaseModel, frozen=True):
 
 FINGERPRINT_METADATA_KEY = "theo_golden_fingerprint"
 PRE_CYCLE_STATE_METADATA_KEY = "theo_pre_cycle_state"
+STATE_HASH_BEFORE_METADATA_KEY = "theo_state_hash_before"
+STATE_HASH_AFTER_METADATA_KEY = "theo_state_hash_after"
 
 
 def golden_fingerprint(golden_trace: GoldenTrace, response_text: str) -> dict[str, object]:

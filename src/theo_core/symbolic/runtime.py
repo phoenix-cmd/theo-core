@@ -14,10 +14,12 @@ from typing import TYPE_CHECKING
 from theo_core.evaluation.benchmark_schema import (
     FINGERPRINT_METADATA_KEY,
     PRE_CYCLE_STATE_METADATA_KEY,
+    STATE_HASH_AFTER_METADATA_KEY,
+    STATE_HASH_BEFORE_METADATA_KEY,
     golden_fingerprint,
 )
 from theo_core.symbolic.decisions.models import DecisionRecord  # noqa: TC001
-from theo_core.symbolic.persistence.store import serialize_cycle_state
+from theo_core.symbolic.persistence.store import checksum_cycle_state, serialize_cycle_state
 from theo_core.symbolic.response.renderer import TemplateResponseRenderer
 
 if TYPE_CHECKING:
@@ -89,6 +91,15 @@ class SymbolicRuntime:
         """Return the trace id recorded for the most recent cycle, if recording."""
         return self._last_trace_id
 
+    def state_checksum(self) -> str:
+        """Return the canonical checksum of the current committed state.
+
+        Replay uses this to verify the recorded ``theo_state_hash_before`` /
+        ``theo_state_hash_after`` invariants: the restored pre-cycle state and
+        the post-cycle committed state must reproduce exactly.
+        """
+        return checksum_cycle_state(self._pipeline.state)
+
     def start(self) -> None:
         """Restore committed state from the store and mark the runtime started."""
         if self._store is not None:
@@ -142,6 +153,7 @@ class SymbolicRuntime:
             percept_input, budget
         )
         response_text = self._renderer.render(decision)
+        post_state = self._pipeline.state
         boundary_golden_trace = golden_trace.model_copy(update={"response_text": response_text})
         if self._recorder is not None:
             saved = self._recorder.record_trace(
@@ -152,6 +164,8 @@ class SymbolicRuntime:
                         boundary_golden_trace, response_text
                     ),
                     PRE_CYCLE_STATE_METADATA_KEY: serialize_cycle_state(pre_state),
+                    STATE_HASH_BEFORE_METADATA_KEY: checksum_cycle_state(pre_state),
+                    STATE_HASH_AFTER_METADATA_KEY: checksum_cycle_state(post_state),
                 },
             )
             self._last_trace_id = str(saved.trace_id)

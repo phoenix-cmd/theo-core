@@ -8,9 +8,14 @@ response text and identical golden-trace identifiers.
 from __future__ import annotations
 
 import json
+import re
 from typing import TYPE_CHECKING
 
-from theo_core.evaluation.benchmark_schema import FINGERPRINT_METADATA_KEY
+from theo_core.evaluation.benchmark_schema import (
+    FINGERPRINT_METADATA_KEY,
+    STATE_HASH_AFTER_METADATA_KEY,
+    STATE_HASH_BEFORE_METADATA_KEY,
+)
 from theo_core.explanation.replay.replay_engine import ReplayEngine
 from theo_core.symbolic.runtime import SymbolicRuntime
 from theo_core.telemetry.tracing.cognitive_trace import CognitiveTrace
@@ -160,3 +165,64 @@ class TestMultiTurnReplayFidelity:
         first_replay = replay_engine.replay(first_trace_id)
         assert first_replay.matched
         assert first_replay.variance == 0.0
+
+
+class TestStateHashInvariants:
+    def test_runtime_records_state_hashes_with_continuity(self, tmp_path: Path) -> None:
+        recorder = TraceRecorder(str(tmp_path / "traces"))
+        runtime = SymbolicRuntime(recorder=recorder)
+        runtime.process("rain is falling")
+        trace1 = recorder.load_trace(str(runtime.last_trace_id))
+        assert trace1 is not None
+        pre1 = trace1.metadata[STATE_HASH_BEFORE_METADATA_KEY]
+        post1 = trace1.metadata[STATE_HASH_AFTER_METADATA_KEY]
+        assert re.fullmatch(r"[0-9a-f]{64}", pre1)
+        assert re.fullmatch(r"[0-9a-f]{64}", post1)
+        assert pre1 != post1
+
+        runtime.process("road is slippery")
+        trace2 = recorder.load_trace(str(runtime.last_trace_id))
+        assert trace2 is not None
+        pre2 = trace2.metadata[STATE_HASH_BEFORE_METADATA_KEY]
+        assert pre2 == post1
+
+    def test_replay_verifies_both_state_hash_invariants(self, tmp_path: Path) -> None:
+        recorder = TraceRecorder(str(tmp_path / "traces"))
+        runtime = SymbolicRuntime(recorder=recorder)
+        runtime.process("rain is falling")
+        runtime.process("road is slippery")
+        trace_id = runtime.last_trace_id
+        assert trace_id is not None
+
+        replay_engine = ReplayEngine(
+            recorder=recorder,
+            engine_factory=lambda: SymbolicRuntime(),
+        )
+        replay = replay_engine.replay(trace_id)
+
+        assert replay.matched
+        assert replay.state_hashes_matched is True
+        assert replay.pre_state_hash_replay == replay.pre_state_hash
+        assert replay.post_state_hash_replay == replay.post_state_hash
+
+    def test_tampered_post_state_hash_is_detected(self, tmp_path: Path) -> None:
+        recorder = TraceRecorder(str(tmp_path / "traces"))
+        runtime = SymbolicRuntime(recorder=recorder)
+        runtime.process("rain is falling")
+        trace_path = tmp_path / "traces" / f"{runtime.last_trace_id}.json"
+
+        data = json.loads(trace_path.read_text(encoding="utf-8"))
+        recorded_hashes = data["metadata"]
+        recorded_hashes[STATE_HASH_AFTER_METADATA_KEY] = "0" * 64
+        trace_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+        replay_engine = ReplayEngine(
+            recorder=recorder,
+            engine_factory=lambda: SymbolicRuntime(),
+        )
+        replay = replay_engine.replay(str(runtime.last_trace_id))
+
+        assert replay.matched is False
+        assert replay.state_hashes_matched is False
+        assert replay.post_state_hash_replay != replay.post_state_hash
+        assert replay.pre_state_hash_replay == replay.pre_state_hash
