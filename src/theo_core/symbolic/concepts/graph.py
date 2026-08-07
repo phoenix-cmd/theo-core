@@ -18,6 +18,21 @@ class ConceptGraph:
         """Initialize empty ConceptGraph instance."""
         self._graph: Graph[Concept, ConceptEdge] = Graph()
 
+    @classmethod
+    def from_raw_graph(cls, raw: Graph[Concept, ConceptEdge]) -> ConceptGraph:
+        """Wrap a reconstructed generic Graph into a ConceptGraph.
+
+        Args:
+            raw: A deserialized Graph[Concept, ConceptEdge].
+
+        Returns:
+            A ConceptGraph backed by the given raw graph.
+
+        """
+        graph = cls()
+        graph._graph = raw
+        return graph
+
     @property
     def node_count(self) -> int:
         """Total number of concepts in graph."""
@@ -94,3 +109,9 @@ class ConceptGraph:
             edge_filter=lambda ek, _: ek.relation == RelationType.IS_A.value,
         )
         return {ConceptId(value=sid.value) for sid in symbolic_descendants}
+
+    def copy(self) -> ConceptGraph:
+        """Return an independent shallow copy of this ConceptGraph."""
+        new_graph = ConceptGraph()
+        new_graph._graph = self._graph.copy()
+        return new_graph

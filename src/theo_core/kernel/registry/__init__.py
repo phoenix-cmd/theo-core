@@ -20,6 +20,36 @@ class SubsystemState(StrEnum):
     FAILED = "failed"
 
 
+class InvalidStateTransitionError(RuntimeError):
+    """Raised when a subsystem attempts an illegal lifecycle transition."""
+
+    def __init__(self, name: str, current: SubsystemState, target: SubsystemState) -> None:
+        """Initialize with the offending subsystem and states."""
+        super().__init__(
+            f"Illegal subsystem state transition for '{name}': "
+            f"{current.value} -> {target.value}"
+        )
+        self.name = name
+        self.current = current
+        self.target = target
+
+
+LEGAL_TRANSITIONS: dict[SubsystemState, frozenset[SubsystemState]] = {
+    SubsystemState.REGISTERED: frozenset({SubsystemState.STARTING}),
+    SubsystemState.STARTING: frozenset(
+        {SubsystemState.RUNNING, SubsystemState.STOPPING, SubsystemState.FAILED}
+    ),
+    SubsystemState.RUNNING: frozenset(
+        {SubsystemState.STOPPING, SubsystemState.FAILED}
+    ),
+    SubsystemState.STOPPING: frozenset(
+        {SubsystemState.STOPPED, SubsystemState.FAILED}
+    ),
+    SubsystemState.STOPPED: frozenset(),
+    SubsystemState.FAILED: frozenset({SubsystemState.STARTING}),
+}
+
+
 class SubsystemEntry:
     """A registered subsystem with its state and metadata.
 
@@ -84,6 +114,9 @@ class SubsystemRegistry:
     def set_state(self, name: str, state: SubsystemState) -> None:
         """Update the state of a registered subsystem.
 
+        Low-level permissive setter; prefer :meth:`transition` for lifecycle
+        enforcement.
+
         Args:
             name: The subsystem name.
             state: The new state.
@@ -92,6 +125,28 @@ class SubsystemRegistry:
         if name in self._entries:
             self._entries[name].state = state
             logger.debug("Subsystem %s → %s", name, state)
+
+    def transition(self, name: str, target: SubsystemState) -> None:
+        """Transition a subsystem to a new state, validating legality.
+
+        Raises:
+            KeyError: If the subsystem is not registered.
+            InvalidStateTransitionError: If the transition is not legal.
+
+        Args:
+            name: The subsystem name.
+            target: The target state.
+
+        """
+        entry = self._entries.get(name)
+        if entry is None:
+            raise KeyError(f"Unknown subsystem: {name}")
+        if entry.state == target:
+            return
+        if target not in LEGAL_TRANSITIONS[entry.state]:
+            raise InvalidStateTransitionError(name, entry.state, target)
+        entry.state = target
+        logger.debug("Subsystem %s → %s", name, target)
 
     def all_entries(self) -> list[SubsystemEntry]:
         """Return all registered subsystem entries.

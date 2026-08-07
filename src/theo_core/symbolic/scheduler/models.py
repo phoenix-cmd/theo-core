@@ -19,6 +19,7 @@ class CycleStage(StrEnum):
     CONFLICT_RESOLUTION = "conflict_resolution"
     DECISION = "decision"
     REALIZATION = "realization"
+    LEARNING = "learning"
 
 
 class ComputeBudget(BaseModel, frozen=True):
@@ -30,10 +31,14 @@ class ComputeBudget(BaseModel, frozen=True):
 
 
 class SchedulerTrace(BaseModel, frozen=True):
-    """Trace log of scheduler stage execution and budget utilization."""
+    """Trace log of scheduler stage execution and budget utilization.
+
+    When no ``ComputeBudget`` is supplied, timing is disabled entirely and
+    ``total_time_ms`` is ``None`` so that the trace is fully deterministic.
+    """
 
     stages_executed: tuple[CycleStage, ...] = Field(default_factory=tuple)
-    total_time_ms: Decimal = Field(default=Decimal("0.0"), ge=Decimal("0.0"))
+    total_time_ms: Decimal | None = Field(default=None, ge=Decimal("0.0"))
     budget_exhausted: bool = False
 
 

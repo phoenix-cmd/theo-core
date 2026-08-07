@@ -26,6 +26,21 @@ class ThoughtGraph:
         """Initialize empty ThoughtGraph instance."""
         self._graph: Graph[Thought, ThoughtEdge] = Graph()
 
+    @classmethod
+    def from_raw_graph(cls, raw: Graph[Thought, ThoughtEdge]) -> ThoughtGraph:
+        """Wrap a reconstructed generic Graph into a ThoughtGraph.
+
+        Args:
+            raw: A deserialized Graph[Thought, ThoughtEdge].
+
+        Returns:
+            A ThoughtGraph backed by the given raw graph.
+
+        """
+        graph = cls()
+        graph._graph = raw
+        return graph
+
     @property
     def node_count(self) -> int:
         """Total number of thoughts in graph."""
@@ -148,3 +163,9 @@ class ThoughtGraph:
         # Filter topological sort by chain members
         full_topo = self.topological_sort()
         return [t for t in full_topo if t.id.to_symbolic_id() in all_chain_ids]
+
+    def copy(self) -> ThoughtGraph:
+        """Return an independent shallow copy of this ThoughtGraph."""
+        new_graph = ThoughtGraph()
+        new_graph._graph = self._graph.copy()
+        return new_graph

@@ -9,7 +9,9 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
+from theo_core._version import __version__
 from theo_core.events.events import SubsystemStartedV1, SystemReadyV1
+from theo_core.kernel.registry import SubsystemState
 
 if TYPE_CHECKING:
     from theo_core.events.bus import EventBus
@@ -50,9 +52,14 @@ class Kernel:
     def boot(self) -> None:
         """Execute the deterministic kernel boot sequence.
 
-        Boots subsystems in start_order sequence, sets states to RUNNING,
-        and publishes SystemReady event when complete.
+        Boots subsystems in start_order sequence, drives each through
+        REGISTERED -> STARTING -> RUNNING, and publishes SystemReady when
+        complete. Idempotent: calling boot while already booted is a no-op.
         """
+        if self._is_booted:
+            logger.info("Kernel already booted, ignoring repeated boot() call.")
+            return
+
         logger.info("=== THEO Kernel Boot Sequence ===")
 
         started_count = 0
@@ -65,19 +72,27 @@ class Kernel:
                 )
                 continue
 
+            self._registry.transition(name, SubsystemState.STARTING)
             try:
-                self._lifecycle.start_subsystem(name, subsystem)
-                started_count += 1
-                self._event_bus.publish(
-                    SubsystemStartedV1(
-                        source="kernel",
-                        subsystem_name=name,
-                        version="0.2.0",
-                    )
-                )
+                started = self._lifecycle.start_subsystem(name, subsystem)
             except Exception:
                 logger.exception("Failed to start subsystem '%s'", name)
+                self._registry.transition(name, SubsystemState.FAILED)
                 raise
+            if not started:
+                self._registry.transition(name, SubsystemState.FAILED)
+                logger.error("Subsystem '%s' failed to start.", name)
+                continue
+
+            self._registry.transition(name, SubsystemState.RUNNING)
+            started_count += 1
+            self._event_bus.publish(
+                SubsystemStartedV1(
+                    source="kernel",
+                    subsystem_name=name,
+                    version=__version__,
+                )
+            )
 
         self._is_booted = True
         logger.info("=== THEO Kernel Ready (%d subsystems started) ===", started_count)
@@ -89,13 +104,34 @@ class Kernel:
         )
 
     def shutdown(self) -> None:
-        """Shutdown all registered subsystems in reverse boot order."""
+        """Shutdown all registered subsystems in reverse boot order.
+
+        Drives each active subsystem through RUNNING/STARTING -> STOPPING ->
+        STOPPED. Idempotent: calling shutdown while not booted is a no-op.
+        """
+        if not self._is_booted:
+            logger.info("Kernel not booted, ignoring shutdown() call.")
+            return
+
         logger.info("=== THEO Kernel Shutdown Sequence ===")
         for entry in reversed(self._registry.all_entries()):
+            if entry.state not in (
+                SubsystemState.STARTING,
+                SubsystemState.RUNNING,
+            ):
+                continue
+            self._registry.transition(entry.name, SubsystemState.STOPPING)
             try:
-                self._lifecycle.stop_subsystem(entry.name, entry.instance)
+                stopped = self._lifecycle.stop_subsystem(entry.name, entry.instance)
             except Exception:
                 logger.exception("Failed to stop subsystem '%s'", entry.name)
+                self._registry.transition(entry.name, SubsystemState.FAILED)
+                continue
+            if not stopped:
+                logger.error("Subsystem '%s' failed to stop.", entry.name)
+                self._registry.transition(entry.name, SubsystemState.FAILED)
+                continue
+            self._registry.transition(entry.name, SubsystemState.STOPPED)
 
         self._is_booted = False
         logger.info("=== THEO Kernel Shutdown Complete ===")

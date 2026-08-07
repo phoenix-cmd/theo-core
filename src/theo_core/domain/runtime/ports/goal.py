@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     from uuid import UUID
 
     from theo_core.domain.runtime.entities.goal import Goal
+    from theo_core.domain.runtime.entities.percept import Percept
 
 
 class GoalPort(ABC):
@@ -16,6 +17,18 @@ class GoalPort(ABC):
 
     Goals answer "Why?" and drive the planning subsystem.
     """
+
+    @abstractmethod
+    def select_top_goal(self, percept: Percept | None = None) -> Goal:
+        """Select or infer the highest priority active goal.
+
+        Args:
+            percept: Optional Percept to inform goal selection.
+
+        Returns:
+            The selected top priority Goal.
+
+        """
 
     @abstractmethod
     def add_goal(self, goal: Goal) -> None:

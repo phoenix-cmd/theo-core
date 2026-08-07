@@ -23,6 +23,8 @@ if TYPE_CHECKING:
     from theo_core.perception.text.data_driven_processor import DataDrivenPerceptionProcessor
     from theo_core.response.template.generator import TemplateResponseGenerator
     from theo_core.symbolic.pipeline import SymbolicCognitivePipeline
+    from theo_core.symbolic.response.renderer import TemplateResponseRenderer
+    from theo_core.symbolic.runtime import SymbolicRuntime
     from theo_core.telemetry.tracing.recorder import TraceRecorder
 
 
@@ -50,6 +52,9 @@ class TheoContainer:
         explain_engine: Explainability engine.
         replay_engine: Trace replay engine.
         cognitive_engine: 12-stage cognitive pipeline orchestrator.
+        symbolic_pipeline: Canonical symbolic cognitive pipeline.
+        response_renderer: Boundary response renderer (Canon Law 6).
+        symbolic_runtime: Canonical symbolic runtime boundary service.
 
     """
 
@@ -71,3 +76,5 @@ class TheoContainer:
     replay_engine: ReplayEngine
     cognitive_engine: CognitiveEngine
     symbolic_pipeline: SymbolicCognitivePipeline
+    response_renderer: TemplateResponseRenderer
+    symbolic_runtime: SymbolicRuntime

@@ -1,5 +1,6 @@
 """CAUSAL-001 Benchmark Case — Causal Deduction Verification."""
 
+import hashlib
 from decimal import Decimal
 
 from theo_core.evaluation.benchmark_schema import BenchmarkCase, BenchmarkId, GoldenTrace
@@ -22,6 +23,7 @@ def test_causal_001_benchmark_execution() -> None:
         min_confidence=Decimal("0.5"),
         max_confidence=Decimal("1.0"),
         golden_trace=GoldenTrace(
+            retrieved_memory_ids=(SymbolicId.of("belief://b_rain"),),
             fired_rule_ids=(SymbolicId.of("rule://causal/rain_umbrella"),),
             thought_dag_node_count=1,
         ),
@@ -48,10 +50,31 @@ def test_causal_001_benchmark_execution() -> None:
     pipeline = SymbolicCognitivePipeline(beliefs=beliefs, rules=[r1])
     decision, trace, golden_trace = pipeline.execute_cycle(bm_case.percept_input)
 
-    # Assert correctness against benchmark case criteria and golden trace
+    # Assert correctness against benchmark case criteria
     assert decision.action_text == bm_case.expected_action_text
     assert bm_case.min_confidence <= decision.confidence <= bm_case.max_confidence
-    assert len(trace.stages_executed) == 8
+    assert len(trace.stages_executed) == 9
+
+    # Full golden trace assertions (all deterministic fields, Canon Invariant 2)
+    percept_hash = hashlib.sha256(bm_case.percept_input.encode("utf-8")).hexdigest()[:8]
+    assert golden_trace.retrieved_memory_ids == (
+        SymbolicId.of("belief://b_rain"),
+    )
+    assert golden_trace.activated_concept_ids == ()
+    assert golden_trace.generated_hypothesis_ids == (
+        SymbolicId.of("hypothesis://cand/2"),
+        SymbolicId.of("hypothesis://cand/1"),
+    )
+    assert golden_trace.fired_rule_ids == (
+        SymbolicId.of("rule://causal/rain_umbrella"),
+    )
+    assert golden_trace.derived_belief_ids == (
+        SymbolicId.of("belief://inf/causal/rain_umbrella/1"),
+        SymbolicId.of(f"belief://percept/{percept_hash}"),
+    )
+    assert golden_trace.resolved_conflict_ids == (
+        SymbolicId.of("conflict://hyp/cand/2_cand/1"),
+    )
+    assert golden_trace.thought_dag_node_count == 1
     assert golden_trace.decision_id == decision.id.to_symbolic_id()
     assert golden_trace.response_text == decision.action_text
-    assert golden_trace.thought_dag_node_count == 1

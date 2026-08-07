@@ -22,6 +22,15 @@ Every major architectural, research, or system design decision for THEO MUST be 
 - [ADR-0016: Observability & Telemetry](ADR-0016-telemetry-strategy.md)
 - [ADR-0017: Cognitive Cycle & Perception](ADR-0017-cognitive-cycle-and-perception.md)
 - [ADR-0018: Goal Management & Active Context](ADR-0018-goal-system-and-context.md)
+- [ADR-0019: Symbolic Knowledge and Concept Taxonomy](ADR-0019-symbolic-knowledge-and-concept-taxonomy.md)
+- [ADR-0020: Thought Graph and Defeasible Inference](ADR-0020-thought-graph-and-defeasible-inference.md)
+- [ADR-0021: Hypothesis Engine and Conflict Resolution](ADR-0021-hypothesis-engine-and-conflict-resolution.md)
+- [ADR-0022: Decoupled Response Generation and Versioned Ports](ADR-0022-decoupled-response-generation-and-versioned-ports.md)
+- [ADR-0023: Cognitive Computation Model and Belief System](ADR-0023-cognitive-computation-model-and-belief-system.md)
+- [ADR-0024: Cognitive Scheduler and Metacognitive Control](ADR-0024-cognitive-scheduler-and-metacognitive-control.md)
+- [ADR-0025: Cognitive Ontology and Fundamental Laws](ADR-0025-cognitive-ontology-and-fundamental-laws.md)
+- [ADR-0026: Canon Law 4 Verdict — Perception Enters Cognition as Evidence](ADR-0026-canon-law-4-verdict-perception-as-evidence.md)
+- [ADR-0027: Runtime Unification — Symbolic Pipeline as Canonical Runtime](ADR-0027-runtime-unification-symbolic-canonical.md)
 
 ## ADR Template
 

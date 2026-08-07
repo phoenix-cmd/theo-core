@@ -14,7 +14,11 @@ class TestCognitiveEngine:
     def test_greeting_cycle(self, tmp_path: object) -> None:
         """Greeting input should visit all stages and respond deterministically."""
         json_file = str(tmp_path) + "/test_mem.json"
-        container = bootstrap(memory_file=json_file)
+        container = bootstrap(
+            memory_file=json_file,
+            knowledge_file=str(tmp_path) + "/test_know.json",
+            trace_dir=str(tmp_path) + "/traces",
+        )
 
         state = container.cognitive_engine.process("Hello Theo")
 
@@ -30,7 +34,11 @@ class TestCognitiveEngine:
     def test_name_statement_cycle(self, tmp_path: object) -> None:
         """Identity introduction input should extract name into context and memory."""
         json_file = str(tmp_path) + "/test_mem_name.json"
-        container = bootstrap(memory_file=json_file)
+        container = bootstrap(
+            memory_file=json_file,
+            knowledge_file=str(tmp_path) + "/test_know_name.json",
+            trace_dir=str(tmp_path) + "/traces",
+        )
 
         state = container.cognitive_engine.process("My name is Falcon")
 
@@ -44,7 +52,11 @@ class TestCognitiveEngine:
     def test_multi_turn_name_recall(self, tmp_path: object) -> None:
         """Second greeting turn should use name stored in active context and memory."""
         json_file = str(tmp_path) + "/test_mem_recall.json"
-        container = bootstrap(memory_file=json_file)
+        container = bootstrap(
+            memory_file=json_file,
+            knowledge_file=str(tmp_path) + "/test_know_recall.json",
+            trace_dir=str(tmp_path) + "/traces",
+        )
 
         container.cognitive_engine.process("My name is Falcon")
         state2 = container.cognitive_engine.process("Hello")

@@ -19,6 +19,21 @@ class BeliefGraph:
         """Initialize empty BeliefGraph instance."""
         self._graph: Graph[Belief, BeliefEdge] = Graph()
 
+    @classmethod
+    def from_raw_graph(cls, raw: Graph[Belief, BeliefEdge]) -> BeliefGraph:
+        """Wrap a reconstructed generic Graph into a BeliefGraph.
+
+        Args:
+            raw: A deserialized Graph[Belief, BeliefEdge].
+
+        Returns:
+            A BeliefGraph backed by the given raw graph.
+
+        """
+        graph = cls()
+        graph._graph = raw
+        return graph
+
     @property
     def node_count(self) -> int:
         """Total number of beliefs in graph."""
@@ -119,3 +134,9 @@ class BeliefGraph:
             for ek, _ in edges
             if ek.relation == BeliefRelation.DEPENDS_ON.value
         }
+
+    def copy(self) -> BeliefGraph:
+        """Return an independent shallow copy of this BeliefGraph."""
+        new_graph = BeliefGraph()
+        new_graph._graph = self._graph.copy()
+        return new_graph

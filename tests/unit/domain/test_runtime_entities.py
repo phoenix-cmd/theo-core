@@ -105,6 +105,21 @@ class TestGoal:
         assert goal.status == GoalStatus.ACTIVE
         assert goal.priority == GoalPriority.HIGH
 
+    def test_goal_id_is_derived_deterministically(self) -> None:
+        """A goal should derive a deterministic GoalId from its description."""
+        goal = Goal(description="AcknowledgeGreeting")
+        assert goal.goal_id is not None
+        assert goal.goal_id.value == "goal://acknowledgegreeting"
+
+    def test_goal_id_is_stable_across_instances(self) -> None:
+        """Identical descriptions should yield identical GoalIds."""
+        g1 = Goal(description="Learn about the user")
+        g2 = Goal(description="Learn about the user")
+        assert g1.goal_id == g2.goal_id
+        assert g1.goal_id is not None
+        assert g2.goal_id is not None
+        assert g1.goal_id.value == g2.goal_id.value
+
 
 class TestPercept:
     """Tests for the Percept value object."""

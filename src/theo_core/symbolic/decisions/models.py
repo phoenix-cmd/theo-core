@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from decimal import Decimal
 from enum import StrEnum
@@ -51,16 +51,50 @@ class DecisionType(StrEnum):
     NO_OP = "no_op"
 
 
+class Intent(StrEnum):
+    """Intent inferred from the active goal (aligned to the GoalManager vocabulary).
+
+    The intent drives the structured ActionSpec and, ultimately, the
+    boundary ResponseRenderer (Canon Law 6).
+    """
+
+    ACKNOWLEDGE_GREETING = "acknowledge_greeting"
+    REMEMBER_FACT = "remember_fact"
+    PROVIDE_RECOMMENDATION = "provide_recommendation"
+    ANSWER_QUESTION = "answer_question"
+    MAINTAIN_CONVERSATION = "maintain_conversation"
+
+
+@dataclass(frozen=True, slots=True)
+class ActionSpec:
+    """Structured, non-rendered payload describing the intended action.
+
+    The pipeline never renders language (Canon Law 6); this spec is the
+    data contract the boundary ResponseRenderer consumes to produce text.
+    """
+
+    capability: str
+    parameters: dict[str, Any] = field(default_factory=dict)
+
+
 class DecisionRecord(BaseModel, frozen=True):
     """An immutable decision selection record enforcing Canon Law 2 and Invariant 2."""
 
     id: DecisionId
     type: DecisionType = DecisionType.RESPONSE
     action_text: str
+    referenced_goal: SymbolicId = Field(
+        description="Canon Invariant 7: the active goal referenced by this decision."
+    )
+    intent: Intent = Field(
+        description="Intent inferred from the referenced goal (Canon Law 6)."
+    )
+    action_spec: ActionSpec = Field(
+        description="Structured action payload consumed by the boundary ResponseRenderer."
+    )
     confidence: Decimal = Field(default=Decimal("1.0"), ge=Decimal("0.0"), le=Decimal("1.0"))
     referenced_thoughts: tuple[ThoughtId, ...] = Field(default_factory=tuple)
     accepted_hypothesis_id: HypothesisId | None = None
-    active_goal_id: SymbolicId | None = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
     metadata: dict[str, Any] = Field(default_factory=dict)
 

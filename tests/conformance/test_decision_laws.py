@@ -2,6 +2,7 @@
 
 from decimal import Decimal
 
+from theo_core.symbolic._primitives.identifiers import SymbolicId
 from theo_core.symbolic.decisions.engine import DecisionEngine
 from theo_core.symbolic.hypotheses.models import Hypothesis, HypothesisId, HypothesisState
 from theo_core.symbolic.thoughts.graph import ThoughtGraph
@@ -23,7 +24,9 @@ class TestCanonDecisionLaws:
             supporting_thoughts=(t1_id,),
         )
 
-        decision = DecisionEngine.make_decision([h1], tg)
+        decision = DecisionEngine.make_decision(
+            [h1], tg, referenced_goal=SymbolicId.of("goal://acknowledge_greeting")
+        )
 
         assert len(decision.referenced_thoughts) >= 1
         assert t1_id in decision.referenced_thoughts
@@ -42,7 +45,12 @@ class TestCanonDecisionLaws:
             supporting_thoughts=(t1_id,),
         )
 
-        decisions = [DecisionEngine.make_decision([h1], tg) for _ in range(100)]
+        decisions = [
+            DecisionEngine.make_decision(
+                [h1], tg, referenced_goal=SymbolicId.of("goal://test")
+            )
+            for _ in range(100)
+        ]
 
         # Verify all 100 decision outcomes are strictly identical
         first = (decisions[0].id.value, decisions[0].action_text, decisions[0].confidence)

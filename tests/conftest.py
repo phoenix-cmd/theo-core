@@ -11,6 +11,8 @@ from theo_core.events.bus import EventBus
 from theo_core.infrastructure.config import TheoSettings
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     from theo_core.composition.container import TheoContainer
 
 
@@ -30,6 +32,12 @@ def event_bus() -> EventBus:
 
 
 @pytest.fixture
-def container(settings: TheoSettings) -> TheoContainer:
+def container(settings: TheoSettings, tmp_path: Path) -> TheoContainer:
     """Create a fully wired TheoContainer for integration tests."""
-    return bootstrap(settings)
+    return bootstrap(
+        settings,
+        memory_file=str(tmp_path / "memory_store.json"),
+        knowledge_file=str(tmp_path / "knowledge_graph.json"),
+        trace_dir=str(tmp_path / "traces"),
+        state_file=str(tmp_path / "symbolic_state.json"),
+    )

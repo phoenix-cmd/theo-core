@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "theo-core"
-version = "0.4.1"
+dynamic = ["version"]
 description = "THEO — The Poet: A cognitive operating system for exploring artificial cognition, memory, creativity, reasoning, and identity."
 readme = "README.md"
 license = { text = "MIT" }
@@ -20,11 +20,8 @@ classifiers = [
 
 dependencies = [
     "pydantic>=2.10",
-    "hydra-core>=1.3",
     "structlog>=25.0",
     "typer>=0.15",
-    "pluggy>=1.5",
-    "apscheduler>=3.10",
     "pyyaml>=6.0",
 ]
 
@@ -48,6 +45,9 @@ theo = "theo_core.__main__:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/theo_core"]
+
+[tool.hatch.version]
+path = "src/theo_core/_version.py"
 
 # ---------- Ruff ----------
 [tool.ruff]
@@ -110,7 +110,7 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-addopts = "-v --strict-markers --tb=short"
+addopts = "-v --strict-markers --tb=short --cov=theo_core --cov-report=term-missing --cov-fail-under=80"
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "integration: marks integration tests",

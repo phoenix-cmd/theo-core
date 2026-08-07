@@ -74,6 +74,22 @@ class TestKernel:
         kernel.boot()  # Should not raise
         assert kernel.is_booted
 
+    def test_boot_marks_subsystems_running_and_shutdown_stopped(self) -> None:
+        """Boot should mark subsystems RUNNING; shutdown should mark them STOPPED."""
+        registry = SubsystemRegistry()
+        event_bus = EventBus()
+        lifecycle = LifecycleManager()
+
+        registry.register("test_sub", StubSubsystem())
+        kernel = Kernel(registry, event_bus, lifecycle, start_order=["test_sub"])
+        kernel.boot()
+
+        assert registry.is_all_running()
+
+        kernel.shutdown()
+        entry = registry.all_entries()[0]
+        assert entry.state == SubsystemState.STOPPED
+
 
 class TestSubsystemRegistry:
     """Tests for the SubsystemRegistry."""

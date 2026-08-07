@@ -41,12 +41,15 @@ class BeliefId:
 
 
 class BeliefSource(StrEnum):
-    """Origin source of a belief, enforcing Canon Law 4."""
+    """Origin source of a belief, enforcing Canon Law 4.
+
+    Perception is intentionally absent: percepts enter cognition as *evidence*,
+    and beliefs are mechanically derived by Inference (see ADR-0026).
+    """
 
     MEMORY = "memory"
     KNOWLEDGE = "knowledge"
     INFERENCE = "inference"
-    PERCEPTION = "perception"
 
 
 class EvidenceTrace(BaseModel, frozen=True):

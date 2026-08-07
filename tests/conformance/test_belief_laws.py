@@ -12,12 +12,15 @@ from theo_core.symbolic.beliefs.models import (
 
 class TestCanonBeliefLaws:
     def test_law_4_belief_source_validity(self) -> None:
-        """Canon Law 4: Beliefs MUST be derived from valid sources."""
+        """Canon Law 4: Beliefs MUST be derived from valid sources.
+
+        Perception is not a mechanical source: percepts enter cognition as
+        evidence and beliefs are mechanically derived by Inference (ADR-0026).
+        """
         valid_sources = {
             BeliefSource.MEMORY,
             BeliefSource.KNOWLEDGE,
             BeliefSource.INFERENCE,
-            BeliefSource.PERCEPTION,
         }
         b = Belief(
             id=BeliefId.of("belief://canon_test"),

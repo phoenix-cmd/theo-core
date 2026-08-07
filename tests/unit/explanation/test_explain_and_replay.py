@@ -37,7 +37,11 @@ class TestTraceRecorderAndReplay:
         """Cognitive cycle should record trace file and replay with 0-variance match."""
         mem_file = str(tmp_path) + "/replay_mem.json"
         trace_dir = str(tmp_path) + "/traces"
-        container = bootstrap(memory_file=mem_file, trace_dir=trace_dir)
+        container = bootstrap(
+            memory_file=mem_file,
+            knowledge_file=str(tmp_path) + "/replay_know.json",
+            trace_dir=trace_dir,
+        )
 
         # Run cognitive cycle
         state = container.cognitive_engine.process("My name is Falcon")
@@ -54,7 +58,7 @@ class TestTraceRecorderAndReplay:
         # Replay trace using ReplayEngine
         replay_engine = ReplayEngine(
             recorder=container.trace_recorder,
-            cognitive_engine=container.cognitive_engine,
+            engine=container.cognitive_engine,
         )
         result = replay_engine.replay(str(rec.trace_id))
 

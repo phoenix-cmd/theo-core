@@ -1,3 +1,5 @@
 """THEO Core — The Cognitive Operating System."""
 
-__version__ = "0.4.1"
+from theo_core._version import __version__
+
+__all__ = ["__version__"]

@@ -34,6 +34,10 @@ class DanglingEdgeError(ValidationError):
     """Raised when an edge references a node that does not exist."""
 
 
+class ConstraintViolationError(ValidationError):
+    """Raised when a FATAL constraint violation is detected during validation."""
+
+
 class SerializationError(SymbolicError):
     """Base for serialization/deserialization failures."""
 

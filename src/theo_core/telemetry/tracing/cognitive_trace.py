@@ -8,6 +8,8 @@ from uuid import UUID, uuid4
 
 from pydantic import BaseModel, Field
 
+from theo_core._version import __version__
+
 
 class TraceSpan(BaseModel):
     """Represents an execution span for one stage in the 12-stage cognitive cycle.
@@ -57,7 +59,7 @@ class CognitiveTrace(BaseModel):
     total_duration_ms: float = 0.0
     config_snapshot: dict[str, str] = Field(
         default_factory=lambda: {
-            "theo_version": "0.2.0",
+            "theo_version": __version__,
             "rule_set_version": "v0.2.0",
             "memory_policy_version": "v0.2.0",
             "config_hash": "sha256-deterministic-v0.2",

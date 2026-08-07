@@ -94,8 +94,22 @@ class TestCLI:
         """App should be a valid Typer instance."""
         assert app.info.name == "theo"
 
-    def test_boot_function(self) -> None:
+    def test_boot_function(self, tmp_path: object, monkeypatch) -> None:
         """Boot function should execute kernel boot."""
+        from theo_core.composition import bootstrap as bootstrap_module
+
+        real_bootstrap = bootstrap_module.bootstrap
+
+        def _isolated_bootstrap(settings=None, **kwargs):
+            return real_bootstrap(
+                settings,
+                memory_file=str(tmp_path) + "/memory_store.json",
+                knowledge_file=str(tmp_path) + "/knowledge_graph.json",
+                trace_dir=str(tmp_path) + "/traces",
+                state_file=str(tmp_path) + "/symbolic_state.json",
+            )
+
+        monkeypatch.setattr(bootstrap_module, "bootstrap", _isolated_bootstrap)
         boot()
 
     def test_main_function(self) -> None:

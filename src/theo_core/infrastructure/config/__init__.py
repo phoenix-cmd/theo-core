@@ -132,6 +132,8 @@ class KernelSettings(BaseModel):
             "replay_engine",
             "cognitive_engine",
             "symbolic_pipeline",
+            "response_renderer",
+            "symbolic_runtime",
         ]
     )
 

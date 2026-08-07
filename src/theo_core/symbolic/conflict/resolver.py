@@ -3,11 +3,15 @@
 from __future__ import annotations
 
 from decimal import Decimal
+from typing import TYPE_CHECKING
 
 from theo_core.symbolic._primitives.identifiers import SymbolicId
 from theo_core.symbolic.beliefs.models import Belief, BeliefSource
 from theo_core.symbolic.conflict.models import ConflictPolicy, ConflictRecord
 from theo_core.symbolic.hypotheses.models import Hypothesis, HypothesisState
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 class ConflictResolver:
@@ -36,39 +40,49 @@ class ConflictResolver:
             Tuple of (winning_belief, deprecated_losing_belief, conflict_record).
 
         """
-        # Determine winner based on policy
+        # Determine winner based on policy. Every branch ties break on belief ID
+        # so the outcome is fully deterministic (Canon Invariant 8).
         if policy == ConflictPolicy.HIGHER_CONFIDENCE:
-            winner, loser = (b1, b2) if b1.confidence >= b2.confidence else (b2, b1)
-            reason = (
-                f"Selected {winner.id} with higher confidence "
-                f"{winner.confidence} >= {loser.confidence}"
-            )
+            if b1.confidence != b2.confidence:
+                winner, loser = (b1, b2) if b1.confidence > b2.confidence else (b2, b1)
+                reason = f"Selected {winner.id} with higher confidence"
+            else:
+                winner, loser = sorted((b1, b2), key=lambda b: b.id.value)
+                reason = "Equal confidence; tie-break by belief id"
         elif policy == ConflictPolicy.EVIDENCE_COUNT:
-            winner, loser = (b1, b2) if b1.evidence_count >= b2.evidence_count else (b2, b1)
-            reason = (
-                f"Selected {winner.id} with higher evidence count "
-                f"{winner.evidence_count} >= {loser.evidence_count}"
-            )
+            if b1.evidence_count != b2.evidence_count:
+                winner, loser = (b1, b2) if b1.evidence_count > b2.evidence_count else (b2, b1)
+                reason = f"Selected {winner.id} with higher evidence count"
+            else:
+                winner, loser = sorted((b1, b2), key=lambda b: b.id.value)
+                reason = "Equal evidence count; tie-break by belief id"
         elif policy == ConflictPolicy.RECENT_SOURCE:
-            winner, loser = (b1, b2) if b1.last_verified >= b2.last_verified else (b2, b1)
-            reason = f"Selected {winner.id} verified more recently at {winner.last_verified}"
+            if b1.last_verified != b2.last_verified:
+                winner, loser = (b1, b2) if b1.last_verified > b2.last_verified else (b2, b1)
+                reason = f"Selected {winner.id} with more recent verification"
+            else:
+                winner, loser = sorted((b1, b2), key=lambda b: b.id.value)
+                reason = "Equal verification time; tie-break by belief id"
         elif policy == ConflictPolicy.EXPLICIT_AUTHORITY:
             source_rank = {
                 BeliefSource.KNOWLEDGE: 4,
                 BeliefSource.INFERENCE: 3,
                 BeliefSource.MEMORY: 2,
-                BeliefSource.PERCEPTION: 1,
             }
             r1, r2 = source_rank.get(b1.source, 0), source_rank.get(b2.source, 0)
             if r1 != r2:
                 winner, loser = (b1, b2) if r1 > r2 else (b2, b1)
                 reason = f"Explicit authority source rank {winner.source} > {loser.source}"
             else:
-                winner, loser = (b1, b2) if b1.confidence >= b2.confidence else (b2, b1)
-                reason = f"Equal rank; fallback {winner.confidence} >= {loser.confidence}"
+                winner, loser = sorted((b1, b2), key=lambda b: b.id.value)
+                reason = "Equal authority rank; tie-break by belief id"
         else:
-            winner, loser = (b1, b2) if b1.confidence >= b2.confidence else (b2, b1)
-            reason = f"Fallback confidence selected {winner.id}"
+            if b1.confidence != b2.confidence:
+                winner, loser = (b1, b2) if b1.confidence > b2.confidence else (b2, b1)
+                reason = f"Fallback confidence selected {winner.id}"
+            else:
+                winner, loser = sorted((b1, b2), key=lambda b: b.id.value)
+                reason = "Fallback; equal confidence tie-break by belief id"
 
         # Create updated deprecated loser belief with zero confidence
         deprecated_loser = Belief(
@@ -115,13 +129,25 @@ class ConflictResolver:
         if not hypotheses:
             return [], []
 
+        def evidence_count_key(h: Hypothesis) -> tuple[int, object, str]:
+            return (-len(h.supporting_thoughts), -h.score, h.id.value)
+
+        def recent_source_key(h: Hypothesis) -> tuple[object, str]:
+            return (-h.created_at.timestamp(), h.id.value)
+
+        def confidence_key(h: Hypothesis) -> tuple[object, str]:
+            return (-h.score, h.id.value)
+
         if policy == ConflictPolicy.EVIDENCE_COUNT:
-            sorted_hyp = sorted(
-                hypotheses,
-                key=lambda h: (-len(h.supporting_thoughts), -h.score, h.id.value),
-            )
+            sort_key: Callable[[Hypothesis], tuple[object, ...]] = evidence_count_key
+        elif policy == ConflictPolicy.RECENT_SOURCE:
+            sort_key = recent_source_key
         else:
-            sorted_hyp = sorted(hypotheses, key=lambda h: (-h.score, h.id.value))
+            # HIGHER_CONFIDENCE, EXPLICIT_AUTHORITY (no hypothesis-level source
+            # exists, so authority resolves to score), and unknown policies all
+            # fall back to deterministic confidence ordering.
+            sort_key = confidence_key
+        sorted_hyp = sorted(hypotheses, key=sort_key)
 
         winner = sorted_hyp[0]
 

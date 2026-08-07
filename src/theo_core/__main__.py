@@ -3,13 +3,26 @@
 from __future__ import annotations
 
 import sys
+from typing import TYPE_CHECKING
 
 import typer
+
+from theo_core._version import __version__
+
+if TYPE_CHECKING:
+    from theo_core.evaluation.benchmark_schema import BenchmarkCase
 
 app = typer.Typer(
     name="theo",
     help="THEO — The Poet: A cognitive operating system.",
 )
+
+benchmark_app = typer.Typer(
+    name="benchmark",
+    help="Run the THEO cognitive benchmark corpus.",
+    no_args_is_help=True,
+)
+app.add_typer(benchmark_app)
 
 
 @app.callback(invoke_without_command=True)
@@ -32,7 +45,13 @@ def boot() -> None:
 
 
 @app.command(name="chat")
-def chat() -> None:
+def chat(
+    engine: str = typer.Option(
+        "symbolic",
+        "--engine",
+        help="Runtime engine: 'symbolic' (canonical) or 'legacy' (v0.2 12-stage).",
+    ),
+) -> None:
     """Start an interactive cognitive session with THEO."""
     from theo_core.composition.bootstrap import bootstrap
 
@@ -40,7 +59,7 @@ def chat() -> None:
     container.kernel.boot()
 
     typer.echo("\n==================================================")
-    typer.echo("      THEO v0.2.0 — Deterministic Cognitive REPL  ")
+    typer.echo(f"      THEO v{__version__} — Deterministic Cognitive REPL ({engine})")
     typer.echo("==================================================")
     typer.echo(
         "Commands: /explain, /trace, /memory, /knowledge, /goals, /context, /replay <id>, /exit\n"
@@ -53,6 +72,7 @@ def chat() -> None:
                 continue
 
             if user_input.lower() in ("/exit", "/quit", "exit", "quit"):
+                container.kernel.shutdown()
                 typer.echo("Shutting down THEO cognitive runtime. Goodbye!")
                 break
 
@@ -130,21 +150,75 @@ def chat() -> None:
                         typer.echo("\nUsage: /replay <trace_id>\n")
                     continue
 
-            # Run 12-stage cognitive cycle
-            state = container.cognitive_engine.process(user_input)
-            last_rec = container.cognitive_engine.last_record
-            trace_str = str(last_rec.trace_id) if last_rec and last_rec.trace_id else "N/A"
+            # Run a cognitive cycle
+            if engine == "symbolic":
+                run_result = container.symbolic_runtime.process(user_input)
+                typer.echo(f"\nTheo > {run_result.response_text}")
+                typer.echo(
+                    f"       (Intent: {run_result.decision.intent.value} | "
+                    f"Goal: {run_result.decision.referenced_goal.value})\n"
+                )
+            else:
+                state = container.cognitive_engine.process(user_input)
+                last_rec = container.cognitive_engine.last_record
+                trace_str = str(last_rec.trace_id) if last_rec and last_rec.trace_id else "N/A"
 
-            typer.echo(f"\nTheo > {state.response_text}")
-            typer.echo(
-                f"       (Cognitive Depth: {state.cognitive_depth} stages | "
-                f"Memory: {state.memory_classification} | "
-                f"Trace ID: {trace_str})\n"
-            )
+                typer.echo(f"\nTheo > {state.response_text}")
+                typer.echo(
+                    f"       (Cognitive Depth: {state.cognitive_depth} stages | "
+                    f"Memory: {state.memory_classification} | "
+                    f"Trace ID: {trace_str})\n"
+                )
 
         except (KeyboardInterrupt, EOFError):
+            container.kernel.shutdown()
             typer.echo("\nShutting down THEO cognitive runtime. Goodbye!")
             sys.exit(0)
+
+
+@benchmark_app.command(name="run")
+def benchmark_run(
+    domain: str | None = typer.Option(
+        None,
+        "--domain",
+        help="Restrict the run to a single benchmark domain.",
+    ),
+    case_id: str | None = typer.Option(
+        None,
+        "--case",
+        help="Run a single benchmark case by bm:// identifier.",
+    ),
+) -> None:
+    """Execute benchmark cases against the canonical symbolic pipeline."""
+    from theo_core.evaluation.benchmarks import case_by_id, cases_for_domain
+    from theo_core.evaluation.harness import BenchmarkHarness
+
+    cases: tuple[BenchmarkCase, ...]
+    if case_id is not None:
+        case = case_by_id(case_id)
+        if case is None:
+            typer.echo(f"Unknown benchmark case: {case_id}")
+            raise typer.Exit(code=1)
+        cases = (case,)
+    else:
+        cases = cases_for_domain(domain)
+
+    results = BenchmarkHarness.run_all(cases)
+
+    typer.echo("\n=== THEO Cognitive Benchmark Run ===")
+    passed = 0
+    for result in results:
+        status = "PASS" if result.passed else "FAIL"
+        typer.echo(f"  [{status}] {result.case_id}")
+        if not result.passed:
+            for failure in result.failures:
+                typer.echo(f"          {failure}")
+        else:
+            passed += 1
+
+    typer.echo(f"\n  Summary: {passed}/{len(results)} passed\n")
+    if passed != len(results):
+        raise typer.Exit(code=1)
 
 
 def main() -> None:

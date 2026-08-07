@@ -5,13 +5,34 @@ from __future__ import annotations
 from decimal import Decimal
 from typing import TYPE_CHECKING
 
-from theo_core.symbolic.decisions.models import DecisionId, DecisionRecord, DecisionType
+from theo_core.symbolic.decisions.models import (
+    ActionSpec,
+    DecisionId,
+    DecisionRecord,
+    DecisionType,
+    Intent,
+)
 from theo_core.symbolic.hypotheses.models import Hypothesis, HypothesisState
 from theo_core.symbolic.thoughts.models import Thought, ThoughtId
 
 if TYPE_CHECKING:
     from theo_core.symbolic._primitives.identifiers import SymbolicId
     from theo_core.symbolic.thoughts.graph import ThoughtGraph
+
+
+_INTENT_BY_GOAL_SLUG: dict[str, Intent] = {
+    "acknowledgegreeting": Intent.ACKNOWLEDGE_GREETING,
+    "rememberfact": Intent.REMEMBER_FACT,
+    "providerecommendation": Intent.PROVIDE_RECOMMENDATION,
+    "answerquestion": Intent.ANSWER_QUESTION,
+    "maintainconversation": Intent.MAINTAIN_CONVERSATION,
+}
+
+
+def _intent_for_goal(goal_id: SymbolicId) -> Intent:
+    """Derive the Intent from the referenced goal's deterministic slug."""
+    slug = goal_id.value.rsplit("/", 1)[-1]
+    return _INTENT_BY_GOAL_SLUG.get(slug, Intent.MAINTAIN_CONVERSATION)
 
 
 class DecisionEngine:
@@ -30,16 +51,22 @@ class DecisionEngine:
     def make_decision(
         hypotheses: list[Hypothesis],
         thoughts: ThoughtGraph,
+        referenced_goal: SymbolicId,
         min_confidence: Decimal = Decimal("0.5"),
-        active_goal_id: SymbolicId | None = None,
     ) -> DecisionRecord:
         """Select an action or response decision from hypotheses and thoughts.
+
+        This method is pure: it never mutates the ThoughtGraph. When no
+        existing thought is available to reference (Canon Law 2), a synthetic
+        Thought value is constructed inline and referenced, leaving persistence
+        to the caller (Canon Invariant 2 / §6).
 
         Args:
             hypotheses: Evaluated candidate Hypotheses.
             thoughts: Active ThoughtGraph.
+            referenced_goal: The active goal referenced by the decision
+                (Canon Invariant 7).
             min_confidence: Minimum confidence threshold for an action decision.
-            active_goal_id: Optional active GoalId per Canon Invariant 7.
 
         Returns:
             A deterministic DecisionRecord instance.
@@ -61,7 +88,6 @@ class DecisionEngine:
                     content="Fallback system evaluation due to low hypothesis confidence.",
                     confidence=Decimal("0.0"),
                 )
-                thoughts.add_thought(fallback_thought)
                 referenced: tuple[ThoughtId, ...] = (fallback_thought.id,)
             else:
                 referenced = tuple(t.id for t in all_thoughts[:1])
@@ -72,7 +98,9 @@ class DecisionEngine:
                 action_text="Insufficient confidence; deferring decision.",
                 confidence=Decimal("0.0"),
                 referenced_thoughts=referenced,
-                active_goal_id=active_goal_id,
+                referenced_goal=referenced_goal,
+                intent=_intent_for_goal(referenced_goal),
+                action_spec=ActionSpec(capability="defer"),
             )
 
         # Deterministically pick winning hypothesis (highest score, lowest ID string)
@@ -88,7 +116,6 @@ class DecisionEngine:
                     content=f"System inference rule derivation for hypothesis {winner.id}",
                     confidence=winner.score,
                 )
-                thoughts.add_thought(sys_thought)
                 ref_thoughts.append(sys_thought.id)
             else:
                 ref_thoughts.append(all_t[0].id)
@@ -101,5 +128,10 @@ class DecisionEngine:
             confidence=winner.score,
             referenced_thoughts=tuple(ref_thoughts),
             accepted_hypothesis_id=winner.id,
-            active_goal_id=active_goal_id,
+            referenced_goal=referenced_goal,
+            intent=_intent_for_goal(referenced_goal),
+            action_spec=ActionSpec(
+                capability="respond",
+                parameters={"content": winner.interpretation},
+            ),
         )

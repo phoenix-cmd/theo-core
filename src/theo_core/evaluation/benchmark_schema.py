@@ -13,6 +13,9 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 from theo_core.symbolic._primitives.identifiers import SymbolicId
+from theo_core.symbolic.beliefs.models import Belief, BeliefEdge  # noqa: TC001
+from theo_core.symbolic.concepts.models import Concept, ConceptEdge  # noqa: TC001
+from theo_core.symbolic.inference.models import InferenceRule  # noqa: TC001
 
 
 @dataclass(frozen=True, slots=True)
@@ -56,9 +59,15 @@ class BenchmarkCase(BaseModel, frozen=True):
     domain: str  # e.g., "commonsense", "causal_reasoning", "contradiction", "taxonomy"
     name: str
     description: str
+    initial_concepts: tuple[Concept, ...] = Field(default_factory=tuple)
+    initial_concept_edges: tuple[ConceptEdge, ...] = Field(default_factory=tuple)
+    initial_beliefs: tuple[Belief, ...] = Field(default_factory=tuple)
+    initial_belief_edges: tuple[BeliefEdge, ...] = Field(default_factory=tuple)
+    rules: tuple[InferenceRule, ...] = Field(default_factory=tuple)
     initial_knowledge_base: list[dict[str, Any]] = Field(default_factory=list)
     percept_input: str
     expected_beliefs: tuple[str, ...] = Field(default_factory=tuple)
+    excluded_beliefs: tuple[str, ...] = Field(default_factory=tuple)
     expected_decision_type: str = "response"
     expected_action_text: str
     min_confidence: Decimal = Field(default=Decimal("0.5"), ge=Decimal("0.0"), le=Decimal("1.0"))

@@ -27,7 +27,10 @@ from theo_core.memory.engine.deterministic_memory import DeterministicMemoryEngi
 from theo_core.memory.storage.json_repository import JSONMemoryRepository
 from theo_core.perception.text.data_driven_processor import DataDrivenPerceptionProcessor
 from theo_core.response.template.generator import TemplateResponseGenerator
+from theo_core.symbolic.persistence.store import SymbolicStateStore
 from theo_core.symbolic.pipeline import SymbolicCognitivePipeline
+from theo_core.symbolic.response.renderer import TemplateResponseRenderer
+from theo_core.symbolic.runtime import SymbolicRuntime
 from theo_core.telemetry.tracing.recorder import TraceRecorder
 
 
@@ -36,6 +39,7 @@ def bootstrap(
     memory_file: str = "data/memory_store.json",
     knowledge_file: str = "data/knowledge_graph.json",
     trace_dir: str = "data/traces",
+    state_file: str = "data/symbolic_state.json",
 ) -> TheoContainer:
     """Build and wire the entire THEO cognitive system.
 
@@ -44,6 +48,7 @@ def bootstrap(
         memory_file: Path to JSON memory store file.
         knowledge_file: Path to JSON knowledge graph file.
         trace_dir: Directory path for trace JSON files.
+        state_file: Path for persisted symbolic committed state.
 
     Returns:
         A fully wired TheoContainer ready for operation.
@@ -97,10 +102,17 @@ def bootstrap(
     )
 
     symbolic_pipeline = SymbolicCognitivePipeline()
+    symbolic_state_store = SymbolicStateStore(state_file)
+    response_renderer = TemplateResponseRenderer()
+    symbolic_runtime = SymbolicRuntime(
+        pipeline=symbolic_pipeline,
+        renderer=response_renderer,
+        store=symbolic_state_store,
+    )
 
     replay_engine = ReplayEngine(
         recorder=trace_recorder,
-        cognitive_engine=cognitive_engine,
+        engine=cognitive_engine,
     )
 
     # 6. Kernel & Registry
@@ -123,6 +135,8 @@ def bootstrap(
     registry.register("replay_engine", replay_engine)
     registry.register("cognitive_engine", cognitive_engine)
     registry.register("symbolic_pipeline", symbolic_pipeline)
+    registry.register("response_renderer", response_renderer)
+    registry.register("symbolic_runtime", symbolic_runtime)
 
     kernel = Kernel(
         registry=registry,
@@ -150,4 +164,6 @@ def bootstrap(
         replay_engine=replay_engine,
         cognitive_engine=cognitive_engine,
         symbolic_pipeline=symbolic_pipeline,
+        response_renderer=response_renderer,
+        symbolic_runtime=symbolic_runtime,
     )

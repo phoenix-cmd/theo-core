@@ -148,3 +148,18 @@ class Graph[N, E]:
         """Clear all nodes and edges."""
         self._nodes.clear()
         self._edges.clear()
+
+    def copy(self) -> Graph[N, E]:
+        """Return a shallow structural copy of this graph.
+
+        Node and edge payloads are immutable value objects, so copying the
+        storage dictionaries is sufficient to produce an independent graph.
+
+        Returns:
+            A new Graph instance with the same nodes and edges.
+
+        """
+        new_graph = Graph[N, E]()
+        new_graph._nodes = dict(self._nodes)
+        new_graph._edges = dict(self._edges)
+        return new_graph
