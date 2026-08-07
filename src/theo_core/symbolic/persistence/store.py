@@ -86,6 +86,82 @@ def _dict_to_percept(data: dict[str, Any]) -> Percept:
     )
 
 
+def _concept_serializer() -> GraphSerializer[Concept, ConceptEdge]:
+    """Build a fresh concept graph serializer."""
+    return GraphSerializer("concept", _model_to_json_dict, _model_to_json_dict)
+
+
+def _belief_serializer() -> GraphSerializer[Belief, BeliefEdge]:
+    """Build a fresh belief graph serializer."""
+    return GraphSerializer("belief", _model_to_json_dict, _model_to_json_dict)
+
+
+def _thought_serializer() -> GraphSerializer[Thought, ThoughtEdge]:
+    """Build a fresh thought graph serializer."""
+    return GraphSerializer("thought", _model_to_json_dict, _model_to_json_dict)
+
+
+def _concept_loader() -> GraphLoader[Concept, ConceptEdge]:
+    """Build a fresh concept graph loader."""
+    return GraphLoader("concept", _dict_to_concept, _dict_to_concept_edge)
+
+
+def _belief_loader() -> GraphLoader[Belief, BeliefEdge]:
+    """Build a fresh belief graph loader."""
+    return GraphLoader("belief", _dict_to_belief, _dict_to_belief_edge)
+
+
+def _thought_loader() -> GraphLoader[Thought, ThoughtEdge]:
+    """Build a fresh thought graph loader."""
+    return GraphLoader("thought", _dict_to_thought, _dict_to_thought_edge)
+
+
+def serialize_cycle_state(state: CycleState) -> dict[str, Any]:
+    """Serialize a committed CycleState into a JSON-safe payload dict.
+
+    This is the single serialization path for both durable persistence
+    (``SymbolicStateStore``) and trace-embedded pre-cycle state used by faithful
+    replay: a replayed cycle is re-run from the recorded pre-cycle committed
+    graphs, never from a live runtime's already-advanced state.
+    """
+    return {
+        "concepts": json.loads(_concept_serializer().serialize(state.concepts.raw_graph)),
+        "beliefs": json.loads(_belief_serializer().serialize(state.beliefs.raw_graph)),
+        "thoughts": json.loads(_thought_serializer().serialize(state.thoughts.raw_graph)),
+        "percept": None if state.percept is None else _percept_to_dict(state.percept),
+    }
+
+
+def deserialize_cycle_state(data: dict[str, Any]) -> CycleState:
+    """Rebuild a committed CycleState from a serialized payload dict.
+
+    Args:
+        data: Payload produced by ``serialize_cycle_state``.
+
+    Returns:
+        The reconstructed committed CycleState.
+
+    Raises:
+        ValidationError: If the payload does not match the graph schemas.
+
+    """
+    concepts = ConceptGraph.from_raw_graph(
+        _concept_loader().deserialize(json.dumps(data["concepts"], sort_keys=True))
+    )
+    beliefs = BeliefGraph.from_raw_graph(
+        _belief_loader().deserialize(json.dumps(data["beliefs"], sort_keys=True))
+    )
+    thoughts = ThoughtGraph.from_raw_graph(
+        _thought_loader().deserialize(json.dumps(data["thoughts"], sort_keys=True))
+    )
+    percept_data = data.get("percept")
+    percept = None if percept_data is None else _dict_to_percept(percept_data)
+
+    from theo_core.symbolic.pipeline import CycleState
+
+    return CycleState(concepts=concepts, beliefs=beliefs, thoughts=thoughts, percept=percept)
+
+
 class SymbolicStateStore:
     """Persists committed CycleState snapshots as checksummed JSON envelopes."""
 
@@ -100,36 +176,6 @@ class SymbolicStateStore:
 
         """
         self._path = Path(path)
-        self._concept_serializer: GraphSerializer[Concept, ConceptEdge] = GraphSerializer(
-            "concept",
-            _model_to_json_dict,
-            _model_to_json_dict,
-        )
-        self._belief_serializer: GraphSerializer[Belief, BeliefEdge] = GraphSerializer(
-            "belief",
-            _model_to_json_dict,
-            _model_to_json_dict,
-        )
-        self._thought_serializer: GraphSerializer[Thought, ThoughtEdge] = GraphSerializer(
-            "thought",
-            _model_to_json_dict,
-            _model_to_json_dict,
-        )
-        self._concept_loader = GraphLoader(
-            "concept",
-            _dict_to_concept,
-            _dict_to_concept_edge,
-        )
-        self._belief_loader = GraphLoader(
-            "belief",
-            _dict_to_belief,
-            _dict_to_belief_edge,
-        )
-        self._thought_loader = GraphLoader(
-            "thought",
-            _dict_to_thought,
-            _dict_to_thought_edge,
-        )
 
     @property
     def path(self) -> Path:
@@ -143,12 +189,7 @@ class SymbolicStateStore:
             state: The committed CycleState to persist.
 
         """
-        payload = {
-            "concepts": json.loads(self._concept_serializer.serialize(state.concepts.raw_graph)),
-            "beliefs": json.loads(self._belief_serializer.serialize(state.beliefs.raw_graph)),
-            "thoughts": json.loads(self._thought_serializer.serialize(state.thoughts.raw_graph)),
-            "percept": None if state.percept is None else _percept_to_dict(state.percept),
-        }
+        payload = serialize_cycle_state(state)
         raw_payload = json.dumps(payload, sort_keys=True)
         envelope = {
             "schema_version": self._SCHEMA_VERSION,
@@ -191,18 +232,4 @@ class SymbolicStateStore:
                 "Symbolic state file checksum mismatch; artifact may be corrupt."
             )
 
-        concepts = ConceptGraph.from_raw_graph(
-            self._concept_loader.deserialize(json.dumps(payload["concepts"], sort_keys=True))
-        )
-        beliefs = BeliefGraph.from_raw_graph(
-            self._belief_loader.deserialize(json.dumps(payload["beliefs"], sort_keys=True))
-        )
-        thoughts = ThoughtGraph.from_raw_graph(
-            self._thought_loader.deserialize(json.dumps(payload["thoughts"], sort_keys=True))
-        )
-        percept_data = payload.get("percept")
-        percept = None if percept_data is None else _dict_to_percept(percept_data)
-
-        from theo_core.symbolic.pipeline import CycleState
-
-        return CycleState(concepts=concepts, beliefs=beliefs, thoughts=thoughts, percept=percept)
+        return deserialize_cycle_state(payload)

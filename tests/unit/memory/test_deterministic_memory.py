@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import os
 
+import pytest
+
 from theo_core.domain.runtime.entities.cognitive_workspace import CognitiveWorkspace
 from theo_core.domain.runtime.entities.memory_entry import MemoryImportance
 from theo_core.memory.classifier.memory_classifier import MemoryClassifier
@@ -98,3 +100,13 @@ class TestDeterministicMemoryEngine:
         ws = CognitiveWorkspace()
         assert ws.workspace_id is not None
         assert len(ws.retrieved_memory_ids) == 0
+
+    def test_corrupted_repository_raises_not_silently_empties(self, tmp_path: object) -> None:
+        """Corrupted JSON memory storage must raise, never silently return []."""
+        json_file = str(tmp_path) + "/corrupt_mem_store.json"
+        repo = JSONMemoryRepository(file_path=json_file)
+        with open(json_file, "w", encoding="utf-8") as f:
+            f.write("{ this is not valid json ]")
+
+        with pytest.raises(RuntimeError, match="Corrupted memory repository"):
+            repo.load_all()

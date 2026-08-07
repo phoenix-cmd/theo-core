@@ -76,5 +76,30 @@ class BenchmarkCase(BaseModel, frozen=True):
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
+FINGERPRINT_METADATA_KEY = "theo_golden_fingerprint"
+PRE_CYCLE_STATE_METADATA_KEY = "theo_pre_cycle_state"
+
+
+def golden_fingerprint(golden_trace: GoldenTrace, response_text: str) -> dict[str, object]:
+    """Project a GoldenTrace into a canonical, JSON-serializable fingerprint.
+
+    Recording, replay, and cross-process determinism all use this projection so
+    a replayed cycle is compared field-for-field — decision, fired rules, derived
+    beliefs, hypotheses, activated concepts, and thought-DAG size — and never
+    just by rendered response text.
+    """
+    return {
+        "decision_id": golden_trace.decision_id.value if golden_trace.decision_id else None,
+        "response_text": response_text,
+        "activated_concept_ids": [str(i) for i in golden_trace.activated_concept_ids],
+        "retrieved_memory_ids": [str(i) for i in golden_trace.retrieved_memory_ids],
+        "generated_hypothesis_ids": [str(i) for i in golden_trace.generated_hypothesis_ids],
+        "fired_rule_ids": [str(i) for i in golden_trace.fired_rule_ids],
+        "derived_belief_ids": [str(i) for i in golden_trace.derived_belief_ids],
+        "resolved_conflict_ids": [str(i) for i in golden_trace.resolved_conflict_ids],
+        "thought_dag_node_count": golden_trace.thought_dag_node_count,
+    }
+
+
 GoldenTrace.model_rebuild()
 BenchmarkCase.model_rebuild()

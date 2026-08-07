@@ -6,6 +6,7 @@ import json
 import os
 import time
 from typing import TYPE_CHECKING, Any
+from uuid import uuid4
 
 from theo_core.telemetry.tracing.cognitive_trace import CognitiveTrace, TraceSpan
 
@@ -78,6 +79,7 @@ class TraceRecorder:
         raw_input: str,
         response_text: str,
         execution_stats: dict[str, Any] | None = None,
+        metadata: dict[str, Any] | None = None,
     ) -> CognitiveTrace:
         """Close the active trace, compute total latency, and write to JSON file.
 
@@ -86,6 +88,7 @@ class TraceRecorder:
             raw_input: Raw user input text string.
             response_text: Final response text string.
             execution_stats: Optional dictionary of quantified execution metrics.
+            metadata: Optional extensible trace metadata.
 
         Returns:
             The saved CognitiveTrace object.
@@ -103,8 +106,46 @@ class TraceRecorder:
             spans=tuple(self._spans),
             total_duration_ms=round(total_ms, 3),
             execution_stats=stats,
+            metadata=metadata or {},
         )
 
+        return self._write_trace(trace)
+
+    def record_trace(
+        self,
+        raw_input: str,
+        response_text: str,
+        execution_stats: dict[str, Any] | None = None,
+        metadata: dict[str, Any] | None = None,
+    ) -> CognitiveTrace:
+        """Record a span-free trace (canonical pipeline path).
+
+        The canonical symbolic pipeline records no stage spans; this writes a
+        trace whose structural fingerprint is carried in ``metadata``. It does
+        not touch the legacy span accumulator, so sharing a TraceRecorder
+        between the legacy engine and the symbolic runtime is safe.
+
+        Args:
+            raw_input: Raw user input text string.
+            response_text: Final response text string.
+            execution_stats: Optional dictionary of quantified execution metrics.
+            metadata: Optional extensible trace metadata (e.g. the fingerprint).
+
+        Returns:
+            The saved CognitiveTrace object.
+
+        """
+        trace = CognitiveTrace(
+            cycle_id=uuid4(),
+            raw_input=raw_input,
+            response_text=response_text,
+            execution_stats=execution_stats or {},
+            metadata=metadata or {},
+        )
+        return self._write_trace(trace)
+
+    def _write_trace(self, trace: CognitiveTrace) -> CognitiveTrace:
+        """Serialize a CognitiveTrace to its JSON file and return it."""
         trace_path = os.path.join(self._trace_dir, f"{trace.trace_id}.json")
         with open(trace_path, "w", encoding="utf-8") as f:
             json.dump(trace.model_dump(mode="json"), f, indent=2)

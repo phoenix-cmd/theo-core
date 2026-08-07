@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import sys
 from typing import TYPE_CHECKING
 
@@ -119,6 +120,24 @@ def chat(
                         typer.echo("\nNo cognitive cycle executed yet.\n")
                     continue
                 if cmd == "/trace":
+                    if engine == "symbolic":
+                        t_id = container.symbolic_runtime.last_trace_id
+                        if t_id:
+                            trace = container.trace_recorder.load_trace(t_id)
+                            if trace:
+                                fp = trace.metadata.get("theo_golden_fingerprint")
+                                typer.echo(f"\n[GoldenTrace {trace.trace_id}]:")
+                                typer.echo(f"  Input:      {trace.raw_input}")
+                                typer.echo(f"  Response:   {trace.response_text}")
+                                typer.echo(
+                                    f"  Fingerprint: {json.dumps(fp, sort_keys=True)}"
+                                    if fp
+                                    else "  Fingerprint: n/a"
+                                )
+                                typer.echo("")
+                                continue
+                        typer.echo("\nNo trace available for the last turn.\n")
+                        continue
                     rec = container.cognitive_engine.last_record
                     if rec and rec.trace_id:
                         trace = container.trace_recorder.load_trace(rec.trace_id)
@@ -133,8 +152,11 @@ def chat(
                     continue
                 if cmd == "/replay":
                     if len(parts) < 2:
-                        rec = container.cognitive_engine.last_record
-                        t_id = str(rec.trace_id) if rec and rec.trace_id else None
+                        if engine == "symbolic":
+                            t_id = container.symbolic_runtime.last_trace_id
+                        else:
+                            rec = container.cognitive_engine.last_record
+                            t_id = str(rec.trace_id) if rec and rec.trace_id else None
                     else:
                         t_id = parts[1]
 

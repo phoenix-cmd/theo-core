@@ -49,3 +49,38 @@ class TestSymbolicArchitectureIsolation:
         pipeline = _symbolic_dir() / "pipeline.py"
         content = pipeline.read_text(encoding="utf-8")
         assert "theo_core.symbolic.response" not in content
+
+    def test_no_symbolic_subsystem_imports_rendering_code(self) -> None:
+        """Response isolation: no symbolic subsystem imports the renderer.
+
+        Only the designated boundary (symbolic/runtime.py) and the response
+        package itself may reference theo_core.symbolic.response. This keeps the
+        dependency direction one-way: Decision -> Intent -> ActionSpec ->
+        ResponseRenderer, never the reverse.
+        """
+        allowed = {"runtime.py", "response"}
+        for py_file in sorted(_symbolic_dir().rglob("*.py")):
+            if py_file.name in allowed:
+                continue
+            if py_file.parent == _symbolic_dir() / "response":
+                continue
+            content = py_file.read_text(encoding="utf-8")
+            assert "theo_core.symbolic.response" not in content, (
+                f"Rendering import found in {py_file.relative_to(_symbolic_dir())}"
+            )
+
+    def test_response_package_imports_only_decision_models(self) -> None:
+        """The response package may only depend on decision models and its port."""
+        for py_file in sorted((_symbolic_dir() / "response").glob("*.py")):
+            content = py_file.read_text(encoding="utf-8")
+            for forbidden in (
+                "theo_core.symbolic.pipeline",
+                "theo_core.symbolic.beliefs",
+                "theo_core.symbolic.thoughts",
+                "theo_core.symbolic.inference",
+                "theo_core.symbolic.concepts",
+                "theo_core.cognitive_cycle",
+            ):
+                assert forbidden not in content, (
+                    f"Render-to-cognition import {forbidden!r} found in {py_file.name}"
+                )

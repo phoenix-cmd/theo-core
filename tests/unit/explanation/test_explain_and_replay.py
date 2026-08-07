@@ -8,6 +8,8 @@ from theo_core.composition.bootstrap import bootstrap
 from theo_core.domain.runtime.entities.decision_record import DecisionRecord
 from theo_core.explanation.engine.explain_engine import ExplainEngine
 from theo_core.explanation.replay.replay_engine import ReplayEngine
+from theo_core.symbolic.pipeline import SymbolicCognitivePipeline
+from theo_core.symbolic.runtime import SymbolicRuntime
 
 
 class TestExplainEngine:
@@ -72,3 +74,36 @@ class TestTraceRecorderAndReplay:
 
         if os.path.exists(mem_file):
             os.remove(mem_file)
+
+    def test_container_replay_engine_drives_canonical_runtime(self, tmp_path: object) -> None:
+        """The container's ReplayEngine must replay through the canonical runtime.
+
+        No hidden legacy execution path: the container binds replay to a factory
+        that builds a fresh canonical SymbolicRuntime (not the legacy
+        CognitiveEngine), restores the recorded pre-cycle state, and regenerates
+        the golden fingerprint.
+        """
+        container = bootstrap(
+            memory_file=str(tmp_path) + "/replay_mem.json",
+            knowledge_file=str(tmp_path) + "/replay_know.json",
+            trace_dir=str(tmp_path) + "/traces",
+            state_file=str(tmp_path) + "/symbolic_state.json",
+        )
+
+        result = container.symbolic_runtime.process("rain is falling")
+        trace_id = container.symbolic_runtime.last_trace_id
+        assert trace_id is not None
+
+        replay = container.replay_engine.replay(trace_id)
+
+        assert replay.matched
+        assert replay.variance == 0.0
+        assert replay.replayed_output == result.response_text
+
+        # The container replay engine builds fresh canonical runtimes and is not
+        # bound to the legacy CognitiveEngine.
+        assert container.replay_engine._engine is None
+        assert container.replay_engine._engine_factory is not None
+        replay_runtime = container.replay_engine._engine_factory()
+        assert isinstance(replay_runtime, SymbolicRuntime)
+        assert isinstance(replay_runtime.pipeline, SymbolicCognitivePipeline)

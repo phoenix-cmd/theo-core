@@ -19,6 +19,28 @@ Freeze posture is codified in:
   12-stage `CognitiveEngine` is demoted to a legacy compatibility path (`theo chat --engine legacy`),
   excluded from the frozen contract.
 
+## Known Follow-ups (tracked, not frozen contract)
+
+These items do not reopen the frozen v0.4.1 cognitive architecture. They are infrastructure
+robustness and research-instrument work tracked for the wider release.
+
+- **Corrupted memory store — resolved & tested**: `JSONMemoryRepository.load_all` raises
+  `RuntimeError` on corrupt JSON (it does not silently return `[]`); covered by
+  `test_corrupted_repository_raises_not_silently_empties`.
+- **Replay fidelity — resolved & tested**: traces record the pre-cycle committed state
+  (`theo_pre_cycle_state`); the container's `ReplayEngine` builds a fresh canonical
+  `SymbolicRuntime`, restores that recorded state, and re-runs the raw input so replay never
+  re-executes against a live runtime's advanced state. Fingerprint comparison remains the
+  authority (text match alone is insufficient). Covered by `TestMultiTurnReplayFidelity` and
+  `test_container_replay_engine_drives_canonical_runtime`.
+- **Canon Law 4 wording (proposed minor amendment)**: Law 4 lists "Perception" among belief
+  derivation sources, while ADR-0026 fixes three mechanical sources (MEMORY / KNOWLEDGE /
+  INFERENCE) with perception entering as evidence. A clarifying sentence is proposed; ratification
+  is a governance decision under Canon §10 (minor amendment, no new Edition).
+- **Benchmark corpus expansion (pre-v0.5 research instrument)**: the 26-case corpus covers five
+  domains and conflicting evidence well, but is weak on adversarial, negative-control, and
+  ambiguity cases. Expand before v0.5 so neural proposal integration targets measured weaknesses.
+
 ## Milestones
 
 | Version | Codename | Focus | Status |

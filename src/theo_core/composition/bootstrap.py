@@ -108,11 +108,14 @@ def bootstrap(
         pipeline=symbolic_pipeline,
         renderer=response_renderer,
         store=symbolic_state_store,
+        recorder=trace_recorder,
     )
 
     replay_engine = ReplayEngine(
         recorder=trace_recorder,
-        engine=cognitive_engine,
+        engine_factory=lambda: SymbolicRuntime(
+            pipeline=SymbolicCognitivePipeline(rules=list(symbolic_pipeline.rules))
+        ),
     )
 
     # 6. Kernel & Registry
