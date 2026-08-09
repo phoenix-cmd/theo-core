@@ -177,6 +177,41 @@ class TestNullEquivalence:
             i.capability == ProviderCapabilities.SALIENCE for i in pipeline.provider_provenance
         )
 
+    def test_proposals_are_surfaced_but_never_consumed(self) -> None:
+        """Phase 5: proposal-only — the pipeline records proposals observationally.
+
+        ``last_proposals``/``last_hypotheses``/``last_proposal_grounding`` are
+        read-only measurement surfaces; the decision and fingerprint must remain
+        identical to the no-provider baseline (no automatic acceptance).
+        """
+        proposal = HypothesisProposal(
+            proposal_id="proposal://heuristic/belief/b_weather_rain",
+            content="Alternative interpretation based on belief 'it will rain today'",
+            referenced_ids=frozenset({"belief://b_weather_rain"}),
+            rationale="lexical similarity 0.410",
+        )
+        provider = RecordingProvider(
+            capabilities=frozenset({ProviderCapabilities.HYPOTHESIS_PROPOSAL}),
+            output=(proposal,),
+        )
+        configured = SymbolicCognitivePipeline(coordinator=_coordinator_with(provider))
+        baseline = SymbolicCognitivePipeline()
+
+        configured_cycle = configured.execute_cycle("rain is falling")
+        baseline_cycle = baseline.execute_cycle("rain is falling")
+
+        assert configured.last_proposals == (proposal,)
+        assert configured.last_proposal_grounding is not None
+        assert configured.last_hypotheses
+        assert [s.hypothesis_id for s in configured.last_hypotheses] == [
+            "hypothesis://cand/1"
+        ]
+        assert golden_fingerprint(
+            configured_cycle[2], configured_cycle[0].action_text
+        ) == golden_fingerprint(baseline_cycle[2], baseline_cycle[0].action_text)
+        assert _state_checksum(configured) == _state_checksum(baseline)
+        assert configured.provider_provenance[0].summary == {"count": 1}
+
 
 class TestFailFast:
     def test_provider_failure_fails_the_cycle(self) -> None:

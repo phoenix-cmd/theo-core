@@ -20,9 +20,17 @@ from theo_core.models.ports.converters import (
     hypotheses_to_collection,
     rules_to_collection,
 )
-from theo_core.models.ports.snapshots import ScoredHypothesis
+from theo_core.models.ports.snapshots import (
+    GroundingSnapshot,
+    HypothesisProposal,
+    HypothesisSnapshotCollection,
+    ScoredHypothesis,
+)
 from theo_core.runtime.providers.coordinator import ProviderCoordinator
-from theo_core.runtime.providers.models import ProviderInvocation  # noqa: TC001
+from theo_core.runtime.providers.models import (  # noqa: TC001
+    ProposalHookResult,
+    ProviderInvocation,
+)
 from theo_core.runtime.providers.resolution import ProviderResolver
 from theo_core.symbolic._primitives.identifiers import SymbolicId
 from theo_core.symbolic.beliefs.graph import BeliefGraph
@@ -111,6 +119,9 @@ class SymbolicCognitivePipeline:
         self._goal_manager = goal_manager or GoalManager()
         self._coordinator = coordinator or ProviderCoordinator(ProviderResolver())
         self._provider_provenance: tuple[ProviderInvocation, ...] = ()
+        self._proposal_hook_result: ProposalHookResult | None = None
+        self._last_proposal_grounding = GroundingSnapshot.empty()
+        self._last_hypothesis_snapshots: HypothesisSnapshotCollection = ()
         self.state: CycleState = CycleState(
             concepts=self.concepts,
             beliefs=self.beliefs,
@@ -121,6 +132,27 @@ class SymbolicCognitivePipeline:
     def provider_provenance(self) -> tuple[ProviderInvocation, ...]:
         """Return the provider invocations recorded by the most recent cycle."""
         return self._provider_provenance
+
+    @property
+    def last_proposals(self) -> tuple[HypothesisProposal, ...]:
+        """Return proposals from the hypothesis hook of the most recent cycle.
+
+        Observational only (Phase 5, proposal-only): proposals are never
+        consumed by the pipeline; they are surfaced for offline measurement.
+        """
+        if self._proposal_hook_result is None:
+            return ()
+        return self._proposal_hook_result.proposals
+
+    @property
+    def last_proposal_grounding(self) -> GroundingSnapshot:
+        """Return the grounding boundary used by the hypothesis proposal hook."""
+        return self._last_proposal_grounding
+
+    @property
+    def last_hypotheses(self) -> HypothesisSnapshotCollection:
+        """Return the evaluated symbolic hypotheses of the most recent cycle."""
+        return self._last_hypothesis_snapshots
 
     def execute_cycle(
         self,
@@ -220,13 +252,18 @@ class SymbolicCognitivePipeline:
         scheduler.record_stage(CycleStage.HYPOTHESIS)
         hypothesis_beliefs = working.beliefs.get_active_beliefs()
         hypothesis_concepts = working.concepts.get_concepts()
+        proposal_grounding = build_grounding(
+            hypothesis_beliefs, hypothesis_concepts, self.rules
+        )
         proposed = self._coordinator.propose_hypotheses(
             percept=percept_input,
             concepts=concepts_to_collection(hypothesis_concepts),
             beliefs=beliefs_to_collection(hypothesis_beliefs),
             rules=inference_rules,
-            grounding=build_grounding(hypothesis_beliefs, hypothesis_concepts, self.rules),
+            grounding=proposal_grounding,
         )
+        self._proposal_hook_result = proposed
+        self._last_proposal_grounding = proposal_grounding
         if proposed.invocation is not None:
             provider_invocations.append(proposed.invocation)
         cands = HypothesisEngine.generate_hypotheses(
@@ -235,11 +272,13 @@ class SymbolicCognitivePipeline:
         evaluated_cands = HypothesisEngine.evaluate_hypotheses(
             cands, working.thoughts, working.beliefs
         )
+        evaluated_hypothesis_snapshots = hypotheses_to_collection(evaluated_cands)
+        self._last_hypothesis_snapshots = evaluated_hypothesis_snapshots
         scored = self._coordinator.score_hypotheses(
-            hypotheses=hypotheses_to_collection(evaluated_cands),
+            hypotheses=evaluated_hypothesis_snapshots,
             beliefs=beliefs_to_collection(hypothesis_beliefs),
             percept=percept_input,
-            grounding=build_grounding(hypothesis_beliefs, hypothesis_concepts, self.rules),
+            grounding=proposal_grounding,
         )
         if scored.invocation is not None:
             provider_invocations.append(scored.invocation)
