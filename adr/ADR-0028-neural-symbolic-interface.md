@@ -165,6 +165,66 @@ cannot participate in the deterministic benchmark gate. GPU kernels,
 quantization, provider libraries, hardware, and tokenizer versions can
 introduce variation; the contract holds the provider responsible, not the seed.
 
+### Provider resolution (deterministic)
+
+> Amendment (v0.5.0, Phase 1): the runtime MUST resolve at most one provider
+> per capability, deterministically.
+
+Resolution follows a single explicit rule:
+
+```
+capability
+    → eligible providers (those advertising the capability)
+    → sort by (priority desc, provider name asc, configuration order asc)
+    → exactly one selected provider, or none
+```
+
+- Selection MUST NOT depend on set or hash iteration order (e.g. never on
+  iterating a `frozenset` of providers or capabilities). Provider ordering
+  comes only from the explicit configuration sequence plus the sort key above.
+- A provider that does not advertise a capability is **never consulted** for
+  that capability; the symbolic path executes unchanged.
+- Zero providers configured ⇒ every capability resolves to none ⇒ runtime
+  behavior is identical to v0.4.1.
+- Every registered provider MUST expose `capabilities()`; a provider object
+  that does not is a configuration error and is rejected at registration.
+
+### Provider failure semantics
+
+> Amendment (v0.5.0, Phase 1): a crashed provider is never silently treated as
+> absent.
+
+If a resolved provider raises while executing a hook, the runtime:
+
+1. records the failure in provider provenance;
+2. raises an explicit `ProviderFailure` (capability, provider, cause);
+3. applies the **configured** fallback policy — or, when none is configured,
+   fails the cycle.
+
+There is **no silent fallback**: provider output is advisory, but a provider
+error is an error. Treating a failed provider as "not there" would make
+research results uninterpretable. In v0.5.0 only the fail-fast policy exists
+(any provider error fails the cycle); any explicit fallback policy requires a
+further ADR amendment.
+
+### Provider provenance (trace)
+
+> Amendment (v0.5.0, Phase 1): traces distinguish "provider not configured"
+> from "provider configured but returned nothing".
+
+The runtime trace records, per capability consulted, the resolved provider and
+the invocation outcome (executed with an output summary, or failed). These two
+states are scientifically different and MUST be distinguishable:
+
+- **provider not configured** ⇒ no provider consulted, no provenance entry,
+  recorded trace identical to v0.4.1;
+- **provider configured but returned nothing** ⇒ provider called and
+  provenance records the executed call with an empty output summary.
+
+Provider provenance is **trace metadata only**. It is deliberately NOT part of
+`GoldenTrace` or the golden fingerprint, so replay and the benchmark contract
+are unchanged.
+
 ### Dependency direction (frozen)
 
 ```text
@@ -275,6 +335,12 @@ offline `RuleDiscoveryProvider`, the frozen theo-core → theo-providers depende
 direction, and the absence of implementation choices in this ADR. The defining
 principle — *neural providers are replaceable implementations, not architectural
 components* — is enforced by the permanent architectural firewall test (Phase D).
+
+Amended 2026-08-09 (v0.5.0, Phase 1) with three normative contracts verified by
+the Phase 1 acceptance suite: deterministic provider resolution (one provider
+per capability, explicit sort key, no set-order dependence), fail-fast provider
+failure semantics (explicit `ProviderFailure`, no silent fallback), and
+provider provenance as trace metadata outside the replay fingerprint.
 
 ## References
 

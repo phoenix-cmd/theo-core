@@ -14,10 +14,13 @@ from typing import TYPE_CHECKING
 from theo_core.evaluation.benchmark_schema import (
     FINGERPRINT_METADATA_KEY,
     PRE_CYCLE_STATE_METADATA_KEY,
+    PROVIDER_PROVENANCE_METADATA_KEY,
     STATE_HASH_AFTER_METADATA_KEY,
     STATE_HASH_BEFORE_METADATA_KEY,
     golden_fingerprint,
 )
+from theo_core.runtime.providers.coordinator import ProviderCoordinator  # noqa: TC001
+from theo_core.runtime.providers.models import ProviderInvocation  # noqa: TC001
 from theo_core.symbolic.decisions.models import DecisionRecord  # noqa: TC001
 from theo_core.symbolic.persistence.store import checksum_cycle_state, serialize_cycle_state
 from theo_core.symbolic.response.renderer import TemplateResponseRenderer
@@ -41,6 +44,7 @@ class SymbolicRuntimeResult:
     golden_trace: GoldenTrace
     response_text: str
     referenced_goal: SymbolicId
+    provider_provenance: tuple[ProviderInvocation, ...] = ()
 
 
 class SymbolicRuntime:
@@ -56,6 +60,7 @@ class SymbolicRuntime:
         renderer: ResponseRendererPort | None = None,
         store: SymbolicStateStore | None = None,
         recorder: TraceRecorder | None = None,
+        coordinator: ProviderCoordinator | None = None,
     ) -> None:
         """Initialize the runtime.
 
@@ -65,11 +70,13 @@ class SymbolicRuntime:
             store: Optional persistent state store.
             recorder: Optional trace recorder; each cycle is recorded with its
                 golden fingerprint when provided.
+            coordinator: Provider hook coordinator (ADR-0028). Passed to the
+                pipeline; defaults to an unconfigured coordinator.
 
         """
         from theo_core.symbolic.pipeline import SymbolicCognitivePipeline
 
-        self._pipeline = pipeline or SymbolicCognitivePipeline()
+        self._pipeline = pipeline or SymbolicCognitivePipeline(coordinator=coordinator)
         self._renderer = renderer or TemplateResponseRenderer()
         self._store = store
         self._recorder = recorder
@@ -152,21 +159,27 @@ class SymbolicRuntime:
         decision, scheduler_trace, golden_trace = self._pipeline.execute_cycle(
             percept_input, budget
         )
+        provider_provenance = self._pipeline.provider_provenance
         response_text = self._renderer.render(decision)
         post_state = self._pipeline.state
         boundary_golden_trace = golden_trace.model_copy(update={"response_text": response_text})
         if self._recorder is not None:
+            metadata: dict[str, object] = {
+                FINGERPRINT_METADATA_KEY: golden_fingerprint(
+                    boundary_golden_trace, response_text
+                ),
+                PRE_CYCLE_STATE_METADATA_KEY: serialize_cycle_state(pre_state),
+                STATE_HASH_BEFORE_METADATA_KEY: checksum_cycle_state(pre_state),
+                STATE_HASH_AFTER_METADATA_KEY: checksum_cycle_state(post_state),
+            }
+            if provider_provenance:
+                metadata[PROVIDER_PROVENANCE_METADATA_KEY] = [
+                    invocation.to_json() for invocation in provider_provenance
+                ]
             saved = self._recorder.record_trace(
                 raw_input=percept_input,
                 response_text=response_text,
-                metadata={
-                    FINGERPRINT_METADATA_KEY: golden_fingerprint(
-                        boundary_golden_trace, response_text
-                    ),
-                    PRE_CYCLE_STATE_METADATA_KEY: serialize_cycle_state(pre_state),
-                    STATE_HASH_BEFORE_METADATA_KEY: checksum_cycle_state(pre_state),
-                    STATE_HASH_AFTER_METADATA_KEY: checksum_cycle_state(post_state),
-                },
+                metadata=metadata,
             )
             self._last_trace_id = str(saved.trace_id)
         return SymbolicRuntimeResult(
@@ -175,4 +188,5 @@ class SymbolicRuntime:
             golden_trace=boundary_golden_trace,
             response_text=response_text,
             referenced_goal=decision.referenced_goal,
+            provider_provenance=provider_provenance,
         )

@@ -17,6 +17,7 @@ from theo_core.models.ports.snapshots import (
     ConceptSnapshotCollection,
     DecisionSnapshot,
     GoalSnapshot,
+    GoalSnapshotCollection,
     GroundingSnapshot,
     HypothesisSnapshot,
     HypothesisSnapshotCollection,
@@ -106,6 +107,11 @@ def decision_to_snapshot(decision: DecisionRecord) -> DecisionSnapshot:
         confidence=decision.confidence,
         referenced_goal=decision.referenced_goal.value,
     )
+
+
+def goals_to_collection(goals: Iterable[Goal]) -> GoalSnapshotCollection:
+    """Convert an iterable of ``Goal`` objects to a snapshot collection."""
+    return tuple(goal_to_snapshot(g) for g in goals)
 
 
 def goal_to_snapshot(goal: Goal) -> GoalSnapshot:

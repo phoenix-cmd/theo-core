@@ -11,6 +11,7 @@ from theo_core.symbolic.concepts.graph import ConceptGraph
 from theo_core.symbolic.pipeline import SymbolicCognitivePipeline
 
 if TYPE_CHECKING:
+    from theo_core.runtime.providers.coordinator import ProviderCoordinator
     from theo_core.symbolic.decisions.models import DecisionRecord
 
 
@@ -39,11 +40,17 @@ class BenchmarkHarness:
     """
 
     @staticmethod
-    def run(case: BenchmarkCase) -> BenchmarkResult:
+    def run(
+        case: BenchmarkCase,
+        coordinator: ProviderCoordinator | None = None,
+    ) -> BenchmarkResult:
         """Execute one benchmark case and return its result.
 
         Args:
             case: The benchmark case definition.
+            coordinator: Optional provider hook coordinator (ADR-0028). When
+                provided, the pipeline consults provider hooks (Phase 1:
+                provenance only, outputs not consumed).
 
         Returns:
             A BenchmarkResult describing pass/fail and any mismatches.
@@ -67,6 +74,7 @@ class BenchmarkHarness:
             concepts=concepts,
             beliefs=beliefs,
             rules=list(case.rules),
+            coordinator=coordinator,
         )
         decision, _trace, golden_trace = pipeline.execute_cycle(case.percept_input)
 
@@ -111,17 +119,21 @@ class BenchmarkHarness:
         )
 
     @staticmethod
-    def run_all(cases: tuple[BenchmarkCase, ...] | list[BenchmarkCase]) -> list[BenchmarkResult]:
+    def run_all(
+        cases: tuple[BenchmarkCase, ...] | list[BenchmarkCase],
+        coordinator: ProviderCoordinator | None = None,
+    ) -> list[BenchmarkResult]:
         """Execute every case and return results in input order.
 
         Args:
             cases: Iterable of benchmark cases.
+            coordinator: Optional provider hook coordinator (ADR-0028).
 
         Returns:
             A list of BenchmarkResult instances, one per case.
 
         """
-        return [BenchmarkHarness.run(case) for case in cases]
+        return [BenchmarkHarness.run(case, coordinator) for case in cases]
 
     @staticmethod
     def _golden_trace_mismatches(expected: GoldenTrace, produced: GoldenTrace) -> list[str]:

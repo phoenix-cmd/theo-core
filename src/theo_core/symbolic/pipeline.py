@@ -11,6 +11,18 @@ from theo_core.domain.runtime.entities.percept import Percept as DomainPercept
 from theo_core.domain.runtime.entities.percept import PerceptModality
 from theo_core.evaluation.benchmark_schema import GoldenTrace
 from theo_core.goals.manager.goal_manager import GoalManager
+from theo_core.models.ports.converters import (
+    beliefs_to_collection,
+    build_grounding,
+    concepts_to_collection,
+    decision_to_snapshot,
+    goals_to_collection,
+    hypotheses_to_collection,
+    rules_to_collection,
+)
+from theo_core.runtime.providers.coordinator import ProviderCoordinator
+from theo_core.runtime.providers.models import ProviderInvocation  # noqa: TC001
+from theo_core.runtime.providers.resolution import ProviderResolver
 from theo_core.symbolic._primitives.identifiers import SymbolicId
 from theo_core.symbolic.beliefs.graph import BeliefGraph
 from theo_core.symbolic.beliefs.models import Belief, BeliefId, BeliefSource, EvidenceTrace
@@ -74,6 +86,7 @@ class SymbolicCognitivePipeline:
         thoughts: ThoughtGraph | None = None,
         rules: list[InferenceRule] | None = None,
         goal_manager: GoalPort | None = None,
+        coordinator: ProviderCoordinator | None = None,
     ) -> None:
         """Initialize cognitive pipeline state containers.
 
@@ -84,6 +97,10 @@ class SymbolicCognitivePipeline:
             rules: Initial inference rules.
             goal_manager: Goal port used to resolve the active goal
                 (Canon Invariant 7). Defaults to a fresh ``GoalManager``.
+            coordinator: Provider hook coordinator (ADR-0028). Phase 1
+                consults the hooks for provenance only; hook outputs are not
+                consumed. Defaults to an unconfigured coordinator that resolves
+                no providers, preserving v0.4.1 cognition exactly.
 
         """
         self.concepts = concepts or ConceptGraph()
@@ -91,11 +108,18 @@ class SymbolicCognitivePipeline:
         self.thoughts = thoughts or ThoughtGraph()
         self.rules = rules or []
         self._goal_manager = goal_manager or GoalManager()
+        self._coordinator = coordinator or ProviderCoordinator(ProviderResolver())
+        self._provider_provenance: tuple[ProviderInvocation, ...] = ()
         self.state: CycleState = CycleState(
             concepts=self.concepts,
             beliefs=self.beliefs,
             thoughts=self.thoughts,
         )
+
+    @property
+    def provider_provenance(self) -> tuple[ProviderInvocation, ...]:
+        """Return the provider invocations recorded by the most recent cycle."""
+        return self._provider_provenance
 
     def execute_cycle(
         self,
@@ -114,6 +138,8 @@ class SymbolicCognitivePipeline:
         """
         scheduler = CognitiveScheduler(budget)
         scheduler.start_cycle()
+
+        provider_invocations: list[ProviderInvocation] = []
 
         # Snapshot the committed state BEFORE the cycle: it is the memory
         # retrieved into working memory and the baseline for derived beliefs.
@@ -169,6 +195,19 @@ class SymbolicCognitivePipeline:
 
         # 4. INFERENCE & RULE DEDUCTION (consumes the perceptual belief as evidence)
         scheduler.record_stage(CycleStage.INFERENCE)
+        inference_rules = rules_to_collection(self.rules)
+        inference_beliefs = working.beliefs.get_active_beliefs()
+        inference_concepts = working.concepts.get_concepts()
+        ranked_rules = self._coordinator.rank_rules(
+            rules=inference_rules,
+            concepts=concepts_to_collection(inference_concepts),
+            beliefs=beliefs_to_collection(inference_beliefs),
+            grounding=build_grounding(
+                inference_beliefs, inference_concepts, self.rules
+            ),
+        )
+        if ranked_rules.invocation is not None:
+            provider_invocations.append(ranked_rules.invocation)
         inference_trace: InferenceTrace | None = None
         if self.rules:
             inference_trace = InferenceEngine.forward_chain(
@@ -180,12 +219,35 @@ class SymbolicCognitivePipeline:
 
         # 5. HYPOTHESIS GENERATION & EVALUATION
         scheduler.record_stage(CycleStage.HYPOTHESIS)
+        hypothesis_beliefs = working.beliefs.get_active_beliefs()
+        hypothesis_concepts = working.concepts.get_concepts()
+        proposed = self._coordinator.propose_hypotheses(
+            percept=percept_input,
+            concepts=concepts_to_collection(hypothesis_concepts),
+            beliefs=beliefs_to_collection(hypothesis_beliefs),
+            rules=inference_rules,
+            grounding=build_grounding(
+                hypothesis_beliefs, hypothesis_concepts, self.rules
+            ),
+        )
+        if proposed.invocation is not None:
+            provider_invocations.append(proposed.invocation)
         cands = HypothesisEngine.generate_hypotheses(
             percept_input, working.concepts, working.beliefs, working.thoughts
         )
         evaluated_cands = HypothesisEngine.evaluate_hypotheses(
             cands, working.thoughts, working.beliefs
         )
+        scored = self._coordinator.score_hypotheses(
+            hypotheses=hypotheses_to_collection(evaluated_cands),
+            beliefs=beliefs_to_collection(hypothesis_beliefs),
+            percept=percept_input,
+            grounding=build_grounding(
+                hypothesis_beliefs, hypothesis_concepts, self.rules
+            ),
+        )
+        if scored.invocation is not None:
+            provider_invocations.append(scored.invocation)
 
         # 6. CONFLICT RESOLUTION
         scheduler.record_stage(CycleStage.CONFLICT_RESOLUTION)
@@ -199,12 +261,33 @@ class SymbolicCognitivePipeline:
             modality=PerceptModality.TEXT,
             content=percept_input,
         )
+        decision_beliefs = working.beliefs.get_active_beliefs()
+        decision_concepts = working.concepts.get_concepts()
+        decision_grounding = build_grounding(
+            decision_beliefs, decision_concepts, self.rules
+        )
+        ranked_goals = self._coordinator.rank_goals(
+            goals=goals_to_collection(self._goal_manager.get_active_goals()),
+            percept=percept_input,
+            beliefs=beliefs_to_collection(decision_beliefs),
+            grounding=decision_grounding,
+        )
+        if ranked_goals.invocation is not None:
+            provider_invocations.append(ranked_goals.invocation)
         goal = self._goal_manager.select_top_goal(domain_percept)
         assert goal.goal_id is not None, "GoalId is always derived from the description"
         referenced_goal = SymbolicId.of(goal.goal_id.value)
         decision = DecisionEngine.make_decision(
             resolved_cands, working.thoughts, referenced_goal=referenced_goal
         )
+        calibrated = self._coordinator.score_confidence(
+            decision=decision_to_snapshot(decision),
+            hypotheses=hypotheses_to_collection(resolved_cands),
+            beliefs=beliefs_to_collection(decision_beliefs),
+            grounding=decision_grounding,
+        )
+        if calibrated.invocation is not None:
+            provider_invocations.append(calibrated.invocation)
 
         # 8. REALIZATION & CONSTRAINT VALIDATION
         scheduler.record_stage(CycleStage.REALIZATION)
@@ -245,4 +328,5 @@ class SymbolicCognitivePipeline:
             decision_id=decision.id.to_symbolic_id(),
             response_text=decision.action_text,
         )
+        self._provider_provenance = tuple(provider_invocations)
         return decision, trace, golden_trace
