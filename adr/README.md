@@ -31,6 +31,7 @@ Every major architectural, research, or system design decision for THEO MUST be 
 - [ADR-0025: Cognitive Ontology and Fundamental Laws](ADR-0025-cognitive-ontology-and-fundamental-laws.md)
 - [ADR-0026: Canon Law 4 Verdict — Perception Enters Cognition as Evidence](ADR-0026-canon-law-4-verdict-perception-as-evidence.md)
 - [ADR-0027: Runtime Unification — Symbolic Pipeline as Canonical Runtime](ADR-0027-runtime-unification-symbolic-canonical.md)
+- [ADR-0028: Neural Symbolic Interface — Controlled Experimental Boundary](ADR-0028-neural-symbolic-interface.md)
 
 ## ADR Template
 
