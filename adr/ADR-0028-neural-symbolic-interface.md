@@ -2,7 +2,7 @@
 
 ## Status
 
-Proposed
+Accepted (v0.5.0)
 
 ## Context
 
@@ -265,6 +265,16 @@ runtime state.
   could be introduced behind the same grounding and determinism contracts.
 - The provider boundary could generalize to non-neural advisors (external
   solvers, databases) without changing the snapshot contracts.
+
+## Ratification
+
+Ratified 2026-08-09 after Phase A review. No architectural objection; acceptance
+covers the snapshot-only provider boundary, `ProviderExecution` as the replay
+contract, strict grounding rejection, the two-operation `CalibrationProvider`,
+offline `RuleDiscoveryProvider`, the frozen theo-core → theo-providers dependency
+direction, and the absence of implementation choices in this ADR. The defining
+principle — *neural providers are replaceable implementations, not architectural
+components* — is enforced by the permanent architectural firewall test (Phase D).
 
 ## References
 
