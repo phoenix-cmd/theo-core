@@ -8,6 +8,7 @@ contracts inside theo-core.
 
 from __future__ import annotations
 
+from decimal import Decimal
 from typing import TYPE_CHECKING
 
 import pytest
@@ -18,8 +19,14 @@ from theo_core.evaluation.benchmark_schema import (
     golden_fingerprint,
 )
 from theo_core.models.ports.snapshots import (
+    BeliefSnapshotCollection,
+    DecisionSnapshot,
+    GroundingSnapshot,
     HypothesisProposal,
+    HypothesisSnapshotCollection,
     ProviderCapabilities,
+    ProviderExecution,
+    ScoredHypothesis,
 )
 from theo_core.runtime.providers.coordinator import ProviderCoordinator
 from theo_core.runtime.providers.models import ProviderFailure, ProviderStatus
@@ -109,13 +116,53 @@ class TestNullEquivalence:
         configured_fingerprint = golden_fingerprint(
             configured_cycle[2], configured_cycle[0].action_text
         )
-        baseline_fingerprint = golden_fingerprint(
-            baseline_cycle[2], baseline_cycle[0].action_text
-        )
+        baseline_fingerprint = golden_fingerprint(baseline_cycle[2], baseline_cycle[0].action_text)
         assert configured_fingerprint == baseline_fingerprint
         assert configured_cycle[1] == baseline_cycle[1]
         assert configured_cycle[2] == baseline_cycle[2]
         assert _state_checksum(configured) == _state_checksum(baseline)
+
+    def test_wellformed_calibration_scores_are_consumed(self) -> None:
+        """Phase 4: well-formed ScoredHypothesis output recalibrates confidence.
+
+        The accepted (first) hypothesis receives the provider score while the
+        decision identity and action text are preserved.
+        """
+
+        class RecalibrateProvider(RecordingProvider):
+            def score_confidence(
+                self,
+                decision: DecisionSnapshot,
+                hypotheses: HypothesisSnapshotCollection,
+                beliefs: BeliefSnapshotCollection,
+                grounding: GroundingSnapshot,
+            ) -> ProviderExecution[tuple[object, ...]]:
+                return ProviderExecution(
+                    provider_name="recalibrate",
+                    provider_version="0.1.0",
+                    model_name="test",
+                    model_hash="",
+                    seed=0,
+                    temperature=0.0,
+                    output=tuple(
+                        ScoredHypothesis(
+                            hypothesis_id=h.hypothesis_id,
+                            score=Decimal("0.42") if i == 0 else h.confidence,
+                            evidence="test",
+                        )
+                        for i, h in enumerate(hypotheses)
+                    ),
+                )
+
+        baseline = SymbolicCognitivePipeline()
+        configured = SymbolicCognitivePipeline(coordinator=_coordinator_with(RecalibrateProvider()))
+        baseline_decision, _, _ = baseline.execute_cycle("rain is falling")
+        configured_decision, _, _ = configured.execute_cycle("rain is falling")
+
+        assert configured_decision.id == baseline_decision.id
+        assert configured_decision.action_text == baseline_decision.action_text
+        assert configured_decision.confidence == Decimal("0.42")
+        assert baseline_decision.confidence != Decimal("0.42")
 
     def test_unsupported_capability_is_never_called(self) -> None:
         provider = GoalSalienceOnlyProvider()
@@ -127,8 +174,7 @@ class TestNullEquivalence:
         assert methods == ["rank_rules", "rank_goals"]
         assert len(pipeline.provider_provenance) == 2
         assert all(
-            i.capability == ProviderCapabilities.SALIENCE
-            for i in pipeline.provider_provenance
+            i.capability == ProviderCapabilities.SALIENCE for i in pipeline.provider_provenance
         )
 
 
@@ -201,9 +247,8 @@ class TestRuntimeProvenance:
         baseline_result = baseline.process("rain is falling")
         null_result = null_configured.process("rain is falling")
 
-        assert (
-            golden_fingerprint(null_result.golden_trace, null_result.response_text)
-            == golden_fingerprint(baseline_result.golden_trace, baseline_result.response_text)
-        )
+        assert golden_fingerprint(
+            null_result.golden_trace, null_result.response_text
+        ) == golden_fingerprint(baseline_result.golden_trace, baseline_result.response_text)
         assert null_result.provider_provenance != ()
         assert baseline_result.provider_provenance == ()

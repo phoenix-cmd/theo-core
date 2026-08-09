@@ -20,6 +20,7 @@ from theo_core.models.ports.converters import (
     hypotheses_to_collection,
     rules_to_collection,
 )
+from theo_core.models.ports.snapshots import ScoredHypothesis
 from theo_core.runtime.providers.coordinator import ProviderCoordinator
 from theo_core.runtime.providers.models import ProviderInvocation  # noqa: TC001
 from theo_core.runtime.providers.resolution import ProviderResolver
@@ -202,9 +203,7 @@ class SymbolicCognitivePipeline:
             rules=inference_rules,
             concepts=concepts_to_collection(inference_concepts),
             beliefs=beliefs_to_collection(inference_beliefs),
-            grounding=build_grounding(
-                inference_beliefs, inference_concepts, self.rules
-            ),
+            grounding=build_grounding(inference_beliefs, inference_concepts, self.rules),
         )
         if ranked_rules.invocation is not None:
             provider_invocations.append(ranked_rules.invocation)
@@ -226,9 +225,7 @@ class SymbolicCognitivePipeline:
             concepts=concepts_to_collection(hypothesis_concepts),
             beliefs=beliefs_to_collection(hypothesis_beliefs),
             rules=inference_rules,
-            grounding=build_grounding(
-                hypothesis_beliefs, hypothesis_concepts, self.rules
-            ),
+            grounding=build_grounding(hypothesis_beliefs, hypothesis_concepts, self.rules),
         )
         if proposed.invocation is not None:
             provider_invocations.append(proposed.invocation)
@@ -242,9 +239,7 @@ class SymbolicCognitivePipeline:
             hypotheses=hypotheses_to_collection(evaluated_cands),
             beliefs=beliefs_to_collection(hypothesis_beliefs),
             percept=percept_input,
-            grounding=build_grounding(
-                hypothesis_beliefs, hypothesis_concepts, self.rules
-            ),
+            grounding=build_grounding(hypothesis_beliefs, hypothesis_concepts, self.rules),
         )
         if scored.invocation is not None:
             provider_invocations.append(scored.invocation)
@@ -263,9 +258,7 @@ class SymbolicCognitivePipeline:
         )
         decision_beliefs = working.beliefs.get_active_beliefs()
         decision_concepts = working.concepts.get_concepts()
-        decision_grounding = build_grounding(
-            decision_beliefs, decision_concepts, self.rules
-        )
+        decision_grounding = build_grounding(decision_beliefs, decision_concepts, self.rules)
         ranked_goals = self._coordinator.rank_goals(
             goals=goals_to_collection(self._goal_manager.get_active_goals()),
             percept=percept_input,
@@ -288,6 +281,22 @@ class SymbolicCognitivePipeline:
         )
         if calibrated.invocation is not None:
             provider_invocations.append(calibrated.invocation)
+
+        # Apply calibrated confidence from provider (Phase 4).
+        # Only well-formed ScoredHypothesis outputs are consumed; any other
+        # output shape is ignored, preserving the Phase 1 equivalence pin that
+        # provider outputs are never consumed unless they are valid calibration.
+        if calibrated.scored and decision.accepted_hypothesis_id is not None:
+            accepted_id = decision.accepted_hypothesis_id.value
+            for scored_hyp in calibrated.scored:
+                if not isinstance(scored_hyp, ScoredHypothesis):
+                    continue
+                if scored_hyp.hypothesis_id == accepted_id:
+                    # New decision with calibrated confidence (all else identical)
+                    decision = decision.model_copy(
+                        update={"confidence": Decimal(str(scored_hyp.score))}
+                    )
+                    break
 
         # 8. REALIZATION & CONSTRAINT VALIDATION
         scheduler.record_stage(CycleStage.REALIZATION)
