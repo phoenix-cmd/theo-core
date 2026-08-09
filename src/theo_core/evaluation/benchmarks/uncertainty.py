@@ -4,9 +4,15 @@ from __future__ import annotations
 
 from decimal import Decimal
 
-from theo_core.evaluation.benchmark_schema import BenchmarkCase, BenchmarkId, GoldenTrace
+from theo_core.evaluation.benchmark_schema import (
+    BenchmarkCase,
+    BenchmarkId,
+    FailureMode,
+    GoldenTrace,
+)
 from theo_core.symbolic._primitives.identifiers import SymbolicId
 from theo_core.symbolic.beliefs.models import Belief, BeliefId
+from theo_core.symbolic.decisions.models import Intent
 from theo_core.symbolic.inference.models import InferenceRule, RuleCondition, RuleId
 
 
@@ -148,5 +154,259 @@ CASES: tuple[BenchmarkCase, ...] = (
             fired_rule_ids=(SymbolicId.of("rule://uncertainty/volatile_diversify"),),
             thought_dag_node_count=1,
         ),
+    ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://uncertainty/006"),
+        domain="uncertainty",
+        name="UNC-006: Strong Rule Calibration",
+        description="Probe CALIBRATION (strong rung): a strong 0.9 multiplier "
+        "rule must yield a high-confidence decision; the confidence ladder "
+        "across UNC-006/007/008 is monotone in rule strength.",
+        rules=(
+            _rule(
+                "rule://uncertainty/storm_weather",
+                "storm",
+                "severe weather is approaching",
+                Decimal("0.9"),
+            ),
+        ),
+        percept_input="a storm is approaching",
+        expected_beliefs=("severe weather is approaching",),
+        expected_action_text="Interpretation based on belief 'a storm is approaching'",
+        min_confidence=Decimal("0.9"),
+        max_confidence=Decimal("1.0"),
+        expected_intent=Intent.MAINTAIN_CONVERSATION,
+        failure_mode=FailureMode.CALIBRATION,
+        metadata={
+            "calibration_rung": "strong",
+            "rule_multiplier": "0.9",
+            "ground_truth_ordering": {
+                "strong_rule_0.9": "decision confidence should be the highest in the ladder"
+            },
+        },
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(),
+            fired_rule_ids=(SymbolicId.of("rule://uncertainty/storm_weather"),),
+            generated_hypothesis_ids=(
+                SymbolicId.of("hypothesis://cand/2"),
+                SymbolicId.of("hypothesis://cand/1"),
+            ),
+            resolved_conflict_ids=(SymbolicId.of("conflict://hyp/cand/2_cand/1"),),
+            thought_dag_node_count=1,
+        ),
+        baseline={
+            "accepted_hypothesis_id": "hypothesis://cand/2",
+            "action_text": "Interpretation based on belief 'a storm is approaching'",
+            "activated_concepts": [],
+            "captured_at": "v0.4.1 (ADR-0028 Phase 2, pre-provider)",
+            "confidence": "0.9500",
+            "dag_node_count": 1,
+            "decision_id": "decision://select/cand/2",
+            "decision_type": "response",
+            "derived_beliefs": [
+                "belief://inf/uncertainty/storm_weather/1",
+                "belief://percept/b2432293",
+            ],
+            "fingerprint": {
+                "activated_concept_ids": [],
+                "decision_id": "decision://select/cand/2",
+                "derived_belief_ids": [
+                    "belief://inf/uncertainty/storm_weather/1",
+                    "belief://percept/b2432293",
+                ],
+                "fired_rule_ids": ["rule://uncertainty/storm_weather"],
+                "generated_hypothesis_ids": ["hypothesis://cand/2", "hypothesis://cand/1"],
+                "resolved_conflict_ids": ["conflict://hyp/cand/2_cand/1"],
+                "response_text": "Interpretation based on belief 'a storm is approaching'",
+                "retrieved_memory_ids": [],
+                "thought_dag_node_count": 1,
+            },
+            "fired_rules": ["rule://uncertainty/storm_weather"],
+            "generated_hypotheses": ["hypothesis://cand/2", "hypothesis://cand/1"],
+            "intent": "maintain_conversation",
+            "referenced_goal": "goal://maintainconversation",
+            "resolved_conflicts": ["conflict://hyp/cand/2_cand/1"],
+            "retrieved_memories": [],
+            "stages": [
+                "perception",
+                "activation",
+                "revision",
+                "inference",
+                "hypothesis",
+                "conflict_resolution",
+                "decision",
+                "realization",
+                "learning",
+            ],
+            "state_checksum": "64875249952ede07bcfaea29a50cf39acc29ca93bb1ac4c023979bb6fae2456f",
+        },
+    ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://uncertainty/007"),
+        domain="uncertainty",
+        name="UNC-007: Sparse-Evidence Moderate Rule",
+        description="Probe SPARSE_KNOWLEDGE/CALIBRATION (middle rung): with a "
+        "single moderate 0.4 rule as the only evidence, the decision confidence "
+        "must land below the strong rung; the weak support must not be masked.",
+        rules=(
+            _rule(
+                "rule://uncertainty/fog_visibility",
+                "fog",
+                "visibility is reduced",
+                Decimal("0.4"),
+            ),
+        ),
+        percept_input="the fog rolls in",
+        expected_beliefs=("visibility is reduced",),
+        expected_action_text="Interpretation based on belief 'the fog rolls in'",
+        min_confidence=Decimal("0.6"),
+        max_confidence=Decimal("0.8"),
+        expected_intent=Intent.MAINTAIN_CONVERSATION,
+        failure_mode=FailureMode.SPARSE_KNOWLEDGE,
+        metadata={
+            "calibration_rung": "moderate",
+            "rule_multiplier": "0.4",
+            "ground_truth_ordering": {
+                "moderate_rule_0.4": "decision confidence should sit between strong and weak rungs"
+            },
+        },
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(),
+            fired_rule_ids=(SymbolicId.of("rule://uncertainty/fog_visibility"),),
+            generated_hypothesis_ids=(SymbolicId.of("hypothesis://cand/1"),),
+            thought_dag_node_count=1,
+        ),
+        baseline={
+            "accepted_hypothesis_id": "hypothesis://cand/1",
+            "action_text": "Interpretation based on belief 'the fog rolls in'",
+            "activated_concepts": [],
+            "captured_at": "v0.4.1 (ADR-0028 Phase 2, pre-provider)",
+            "confidence": "0.7000",
+            "dag_node_count": 1,
+            "decision_id": "decision://select/cand/1",
+            "decision_type": "response",
+            "derived_beliefs": [
+                "belief://inf/uncertainty/fog_visibility/1",
+                "belief://percept/a7529822",
+            ],
+            "fingerprint": {
+                "activated_concept_ids": [],
+                "decision_id": "decision://select/cand/1",
+                "derived_belief_ids": [
+                    "belief://inf/uncertainty/fog_visibility/1",
+                    "belief://percept/a7529822",
+                ],
+                "fired_rule_ids": ["rule://uncertainty/fog_visibility"],
+                "generated_hypothesis_ids": ["hypothesis://cand/1"],
+                "resolved_conflict_ids": [],
+                "response_text": "Interpretation based on belief 'the fog rolls in'",
+                "retrieved_memory_ids": [],
+                "thought_dag_node_count": 1,
+            },
+            "fired_rules": ["rule://uncertainty/fog_visibility"],
+            "generated_hypotheses": ["hypothesis://cand/1"],
+            "intent": "maintain_conversation",
+            "referenced_goal": "goal://maintainconversation",
+            "resolved_conflicts": [],
+            "retrieved_memories": [],
+            "stages": [
+                "perception",
+                "activation",
+                "revision",
+                "inference",
+                "hypothesis",
+                "conflict_resolution",
+                "decision",
+                "realization",
+                "learning",
+            ],
+            "state_checksum": "8754d66fbf9b9f12b951f15d3cf267b5c887ab877ed9e43487a8f5fa4eab4e0e",
+        },
+    ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://uncertainty/008"),
+        domain="uncertainty",
+        name="UNC-008: Weak Rule Calibration",
+        description="Probe CALIBRATION (weak rung): a weak 0.2 multiplier rule "
+        "must yield the lowest decision confidence in the ladder while the "
+        "derived belief still persists.",
+        rules=(
+            _rule(
+                "rule://uncertainty/tremor_earth",
+                "tremor",
+                "minor earth movement detected",
+                Decimal("0.2"),
+            ),
+        ),
+        percept_input="a tremor is felt",
+        expected_beliefs=("minor earth movement detected",),
+        expected_action_text="Interpretation based on belief 'a tremor is felt'",
+        min_confidence=Decimal("0.5"),
+        max_confidence=Decimal("0.7"),
+        expected_intent=Intent.MAINTAIN_CONVERSATION,
+        failure_mode=FailureMode.CALIBRATION,
+        metadata={
+            "calibration_rung": "weak",
+            "rule_multiplier": "0.2",
+            "ground_truth_ordering": {
+                "weak_rule_0.2": "decision confidence should be the lowest in the ladder"
+            },
+        },
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(),
+            fired_rule_ids=(SymbolicId.of("rule://uncertainty/tremor_earth"),),
+            generated_hypothesis_ids=(
+                SymbolicId.of("hypothesis://cand/2"),
+                SymbolicId.of("hypothesis://cand/1"),
+            ),
+            resolved_conflict_ids=(SymbolicId.of("conflict://hyp/cand/2_cand/1"),),
+            thought_dag_node_count=1,
+        ),
+        baseline={
+            "accepted_hypothesis_id": "hypothesis://cand/2",
+            "action_text": "Interpretation based on belief 'a tremor is felt'",
+            "activated_concepts": [],
+            "captured_at": "v0.4.1 (ADR-0028 Phase 2, pre-provider)",
+            "confidence": "0.6000",
+            "dag_node_count": 1,
+            "decision_id": "decision://select/cand/2",
+            "decision_type": "response",
+            "derived_beliefs": [
+                "belief://inf/uncertainty/tremor_earth/1",
+                "belief://percept/dbdfa0a8",
+            ],
+            "fingerprint": {
+                "activated_concept_ids": [],
+                "decision_id": "decision://select/cand/2",
+                "derived_belief_ids": [
+                    "belief://inf/uncertainty/tremor_earth/1",
+                    "belief://percept/dbdfa0a8",
+                ],
+                "fired_rule_ids": ["rule://uncertainty/tremor_earth"],
+                "generated_hypothesis_ids": ["hypothesis://cand/2", "hypothesis://cand/1"],
+                "resolved_conflict_ids": ["conflict://hyp/cand/2_cand/1"],
+                "response_text": "Interpretation based on belief 'a tremor is felt'",
+                "retrieved_memory_ids": [],
+                "thought_dag_node_count": 1,
+            },
+            "fired_rules": ["rule://uncertainty/tremor_earth"],
+            "generated_hypotheses": ["hypothesis://cand/2", "hypothesis://cand/1"],
+            "intent": "maintain_conversation",
+            "referenced_goal": "goal://maintainconversation",
+            "resolved_conflicts": ["conflict://hyp/cand/2_cand/1"],
+            "retrieved_memories": [],
+            "stages": [
+                "perception",
+                "activation",
+                "revision",
+                "inference",
+                "hypothesis",
+                "conflict_resolution",
+                "decision",
+                "realization",
+                "learning",
+            ],
+            "state_checksum": "1491e3d3303dcdfe18026422ae7ac4b53294d0353af4b050c0b4c85b2fcb866d",
+        },
     ),
 )

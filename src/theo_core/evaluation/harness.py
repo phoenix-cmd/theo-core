@@ -5,7 +5,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
+from theo_core.domain.runtime.entities.goal import Goal, GoalPriority
 from theo_core.evaluation.benchmark_schema import BenchmarkCase, GoldenTrace
+from theo_core.goals.manager.goal_manager import GoalManager
 from theo_core.symbolic.beliefs.graph import BeliefGraph
 from theo_core.symbolic.concepts.graph import ConceptGraph
 from theo_core.symbolic.pipeline import SymbolicCognitivePipeline
@@ -33,9 +35,10 @@ class BenchmarkHarness:
     1. Decision type matches ``expected_decision_type``.
     2. Decision confidence falls within the declared bounds.
     3. Decision action text matches ``expected_action_text``.
-    4. Every ``expected_beliefs`` proposition is active post-cycle.
-    5. No ``excluded_beliefs`` proposition remains active post-cycle.
-    6. Every explicitly-specified GoldenTrace field matches the produced trace
+    4. Decision intent matches ``expected_intent`` (Phase 2, when declared).
+    5. Every ``expected_beliefs`` proposition is active post-cycle.
+    6. No ``excluded_beliefs`` proposition remains active post-cycle.
+    7. Every explicitly-specified GoldenTrace field matches the produced trace
        (fields left at their defaults are not asserted).
     """
 
@@ -70,10 +73,15 @@ class BenchmarkHarness:
         for belief_edge in case.initial_belief_edges:
             beliefs.add_edge(belief_edge)
 
+        goal_manager = GoalManager()
+        for description in case.initial_goals:
+            goal_manager.add_goal(Goal(description=description, priority=GoalPriority.HIGH))
+
         pipeline = SymbolicCognitivePipeline(
             concepts=concepts,
             beliefs=beliefs,
             rules=list(case.rules),
+            goal_manager=goal_manager,
             coordinator=coordinator,
         )
         decision, _trace, golden_trace = pipeline.execute_cycle(case.percept_input)
@@ -94,6 +102,12 @@ class BenchmarkHarness:
             failures.append(
                 f"decision.action_text: expected {case.expected_action_text!r}, "
                 f"got {decision.action_text!r}"
+            )
+
+        if case.expected_intent is not None and decision.intent != case.expected_intent:
+            failures.append(
+                f"decision.intent: expected {case.expected_intent.value!r}, "
+                f"got {decision.intent.value!r}"
             )
 
         active_propositions = [b.proposition for b in pipeline.beliefs.get_active_beliefs()]

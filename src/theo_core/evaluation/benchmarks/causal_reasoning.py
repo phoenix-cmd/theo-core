@@ -8,9 +8,15 @@ from __future__ import annotations
 
 from decimal import Decimal
 
-from theo_core.evaluation.benchmark_schema import BenchmarkCase, BenchmarkId, GoldenTrace
+from theo_core.evaluation.benchmark_schema import (
+    BenchmarkCase,
+    BenchmarkId,
+    FailureMode,
+    GoldenTrace,
+)
 from theo_core.symbolic._primitives.identifiers import SymbolicId
 from theo_core.symbolic.beliefs.models import Belief, BeliefId
+from theo_core.symbolic.decisions.models import Intent
 from theo_core.symbolic.inference.models import InferenceRule, RuleCondition, RuleId
 
 
@@ -210,9 +216,7 @@ CASES: tuple[BenchmarkCase, ...] = (
         percept_input="I can see steam in the kitchen",
         expected_beliefs=("steam is rising from the kettle",),
         excluded_beliefs=("Fire is likely nearby",),
-        expected_action_text=(
-            "Interpretation based on belief 'steam is rising from the kettle'"
-        ),
+        expected_action_text=("Interpretation based on belief 'steam is rising from the kettle'"),
         min_confidence=Decimal("0.5"),
         max_confidence=Decimal("1.0"),
         golden_trace=GoldenTrace(
@@ -253,5 +257,216 @@ CASES: tuple[BenchmarkCase, ...] = (
             fired_rule_ids=(),
             thought_dag_node_count=0,
         ),
+    ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://causal_reasoning/009"),
+        domain="causal_reasoning",
+        name="CAUSAL-009: Three-Hop Forecast Chain",
+        description="Probe MULTI_HOP: a three-rule causal chain "
+        "(rain -> wet ground -> slippery path -> warn about slipping) must "
+        "fire in sequence and commit all intermediate derivations.",
+        initial_beliefs=(_belief("belief://c_rain", "raining"),),
+        rules=(
+            _rule(
+                "rule://causal/rain_wet",
+                "rain",
+                "the ground is wet",
+                Decimal("0.9"),
+            ),
+            _rule(
+                "rule://causal/wet_slippery",
+                "wet",
+                "the path is slippery",
+                Decimal("0.85"),
+            ),
+            _rule(
+                "rule://causal/slippery_fall",
+                "slippery",
+                "warn about slipping",
+                Decimal("0.8"),
+            ),
+        ),
+        percept_input="what does the forecast mean",
+        expected_beliefs=(
+            "the ground is wet",
+            "the path is slippery",
+            "warn about slipping",
+        ),
+        expected_action_text="Interpretation based on belief 'what does the forecast mean'",
+        min_confidence=Decimal("0.9"),
+        max_confidence=Decimal("1.0"),
+        expected_intent=Intent.MAINTAIN_CONVERSATION,
+        failure_mode=FailureMode.MULTI_HOP,
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(SymbolicId.of("belief://c_rain"),),
+            fired_rule_ids=(
+                SymbolicId.of("rule://causal/rain_wet"),
+                SymbolicId.of("rule://causal/slippery_fall"),
+                SymbolicId.of("rule://causal/wet_slippery"),
+            ),
+            generated_hypothesis_ids=(
+                SymbolicId.of("hypothesis://cand/3"),
+                SymbolicId.of("hypothesis://cand/1"),
+                SymbolicId.of("hypothesis://cand/2"),
+            ),
+            resolved_conflict_ids=(
+                SymbolicId.of("conflict://hyp/cand/3_cand/1"),
+                SymbolicId.of("conflict://hyp/cand/3_cand/2"),
+            ),
+            thought_dag_node_count=3,
+        ),
+        baseline={
+            "accepted_hypothesis_id": "hypothesis://cand/3",
+            "action_text": "Interpretation based on belief 'what does the forecast mean'",
+            "activated_concepts": [],
+            "captured_at": "v0.4.1 (ADR-0028 Phase 2, pre-provider)",
+            "confidence": "1.0000",
+            "dag_node_count": 3,
+            "decision_id": "decision://select/cand/3",
+            "decision_type": "response",
+            "derived_beliefs": [
+                "belief://inf/causal/rain_wet/1",
+                "belief://inf/causal/slippery_fall/3",
+                "belief://inf/causal/wet_slippery/2",
+                "belief://percept/a40bbddb",
+            ],
+            "fingerprint": {
+                "activated_concept_ids": [],
+                "decision_id": "decision://select/cand/3",
+                "derived_belief_ids": [
+                    "belief://inf/causal/rain_wet/1",
+                    "belief://inf/causal/slippery_fall/3",
+                    "belief://inf/causal/wet_slippery/2",
+                    "belief://percept/a40bbddb",
+                ],
+                "fired_rule_ids": [
+                    "rule://causal/rain_wet",
+                    "rule://causal/slippery_fall",
+                    "rule://causal/wet_slippery",
+                ],
+                "generated_hypothesis_ids": [
+                    "hypothesis://cand/3",
+                    "hypothesis://cand/1",
+                    "hypothesis://cand/2",
+                ],
+                "resolved_conflict_ids": [
+                    "conflict://hyp/cand/3_cand/1",
+                    "conflict://hyp/cand/3_cand/2",
+                ],
+                "response_text": "Interpretation based on belief 'what does the forecast mean'",
+                "retrieved_memory_ids": ["belief://c_rain"],
+                "thought_dag_node_count": 3,
+            },
+            "fired_rules": [
+                "rule://causal/rain_wet",
+                "rule://causal/slippery_fall",
+                "rule://causal/wet_slippery",
+            ],
+            "generated_hypotheses": [
+                "hypothesis://cand/3",
+                "hypothesis://cand/1",
+                "hypothesis://cand/2",
+            ],
+            "intent": "maintain_conversation",
+            "referenced_goal": "goal://maintainconversation",
+            "resolved_conflicts": ["conflict://hyp/cand/3_cand/1", "conflict://hyp/cand/3_cand/2"],
+            "retrieved_memories": ["belief://c_rain"],
+            "stages": [
+                "perception",
+                "activation",
+                "revision",
+                "inference",
+                "hypothesis",
+                "conflict_resolution",
+                "decision",
+                "realization",
+                "learning",
+            ],
+            "state_checksum": "a4d682c56b038b251daa5a6574b344f67d5335623005ed3d5aca04dc18d848c4",
+        },
+    ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://causal_reasoning/010"),
+        domain="causal_reasoning",
+        name="CAUSAL-010: Sleet Distractor Rule",
+        description="Probe DISTRACTOR_EVIDENCE: a near-synonym distractor rule "
+        "(sleet -> travel cancelled) must not fire when only snow is observed; "
+        "only the correct causal rule fires.",
+        initial_beliefs=(_belief("belief://c_snow", "snow is falling"),),
+        rules=(
+            _rule(
+                "rule://causal/snow_slippery",
+                "snow",
+                "the roads are slippery",
+                Decimal("0.85"),
+            ),
+            _rule(
+                "rule://causal/sleet_cancel",
+                "sleet",
+                "travel is cancelled",
+                Decimal("0.9"),
+            ),
+        ),
+        percept_input="snow is falling",
+        expected_beliefs=("the roads are slippery",),
+        excluded_beliefs=("travel is cancelled",),
+        expected_action_text="Interpretation based on belief 'snow is falling'",
+        min_confidence=Decimal("0.9"),
+        max_confidence=Decimal("1.0"),
+        expected_intent=Intent.MAINTAIN_CONVERSATION,
+        failure_mode=FailureMode.DISTRACTOR_EVIDENCE,
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(SymbolicId.of("belief://c_snow"),),
+            fired_rule_ids=(SymbolicId.of("rule://causal/snow_slippery"),),
+            generated_hypothesis_ids=(
+                SymbolicId.of("hypothesis://cand/2"),
+                SymbolicId.of("hypothesis://cand/1"),
+            ),
+            resolved_conflict_ids=(SymbolicId.of("conflict://hyp/cand/2_cand/1"),),
+            thought_dag_node_count=1,
+        ),
+        baseline={
+            "accepted_hypothesis_id": "hypothesis://cand/2",
+            "action_text": "Interpretation based on belief 'snow is falling'",
+            "activated_concepts": [],
+            "captured_at": "v0.4.1 (ADR-0028 Phase 2, pre-provider)",
+            "confidence": "1.0000",
+            "dag_node_count": 1,
+            "decision_id": "decision://select/cand/2",
+            "decision_type": "response",
+            "derived_beliefs": ["belief://inf/causal/snow_slippery/1", "belief://percept/34d58b81"],
+            "fingerprint": {
+                "activated_concept_ids": [],
+                "decision_id": "decision://select/cand/2",
+                "derived_belief_ids": [
+                    "belief://inf/causal/snow_slippery/1",
+                    "belief://percept/34d58b81",
+                ],
+                "fired_rule_ids": ["rule://causal/snow_slippery"],
+                "generated_hypothesis_ids": ["hypothesis://cand/2", "hypothesis://cand/1"],
+                "resolved_conflict_ids": ["conflict://hyp/cand/2_cand/1"],
+                "response_text": "Interpretation based on belief 'snow is falling'",
+                "retrieved_memory_ids": ["belief://c_snow"],
+                "thought_dag_node_count": 1,
+            },
+            "fired_rules": ["rule://causal/snow_slippery"],
+            "generated_hypotheses": ["hypothesis://cand/2", "hypothesis://cand/1"],
+            "intent": "maintain_conversation",
+            "referenced_goal": "goal://maintainconversation",
+            "resolved_conflicts": ["conflict://hyp/cand/2_cand/1"],
+            "retrieved_memories": ["belief://c_snow"],
+            "stages": [
+                "perception",
+                "activation",
+                "revision",
+                "inference",
+                "hypothesis",
+                "conflict_resolution",
+                "decision",
+                "realization",
+                "learning",
+            ],
+            "state_checksum": "daec4053b1236364be99012a6306f8da3a46dcc6e977633a97345b5afb42447d",
+        },
     ),
 )

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from decimal import Decimal
+from enum import StrEnum
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -15,6 +16,7 @@ from pydantic import BaseModel, Field
 from theo_core.symbolic._primitives.identifiers import SymbolicId
 from theo_core.symbolic.beliefs.models import Belief, BeliefEdge  # noqa: TC001
 from theo_core.symbolic.concepts.models import Concept, ConceptEdge  # noqa: TC001
+from theo_core.symbolic.decisions.models import Intent  # noqa: TC001
 from theo_core.symbolic.inference.models import InferenceRule  # noqa: TC001
 
 
@@ -52,8 +54,30 @@ class GoldenTrace(BaseModel, frozen=True):
     response_text: str = ""
 
 
+class FailureMode(StrEnum):
+    """Declared weakness a case is designed to probe (architecture-neutral).
+
+    Phase 2: every new case declares exactly one failure mode. The mode names
+    the measured limitation (e.g. confidence compression, lexical distractors)
+    without prescribing how any provider should address it. The declared mode
+    is corpus metadata, never a provider contract.
+    """
+
+    MULTI_HOP = "multi_hop"
+    SPARSE_KNOWLEDGE = "sparse_knowledge"
+    DISTRACTOR_EVIDENCE = "distractor_evidence"
+    SYNONYM_AMBIGUITY = "synonym_ambiguity"
+    FALSE_ASSOCIATION = "false_association"
+    CALIBRATION = "calibration"
+
+
 class BenchmarkCase(BaseModel, frozen=True):
-    """Formal structured benchmark case definition."""
+    """Formal structured benchmark case definition.
+
+    Fields added in Phase 2 (all additive with defaults, so no pre-v0.5 case
+    is affected): ``expected_intent``, ``failure_mode``, ``initial_goals``, and
+    ``baseline`` (the frozen v0.4.1 measurement captured at case creation).
+    """
 
     id: BenchmarkId
     domain: str  # e.g., "commonsense", "causal_reasoning", "contradiction", "taxonomy"
@@ -72,6 +96,24 @@ class BenchmarkCase(BaseModel, frozen=True):
     expected_action_text: str
     min_confidence: Decimal = Field(default=Decimal("0.5"), ge=Decimal("0.0"), le=Decimal("1.0"))
     max_confidence: Decimal = Field(default=Decimal("1.0"), ge=Decimal("0.0"), le=Decimal("1.0"))
+    expected_intent: Intent | None = None
+    failure_mode: FailureMode | None = None
+    initial_goals: tuple[str, ...] = Field(
+        default_factory=tuple,
+        description=(
+            "Goal descriptions seeded into the GoalManager before the cycle; "
+            "the deterministic goal slug drives the decision intent "
+            "(Canon Invariant 7 / audit F5)."
+        ),
+    )
+    baseline: dict[str, Any] = Field(
+        default_factory=dict,
+        description=(
+            "Frozen v0.4.1 baseline measurement captured when the case was "
+            "created, before any provider was evaluated. Diagnostic metadata "
+            "only; the harness never asserts on it."
+        ),
+    )
     golden_trace: GoldenTrace | None = None
     metadata: dict[str, Any] = Field(default_factory=dict)
 

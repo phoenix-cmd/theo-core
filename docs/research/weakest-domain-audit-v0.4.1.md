@@ -136,3 +136,32 @@ The audit identifies the following hypotheses for future investigation:
 Audit run under the frozen baseline (tag `v0.4.1`). Per-case JSON is available
 in the session temp output (`audit_report.json`); the harness itself is the
 committed `theo benchmark run` path (`BenchmarkHarness.run_all`).
+
+## Addendum — ADR-0028 Phase 2 corpus expansion (51 cases)
+
+The 16 appended cases target the gaps above while preserving the frozen
+baseline (all 35 original cases untouched):
+
+- **Intent diversity (F5):** commonsense/006 (ProvideRecommendation),
+  commonsense/007 (RememberFact), taxonomy/006 (AnswerQuestion) seed goals and
+  assert `decision.intent`; the remaining 13 default to
+  `MAINTAIN_CONVERSATION`. The decision engine's goal-slug → intent mapping is
+  covered by an integrity test (`test_expected_intent_matches_seeded_goal`).
+- **Confidence compression (F2):** uncertainty/006–008 use fired-rule
+  multipliers (0.9 / 0.4 / 0.2) to spread decision confidence
+  (0.95 / 0.70 / 0.60 ≈ (1 + multiplier)/2) and ambiguity/006, contradiction/008
+  declare known confidence *orderings*. All cases pin confidence bands so
+  calibration can be scored without a single golden value.
+- **Inference × uncertainty co-variance:** causal_reasoning/009 is a 3-rule
+  chain (DAG 3) and taxonomy/006–008 fire 2–3 rules with DAG 2–3, so DAG depth
+  now co-varies with confidence-sensitive cases.
+- **Sparse knowledge (no case has provably wrong output):** uncertainty/007 and
+  taxonomy/009 keep the pipeline unable to answer (single percept hypothesis)
+  while a rule still fires (007) or knowledge is absent (009).
+- **Declared failure modes:** each new case declares exactly one `FailureMode`
+  and carries a frozen v0.4.1 `baseline` snapshot; a corpus test requires every
+  `FailureMode` value to be exercised and frozen baselines to match fresh runs.
+- **Measured anomalies recorded for Phase 5 `GapAnalyzer`:** substring-premise
+  self-chaining (a conclusion may re-match a rule premise, collapsing candidate
+  counts — e.g. causal_reasoning/009 has 3 hypotheses for 3 fired rules), and
+  percept-undominated candidates under sparse knowledge (uncertainty/007).

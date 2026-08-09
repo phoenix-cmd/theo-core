@@ -8,9 +8,15 @@ from __future__ import annotations
 
 from decimal import Decimal
 
-from theo_core.evaluation.benchmark_schema import BenchmarkCase, BenchmarkId, GoldenTrace
+from theo_core.evaluation.benchmark_schema import (
+    BenchmarkCase,
+    BenchmarkId,
+    FailureMode,
+    GoldenTrace,
+)
 from theo_core.symbolic._primitives.identifiers import SymbolicId
 from theo_core.symbolic.beliefs.models import Belief, BeliefEdge, BeliefId, BeliefRelation
+from theo_core.symbolic.decisions.models import Intent
 
 
 def _belief(uri: str, proposition: str, confidence: Decimal) -> Belief:
@@ -185,9 +191,7 @@ CASES: tuple[BenchmarkCase, ...] = (
             _belief("belief://b_signal_strong", "the signal is strong", Decimal("0.4")),
             _belief("belief://b_signal_weak", "the signal is weak", Decimal("0.3")),
         ),
-        initial_belief_edges=(
-            _contradicts("belief://b_signal_strong", "belief://b_signal_weak"),
-        ),
+        initial_belief_edges=(_contradicts("belief://b_signal_strong", "belief://b_signal_weak"),),
         percept_input="check the signal",
         expected_beliefs=("the signal is strong",),
         excluded_beliefs=("the signal is weak",),
@@ -201,5 +205,173 @@ CASES: tuple[BenchmarkCase, ...] = (
             ),
             thought_dag_node_count=0,
         ),
+    ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://contradiction/008"),
+        domain="contradiction",
+        name="CONT-008: Graded Market Conflict",
+        description="Probe CALIBRATION: a wide confidence gap (rising 0.9 vs "
+        "falling 0.3) is resolved to the stronger reading; the case records the "
+        "declared correct ordering and residual confidence.",
+        initial_beliefs=(
+            _belief("belief://b_market_falling", "the market is falling", Decimal("0.3")),
+            _belief("belief://b_market_rising", "the market is rising", Decimal("0.9")),
+        ),
+        initial_belief_edges=(
+            _contradicts("belief://b_market_rising", "belief://b_market_falling"),
+        ),
+        percept_input="check the market",
+        expected_beliefs=("the market is rising",),
+        excluded_beliefs=("the market is falling",),
+        expected_action_text="Interpretation based on belief 'check the market'",
+        min_confidence=Decimal("0.9"),
+        max_confidence=Decimal("1.0"),
+        expected_intent=Intent.MAINTAIN_CONVERSATION,
+        failure_mode=FailureMode.CALIBRATION,
+        metadata={
+            "ground_truth_ordering": {
+                "the market is rising": "0.9",
+                "the market is falling": "0.3",
+            }
+        },
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(
+                SymbolicId.of("belief://b_market_falling"),
+                SymbolicId.of("belief://b_market_rising"),
+            ),
+            generated_hypothesis_ids=(
+                SymbolicId.of("hypothesis://cand/2"),
+                SymbolicId.of("hypothesis://cand/1"),
+            ),
+            resolved_conflict_ids=(SymbolicId.of("conflict://hyp/cand/2_cand/1"),),
+            thought_dag_node_count=0,
+        ),
+        baseline={
+            "accepted_hypothesis_id": "hypothesis://cand/2",
+            "action_text": "Interpretation based on belief 'check the market'",
+            "activated_concepts": [],
+            "captured_at": "v0.4.1 (ADR-0028 Phase 2, pre-provider)",
+            "confidence": "1.0000",
+            "dag_node_count": 0,
+            "decision_id": "decision://select/cand/2",
+            "decision_type": "response",
+            "derived_beliefs": ["belief://percept/3321b075"],
+            "fingerprint": {
+                "activated_concept_ids": [],
+                "decision_id": "decision://select/cand/2",
+                "derived_belief_ids": ["belief://percept/3321b075"],
+                "fired_rule_ids": [],
+                "generated_hypothesis_ids": ["hypothesis://cand/2", "hypothesis://cand/1"],
+                "resolved_conflict_ids": ["conflict://hyp/cand/2_cand/1"],
+                "response_text": "Interpretation based on belief 'check the market'",
+                "retrieved_memory_ids": ["belief://b_market_falling", "belief://b_market_rising"],
+                "thought_dag_node_count": 0,
+            },
+            "fired_rules": [],
+            "generated_hypotheses": ["hypothesis://cand/2", "hypothesis://cand/1"],
+            "intent": "maintain_conversation",
+            "referenced_goal": "goal://maintainconversation",
+            "resolved_conflicts": ["conflict://hyp/cand/2_cand/1"],
+            "retrieved_memories": ["belief://b_market_falling", "belief://b_market_rising"],
+            "stages": [
+                "perception",
+                "activation",
+                "revision",
+                "inference",
+                "hypothesis",
+                "conflict_resolution",
+                "decision",
+                "realization",
+                "learning",
+            ],
+            "state_checksum": "3e828ab966ec98609a1a64b86e1e39500c6d21e38fa60c23ecdfa595b817c1e6",
+        },
+    ),
+    BenchmarkCase(
+        id=BenchmarkId.of("bm://contradiction/009"),
+        domain="contradiction",
+        name="CONT-009: Low-Absolute-Confidence Conflict",
+        description="Probe CALIBRATION (weakest rung): even after resolution "
+        "the winner carries only 0.45 absolute confidence, documenting residual "
+        "uncertainty the percept cannot mask.",
+        initial_beliefs=(
+            _belief("belief://b_signal_gate_low", "the gate signal is low", Decimal("0.35")),
+            _belief("belief://b_signal_gate_high", "the gate signal is high", Decimal("0.45")),
+        ),
+        initial_belief_edges=(
+            _contradicts("belief://b_signal_gate_high", "belief://b_signal_gate_low"),
+        ),
+        percept_input="read the gate signal",
+        expected_beliefs=("the gate signal is high",),
+        excluded_beliefs=("the gate signal is low",),
+        expected_action_text="Interpretation based on belief 'read the gate signal'",
+        min_confidence=Decimal("0.9"),
+        max_confidence=Decimal("1.0"),
+        expected_intent=Intent.MAINTAIN_CONVERSATION,
+        failure_mode=FailureMode.CALIBRATION,
+        metadata={
+            "ground_truth_ordering": {
+                "the gate signal is high": "0.45",
+                "the gate signal is low": "0.35",
+            },
+            "residual_uncertainty": (
+                "winner confidence 0.45 remains below the percept self-confidence"
+            ),
+        },
+        golden_trace=GoldenTrace(
+            retrieved_memory_ids=(
+                SymbolicId.of("belief://b_signal_gate_high"),
+                SymbolicId.of("belief://b_signal_gate_low"),
+            ),
+            generated_hypothesis_ids=(
+                SymbolicId.of("hypothesis://cand/2"),
+                SymbolicId.of("hypothesis://cand/1"),
+            ),
+            resolved_conflict_ids=(SymbolicId.of("conflict://hyp/cand/2_cand/1"),),
+            thought_dag_node_count=0,
+        ),
+        baseline={
+            "accepted_hypothesis_id": "hypothesis://cand/2",
+            "action_text": "Interpretation based on belief 'read the gate signal'",
+            "activated_concepts": [],
+            "captured_at": "v0.4.1 (ADR-0028 Phase 2, pre-provider)",
+            "confidence": "1.0000",
+            "dag_node_count": 0,
+            "decision_id": "decision://select/cand/2",
+            "decision_type": "response",
+            "derived_beliefs": ["belief://percept/cd3281fd"],
+            "fingerprint": {
+                "activated_concept_ids": [],
+                "decision_id": "decision://select/cand/2",
+                "derived_belief_ids": ["belief://percept/cd3281fd"],
+                "fired_rule_ids": [],
+                "generated_hypothesis_ids": ["hypothesis://cand/2", "hypothesis://cand/1"],
+                "resolved_conflict_ids": ["conflict://hyp/cand/2_cand/1"],
+                "response_text": "Interpretation based on belief 'read the gate signal'",
+                "retrieved_memory_ids": [
+                    "belief://b_signal_gate_high",
+                    "belief://b_signal_gate_low",
+                ],
+                "thought_dag_node_count": 0,
+            },
+            "fired_rules": [],
+            "generated_hypotheses": ["hypothesis://cand/2", "hypothesis://cand/1"],
+            "intent": "maintain_conversation",
+            "referenced_goal": "goal://maintainconversation",
+            "resolved_conflicts": ["conflict://hyp/cand/2_cand/1"],
+            "retrieved_memories": ["belief://b_signal_gate_high", "belief://b_signal_gate_low"],
+            "stages": [
+                "perception",
+                "activation",
+                "revision",
+                "inference",
+                "hypothesis",
+                "conflict_resolution",
+                "decision",
+                "realization",
+                "learning",
+            ],
+            "state_checksum": "cb857f4cf528e449d5b57e7df0dcde9aec626ec7dcc408199f40aafd751dbc37",
+        },
     ),
 )
