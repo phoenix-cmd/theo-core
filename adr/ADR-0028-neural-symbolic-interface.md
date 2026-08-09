@@ -140,9 +140,9 @@ def verify_grounding(
 ```
 
 A proposal whose referenced identifiers have an empty intersection with the
-union of the four sets is **REJECTED**. There is no `grounded=False` fallback.
-Unreferenced proposals are admissible; proposals that reference nonexistent
-entities are rejected.
+union of the four sets is **REJECTED** — including proposals with no references
+at all. There is no `grounded=False` fallback. A proposal MUST reference at
+least one existing entity.
 
 ### Determinism
 
