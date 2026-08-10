@@ -1,0 +1,462 @@
+{
+  "probe_version": "semantic-probe-v1",
+  "status": "frozen",
+  "date": "2026-08-10",
+  "case_count": 15,
+  "groups": {
+    "A": "semantic paraphrase",
+    "B": "multi-fact interpretation",
+    "C": "semantic contradiction",
+    "D": "taxonomic interpretation",
+    "E": "distractor resistance"
+  },
+  "e_classes": {
+    "E0": "malformed",
+    "E1": "ungrounded",
+    "E2": "exact repeat",
+    "E3": "paraphrase",
+    "E4": "taxonomy/rule echo",
+    "E5": "semantic interpretation",
+    "E6": "decision-relevant semantic interpretation"
+  },
+  "cases": [
+    {
+      "id": "sp1://a/001",
+      "group": "A",
+      "capability": "paraphrase",
+      "name": "container shattered",
+      "percept_input": "The container shattered after hitting the floor.",
+      "concepts": [
+        {"id": "concept://sp1/a1/container", "label": "container", "concept_type": "entity"},
+        {"id": "concept://sp1/a1/floor", "label": "floor", "concept_type": "entity"},
+        {"id": "concept://sp1/a1/impact", "label": "impact", "concept_type": "event"},
+        {"id": "concept://sp1/a1/break", "label": "break", "concept_type": "event"}
+      ],
+      "concept_edges": [],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "The container broke.",
+        "grounding_ids": ["concept://sp1/a1/container", "concept://sp1/a1/break"],
+        "distractor_ids": [],
+        "decision_target": "did the event happen / what happened?",
+        "decision_target_answer": "the container broke"
+      },
+      "trap_propositions": ["The container shattered."],
+      "non_derivability_note": "shattered and hitting match no concept label; runtime activates container+floor only; no rule derives break."
+    },
+    {
+      "id": "sp1://a/002",
+      "group": "A",
+      "capability": "paraphrase",
+      "name": "towel damp",
+      "percept_input": "The towel still feels damp after hanging all night.",
+      "concepts": [
+        {"id": "concept://sp1/a2/towel", "label": "towel", "concept_type": "entity"},
+        {"id": "concept://sp1/a2/damp", "label": "damp", "concept_type": "property"},
+        {"id": "concept://sp1/a2/moisture", "label": "moisture", "concept_type": "substance"},
+        {"id": "concept://sp1/a2/dry", "label": "dry", "concept_type": "property"}
+      ],
+      "concept_edges": [],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "The towel contains moisture.",
+        "grounding_ids": ["concept://sp1/a2/towel", "concept://sp1/a2/moisture"],
+        "distractor_ids": [],
+        "decision_target": "what is the state of the towel?",
+        "decision_target_answer": "the towel contains moisture"
+      },
+      "trap_propositions": ["The towel is damp."],
+      "non_derivability_note": "moisture absent from percept; damp present only as an adjective echo trap; noun-form mapping required."
+    },
+    {
+      "id": "sp1://a/003",
+      "group": "A",
+      "capability": "paraphrase",
+      "name": "offer turned down",
+      "percept_input": "She turned down the job offer.",
+      "concepts": [
+        {"id": "concept://sp1/a3/person", "label": "person", "concept_type": "entity"},
+        {"id": "concept://sp1/a3/job", "label": "job", "concept_type": "entity"},
+        {"id": "concept://sp1/a3/offer", "label": "offer", "concept_type": "entity"},
+        {"id": "concept://sp1/a3/refuse", "label": "refuse", "concept_type": "event"}
+      ],
+      "concept_edges": [],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "She refused the job offer.",
+        "grounding_ids": ["concept://sp1/a3/refuse", "concept://sp1/a3/offer", "concept://sp1/a3/job"],
+        "distractor_ids": [],
+        "decision_target": "what happened to the offer?",
+        "decision_target_answer": "the offer was refused"
+      },
+      "trap_propositions": ["She said no to the offer."],
+      "non_derivability_note": "turned down matches no label; refuse requires the idiom mapping person+job+offer."
+    },
+    {
+      "id": "sp1://b/001",
+      "group": "B",
+      "capability": "inference",
+      "name": "rain",
+      "percept_input": "Ravi picked up an umbrella before leaving. Dark clouds covered the sky. The street was already wet.",
+      "concepts": [
+        {"id": "concept://sp1/b1/umbrella", "label": "umbrella", "concept_type": "entity"},
+        {"id": "concept://sp1/b1/rain", "label": "rain", "concept_type": "weather"},
+        {"id": "concept://sp1/b1/cloud", "label": "cloud", "concept_type": "weather"},
+        {"id": "concept://sp1/b1/street", "label": "street", "concept_type": "entity"},
+        {"id": "concept://sp1/b1/wet", "label": "wet", "concept_type": "property"}
+      ],
+      "concept_edges": [],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "It is raining or has recently rained.",
+        "grounding_ids": ["concept://sp1/b1/umbrella", "concept://sp1/b1/cloud", "concept://sp1/b1/wet"],
+        "distractor_ids": [],
+        "decision_target": "what weather is present?",
+        "decision_target_answer": "rain"
+      },
+      "trap_propositions": ["The street is wet."],
+      "non_derivability_note": "rain absent from percept; no rule maps umbrella+cloud+wet to rain; combination required."
+    },
+    {
+      "id": "sp1://b/002",
+      "group": "B",
+      "capability": "inference",
+      "name": "power outage",
+      "percept_input": "The lights went out. The microwave clock was blinking. The fridge hummed to life.",
+      "concepts": [
+        {"id": "concept://sp1/b2/power", "label": "power", "concept_type": "entity"},
+        {"id": "concept://sp1/b2/electricity", "label": "electricity", "concept_type": "substance"},
+        {"id": "concept://sp1/b2/light", "label": "light", "concept_type": "entity"},
+        {"id": "concept://sp1/b2/outage", "label": "outage", "concept_type": "event"}
+      ],
+      "concept_edges": [],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "There is a power outage.",
+        "grounding_ids": ["concept://sp1/b2/power", "concept://sp1/b2/light", "concept://sp1/b2/electricity"],
+        "distractor_ids": [],
+        "decision_target": "what explains the observations?",
+        "decision_target_answer": "a power outage"
+      },
+      "trap_propositions": ["The lights went out."],
+      "non_derivability_note": "outage absent; no rule combines the three observations; explanatory inference required."
+    },
+    {
+      "id": "sp1://b/003",
+      "group": "B",
+      "capability": "inference",
+      "name": "birthday",
+      "percept_input": "A cake with candles was on the table. Balloons filled the room. Friends shouted 'Surprise!'",
+      "concepts": [
+        {"id": "concept://sp1/b3/cake", "label": "cake", "concept_type": "entity"},
+        {"id": "concept://sp1/b3/candle", "label": "candle", "concept_type": "entity"},
+        {"id": "concept://sp1/b3/birthday", "label": "birthday", "concept_type": "event"},
+        {"id": "concept://sp1/b3/party", "label": "party", "concept_type": "event"}
+      ],
+      "concept_edges": [],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "It is a birthday celebration.",
+        "grounding_ids": ["concept://sp1/b3/cake", "concept://sp1/b3/candle", "concept://sp1/b3/party"],
+        "distractor_ids": [],
+        "decision_target": "what is happening?",
+        "decision_target_answer": "a birthday celebration"
+      },
+      "trap_propositions": ["A cake with candles was on the table."],
+      "non_derivability_note": "birthday absent; no rule maps cake+candles+balloons+surprise to birthday."
+    },
+    {
+      "id": "sp1://c/001",
+      "group": "C",
+      "capability": "contradiction-inference",
+      "name": "door blocked",
+      "percept_input": "Nobody can enter through the door.",
+      "concepts": [
+        {"id": "concept://sp1/c1/door", "label": "door", "concept_type": "entity"},
+        {"id": "concept://sp1/c1/enter", "label": "enter", "concept_type": "event"},
+        {"id": "concept://sp1/c1/lock", "label": "lock", "concept_type": "entity"},
+        {"id": "concept://sp1/c1/accessible", "label": "accessible", "concept_type": "property"}
+      ],
+      "concept_edges": [],
+      "beliefs": [
+        {"id": "belief://sp1/c1/door_open", "proposition": "The door is open.", "confidence": 0.9},
+        {"id": "belief://sp1/c1/door_locked_outside", "proposition": "The door was locked from the outside.", "confidence": 0.8}
+      ],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "The door is inaccessible.",
+        "grounding_ids": ["belief://sp1/c1/door_open", "belief://sp1/c1/door_locked_outside", "concept://sp1/c1/accessible", "concept://sp1/c1/door"],
+        "distractor_ids": [],
+        "decision_target": "can someone enter?",
+        "decision_target_answer": "no / the door is inaccessible"
+      },
+      "trap_propositions": ["The door is closed."],
+      "trap_note": "The door is closed. is E5-unsupported: it contradicts the door_open belief (consistency_vs_beliefs flag).",
+      "non_derivability_note": "inaccessible absent; conflict machinery fires on neither belief alone; combination of open+locked+nobody can enter required."
+    },
+    {
+      "id": "sp1://c/002",
+      "group": "C",
+      "capability": "contradiction-inference",
+      "name": "light broken",
+      "percept_input": "Someone just left the room.",
+      "concepts": [
+        {"id": "concept://sp1/c2/light", "label": "light", "concept_type": "entity"},
+        {"id": "concept://sp1/c2/dark", "label": "dark", "concept_type": "property"},
+        {"id": "concept://sp1/c2/broken", "label": "broken", "concept_type": "property"},
+        {"id": "concept://sp1/c2/room", "label": "room", "concept_type": "entity"}
+      ],
+      "concept_edges": [],
+      "beliefs": [
+        {"id": "belief://sp1/c2/light_on", "proposition": "The room light is on.", "confidence": 0.9},
+        {"id": "belief://sp1/c2/room_dark", "proposition": "The room is dark.", "confidence": 0.7}
+      ],
+      "belief_edges": [{"source": "belief://sp1/c2/light_on", "target": "belief://sp1/c2/room_dark", "relation": "contradicts"}],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "The light is broken.",
+        "grounding_ids": ["belief://sp1/c2/light_on", "belief://sp1/c2/room_dark", "concept://sp1/c2/broken"],
+        "distractor_ids": [],
+        "decision_target": "why is the room dark?",
+        "decision_target_answer": "the light is broken"
+      },
+      "trap_propositions": ["The room is dark because someone left."],
+      "trap_note": "citing the percept as the cause is E3; the percept is a distractor, not the cause.",
+      "non_derivability_note": "broken absent; percept is a distractor; the light_on/room_dark contradiction is the semantic trigger."
+    },
+    {
+      "id": "sp1://c/003",
+      "group": "C",
+      "capability": "contradiction-inference",
+      "name": "fish in danger",
+      "percept_input": "The tank has no water.",
+      "concepts": [
+        {"id": "concept://sp1/c3/fish", "label": "fish", "concept_type": "entity"},
+        {"id": "concept://sp1/c3/water", "label": "water", "concept_type": "substance"},
+        {"id": "concept://sp1/c3/danger", "label": "danger", "concept_type": "state"},
+        {"id": "concept://sp1/c3/tank", "label": "tank", "concept_type": "entity"}
+      ],
+      "concept_edges": [],
+      "beliefs": [
+        {"id": "belief://sp1/c3/fish_alive", "proposition": "The fish is alive.", "confidence": 0.9},
+        {"id": "belief://sp1/c3/water_gone", "proposition": "The water in the tank is gone.", "confidence": 0.8}
+      ],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "The fish is in danger.",
+        "grounding_ids": ["belief://sp1/c3/fish_alive", "belief://sp1/c3/water_gone", "concept://sp1/c3/danger", "concept://sp1/c3/fish"],
+        "distractor_ids": [],
+        "decision_target": "what is the state of the fish?",
+        "decision_target_answer": "in danger"
+      },
+      "trap_propositions": ["The water is gone."],
+      "trap_note": "The water is gone. is E3: it copies the water_gone belief.",
+      "non_derivability_note": "danger absent; combining alive+no-water requires interpretation beyond any single belief."
+    },
+    {
+      "id": "sp1://d/001",
+      "group": "D",
+      "capability": "taxonomy-interpretation",
+      "name": "mammal",
+      "percept_input": "The animal has fur, nurses its young, and has three toes.",
+      "concepts": [
+        {"id": "concept://sp1/d1/animal", "label": "animal", "concept_type": "entity"},
+        {"id": "concept://sp1/d1/mammal", "label": "mammal", "concept_type": "entity"},
+        {"id": "concept://sp1/d1/bird", "label": "bird", "concept_type": "entity"},
+        {"id": "concept://sp1/d1/reptile", "label": "reptile", "concept_type": "entity"}
+      ],
+      "concept_edges": [
+        {"source": "concept://sp1/d1/mammal", "target": "concept://sp1/d1/animal", "relation": "is_a"},
+        {"source": "concept://sp1/d1/bird", "target": "concept://sp1/d1/animal", "relation": "is_a"},
+        {"source": "concept://sp1/d1/reptile", "target": "concept://sp1/d1/animal", "relation": "is_a"}
+      ],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "The animal is likely a mammal.",
+        "grounding_ids": ["concept://sp1/d1/animal", "concept://sp1/d1/mammal"],
+        "distractor_ids": [],
+        "decision_target": "what kind of animal is it?",
+        "decision_target_answer": "a mammal"
+      },
+      "trap_propositions": ["A mammal is an animal."],
+      "trap_note": "A mammal is an animal. is E4: echoes the supplied is_a edge.",
+      "non_derivability_note": "mammal absent; no feature->mammal edges; is_a edges only link to animal; feature-based classification required."
+    },
+    {
+      "id": "sp1://d/002",
+      "group": "D",
+      "capability": "taxonomy-interpretation",
+      "name": "bicycle",
+      "percept_input": "The vehicle has two wheels, pedals, a chain, and a bell.",
+      "concepts": [
+        {"id": "concept://sp1/d2/vehicle", "label": "vehicle", "concept_type": "entity"},
+        {"id": "concept://sp1/d2/bicycle", "label": "bicycle", "concept_type": "entity"},
+        {"id": "concept://sp1/d2/car", "label": "car", "concept_type": "entity"},
+        {"id": "concept://sp1/d2/motorcycle", "label": "motorcycle", "concept_type": "entity"}
+      ],
+      "concept_edges": [
+        {"source": "concept://sp1/d2/bicycle", "target": "concept://sp1/d2/vehicle", "relation": "is_a"},
+        {"source": "concept://sp1/d2/car", "target": "concept://sp1/d2/vehicle", "relation": "is_a"},
+        {"source": "concept://sp1/d2/motorcycle", "target": "concept://sp1/d2/vehicle", "relation": "is_a"}
+      ],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "The vehicle is likely a bicycle.",
+        "grounding_ids": ["concept://sp1/d2/vehicle", "concept://sp1/d2/bicycle"],
+        "distractor_ids": [],
+        "decision_target": "what kind of vehicle is it?",
+        "decision_target_answer": "a bicycle"
+      },
+      "trap_propositions": [],
+      "non_derivability_note": "bicycle absent; no feature->bicycle edges; is_a edges only link to vehicle."
+    },
+    {
+      "id": "sp1://d/003",
+      "group": "D",
+      "capability": "taxonomy-interpretation",
+      "name": "bird",
+      "percept_input": "The creature has feathers, lays eggs, and builds nests in trees.",
+      "concepts": [
+        {"id": "concept://sp1/d3/animal", "label": "animal", "concept_type": "entity"},
+        {"id": "concept://sp1/d3/bird", "label": "bird", "concept_type": "entity"},
+        {"id": "concept://sp1/d3/mammal", "label": "mammal", "concept_type": "entity"},
+        {"id": "concept://sp1/d3/reptile", "label": "reptile", "concept_type": "entity"}
+      ],
+      "concept_edges": [
+        {"source": "concept://sp1/d3/bird", "target": "concept://sp1/d3/animal", "relation": "is_a"},
+        {"source": "concept://sp1/d3/mammal", "target": "concept://sp1/d3/animal", "relation": "is_a"},
+        {"source": "concept://sp1/d3/reptile", "target": "concept://sp1/d3/animal", "relation": "is_a"}
+      ],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "The creature is likely a bird.",
+        "grounding_ids": ["concept://sp1/d3/animal", "concept://sp1/d3/bird"],
+        "distractor_ids": [],
+        "decision_target": "what kind of creature is it?",
+        "decision_target_answer": "a bird"
+      },
+      "trap_propositions": [],
+      "non_derivability_note": "bird absent; no feature->bird edges; is_a edges only link to animal."
+    },
+    {
+      "id": "sp1://e/001",
+      "group": "E",
+      "capability": "evidence-selection",
+      "name": "recent rain",
+      "percept_input": "The sky is blue. A red car is parked outside. The dog is sleeping in the sun. The road is wet. Pedestrians carry umbrellas.",
+      "concepts": [
+        {"id": "concept://sp1/e1/weather", "label": "weather", "concept_type": "entity"},
+        {"id": "concept://sp1/e1/rain", "label": "rain", "concept_type": "weather"},
+        {"id": "concept://sp1/e1/wet", "label": "wet", "concept_type": "property"},
+        {"id": "concept://sp1/e1/umbrella", "label": "umbrella", "concept_type": "entity"},
+        {"id": "concept://sp1/e1/sky", "label": "sky", "concept_type": "entity"},
+        {"id": "concept://sp1/e1/car", "label": "car", "concept_type": "entity"},
+        {"id": "concept://sp1/e1/dog", "label": "dog", "concept_type": "entity"}
+      ],
+      "concept_edges": [],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "Recent rainfall is likely.",
+        "grounding_ids": ["concept://sp1/e1/wet", "concept://sp1/e1/umbrella"],
+        "distractor_ids": ["concept://sp1/e1/sky", "concept://sp1/e1/car", "concept://sp1/e1/dog"],
+        "decision_target": "what weather is present?",
+        "decision_target_answer": "rain"
+      },
+      "trap_propositions": ["The sky is blue.", "A red car is parked outside.", "The dog is sleeping."],
+      "non_derivability_note": "rain absent; blue sky, car, dog are salient but irrelevant; only wet+umbrella support rain."
+    },
+    {
+      "id": "sp1://e/002",
+      "group": "E",
+      "capability": "evidence-selection",
+      "name": "cat in home",
+      "percept_input": "The house has three bedrooms. The kitchen has a food bowl and a litter box. The windows are large.",
+      "concepts": [
+        {"id": "concept://sp1/e2/home", "label": "home", "concept_type": "entity"},
+        {"id": "concept://sp1/e2/cat", "label": "cat", "concept_type": "entity"},
+        {"id": "concept://sp1/e2/pet", "label": "pet", "concept_type": "entity"},
+        {"id": "concept://sp1/e2/food", "label": "food", "concept_type": "entity"},
+        {"id": "concept://sp1/e2/bedroom", "label": "bedroom", "concept_type": "entity"},
+        {"id": "concept://sp1/e2/window", "label": "window", "concept_type": "entity"}
+      ],
+      "concept_edges": [],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "A cat is likely kept in the home.",
+        "grounding_ids": ["concept://sp1/e2/cat", "concept://sp1/e2/food", "concept://sp1/e2/home"],
+        "distractor_ids": ["concept://sp1/e2/bedroom", "concept://sp1/e2/window"],
+        "decision_target": "what animal is kept in the home?",
+        "decision_target_answer": "a cat"
+      },
+      "trap_propositions": ["The house has three bedrooms.", "The windows are large."],
+      "non_derivability_note": "cat absent; litter box has no concept; food bowl+litter box must map to cat; bedrooms/windows irrelevant."
+    },
+    {
+      "id": "sp1://e/003",
+      "group": "E",
+      "capability": "evidence-selection",
+      "name": "soccer",
+      "percept_input": "The building has blue walls. A group of people wear shin guards. A round black-and-white ball sits in a net. The carpet is grey.",
+      "concepts": [
+        {"id": "concept://sp1/e3/sport", "label": "sport", "concept_type": "entity"},
+        {"id": "concept://sp1/e3/soccer", "label": "soccer", "concept_type": "sport"},
+        {"id": "concept://sp1/e3/ball", "label": "ball", "concept_type": "entity"},
+        {"id": "concept://sp1/e3/goal", "label": "goal", "concept_type": "entity"},
+        {"id": "concept://sp1/e3/building", "label": "building", "concept_type": "entity"},
+        {"id": "concept://sp1/e3/carpet", "label": "carpet", "concept_type": "entity"}
+      ],
+      "concept_edges": [],
+      "beliefs": [],
+      "belief_edges": [],
+      "rules": [],
+      "initial_goals": [],
+      "ground_truth": {
+        "candidate": "They are likely playing soccer.",
+        "grounding_ids": ["concept://sp1/e3/soccer", "concept://sp1/e3/ball", "concept://sp1/e3/goal"],
+        "distractor_ids": ["concept://sp1/e3/building", "concept://sp1/e3/carpet"],
+        "decision_target": "what activity is happening?",
+        "decision_target_answer": "soccer"
+      },
+      "trap_propositions": ["The building has blue walls.", "The carpet is grey."],
+      "non_derivability_note": "soccer absent; shin guards+ball+net must map to soccer; building/carpet irrelevant."
+    }
+  ]
+}
