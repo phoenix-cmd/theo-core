@@ -1,0 +1,30 @@
+{
+  "phase": "Phase 6D.11 — Risk Register",
+  "release_candidate_id": "theo-slm-v0-rc1",
+  "audit_date": "2026-08-11",
+  "method": "Risk assessment over the material evidence gathered in 6D.1-6D.10. Severity rated against the real, verified state of this machine (no release artifacts) rather than against the prior 6C claims.",
+  "risks": [
+    {"id": "RISK-G1", "category": "Artifact integrity", "description": "Release artifacts (base model, adapter, tokenizer, checkpoint, runtime integration, feature flag, telemetry store) do not exist", "likelihood": "CONFIRMED", "severity": "CRITICAL", "status": "OPEN", "evidence": "Zero model files workspace-wide; zero SLM config/src references; no Qwen2.5 cache; invalid hash literals; missing modules in 6C.7R1 audit script", "mitigation_notes": "Cannot be mitigated by code; requires either obtaining/creating the artifacts or explicitly declaring rc1 non-existent"},
+    {"id": "RISK-G2", "category": "False pass claims", "description": "6C.9/6C.10 report GO, PROMOTED, 100% deployed on simulated output", "likelihood": "CONFIRMED", "severity": "CRITICAL", "status": "OPEN", "evidence": "Gates G01-G17 are literal passed=True; 5,000/10,000 telemetry is hardcoded", "mitigation_notes": "All PROMOTE/DEPLOY statements must be retracted or re-issued after real artifacts exist"},
+    {"id": "RISK-G3", "category": "Training cancellation contradicted", "description": "model-selection doc says training STOPPED with zero LoRA downloads, but 6C.3-6C.10 assert a trained adapter", "likelihood": "CONFIRMED", "severity": "HIGH", "status": "OPEN", "evidence": "theo-slm-model-selection-v0.md vs run_phase_6c3/6c4/6c9/6c10", "mitigation_notes": "Resolve the contradiction explicitly in the phase record before any deployment"},
+    {"id": "RISK-G4", "category": "Metric contradiction", "description": "Claimed post-training E0=1.2% contradicts the only real measured baseline E0=53.3% (Qwen3-0.6B)", "likelihood": "CONFIRMED", "severity": "HIGH", "status": "OPEN", "evidence": "run_phase_6c4_final_evaluation.py literal vs semantic_probe_results.json", "mitigation_notes": "No post-training evaluation was performed; the claimed numbers are illustrative"},
+    {"id": "RISK-G5", "category": "Security & privacy", "description": "Training concepts (GOLD_POSITIVE, GOLD_ABSTAIN, HARD_NEGATIVE, reviewer metadata) must never reach production telemetry", "likelihood": "NOT_VERIFIABLE", "severity": "HIGH", "status": "OPEN", "evidence": "No production telemetry path exists to audit; the telemetry-decoupling audit script targets nonexistent modules", "mitigation_notes": "Telemetry architecture must be re-specified and re-implemented before deployment"},
+    {"id": "RISK-G6", "category": "Fail-open / grounding bypass", "description": "Unverified grounding guarantees (100% grounding) on an unexecuted pipeline", "likelihood": "NOT_VERIFIABLE", "severity": "HIGH", "status": "OPEN", "evidence": "Grounding validator only exists as a claimed constant; no real runtime exercised it", "mitigation_notes": "Real fail-closed testing required after a runtime exists; reference parser (parser.py) is the only real boundary today"},
+    {"id": "RISK-G7", "category": "Reproducibility", "description": "7/11 reproducibility claims not verifiable; core model artifacts unreproducible", "likelihood": "CONFIRMED", "severity": "HIGH", "status": "OPEN", "evidence": "phase-6d-reproducibility-results.json", "mitigation_notes": "No reproducible pipeline until real artifacts exist"},
+    {"id": "RISK-G8", "category": "Runtime/stability", "description": "Soak, rollback, isolation, and capacity claims unsupported by measurements", "likelihood": "CONFIRMED", "severity": "MEDIUM", "status": "OPEN", "evidence": "phase-6d-runtime-stability-results.json; 2,500-request soak and 0ms rollback are literals", "mitigation_notes": "Re-run all runtime stages against a real serving stack"},
+    {"id": "RISK-G9", "category": "GPU capacity", "description": "GTX 1650 4GB is near the floor for CUDA fp16 inference; only Qwen3-0.6B is validated on it", "likelihood": "LIKELY", "severity": "MEDIUM", "status": "OPEN", "evidence": "model-info.json; no release model loaded on this GPU", "mitigation_notes": "Validate the actual release model's memory envelope before any canary"},
+    {"id": "RISK-G10", "category": "Long-running concept leakage", "description": "No demonstrated guarantee that training concepts never appear in long-running output", "likelihood": "NOT_VERIFIABLE", "severity": "LOW", "status": "OPEN", "evidence": "No long-running output artifact exists", "mitigation_notes": "Requires real runtime output corpus"}
+  ],
+  "summary": {
+    "total_risks": 10,
+    "confirmed": 7,
+    "likely": 1,
+    "not_verifiable": 2,
+    "critical": 2,
+    "high": 5,
+    "medium": 2,
+    "low": 1,
+    "top_risk": "RISK-G1 / RISK-G2 — the release candidate does not exist and prior PASS/GO/PROMOTE claims are unsupported"
+  },
+  "generated_by": "Phase 6D audit, audit-only."
+}

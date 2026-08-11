@@ -1,0 +1,27 @@
+{
+  "phase": "Phase 6D.5 / 6D.10 — Runtime, Infrastructure & Request Isolation / Long-Running Stability",
+  "release_candidate_id": "theo-slm-v0-rc1",
+  "audit_date": "2026-08-11",
+  "method": "Static audit of serving, isolation, and stability artifacts. No rc1 inference service, worker, request router, telemetry store, or long-running harness exists on this machine, so runtime-stability stages are NOT_VERIFIABLE for the release candidate. The only real inference path (theo-providers qwen3 provider, CUDA fp16 on GTX 1650 4GB) is a single-process, stateless-per-call stack with temperature 0.0 and seed 0.",
+  "findings": [
+    {"id": "RUNTIME-01", "category": "Inference service existence", "expected": "A deployable inference endpoint/worker exists", "rc1_status": "NOT_VERIFIABLE", "evidence": "No server/worker/endpoint artifact for rc1 anywhere in the repo; 6C.10 '5,000/10,000-request canary' is a hardcoded literal in run_phase_6c10_production_promotion.py"},
+    {"id": "RUNTIME-02", "category": "Request isolation", "expected": "No shared mutable state between concurrent requests; results independent", "rc1_status": "NOT_VERIFIABLE", "evidence": "No concurrency model exists for rc1; no isolation test artifact"},
+    {"id": "RUNTIME-03", "category": "Hardware/capacity fit", "expected": "GPU capacity demonstrated under load", "rc1_status": "PARTIAL", "evidence": "Real Qwen3-0.6B CUDA fp16 stack is documented (model-info.json: GTX 1650 4GB, torch 2.13.0+cu126); but no load test on the release candidate (no release model at all)"},
+    {"id": "RUNTIME-04", "category": "Determinism seed config", "expected": "temperature=0.0, seed=0 enforced at generation", "rc1_status": "NOT_VERIFIABLE", "evidence": "No rc1 generation config artifact", "reference_status": "VERIFIED", "reference_evidence": "theo-providers/model-info.json records temperature 0.0, seed 0 for the real reference stack"},
+    {"id": "RUNTIME-05", "category": "Long-running stability (soak)", "expected": "Stable over an extended window with bounded memory/latency", "rc1_status": "NOT_VERIFIABLE", "evidence": "6C.10 claims 2,500 stable requests in a soak window; no log, trace, or metric exists — only the hardcoded literal in the script"},
+    {"id": "RUNTIME-06", "category": "Error/exception containment", "expected": "Transient failures do not corrupt subsequent requests", "rc1_status": "NOT_VERIFIABLE", "evidence": "No rc1 runtime"},
+    {"id": "RUNTIME-07", "category": "Graceful shutdown / restart", "expected": "Defined restart behavior, no state corruption", "rc1_status": "NOT_VERIFIABLE", "evidence": "No rc1 runtime"},
+    {"id": "RUNTIME-08", "category": "Rollback capability", "expected": "Drill demonstrated with measured recovery", "rc1_status": "NOT_VERIFIABLE", "evidence": "6C.7 claims '0ms rollback' from a hardcoded literal in run_phase_6c7_production_canary.py:125 (simulated rollback drill); no deployment mechanism exists"},
+    {"id": "RUNTIME-09", "category": "Observability/telemetry emission", "expected": "Real request counts, latencies, error rates emitted by the running system", "rc1_status": "NOT_VERIFIABLE", "evidence": "No telemetry emitter exists; all counts are literals in run_phase_6c10_production_promotion.py"},
+    {"id": "RUNTIME-10", "category": "Resource bounds (GPU memory)", "expected": "Memory footprint bounded and measured", "rc1_status": "NOT_VERIFIABLE", "evidence": "No rc1 model to measure; 6C.9 RISK_03 memory-usage claim has no measurement"},
+    {"id": "RUNTIME-11", "category": "Long-running determinism drift", "expected": "Same input yields same output across repeated calls (no hidden state)", "rc1_status": "NOT_VERIFIABLE", "evidence": "No repeated-call artifact; real reference stack is stateless per call (only the Qwen3-0.6B model) and temperature/seed are pinned"}
+  ],
+  "summary": {
+    "total_findings": 11,
+    "rc1_verifiable": 0,
+    "rc1_not_verifiable": 10,
+    "rc1_partial": 1,
+    "long_running_stability": "NOT_VERIFIABLE — the 2,500-request soak and 0ms rollback are simulated literals, not measurements"
+  },
+  "generated_by": "Phase 6D audit, audit-only."
+}

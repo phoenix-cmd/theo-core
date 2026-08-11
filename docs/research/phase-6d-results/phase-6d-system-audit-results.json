@@ -1,0 +1,171 @@
+{
+  "phase": "Phase 6D.1 — Full-System Artifact & Production-State Audit",
+  "release_candidate_id": "theo-slm-v0-rc1",
+  "release_version": "v0.1.0-rc1",
+  "declared_base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "declared_adapter": "LoRA Experiment B (r=16, alpha=32, target_modules=[q,k,v,o,gate,up,down])",
+  "authoritative_corpus": "ds-v0.3-deduplicated",
+  "authoritative_corpus_sha256": "a7b4e84509b1c0dc03b81425125f061cedafe288cb18f153e8399b19cf717eb0",
+  "audit_date": "2026-08-11",
+  "evidence_standards": {
+    "VERIFIED": "Artifact exists on disk and its claimed property was independently confirmed by the auditor (hash recomputed, file opened, code executed).",
+    "NOT_VERIFIABLE": "Artifact does not exist anywhere on this machine, or the claimed evidence cannot be located, so the claimed property cannot be independently confirmed.",
+    "FABRICATED_INDICATOR": "Claimed artifact/hash/metric appears only as a hardcoded literal inside a phase script or report and cannot correspond to any real file or measurement."
+  },
+  "artifact_audit": [
+    {
+      "artifact": "Base model weights (Qwen/Qwen2.5-0.5B-Instruct)",
+      "claimed_sha256": "8f3b2a19e0c5d412e8b74f09a2153c89b7e41205a9c8b7412e8b74f09a2153c8",
+      "found_on_disk": false,
+      "status": "NOT_VERIFIABLE",
+      "evidence": "No Qwen2.5-0.5B files exist under C:\\Users\\bs162\\Desktop\\THEO or in the HuggingFace cache (C:\\Users\\bs162\\.cache\\huggingface\\hub contains only models--Qwen--Qwen3-0.6B). The claimed hash appears as a hardcoded literal in run_phase_6c9/6c10 and the 6C.9/6C.10 reports; no file exists to produce it."
+    },
+    {
+      "artifact": "LoRA adapter config (adapter_config.json)",
+      "claimed_sha256": "3a9c7b12d5e8f014a9c7b12d5e8f014a9c7b12d5e8f014a9c7b12d5e8f014a9c",
+      "found_on_disk": false,
+      "status": "NOT_VERIFIABLE",
+      "evidence": "No adapter_config.json exists anywhere in the workspace. Claimed hash is a 28-hex-character pattern with an obviously repeated 7-hex block; it is not a valid SHA-256 (64 hex chars) and cannot correspond to any file."
+    },
+    {
+      "artifact": "LoRA adapter weights (adapter_model.bin / adapter_model.safetensors)",
+      "claimed_sha256": "e12f09a84b5c7d21e12f09a84b5c7d21e12f09a84b5c7d21e12f09a84b5c7d21",
+      "found_on_disk": false,
+      "status": "NOT_VERIFIABLE",
+      "evidence": "Recursive search for *.bin/*.safetensors/*.gguf/*.pt/*.pth across the workspace returned zero model-weight files. The claimed hash is the literal string 'e12f09a84b5c7d21' repeated 4 times - a fabricated-looking placeholder, not a real digest."
+    },
+    {
+      "artifact": "Tokenizer config (Qwen2.5-0.5B)",
+      "claimed_sha256": "4b8e210fa9c7b5124b8e210fa9c7b5124b8e210fa9c7b5124b8e210fa9c7b5124",
+      "found_on_disk": false,
+      "status": "NOT_VERIFIABLE",
+      "evidence": "No Qwen2.5 tokenizer files exist. Claimed hash repeats the block '4b8e210fa9c7b512' 4 times."
+    },
+    {
+      "artifact": "Experiment B training checkpoint (Qwen2.5-0.5B-Instruct-ExperimentB-Checkpoint)",
+      "found_on_disk": false,
+      "status": "NOT_VERIFIABLE",
+      "evidence": "Named only in 6C.4-6C.10 reports. No checkpoint directory, no optimizer state, no training logs, no loss curves exist."
+    },
+    {
+      "artifact": "Production feature flag ENABLE_THEO_SLM_V0",
+      "found_in_config": false,
+      "status": "NOT_VERIFIABLE",
+      "evidence": "String 'ENABLE_THEO_SLM_V0' appears in zero files under theo-core/configs and zero files under theo-core/src. It exists only as text inside the 6C.6-6C.10 simulation scripts/reports."
+    },
+    {
+      "artifact": "Inference runtime for theo-slm-v0-rc1 (SLM adapter integrated into theo_core)",
+      "found_on_disk": false,
+      "status": "NOT_VERIFIABLE",
+      "evidence": "grep across theo-core/src for GOLD_*, SHOULD_PROPOSE, SHOULD_ABSTAIN, FORMAT_REJECTION, slm, lora, adapter, peft, transformers, torch returned no SLM integration. The 6C.7-R1 script audits modules (theo-core/src/theo/telemetry/logger.py, theo-core/src/theo/providers/slm_adapter.py) whose paths do not exist."
+    },
+    {
+      "artifact": "Production canary/telemetry store (4,000-request and 10,000-request samples)",
+      "found_on_disk": false,
+      "status": "NOT_VERIFIABLE",
+      "evidence": "All counts (proposals, abstentions, E0, latency) are hardcoded literals in run_phase_6c7/6c8/6c9/6c10. No request logs, no telemetry database, no time-series data exist."
+    },
+    {
+      "artifact": "Authoritative corpus candidate_records.json (ds-v0.3-deduplicated)",
+      "found_on_disk": true,
+      "status": "VERIFIED",
+      "evidence": "SHA-256 independently recomputed by auditor = a7b4e84509b1c0dc03b81425125f061cedafe288cb18f153e8399b19cf717eb0. Matches the authoritative value. Corpus is present and unmodified.",
+      "record_count": 264
+    },
+    {
+      "artifact": "Dataset manifest (ds-v0.3-deduplicated)",
+      "found_on_disk": true,
+      "status": "VERIFIED",
+      "evidence": "dataset-manifest.json and final-freeze-manifest.json exist and are internally consistent (264 records; 244 rewritten / 20 preserved)."
+    },
+    {
+      "artifact": "Real reference SLM provider stack (Qwen/Qwen3-0.6B, pinned revision c1899de289a04d12100db370d81485cdf75e47ca)",
+      "found_on_disk": true,
+      "status": "VERIFIED",
+      "evidence": "theo-providers/src/theo_providers/qwen3/* contains a real transformers/torch implementation (model.py, parser.py, prompting.py, provider.py, hashing.py). model-info.json records model_hash a80410e02451ae27828f89ccc87eb55362a14b561fec1937b24a599c9849cca8, tokenizer_hash 92ba2f610797f9ac063d2fcd678beb23eced9256c0144ab80c593b7ece91a743, device cuda, torch_dtype fp16. The model is cached in the HuggingFace hub."
+    },
+    {
+      "artifact": "Real 6A.1 benchmark evaluation artifacts",
+      "found_on_disk": true,
+      "status": "VERIFIED",
+      "evidence": "theo-providers/eval_phase6a1_qwen.json (per-case records for 51 cases), eval_phase6a1_qwen.py, eval_phase6a1_qwen.log. These are genuine measurements on Qwen3-0.6B (reference SLM), NOT on the release candidate."
+    },
+    {
+      "artifact": "Real 6A.2 semantic probe evaluation artifacts",
+      "found_on_disk": true,
+      "status": "VERIFIED",
+      "evidence": "theo-providers/semantic_probe_results.json (per-case E0-E6 annotations, grounding validity, e_class), semantic_probe_labels.json, semantic_probe_summary.json. Real measurements on Qwen3-0.6B. Reported E0 = 8/15 (53.3%) structured-output failures."
+    }
+  ],
+  "configuration_audit": {
+    "config_files_inspected": 26,
+    "slm_references_in_configs": 0,
+    "feature_flag_present": false,
+    "model_id_in_configs": "none",
+    "telemetry_vocabulary_in_runtime_source": {
+      "GOLD_POSITIVE": 0,
+      "GOLD_ABSTAIN": 0,
+      "HARD_NEGATIVE": 0,
+      "SHOULD_PROPOSE": 0,
+      "SHOULD_ABSTAIN": 0,
+      "FORMAT_REJECTION": 0
+    },
+    "notes": "theo-core/configs/config.yaml composes theo/logging/experiment_tracking/memory/knowledge/identity/goals/scheduler/security/telemetry/evaluation/dataset/kernel defaults. None reference an SLM, a model id, a provider, or ENABLE_THEO_SLM_V0."
+  },
+  "source_code_audit": {
+    "theo_core_runtime": {
+      "exists": true,
+      "slm_integration": "NONE",
+      "real_test_suite": "362 passed (85.53% coverage, 80% required) - executed by auditor",
+      "dominant_functionality": "Symbolic cognitive architecture (memory, knowledge, goals, perception, context, cognitive cycle, symbolic beliefs/concepts/inference/decisions/hypotheses)"
+    },
+    "theo_providers": {
+      "exists": true,
+      "real_implementation": "qwen3 (Qwen3-0.6B) + heuristic + null + semantic_probe evaluator",
+      "real_test_suite": "178 passed, 3 skipped (91.21% coverage, 80% required) - executed by auditor",
+      "qwen2_5_support": "NONE"
+    },
+    "phase_6c_scripts": {
+      "exists": true,
+      "imports_torch_transformers_peft": false,
+      "characterization": "Deterministic simulation scripts. Each run_phase_6c[2-10] script recomputes only the corpus SHA-256, then writes a JSON payload of hardcoded metric/hash values. Representative evidence: run_phase_6c3_training_suite.py:280 'simulated_model_output'; run_phase_6c2_evaluation.py:210 'simulate zero-shot uncalibrated prediction'; run_phase_6c4_final_evaluation.py:141 'Evaluate simulated dev predictions for Experiment B'; run_phase_6c7_production_canary.py:125 'Rollback drill simulation'; run_phase_6c9_final_promotion_audit.py gates G01-G17 all passed=True literals; run_phase_6c10_production_promotion.py hardcodes 5,000/10,000 request telemetry."
+    }
+  },
+  "provenance_chain_audit": {
+    "declared_stages": 11,
+    "verifiable_stages": [
+      "Stage 1: ds-v0.3-deduplicated corpus freeze (VERIFIED, hash matches)",
+      "Stage 2: model selection for Qwen2.5-0.5B (report exists; base-model hash NOT verifiable - no artifact)",
+      "Stage 3: controlled training Experiment B (NOT VERIFIABLE - no training code, no weights, no logs; 6C.2 report itself states 'Zero fine-tuning, LoRA, synthetic data generation, hyperparameter tuning, or model weight downloads have occurred')"
+    ],
+    "later_stages": "Stages 4-11 (shortcut forensics, final evaluation, promotion review, pre-production validation, telemetry decoupling, wider canary, promotion decision, 100% production) are declarative: their verdicts are hardcoded in scripts, not measured."
+  },
+  "contradictions_detected": [
+    "theo-slm-model-selection-v0.md states training is STOPPED with zero LoRA and zero weight downloads, yet 6C.3-6C.10 declare the adapter TRAINED with a fabricated hash.",
+    "theo-slm-phase-6c10-production-promotion-v1.md declares '100% DEPLOYED AND STABLE IN PRODUCTION' while no runtime, flag, model, or telemetry exists.",
+    "6C.9/6C.10 claim telemetry vocabulary SHOULD_PROPOSE/SHOULD_ABSTAIN/FORMAT_REJECTION with zero GOLD_* terms; grep shows none of these terms exist in runtime source at all (the 'decoupling' is vacuous).",
+    "Claimed 're-run' of the frozen 51-case benchmark at 100% accuracy and 15-case probe at E0=1.2% contradict the only real probe measurement on this machine (E0=53.3% on Qwen3-0.6B) and are hardcoded literals, not re-runs."
+  ],
+  "real_versus_simulated_summary": {
+    "REAL": [
+      "Corpus ds-v0.3-deduplicated (264 records, SHA verified)",
+      "theo_core symbolic runtime + 362 passing tests",
+      "theo_providers qwen3 reference stack (Qwen3-0.6B) + 178 passing tests",
+      "6A.1 benchmark artifacts (51 cases) and 6A.2 semantic probe artifacts (15 cases) on Qwen3-0.6B",
+      "6A.2 measured E0 = 53.3% structured-output failure rate (the '53.3% baseline' cited in the 6C.2 report)"
+    ],
+    "SIMULATED_OR_FABRICATED": [
+      "Qwen2.5-0.5B-Instruct base model presence/hash",
+      "LoRA Experiment B adapter (r=16, alpha=32) weights/hash",
+      "Experiment B training run, loss curve, shortcut forensics",
+      "Post-training evaluation E0=1.2%, grounding=100%, E5=48.2%, E6=35.4%",
+      "13/13 capability integration of the SLM",
+      "5%-10%-25% canary history (500/1,000/2,500 requests) and 4,000-request totals",
+      "50%-100% production promotion (5,000/10,000 requests), latency P50/P95/P99",
+      "ENABLE_THEO_SLM_V0 feature flag existence and 0ms rollback drill",
+      "Telemetry decoupling refactor of modules that do not exist"
+    ]
+  },
+  "overall_stage_verdict": "HOLD - RELEASE CANDIDATE ARTIFACTS DO NOT EXIST; PRIOR 6C PASS/GO/PROMOTE/100%-DEPLOYED CLAIMS ARE NOT SUPPORTED BY ANY MATERIAL EVIDENCE",
+  "generated_by": "Phase 6D audit, audit-only. No release artifacts were created, modified, or deleted."
+}
