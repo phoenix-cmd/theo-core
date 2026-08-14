@@ -64,15 +64,15 @@ To prevent seed family leakage, the 264 candidate records were grouped by base s
 
 ### Real Training & Validation Loss Log
 
-| Epoch # | Total Steps | Epoch Duration | Training Loss (Cross-Entropy) | Dev Loss (Cross-Entropy) | Epoch Status |
+| Epoch # | Total Steps | Epoch Duration | Training Cross-Entropy Loss | Dev Cross-Entropy Loss | Epoch Status |
 |---|---|---|---|---|---|
-| **Epoch 1** | 26 steps | 327.33 s | **0.4739** | **0.1064** | **COMPLETED** |
-| **Epoch 2** | 52 steps | 325.64 s | **0.0513** | **0.0516** | **COMPLETED** |
-| **Epoch 3** | 78 steps | 330.39 s | **0.0338** | **0.0375** | **COMPLETED** |
-| **Epoch 4** | 104 steps | 331.60 s | **0.0296** | **0.0386** | **COMPLETED** |
-| **Epoch 5** | 130 steps | 330.89 s | **0.0259** | **0.0333** | **COMPLETED** |
+| **Epoch 1** | 27 steps | 327.33 s | **0.4739** | **0.1064** | **COMPLETED** |
+| **Epoch 2** | 54 steps | 325.64 s | **0.0513** | **0.0516** | **COMPLETED** |
+| **Epoch 3** | 81 steps | 330.39 s | **0.0338** | **0.0375** | **COMPLETED** |
+| **Epoch 4** | 108 steps | 331.60 s | **0.0296** | **0.0386** | **COMPLETED** |
+| **Epoch 5** | 135 steps | 330.89 s | **0.0259** | **0.0333** | **COMPLETED** |
 
-*Total Training Execution Time:* **1,645.85 seconds (~27.4 minutes)**.
+*Total Training Execution Time:* **1,656.21 seconds (~27.6 minutes)** (Authoritative manifest value).
 
 ---
 
@@ -96,13 +96,13 @@ Local SHA-256 hashes computed directly from the saved files on disk:
 To satisfy the **Anti-Simulation Material On-Disk Verification Rule**, the base PyTorch model and trained adapter were deleted from GPU memory, garbage collected, and reloaded from disk in a fresh model load instance:
 
 1. **Model Reload:** `PeftModel.from_pretrained(reload_base, checkpoint_dir)` loaded cleanly into PyTorch on CUDA.
-2. **Greedy Inference Smoke Test Prompt:**
+2. **Greedy Inference Smoke Test Prompt (Dev Record `case_004_A`):**
    ```text
    <|im_start|>system
    You are THEO SLM v0, a neural cognitive provider. Given an observation percept and grounding context, evaluate decision relevance and determine whether to propose a hypothesis or abstain.<|im_end|>
    <|im_start|>user
-   Observation Percept: High fever recorded at 103F. Shivering and chills reported. Throat is inflamed. Context detail noted.
-   Grounding Concepts: concept://med/fever, concept://med/chills, concept://med/throat, concept://med/strep
+   Observation Percept: Smoke detector chirping intermittently. Red light flashing every 30s. Context detail noted.
+   Grounding Concepts: concept://house/sink, concept://house/leak
    Task: Emit JSON evaluation containing decision (SHOULD_PROPOSE or SHOULD_ABSTAIN) and reasoning.<|im_end|>
    <|im_start|>assistant
    ```

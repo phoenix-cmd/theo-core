@@ -1,30 +1,35 @@
 """Phase 6E.2 — Real Controlled Training Experiment Engine.
 
 Executes:
-1. Environment & Pre-Training Audits:
+1. Environment & Pre-Training Audits (Actually Performed):
    - Verifies PEFT dependency in pyproject.toml
    - Verifies PyTorch, Transformers, PEFT, Accelerate, CUDA, GPU
    - Verifies exact Qwen revision: 7ae557604adf67be50417f59c2c2f167def9a775
    - Verifies local model snapshot SHA-256 (model.safetensors = fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe)
    - Verifies authoritative corpus SHA-256 (candidate_records.json = a7b4e84509b1c0dc03b81425125f061cedafe288cb18f153e8399b19cf717eb0)
-   - Verifies 51-case benchmark & 15-case semantic probe files exist & unchanged
-2. Input Projection Schema Isolation Audit:
+   (Note: Benchmark/probe file verification is performed by separate audit tooling; not executed in this script.)
+2. Input Projection Schema Isolation Audit (Actually Performed):
    - Verifies training inputs contain NO benchmark/probe labels (GOLD_*), reviewer metadata, or generator metadata.
-3. Grouped-by-Seed 80/20 Train/Dev Dataset Split:
+3. Grouped-by-Seed 80/20 Train/Dev Dataset Split (Actually Performed):
    - Splits 264 candidate records into train and dev records with zero seed family leakage.
-4. Real LoRA Training Execution (PyTorch + PEFT):
+4. Real LoRA Training Execution (PyTorch + PEFT) (Actually Performed):
    - Base model: Qwen/Qwen2.5-0.5B-Instruct (loaded fp16 to cuda:0)
    - LoRA config: r=16, alpha=32, target_modules=[q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
    - Optimizer: AdamW (lr=2e-4, weight_decay=0.01)
-   - Training over 5 epochs, logging actual loss per step to training.log & validation-logs.json.
-5. Material Saving to Disk:
+   - Training over 5 epochs (135 steps total), logging actual loss per step to training.log & validation-logs.json.
+5. Material Saving to Disk (Actually Performed):
    - Saves actual adapter weights & adapter_config.json to disk.
    - Computes local SHA-256 hashes of saved adapter files.
-6. Fresh Process Reload Proof & Inference Smoke Test:
+6. Fresh Process Reload Proof & Inference Smoke Test (Actually Performed):
    - Reloads saved adapter checkpoint in a fresh PyTorch model instance.
-   - Runs greedy inference smoke test on a dev prompt, capturing token IDs, decoded text, latency, and SHA-256 token hash.
-7. Machine-Readable Provenance Artifacts:
+   - Runs greedy inference smoke test on a dev prompt (case_004_A), capturing token IDs, decoded text, latency, and SHA-256 token hash.
+7. Machine-Readable Provenance Artifacts (Actually Performed):
    - Writes all required manifests under theo-data/datasets/theo_slm_v0_artifacts/phase-6e2/.
+
+Operations Distinguished:
+- Actually Performed by Script: Environment audit, snapshot SHA check, corpus SHA check, grouped split, 5-epoch training loop, saving adapter weights, fresh reload smoke test, writing 11 manifests.
+- Performed by Separate Audit Tooling: 51-case benchmark scoring & 15-case semantic probe evaluation (Phase 6E.3).
+- Operations Not Yet Performed: Production deployment, canary traffic routing, Phase 6E.3 reference evaluation.
 """
 
 from __future__ import annotations
