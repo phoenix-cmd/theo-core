@@ -1,0 +1,92 @@
+{
+  "finds": {
+    "PRO_ID": {
+      "extracted": "9117",
+      "value": 9117,
+      "ok": true,
+      "detail": ""
+    },
+    "AB_ID": {
+      "extracted": "1867",
+      "value": 1867,
+      "ok": true,
+      "detail": ""
+    },
+    "D_HIDDEN": {
+      "extracted": "896",
+      "value": 896,
+      "ok": true,
+      "detail": ""
+    },
+    "VOCAB": {
+      "extracted": "151936",
+      "value": 151936,
+      "ok": true,
+      "detail": ""
+    },
+    "LORA_R": {
+      "extracted": "16",
+      "value": 16,
+      "ok": true,
+      "detail": ""
+    },
+    "LORA_ALPHA": {
+      "extracted": "32",
+      "value": 32,
+      "ok": true,
+      "detail": ""
+    },
+    "LORA_DROPOUT": {
+      "extracted": "0.05",
+      "value": 0.05,
+      "ok": true,
+      "detail": ""
+    },
+    "REVISION": {
+      "extracted": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "value": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "ok": true,
+      "detail": ""
+    },
+    "DECISION_INDEX": {
+      "extracted": "4",
+      "value": 4,
+      "ok": true,
+      "detail": ""
+    },
+    "MODEL_ID": {
+      "extracted": "Qwen/Qwen2.5-0.5B-Instruct",
+      "value": "Qwen/Qwen2.5-0.5B-Instruct",
+      "ok": true,
+      "detail": ""
+    },
+    "LORA_TARGETS": {
+      "extracted": "\"q_proj\", \"k_proj\", \"v_proj\", \"o_proj\", \"gate_proj\", \"up_proj\", \"down_proj\"",
+      "value": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "ok": true,
+      "detail": "7 modules"
+    },
+    "PROMPT_CONVENTION": {
+      "ok": true,
+      "detail": "{\"decision\": \" found in frozen runner"
+    },
+    "W_DELTA_SOURCE": {
+      "ok": true,
+      "detail": "unembedding-row source present"
+    },
+    "TENSOR_HASH_CONVENTION": {
+      "ok": true,
+      "detail": "legacy float32 torch-save convention present"
+    }
+  },
+  "mismatches": [],
+  "ok": true
+}

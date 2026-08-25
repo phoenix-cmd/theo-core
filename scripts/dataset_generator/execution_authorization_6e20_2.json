@@ -1,0 +1,39 @@
+{
+  "protocol_sha256": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+  "plan_v40_sha256": "87C8E486572F0B9D42EE49E21B2E93A56AD1C7CB755DD9EFAE5A0F25F463304A",
+  "frozen_6e18_machinery_sha256": "6BCAF1319AC551848FFDB55AEA121D14D808408A192E05F2AA6171161DECEF96",
+  "runner_sha256": "16bef31e56d781170021092052cf708a92875ee68697feb81fb77764e15e691c",
+  "test_suite_sha256": "55a71b4115ba050fa22c3e83290a6b5d4c1fb45977d6448ef24000e03e5530a1",
+  "runner_file": "run_phase_6e20_reevaluation.py",
+  "phase": "6E.20.2",
+  "decision": "APPROVE",
+  "authorization_type": "EXPLICIT_HUMAN_L5_SIGNOFF_6E.20.2_READONLY_REEVALUATION",
+  "date": "2026-08-19",
+  "human_signoff": "ACTIVE L5 AUTHORIZATION — explicit human L5 sign-off granted 2026-08-19 for Phase 6E.20.2 Read-Only Checkpoint Re-Evaluation, superseding the obsolete authorization bound to runner 58D6CB93.... Authorizes 28 checkpoint evaluations (7 conditions x AGGREGATION_SET {4,6,14,15}) using condition-resolved readouts from frozen step0/ artifacts. Recomputed B0 historical reproducibility anchor must match within 1e-4 tolerance before executing any new evaluations. Passing the B0 anchor validates evaluation environment compatibility only and does NOT constitute evidence for H1. Non-silent LoRA adapter tensor restoration strictly enforced on all 28 checkpoints. All new outputs, telemetry, and verdicts written exclusively to phase-6e20.2-reevaluation-output/. Zero mutation of Phase 6E.20.1 artifacts permitted. Runner and test hashes below are bound to the remediated, source-audited artifact set (16BEF31E... / 55A71B41...).",
+  "scope_summary": {
+    "conditions": [
+      "B0",
+      "F1",
+      "S2",
+      "S4",
+      "S8",
+      "C4-Rand",
+      "R1-Rand"
+    ],
+    "aggregation_set": [
+      4,
+      6,
+      14,
+      15
+    ],
+    "total_evaluations": 28,
+    "output_directory": "phase-6e20.2-reevaluation-output"
+  },
+  "invariants": {
+    "historical_phase_frozen": "phase-6e20.1-execution-output is completely read-only; pre/post SHA-256 manifest audits required.",
+    "zero_retraining": "No training, no optimizer steps, no weight updates.",
+    "condition_resolved_readouts": "Each checkpoint is evaluated against its own condition's readout from step0/w_{cond}.npy.",
+    "anchor_separation": "B0 historical reproducibility anchor is a validation gate only; not used as evidence for hypothesis verdicts.",
+    "halt_on_divergence": "Any hash mismatch, checkpoint load error, adapter key drop, or reproducibility divergence halts execution."
+  }
+}

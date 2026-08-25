@@ -1,0 +1,47 @@
+{
+  "authorization_id": "execution_authorization_6e20_4",
+  "phase": "6E.20.4",
+  "title": "6E.20.4 B0 Execution-Regime Remediation — Execution Authorization",
+  "decision": "APPROVE",
+  "reviewer": "L5 Human Review (APPROVED 2026-08-21)",
+  "review_date": "2026-08-21",
+  "scope": "Permits EXACTLY ONE execution of `python run_phase_6e20_reevaluation.py --execute` (optionally with `--out-dir phase-6e20.4-remediation-output`) using the hash-bound artifacts below. No other script, stage, artifact, or execution is authorized. This authorization is INVALIDATED by any change to a bound file's SHA-256; such a change requires restarting the audit -> hash -> review chain. Results must not be selectively retried or post-hoc altered.",
+  "bound_artifacts": {
+    "runner": {
+      "path": "theo-core/scripts/dataset_generator/run_phase_6e20_reevaluation.py",
+      "sha256": "540874237ef5fe4c2652d2483253b76d440a448df93e67d78b7da1f9054113a1"
+    },
+    "test_suite": {
+      "path": "theo-core/scripts/dataset_generator/test_phase_6e20_reevaluation.py",
+      "sha256": "70dd8739b43d42d8e55fafe4415d3bb469569f95c7056dedbe65d37ebc287ea8"
+    },
+    "collect_nepr": {
+      "path": "theo-core/scripts/dataset_generator/collect_nepr.py",
+      "sha256": "e2ee8afe6ee05bf9ad22d753de1c63a12108687eb5f2b86e44d493e4a123095a"
+    },
+    "frozen_6e18_machinery": {
+      "path": "theo-data/datasets/theo_slm_v0_artifacts/phase-6e18-causal-intervention/code_snapshot/run_phase_6e18_causal_intervention.py",
+      "sha256": "6bcaf1319ac551848ffdb55aea121d14d808408a192e05f2aa6171161decef96"
+    }
+  },
+  "runtime_note": "The runner's AUTH_FILE_NAME remains 'execution_authorization_6e20_3.json' and PHASE_ID remains '6E.20.3' because the optional metadata bump (PHASE_ID/DEFAULT_OUTPUT_DIR/AUTH_FILE_NAME) was deferred to the execution step. The companion runtime shim 'execution_authorization_6e20_3.json' therefore carries phase '6E.20.3' and the SAME runner_sha256 540874237ef5fe4c2652d2483253b76d440a448df93e67d78b7da1f9054113a1. Execution is gated by that shim at runtime; this file is the authoritative human-review authorization record.",
+  "frozen_constraints_preserved": {
+    "b0_anchor": 0.428355,
+    "tolerance": 1e-4,
+    "p1_p6_thresholds": "UNCHANGED",
+    "hypothesis_evaluation": "evaluate_protocol_hypotheses UNCHANGED",
+    "joint_gate": "UNCHANGED",
+    "outcome_matrix": "UNCHANGED",
+    "frozen_6e18_machinery": "UNCHANGED (sha256 6bcaf1319ac551848ffdb55aea121d14d808408a192e05f2aa6171161decef96)",
+    "nepr": "UNCHANGED (collect_nepr.py sha256 e2ee8afe6ee05bf9ad22d753de1c63a12108687eb5f2b86e44d493e4a123095a); NEPR remains non-gating",
+    "remediation_scope": "ONLY the Stage 5 B0 eval()/train() regime guard; compute_live_cos_H1, Stages 6-7, and all scientific logic unchanged"
+  },
+  "prohibited": [
+    "No change to tolerance 1e-4",
+    "No change to anchor 0.428355",
+    "No averaging/best-of/correction-factor/anchor-recompute/tolerance-widening",
+    "No modification to P1-P6 thresholds, hypothesis evaluation, joint gate, or outcome matrix",
+    "No modification to frozen 6E.18 machinery or NEPR/collect_nepr.py",
+    "No selective retry or post-hoc alteration of Stage 5 B0 results"
+  ]
+}

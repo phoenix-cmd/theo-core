@@ -1,0 +1,18 @@
+{
+  "protocol_sha256": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+  "plan_v40_sha256": "87C8E486572F0B9D42EE49E21B2E93A56AD1C7CB755DD9EFAE5A0F25F463304A",
+  "frozen_runner_sha256": "550FAA345721649225F32748C39053077B08BE165426EF3FE38C2F6E276A1BD9",
+  "runner_sha256": "F535C789B0C7EECA1C1D0B1B130485D8DF7A70ED5A1E201C955CE3C7605BD312",
+  "runner_revision": "v7 (minimal checkpoint_20 conformance fix over v6 1F5F7EF2894CFC5B6B76D99E0EB57C4DBE9A00700E80B8197784FDF4C45FB15C)",
+  "phase": "6E.20.1",
+  "decision": "APPROVE",
+  "authorization_type": "EXPLICIT_HUMAN_L5_SIGNOFF_6E.20.1_V7_DYNAMICVOID",
+  "date": "2026-08-18",
+  "human_signoff": "APPROVE — explicit L5 sign-off for Phase 6E.20.1 v7. Authorized runner SHA F535C789B0C7EECA1C1D0B1B130485D8DF7A70ED5A1E201C955CE3C7605BD312. Capacity audit accepted at 71.58 GiB free. No further cleanup or admin/TrustedInstaller deletions. Preserve all forensic evidence exactly as audited. Fresh step-0 registration; VOID conditions determined dynamically under Protocol v3.1 §6 G3; retain full frozen checkpoint set {0,4,6,7,14,15,17,20} per NON-VOID condition; halt and preserve failure state on any defect, capacity problem, missing checkpoint, authorization mismatch, or protocol-conformance failure.",
+  "void_conditions_determination": "DYNAMIC (fresh step-0 §6 G3): S2/S4 extracted only if G3 fails on the FRESH registration; B0 is the step-0 anchor; all 7 conditions trained; VOID per protocol §6/§10.4. NOT hardcoded from prior forensic evidence.",
+  "prior_run_forensic_g3_evidence": "v6 disk-full run (PID 30716) G3 forensic: kappa_2=0.056847, kappa_4=0.086011, kappa_8=0.125257 (all within [0.05,0.995]); runtime void=[] => S2/S4 NON-VOID in that run. v6 failure was capacity, not runner logic. Retained as evidence only; NOT used to predetermine VOID for v7.",
+  "checkpoint_set_frozen": [0, 4, 6, 7, 14, 15, 17, 20],
+  "retention_enforcement": "Protocol §10.4: missing rule-mandated checkpoint in ANY condition => run VOID. All 8 per condition required. v7 regression R1-R4 prove emission; execution must retain all 8 per NON-VOID condition.",
+  "capacity_assessment": "C: free 71.58 GiB vs corrected peak ~55.45 GiB (conservative, +2% FS +1GiB transient) / ~59.72 GiB (pessimistic, +10% FS). SUFFICIENT; headroom 16.1 / 11.9 GiB. Accepted by authorizer.",
+  "note": "Supersedes v6 auth 4AA213782144DECF02D6CD062F5102B3E37393A2C3FF7403574DE4FF2CE86779 (must not be reused). v6 runner frozen as forensic evidence of disk-full failure. v7 is minimal revision; v6 training logic otherwise identical. This file is the immutable L5 authorization record; the runner reads execution_authorization_v6.json (identical content, v7-bound)."
+}

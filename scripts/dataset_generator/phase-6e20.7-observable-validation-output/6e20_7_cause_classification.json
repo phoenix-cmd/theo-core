@@ -1,0 +1,66 @@
+{
+  "diagnostic_only": true,
+  "note": "0.95 SENS threshold and four-cause floors are DIAGNOSTIC CONTROLS, not success criteria.",
+  "sens_cos": 0.322966,
+  "sens_expect": 0.95,
+  "floors": {
+    "FLOOR_r_cs": 0.2,
+    "FLOOR_Cspec_abs": 0.02825164031982422,
+    "FLOOR_Vhet": 0.25,
+    "FLOOR_Vhet_stable": 0.1
+  },
+  "classification": {
+    "S4": {
+      "stats": {
+        "agg": 0.46265799999999996,
+        "agg_range": 0.01509499999999997,
+        "C_common": 26.845611572265625,
+        "C_spec": 33.2767391204834,
+        "r_cs": 1.242272276183043,
+        "V_het": 0.01622170084472619
+      },
+      "floor_cspec_abs": 0.02825164031982422,
+      "multimodal_hi_frac": 0.0,
+      "multimodal_lo_frac": 0.0,
+      "criteria": {
+        "common_dominance": false,
+        "low_specific_signal": false,
+        "per_sample_heterogeneity": false,
+        "genuine_stable_plateau": false
+      },
+      "exceedance": {
+        "common_dominance": 0.0,
+        "low_specific_signal": 0.0,
+        "per_sample_heterogeneity": 0.0
+      },
+      "triggered_flags": [],
+      "primary_classification": "inconclusive"
+    },
+    "S8": {
+      "stats": {
+        "agg": 0.42681375,
+        "agg_range": 0.01752100000000001,
+        "C_common": 29.657669067382812,
+        "C_spec": 37.74988269805908,
+        "r_cs": 1.2724976297144666,
+        "V_het": 0.012084020329798361
+      },
+      "floor_cspec_abs": 0.02825164031982422,
+      "multimodal_hi_frac": 0.0,
+      "multimodal_lo_frac": 0.0,
+      "criteria": {
+        "common_dominance": false,
+        "low_specific_signal": false,
+        "per_sample_heterogeneity": false,
+        "genuine_stable_plateau": false
+      },
+      "exceedance": {
+        "common_dominance": 0.0,
+        "low_specific_signal": 0.0,
+        "per_sample_heterogeneity": 0.0
+      },
+      "triggered_flags": [],
+      "primary_classification": "inconclusive"
+    }
+  }
+}

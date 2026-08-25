@@ -1,0 +1,11 @@
+{
+  "timestamp_utc": "2026-08-21T07:21:24Z",
+  "phase": "6E.20.3",
+  "nepr_path": "numerical_environment_provenance.json",
+  "nepr_sha256": "2FE4F41B08DDA10397C1329CEABE18B7177296C767A9FACBB98F1E60854B87BC",
+  "nepr_hash": "sha256:d0d3133a362c00273b2a1bf7c3b1fe1cf2060748bcd8c35d6cf29aa3d3e7fa4e",
+  "pre_execution_manifest_path": "pre_execution_sha256_manifest.json",
+  "pre_execution_manifest_sha256": "9A220F337FA804862A79D4C3CE523883E610B7F0B386E9E9002EF0B6A6ED44ED",
+  "runner_sha256": "540874237EF5FE4C2652D2483253B76D440A448DF93E67D78B7DA1F9054113A1",
+  "test_sha256": "70DD8739B43D42D8E55FAFE4415D3BB469569F95C7056DEDBE65D37EBC287EA8"
+}

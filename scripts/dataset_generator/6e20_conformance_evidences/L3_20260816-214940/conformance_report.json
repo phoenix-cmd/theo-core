@@ -1,0 +1,246 @@
+{
+  "phase": "6E.20",
+  "stage": "L1-L3 (implementation)",
+  "plan": {
+    "file": "theo-slm-fixed-subspace-readout-authorization-protocol-v3.2.1-pre-execution-implementation-plan.md",
+    "sha256": "F6A145DDA276621421A13E22215CBF5F9DE3052C712CD8CD4055076C3D3679F1"
+  },
+  "protocol": {
+    "file": "theo-slm-fixed-subspace-readout-authorization-protocol-draft-v3.1.md",
+    "sha256": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+    "verified": false
+  },
+  "runner": {
+    "file": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\run_phase_6e20_fixed_subspace_readout.py",
+    "sha256": "510830c559574da83c2af74c8b3e67923a7b9103d3cb3cae17a06c093251e5e4"
+  },
+  "authority": "IMPLEMENTATION AUTHORIZED (L1-L3); EXECUTION NOT AUTHORIZED",
+  "created_execution_authorization": false,
+  "rows": [
+    {
+      "row": "C1",
+      "section": "\u00a73.1",
+      "name": "Step-0 panel H_16 & label vector y_16",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": true,
+      "detail": "margin rule + pinned y16 = [+1]^8 (+) [-1]^8 verified on synthetic data; H_16 real-panel collection is L5-only (guarded code path).",
+      "evidence": []
+    },
+    {
+      "row": "C2",
+      "section": "\u00a73.2",
+      "name": "Discriminative axis u_hat_LDA",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": true,
+      "detail": "LDA (lsqr, shrinkage=auto) unit-norm axis on synthetic panel: ||u||=1.00e+00. Legacy identity vs registered u_hat_LDA_hash (ff3cab49...) requires the real panel: L5-DEFERRED.",
+      "evidence": []
+    },
+    {
+      "row": "C3",
+      "section": "\u00a73.3",
+      "name": "Scaling factor s_scale (P3-2 staging)",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": true,
+      "detail": "s_scale formula finite/positive (synthetic) = 1.00000000; degenerate guard passes on nan/0/negative. Per P3-2: real reference match (0.06681545) is L5 step-0 registration ONLY.",
+      "evidence": []
+    },
+    {
+      "row": "C4",
+      "section": "\u00a73.4",
+      "name": "Principal basis U_k (SVD + sign convention + hashing)",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": true,
+      "detail": "sign-convention=True nesting=True hash-conventions-distinct=True cov-reconstruction=True. Legacy basis_sha256 identity (b8dfbd6a...) is L5-DEFERRED; cross-convention equality never asserted (diagnostic).",
+      "evidence": []
+    },
+    {
+      "row": "C5",
+      "section": "\u00a73.5",
+      "name": "Projection norms kappa_k / kappa_R",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "kappa_2=0.031253 kappa_4=0.060488 kappa_8=0.283863 kappa_R=0.065449 (finite, in (0,1)); gate bands are G3/G5.",
+      "evidence": []
+    },
+    {
+      "row": "C6",
+      "section": "\u00a73.6",
+      "name": "Frozen vocabulary margin w_delta (B0)",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": true,
+      "detail": "source = unembedding rows [PRO_ID] - [AB_ID] (synthetic w_head); ||w_delta||=59.866518; b_delta=0. Real w_delta_norm match (0.564183) is L5-DEFERRED (real unembedding).",
+      "evidence": []
+    },
+    {
+      "row": "C7",
+      "section": "\u00a73.7",
+      "name": "Random objects R_4 and n_rand (seed 20260820)",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "R_4 deterministic=True; n_rand deterministic=True, |cos(n,u)|=0.01639<=0.05, unit norm, draws=1.",
+      "evidence": []
+    },
+    {
+      "row": "C8",
+      "section": "\u00a74",
+      "name": "Seven conditions, ZERO trainable readout params, common gain",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "conditions=['B0', 'F1', 'S2', 'S4', 'S8', 'C4-Rand', 'R1-Rand'] total_trainable_params=0 s_scale=0.22368311 gain_norms_ok=True.",
+      "evidence": []
+    },
+    {
+      "row": "C9",
+      "section": "\u00a75.1-5.5",
+      "name": "Forward s = w^T h + b; logits (s,-s); readout-only backward",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "forward=True backward_identity g_R=alpha*w=True off-span=5.49e-17",
+      "evidence": []
+    },
+    {
+      "row": "C10",
+      "section": "\u00a75.6",
+      "name": "Pairwise distinctness",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "21 pairs; all directions distinct (synthetic).",
+      "evidence": []
+    },
+    {
+      "row": "C11",
+      "section": "\u00a75.7",
+      "name": "Dual gradient objects, alpha, rho_c, sigma_c, decomposition",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "alpha_chain_rule=True rho_pos=0.961050 rho_neg=-0.961050 bounded=True decomposition_g_bg+g_R=True (mean rho)^2!=mean(rho^2)=True readout-only cosine sign in {-1,0}=True",
+      "evidence": []
+    },
+    {
+      "row": "C12",
+      "section": "\u00a76",
+      "name": "Gates G1-G8 + VOID semantics",
+      "status": "FAIL",
+      "passed": false,
+      "l5_deferred": false,
+      "detail": "passing-synthetic gates: G1, G2, G3_k4, G3_k8, G4, G5, G6, G7, G8; failing-input tests G8=True G5=True; void_map={'run_void': False, 'condition_void': ['all-affected']}",
+      "evidence": []
+    },
+    {
+      "row": "C13",
+      "section": "\u00a77",
+      "name": "Hypothesis evaluation H1-H7",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "logic smoke on synthetic metric values: {'H1': True, 'H2': True, 'H3': True, 'H4': True, 'H5': True, 'H6': True, 'H7': True}",
+      "evidence": []
+    },
+    {
+      "row": "C14",
+      "section": "\u00a78",
+      "name": "P1-P6 criteria + LOO-CV comparator",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "JOINT_SUCCESS=P2^P4^P5^P6:True PARTIAL=P1^P3:True LOO-CV 16 splits: 16 (non-gating).",
+      "evidence": []
+    },
+    {
+      "row": "C15",
+      "section": "\u00a79",
+      "name": "Outcome matrix tiers",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "SUCCESS(if P6)=SUCCESS P6-fail=GC-only/TU-only-P6_FAILED GC-only=GC-only PARTIAL=PARTIAL",
+      "evidence": []
+    },
+    {
+      "row": "C16",
+      "section": "\u00a710.1-\u00a710.4",
+      "name": "Static config + protocol hash binding",
+      "status": "FAIL",
+      "passed": false,
+      "l5_deferred": false,
+      "detail": "frozen v3.1 sha=e16ca4f1496a (expect E16CA4F1496A) protocol_ok=False static_cfg_ok=False mismatches=[('MODEL_ID', 'Qwen2.5-0.5B-Instruct', 'Qwen/Qwen2.5-0.5B-Instruct')]",
+      "evidence": [
+        "static_config_conformance.json"
+      ]
+    },
+    {
+      "row": "C17",
+      "section": "\u00a710.5",
+      "name": "cos(H1) raw cosine + interpretation binding + sign-assertion",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "cos(H1)(synthetic mean total gradients)=0.057528; G6 sign-assertion passed=True; interpretation: background-dominated total-gradient metric, NOT a confinement statistic.",
+      "evidence": []
+    },
+    {
+      "row": "C18",
+      "section": "\u00a710.6",
+      "name": "Two-mode preflight (L4 synthetic dry-run; L5 registration guarded)",
+      "status": "FAIL",
+      "passed": false,
+      "l5_deferred": false,
+      "detail": "L4 preflight dry-run all_pass=False (13/14 checks); L5 step-0 registration refuses without authorization=True",
+      "evidence": [
+        "preflight_l4_synthetic.json"
+      ]
+    },
+    {
+      "row": "C19",
+      "section": "\u00a710.7",
+      "name": "B0 collapse guard (K=3)",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "trigger at step index 3 (expected 3); no-trigger case=True. B0-only; no back-filling; missing comparator => frozen step-0 anchor + UNAVAILABLE.",
+      "evidence": []
+    },
+    {
+      "row": "C20",
+      "section": "\u00a710.8-\u00a710.9",
+      "name": "VOID rules + verdict double gate + refusal triplet",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "refusal triplet: PRE_EXECUTION / NO_SCIENTIFIC_VERDICT / EXECUTION_NOT_AUTHORIZED",
+      "evidence": []
+    },
+    {
+      "row": "C21",
+      "section": "\u00a710.10",
+      "name": "Provenance schemas (manifest, snapshot, runs, authorization)",
+      "status": "PASS",
+      "passed": true,
+      "l5_deferred": false,
+      "detail": "reference-tensor set ok=True auth schema ok=True runs telemetry ok=True. execution_authorization.json NOT created by this implementation.",
+      "evidence": []
+    }
+  ],
+  "summary": {
+    "total": 21,
+    "pass": 18,
+    "fail": 3,
+    "l5_deferred": 5,
+    "g_plan_1": {
+      "disposition": "FAIL",
+      "no_waiver": true,
+      "note": "L5-DEFERRED rows carry the documented exceptions per plan v3.2.1 (real-panel legacy identity and reference-value matches run only at authorized L5 step-0 registration). No gate/P1-P6/H1-H7/metric/VOID requirement is relaxed."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "decision": "APPROVE",
+  "phase": "6E.20.1",
+  "runner_file": "run_phase_6e20_execution_v5.py",
+  "runner_sha256": "65E6FDA818C7AE3F8D74398C28C8A77F3144BF4BBCBE972EE224BA711FE627E8",
+  "plan_v40_sha256": "87C8E486572F0B9D42EE49E21B2E93A56AD1C7CB755DD9EFAE5A0F25F463304A",
+  "protocol_v31_sha256": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+  "frozen_6e18_snapshot_sha256": "6BCAF1319AC551848FFDB55AEA121D14D808408A192E05F2AA6171161DECEF96",
+  "condition_universe": ["B0", "F1", "S2", "S4", "S8", "C4-Rand", "R1-Rand"],
+  "void_conditions_excluded": ["S2", "S4"],
+  "scope": "Phase 6E.20.1 execution of run_phase_6e20_execution_v5.py ONLY. Frozen condition universe preserved. Protocol-defined VOID conditions are not trained or evaluated. No change to protocol v3.1, thresholds, seeds, conditions, basis, or decision rules; no follow-up experiment or intervention authorized.",
+  "authorizes": "Fresh clean step-0 registration; training and evaluation over the frozen condition universe, with protocol-defined VOID conditions (currently S2 and S4 under registered G3 results) excluded from training and evaluation per frozen protocol §6; evaluation of the remaining conditions (H1-H7, P1-P6, LOO-CV P5); provenance emission; and forensic report under runner v5.",
+  "signature": "EXPLICIT_HUMAN_L5_SIGNOFF_6E.20.1",
+  "date": "2026-08-17"
+}

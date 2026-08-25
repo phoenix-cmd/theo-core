@@ -1,0 +1,48 @@
+{
+  "document": "Post-execution forensic package - Phase 6E.20",
+  "phase": "6E.20",
+  "stage": "L5 post-execution forensic freeze",
+  "date": "2026-08-16",
+  "authorization": {
+    "decision": "APPROVE",
+    "phase": "6E.20",
+    "file": "theo-data/datasets/theo_slm_v0_artifacts/phase-6e20-fixed-subspace-readout/execution_authorization.json",
+    "sha256": "4CFABC2FEE5F5170B6EACD3D9CCAC1FA70F3E0C8F877621707056E149B2DD60E",
+    "timestamp": "2026-08-16T22:07:34+05:30",
+    "signature": "EXPLICIT_HUMAN_L5_AUTHORIZATION_2026-08-16T22:07:34+05:30",
+    "contains_four_frozen_hashes": true
+  },
+  "pre_execution_hash_verification": {
+    "all_four_match": true,
+    "protocol_v31": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+    "runner": "550FAA345721649225F32748C39053077B08BE165426EF3FE38C2F6E276A1BD9",
+    "harness": "8239C2A16C2B886A3239845C3C28E2C2FC3F46DC71CFB059142ABB8CFCDAFE49",
+    "plan_v321": "F6A145DDA276621421A13E22215CBF5F9DE3052C712CD8CD4055076C3D3679F1"
+  },
+  "execution_attempt": {
+    "command": "python run_phase_6e20_fixed_subspace_readout.py execute",
+    "exit_code": 1,
+    "result": "DETERMINISTIC_REFUSAL_BY_FROZEN_RUNNER",
+    "refusal_triplet": ["PRE_EXECUTION", "NO_SCIENTIFIC_VERDICT", "EXECUTION_NOT_AUTHORIZED"],
+    "note": "The frozen runner's execute entry hard-codes auth_path=None and its execution-stage functions (run_step0_registration / run_training / run_evaluation) are guard stubs that raise unconditionally (L4 finding F-3). The frozen artifact therefore deterministically refuses execution regardless of the authorization file. No training, optimizer step, checkpoint, real-panel collection, or evaluation was performed."
+  },
+  "no_reuse_of_6e18": {
+    "verified": true,
+    "note": "The pre-existing 6E.18 execution_authorization.json (phase=6E.18) was not read, referenced, modified, or reused. The 6E.20 authorization file lives in a dedicated phase-6e20-fixed-subspace-readout artifact directory."
+  },
+  "resulting_artifacts": {
+    "execution_authorization.json": "4CFABC2FEE5F5170B6EACD3D9CCAC1FA70F3E0C8F877621707056E149B2DD60E",
+    "training_checkpoints": "NONE",
+    "evaluation_outputs": "NONE",
+    "scientific_verdicts": "NONE"
+  },
+  "safeguards_maintained": {
+    "void_rules": "ACTIVE",
+    "refusal_triplet": "ACTIVE",
+    "provenance": "ACTIVE",
+    "telemetry": "ACTIVE",
+    "hard_stop": "RE-ENGAGED"
+  },
+  "frozen_state": "HARD STOP ACTIVE - NO SCIENTIFIC EXECUTION OCCURRED - L5 AUTHORIZATION RECORDED BUT UNREALIZABLE UNDER FROZEN ARTIFACT",
+  "authority": "EXECUTION AUTHORIZED AND ATTEMPTED UNDER EXACT FROZEN ARTIFACTS; FROZEN RUNNER REFUSED BY DESIGN; NO UNREGISTERED FOLLOW-UP INTERVENTION"
+}

@@ -1,0 +1,70 @@
+{
+  "nepr_schema_version": "1.0.0",
+  "category_A_software": {
+    "python_version": "3.14.3",
+    "torch_version": "2.13.0+cu126",
+    "cuda_version": "12.6",
+    "transformers_version": "5.8.0",
+    "peft_version": "0.20.0",
+    "numpy_version": "2.4.3",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD"
+  },
+  "category_B_hardware": {
+    "gpu_count": 1,
+    "gpu_names": [
+      "NVIDIA GeForce GTX 1650"
+    ],
+    "gpu_memory_bytes": [
+      4294639616
+    ],
+    "cuda_device_count": 1,
+    "cuda_device_names": [
+      "NVIDIA GeForce GTX 1650"
+    ],
+    "cuda_compute_capability": [
+      "7.5"
+    ],
+    "cuda_supports_tf32": false,
+    "model_parallel": false,
+    "device_map": "cuda:0",
+    "world_size": 1,
+    "per_device_batch_size": 1,
+    "cpu_count": 16,
+    "ram_bytes": 16558075904,
+    "hostname_hash": "sha256:e4eda79048b2585e25768762b92673c6fc792d231f2e97e568f7be6aab883bbc"
+  },
+  "category_C_numerical": {
+    "base_model_dtype": "torch.bfloat16",
+    "lora_dtype": "float32",
+    "lora_dtype_detail": {
+      "float32": 336
+    },
+    "attention_backend": "unknown",
+    "gradient_checkpointing": false,
+    "use_deterministic_algorithms": false,
+    "cudnn_deterministic": false,
+    "cudnn_benchmark": false,
+    "matmul_allow_tf32": false,
+    "cudnn_allow_tf32": true
+  },
+  "category_D_reproducibility_state": {
+    "random_seed_set": false,
+    "torch_manual_seed": null,
+    "numpy_manual_seed": null,
+    "cuda_manual_seed_all": null,
+    "torch_deterministic_algorithms": false,
+    "env_timestamp_utc": "2026-08-21T07:21:24Z"
+  },
+  "category_E_artifact_binding": {
+    "runner_sha256": "540874237EF5FE4C2652D2483253B76D440A448DF93E67D78B7DA1F9054113A1",
+    "test_sha256": "70DD8739B43D42D8E55FAFE4415D3BB469569F95C7056DEDBE65D37EBC287EA8",
+    "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "base_model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "phase_id": "6E.20.3"
+  },
+  "category_F_metadata": {
+    "nepr_timestamp_utc": "2026-08-21T07:21:24Z",
+    "nepr_hash": "sha256:d0d3133a362c00273b2a1bf7c3b1fe1cf2060748bcd8c35d6cf29aa3d3e7fa4e"
+  }
+}

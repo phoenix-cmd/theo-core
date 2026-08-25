@@ -1,0 +1,25 @@
+{
+  "decision": "APPROVE",
+  "phase": "6E.20.1",
+  "date": "2026-08-16",
+  "authorization_timestamp": "2026-08-16T23:25:00+05:30",
+  "protocol_artifact": "theo-slm-fixed-subspace-readout-authorization-protocol-draft-v3.1.md",
+  "protocol_sha256": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+  "runner_artifact": "run_phase_6e20_execution_v2.py",
+  "runner_sha256": "E2628BDB8778F86ED546FA9B98C84D22AE7FF990984B9A3C065CC51DC84C9091",
+  "conformance_harness_artifact": "run_phase_6e20_execution_conformance_harness_v2.py",
+  "conformance_harness_sha256": "8C3FCE5335AE5C3E1E804B09DD9CE211C2E5C85CD593B9D3E2E79E792BDF9B65",
+  "implementation_plan_artifact": "theo-slm-fixed-subspace-readout-authorization-protocol-v4.0-execution-extension-plan.md",
+  "implementation_plan_sha256": "87C8E486",
+  "human_authorization_record": "Explicit L5 human execution authorization for Phase 6E.20.1. Decision: APPROVE. Authorization to execute only the pre-registered Phase 6E.20.1 execution-extension scope under frozen v3.1, plan v4.0, runner v2, and harness v2 as recorded above. No modification of protocol, thresholds, seeds, conditions, or decision rules. No reuse of the pre-existing 6E.20 authorization artifact (phase=6E.20). All VOID, refusal, provenance, telemetry, and hard-stop safeguards must be maintained. No unregistered follow-up intervention is authorized. Freeze all execution artifacts and produce post-execution forensic report upon completion.",
+  "signature": "EXPLICIT_HUMAN_L5_AUTHORIZATION_2026-08-16T23:25:00+05:30",
+  "restrictions": [
+    "Execution only under the exact frozen artifacts and hashes recorded above",
+    "No modification of protocol, thresholds, seeds, conditions, or decision rules",
+    "No reuse of the pre-existing 6E.20 execution_authorization.json",
+    "Maintain all VOID, refusal, provenance, telemetry, and hard-stop safeguards",
+    "No unregistered follow-up intervention automatically",
+    "Freeze all execution artifacts and produce post-execution forensic report"
+  ],
+  "scope": "Phase 6E.20.1 Fixed-Subspace Readout execution extension - pre-registered execution only (step-0 registration, training, evaluation per v3.1 / plan v4.0 / runner v2)"
+}

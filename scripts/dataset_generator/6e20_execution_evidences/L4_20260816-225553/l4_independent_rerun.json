@@ -1,0 +1,364 @@
+{
+  "l4_independent_review": true,
+  "reviewer": "L4 Independent Conformance Reviewer",
+  "timestamp_utc": "20260816T17:29:49Z",
+  "rng_seed": 42,
+  "passed": 62,
+  "total": 62,
+  "all_pass": true,
+  "results": [
+    {
+      "check": "F-AUTH-1: refuses None",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-AUTH-2: refuses 6E.20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-AUTH-3: accepts 6E.20.1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-AUTH-4: refuses REJECT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-AUTH-5: EXECUTION_AUTH_PHASE == 6E.20.1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-AUTH-6: frozen auth NOT reused",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-STEP0-1: gates all pass",
+      "pass": true,
+      "detail": "failed=[]"
+    },
+    {
+      "check": "F-STEP0-2: G2 scale finite",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-STEP0-3: G3 kappas in range",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-STEP0-4: G4 kappas present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-STEP0-5: G5 kappa_R in [0.05,0.3]",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-STEP0-6: G8 weights gain",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-COND-1: list",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-COND-2: readouts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-COND-3: zero trainable",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-1: r=16",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-2: alpha=32",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-3: dropout=0.05",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-4: 7 targets",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-5: lr=1e-4",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-6: wd=0.01",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-7: grad_accum=2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-8: batch=4",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-9: clip=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-10: lambda=10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-11: T=20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-12: ckpt set",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-TRAIN-13: COLLAPSE_K=3",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-METRIC-1: ba=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-METRIC-2: d>3",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-METRIC-3: margin POS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-METRIC-4: margin ABS(0)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-CRIT-1: JOINT_SUCCESS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-CRIT-2: P2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-CRIT-3: P4",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-CRIT-4: P5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-CRIT-5: P6",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-CRIT-6: verdict=SUCCESS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-VOID-1: no run_void",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-VOID-2: G8 voids",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-COSH1-1: anti=-1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-COSH1-2: para=1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-PROV-1: 13 objects",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-PROV-2: proto hash",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-PROV-3: 11 decisions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-COLLAPSE-1: trigger",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-COLLAPSE-2: no trigger",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-LAYER-1: layer=24",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-PROMPTS-1: 16",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-PLAN-1: hash len=64",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-PROTO-1: proto hash",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-EXEC-1: collect_H16",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-EXEC-2: train_condition",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-EXEC-3: evaluate_checkpoint",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "F-EXEC-4: emit_provenance",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "HASH-runner_v1",
+      "pass": true,
+      "detail": "computed=B1152326C2972E4AEEAFBD500BBFC67250A19AA364DED1EBBF870B5A2966E347"
+    },
+    {
+      "check": "HASH-harness_exec",
+      "pass": true,
+      "detail": "computed=2AB38CA1BF1C75E2AA03B420D7255AA23EAF161D4568CB6EE57B1BD8954291FA"
+    },
+    {
+      "check": "HASH-frozen_runner",
+      "pass": true,
+      "detail": "computed=550FAA345721649225F32748C39053077B08BE165426EF3FE38C2F6E276A1BD9"
+    },
+    {
+      "check": "HASH-frozen_harness",
+      "pass": true,
+      "detail": "computed=8239C2A16C2B886A3239845C3C28E2C2FC3F46DC71CFB059142ABB8CFCDAFE49"
+    },
+    {
+      "check": "HASH-plan_v40",
+      "pass": true,
+      "detail": "computed=87C8E486572F0B9D42EE49E21B2E93A56AD1C7CB755DD9EFAE5A0F25F463304A"
+    },
+    {
+      "check": "HASH-protocol_v31",
+      "pass": true,
+      "detail": "computed=E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85"
+    },
+    {
+      "check": "HASH-plan_v321",
+      "pass": true,
+      "detail": "computed=F6A145DDA276621421A13E22215CBF5F9DE3052C712CD8CD4055076C3D3679F1"
+    }
+  ],
+  "drift_analysis": [
+    {
+      "item": "S8-Proj naming",
+      "severity": "INFO",
+      "detail": "Review request says S8-Proj; protocol v3.1 and implementation both use S8. No drift."
+    },
+    {
+      "item": "cos_H1 placeholder",
+      "severity": "MAJOR",
+      "detail": "evaluate_checkpoint uses identical S8 vectors for POS/ABS giving cos=1.0 always. Placeholder; real H1 requires gradient computation at L5."
+    },
+    {
+      "item": "rho hardcoded",
+      "severity": "MAJOR",
+      "detail": "rho_s4=0.5, rho_s8=0.6 hardcoded. Requires per-sample gradient decomposition at L5."
+    },
+    {
+      "item": "d15/bal15 source",
+      "severity": "MAJOR",
+      "detail": "d15/bal15 sourced from F1 synthetic margins, not actual t=15 checkpoint. Placeholder."
+    },
+    {
+      "item": "checkpoint restore",
+      "severity": "MAJOR",
+      "detail": "Checkpoint loaded but weights not restored. Evaluation uses current model state."
+    },
+    {
+      "item": "provenance completeness",
+      "severity": "MINOR",
+      "detail": "p5_loo_report.json not emitted; runs.json missing cos_H1/rho_c/sigma_c/gate_dispositions."
+    },
+    {
+      "item": "auth_path hardcoded",
+      "severity": "MINOR",
+      "detail": "Auth path is hardcoded relative. Should be configurable."
+    },
+    {
+      "item": "training gradient",
+      "severity": "MINOR",
+      "detail": "Loss computed analytically from readout margins, not through model forward/backward."
+    }
+  ],
+  "no_execution_occurred": true
+}

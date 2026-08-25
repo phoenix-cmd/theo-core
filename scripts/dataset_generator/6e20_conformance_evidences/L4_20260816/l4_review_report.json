@@ -1,0 +1,75 @@
+{
+  "document": "L4 independent review report - Phase 6E.20 (pre-execution)",
+  "phase": "6E.20",
+  "stage": "L4 independent review (implementation complete; L1-L3 accepted)",
+  "date": "2026-08-16",
+  "reviewer": "Independent reviewer (opencode) - read-only verification",
+  "verdict": "PASS",
+  "acceptance": "L4 PASS / L5 PENDING",
+  "verification_matrix": {
+    "v1": {
+      "requirement": "6E.20 does not read or reuse the pre-existing 6E.18 execution_authorization.json",
+      "result": "VERIFIED",
+      "evidence": "Zero references to phase-6e18/theo-data in 6E.20 modules; auth_path is None on every call path (runner L910/L921/L930/L938/L970/L1079); refusal_check requires decision=APPROVE and phase=6E.20 exactly; 6E.18 file carries phase=6E.18."
+    },
+    "v2": {
+      "requirement": "No execution-stage function can run without the L5 authorization condition",
+      "result": "VERIFIED",
+      "evidence": "run_step0_registration/run_training/run_evaluation begin with check_execution_authorization and raise ExecutionNotAuthorized; execute CLI refuses; L2 execution_gate_refuses test; C18 L5-registration refusal; no optimizer/zero_grad/backward/from_pretrained/torch.load in runner."
+    },
+    "v3": {
+      "requirement": "L3 evidence is independently reproducible",
+      "result": "VERIFIED",
+      "evidence": "Two independent harness runs (L3_20260816-215339, L3_20260816-215443) yield byte-identical preflight_l4_synthetic.json (07DAF8BB...) and synthetic_registration_summary.json (5380530F...); on-disk hashes match run output."
+    },
+    "v4": {
+      "requirement": "All L5-deferred work is explicitly identified and cannot be silently promoted to pre-execution work",
+      "result": "VERIFIED",
+      "evidence": "Exactly 5 rows marked l5_deferred=true (C1, C2, C3, C4, C6); G1/G2 legacy identity checks require real_panel=True; synthetic registration hardcodes real_panel=false (L767); sole real-panel entry point refuses; no_waiver=true."
+    },
+    "v5": {
+      "requirement": "Runner hashes and evidence hashes match the frozen state",
+      "result": "VERIFIED_WITH_FINDING_F1",
+      "evidence": "Report runner sha 550faa...426e... = on-disk file; plan F6A145DD... and frozen protocol E16CA4F1... re-verified on disk; freeze-directive runner hash was a malformed 61-char transcription (finding F-1), corrected via hash_ledger_F1.json."
+    }
+  },
+  "findings_register": [
+    {
+      "id": "F-1",
+      "severity": "MODERATE_DOCUMENTATION",
+      "finding": "Freeze directive quoted runner hash 550FAA345721649225F32748C39053077B08BE165CF3FE38C2F6E276A1BD9 is a 61-character malformed transcription that does not match any file.",
+      "action": "Corrected hash recorded in immutable ledger hash_ledger_F1.json.",
+      "ledger_sha256": "5A8093F3EF6B7E40B137268EEFFAACB75890A08085526D1FED2A743CF20A38CC",
+      "status": "CORRECTED_RECORDED"
+    },
+    {
+      "id": "F-2",
+      "severity": "INFO",
+      "finding": "static_config_conformance.json differs between runs only because run1 predates the C16 MODEL_ID fix (ok=false); run2 includes the fix (ok=true). Fully explained; current harness deterministic.",
+      "action": "None required.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-3",
+      "severity": "INFO",
+      "finding": "run_step0_registration is a guard stub that refuses even with an auth file (defense-in-depth); real-panel L5 path unimplemented at this stage.",
+      "action": "None required; consistent with EXECUTION NOT AUTHORIZED.",
+      "status": "CLOSED"
+    }
+  ],
+  "frozen_hash_ledger": {
+    "runner": "550FAA345721649225F32748C39053077B08BE165426EF3FE38C2F6E276A1BD9",
+    "harness": "8239C2A16C2B886A3239845C3C28E2C2FC3F46DC71CFB059142ABB8CFCDAFE49",
+    "plan_v321": "F6A145DDA276621421A13E22215CBF5F9DE3052C712CD8CD4055076C3D3679F1",
+    "protocol_v31": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85"
+  },
+  "constraints_honored": [
+    "No modification of runner, harness, v3.1 protocol, or Plan v3.2.1",
+    "No training, optimizer steps, checkpoints, or scientific evaluation executed",
+    "run_step0_registration / run_training / run_evaluation not invoked",
+    "execution_authorization.json not created or modified",
+    "Documentation correction only (hash transcription F-1)"
+  ],
+  "final_state": "L4 PASS / L5 PENDING",
+  "authority": "IMPLEMENTATION AUTHORIZED (L1-L3) ONLY; EXECUTION NOT AUTHORIZED"
+}

@@ -1,0 +1,100 @@
+{
+  "aggregation_set": [
+    4,
+    6,
+    14,
+    15
+  ],
+  "mean_cos_H1": {
+    "B0": 0.4200985,
+    "F1": 0.444401,
+    "S2": 0.4537625,
+    "S4": 0.462658,
+    "S8": 0.42681375,
+    "C4-Rand": 0.4484275,
+    "R1-Rand": 0.4114615
+  },
+  "mean_rho_c": {
+    "B0": -0.1759579556047446,
+    "F1": -0.05634584720279452,
+    "S2": -0.010197681619151244,
+    "S4": 0.005779390961914357,
+    "S8": 0.007234221375023356,
+    "C4-Rand": 0.08591836797254235,
+    "R1-Rand": 0.0008431796052382896
+  },
+  "d15": {
+    "B0": 1.6308791221765966,
+    "F1": 1.617632691934445,
+    "S2": 0.7320463591981109,
+    "S4": 1.1244443869922893,
+    "S8": 1.4603918843286607,
+    "C4-Rand": 0.42723315958720365,
+    "R1-Rand": 0.2535291100281325
+  },
+  "balanced_accuracy_15": {
+    "B0": 0.8125,
+    "F1": 0.75,
+    "S2": 0.5,
+    "S4": 0.625,
+    "S8": 0.5,
+    "C4-Rand": 0.5625,
+    "R1-Rand": 0.625
+  },
+  "criteria": {
+    "P2_S4": {
+      "passed": false,
+      "value": 0.462658,
+      "threshold": 0.8
+    },
+    "P2_S8": {
+      "passed": false,
+      "value": 0.42681375,
+      "threshold": 0.8
+    },
+    "P3_F1": {
+      "passed": true,
+      "value": 1.617632691934445,
+      "threshold": 0.8
+    },
+    "P3_C4_FAIL": {
+      "passed": true,
+      "value": 0.42723315958720365,
+      "threshold": 0.8
+    },
+    "P3_R1_FAIL": {
+      "passed": true,
+      "value": 0.2535291100281325,
+      "threshold": 0.8
+    },
+    "P1_S8": {
+      "passed": false,
+      "value": 0.007234221375023356,
+      "threshold": 0.5
+    }
+  },
+  "hypotheses": {
+    "H1_Primary_Subspace_Gradient_Compatibility": {
+      "verdict": "REFUTED",
+      "rule": "mean_cos(S4) >= +0.80 AND mean_cos(S8) >= +0.80",
+      "details": "S4=0.462658, S8=0.426814"
+    },
+    "H4_Aligned_vs_Random_Subspace": {
+      "verdict": "REFUTED",
+      "rule": "mean_cos(S4) - mean_cos(C4-Rand) >= +0.30 AND C4-Rand d(15) < +0.80",
+      "details": "delta=0.014231 (req >= 0.3), C4_d15=0.427233"
+    },
+    "H5_Random_1D_Alignment_Specificity": {
+      "verdict": "SUPPORTED",
+      "rule": "R1-Rand d(15) < +0.80 AND F1 d(15) >= +0.80",
+      "details": "R1_d15=0.253529, F1_d15=1.617633"
+    },
+    "H3_Readout_Steering": {
+      "verdict": "REFUTED",
+      "rule": "rho_S8 >= 0.50 AND rho_S8 >= rho_S4 >= rho_S2",
+      "details": "rho_S8=0.007234, rho_S4=0.005779, rho_S2=-0.010198"
+    }
+  },
+  "nepr_environment_classification": "non_applicable",
+  "nepr_hash": "sha256:d3da6e120704e32adb4d086b190d6c7fc06b3617764bd27785bd53e42593a172"
+}

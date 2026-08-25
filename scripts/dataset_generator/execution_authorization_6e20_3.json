@@ -1,0 +1,79 @@
+{
+  "phase": "6E.20.3",
+  "execution_phase": "6E.20.7",
+  "decision": "APPROVE",
+  "reviewer": "L5 Human Review (6E.20.7, APPROVED at execution-authorization preparation stage)",
+  "review_date": "2026-08-24",
+  "runner_sha256": "2529DFF7198A20F1C50CFDE998CF8A46F4C133E9CBC00E1E38A13EC4F0AF25BC",
+  "test_sha256": "F71539768C40FFF0F51B0FC6EAEC2499E28BE425278B69481A416EE7087DB4AE",
+  "collect_nepr_sha256": "E2EE8AFE6EE05BF9AD22D753DE1C63A12108687EB5F2B86E44D493E4A123095A",
+  "frozen_6e18_sha256": "6BCAF1319AC551848FFDB55AEA121D14D808408A192E05F2AA6171161DECEF96",
+  "bound_hashes_note": "All four hashes are UPPERCASE SHA-256. They MUST be recomputed immediately before execution; any mismatch HALTS execution. The runner_sha256 is additionally enforced by check_authorization at startup (HALT on mismatch).",
+  "scope": {
+    "executions": 1,
+    "selection": "exactly one controlled 6E.20.7 run",
+    "no_retry": true,
+    "no_selective_rerun": true,
+    "no_resume": true
+  },
+  "sens_control": {
+    "enabled": true,
+    "description": "Non-degenerate SENS control: genuinely distinct paraphrase framings of the SAME logical verdict. PRO and ABS sets express the same truth value via different surface forms.",
+    "gradient_source": "real frozen psdg_fn (NO gradient copying); aggregation uses the frozen cos_H1_aggregate (mean-of-8-PRO-gradients then mean-of-8-ABS-gradients, then cosine)",
+    "criterion": "cos_H1(SENS) >= 0.95",
+    "failure_action": "If cos_H1(SENS) < 0.95: the cos(H1) observable is declared INVALID for H1; the broader scientific premise remains UNRESOLVED; NO H1/P1-P6 or protocol verdict is changed; the four-cause criteria are NOT reinterpreted. This is a diagnostic-control failure, not a scientific-success signal.",
+    "binding": "The exact prompt strings below are FROZEN. They MUST be passed verbatim to enable_6e20_7_telemetry(sens_enabled=True, sens_prompts=<the list below>) at execution. Substitution of 'better' paraphrases is PROHIBITED.",
+    "prompts": [
+      ["PRO", "The agreement is legally binding."],
+      ["PRO", "The measurement is confirmed accurate."],
+      ["PRO", "The hypothesis is strongly supported."],
+      ["PRO", "The proposed treatment is recommended."],
+      ["PRO", "The transaction is fully authorized."],
+      ["PRO", "The claim is verified correct."],
+      ["PRO", "The system is operating normally."],
+      ["PRO", "The response is affirmative."],
+      ["ABS", "It is not the case that the agreement is not legally binding."],
+      ["ABS", "It is not the case that the measurement is inaccurate."],
+      ["ABS", "It is not the case that the hypothesis is unsupported."],
+      ["ABS", "It is not the case that the proposed treatment is not recommended."],
+      ["ABS", "It is not the case that the transaction is unauthorized."],
+      ["ABS", "It is not the case that the claim is incorrect."],
+      ["ABS", "It is not the case that the system is non-operational."],
+      ["ABS", "It is not the case that the response is negative."]
+    ]
+  },
+  "cause_thresholds": {
+    "FLOOR_r_cs": 0.20,
+    "FLOOR_Cspec_abs": "1e-3 * median(C_common[S4], C_common[S8])  [NOT all-conditions median — R1 resolved]",
+    "FLOOR_Vhet": 0.25,
+    "FLOOR_Vhet_stable": 0.10,
+    "SENS_EXPECT": 0.95,
+    "EPS": 1e-9,
+    "MULTIMODAL_FRAC": 0.30,
+    "note": "These are DIAGNOSTIC CONTROLS, not new scientific success criteria. Fixed; not tuned to data. 0.95 SENS and the four-cause floors must NOT be promoted to success criteria."
+  },
+  "pre_execution_hash_gate": {
+    "procedure": "Immediately before --execute, independently recompute SHA-256 (uppercase) of run_phase_6e20_reevaluation.py, test_phase_6e20_reevaluation.py, collect_nepr.py, and the frozen 6E.18 machinery. Compare to the bound hashes above. If ANY differs, HALT and DO NOT execute.",
+    "enforced_by_runner": "runner_sha256 is also checked by check_authorization at startup (HALT on mismatch)."
+  },
+  "output_directory": "phase-6e20.7-observable-validation-output",
+  "preserve_artifacts": "All 6E.20.1-6E.20.6 artifacts (including phase-6e20.5 outputs and the frozen 6E.18 machinery) remain READ-ONLY and unmodified by this execution.",
+  "telemetry_scope": "Stage 6 gradient-norm + cos_H1 telemetry and Stage 8 four-cause classification are written to the dedicated 6E.20.7 output directory only; the default verdict pipeline is unchanged.",
+  "post_run_constraints": [
+    "Do not execute more than once.",
+    "Do not retry, selectively rerun, resume, or re-run on failure.",
+    "Do not alter H1 threshold (0.80), rho_c/sigma_c formulas, P1-P6, or evaluate_protocol_hypotheses.",
+    "Do not alter the SENS criterion or the four-cause thresholds.",
+    "Do not reinterpret the criteria after seeing results.",
+    "Produce a complete execution record and stop."
+  ],
+  "audit_disposition": "PASS (6E.20.7_PRE_AUTHORIZATION_AUDIT_v2.md); human approval granted for authorization preparation; execution itself not yet performed.",
+  "prior_auth_superseded": "execution_authorization_6e20_3_6E20.5_SUPERSEDED.json",
+  "reauthorization": {
+    "date": "2026-08-24",
+    "decision": "APPROVE (corrected single execution)",
+    "reason": "Initial --execute halted at environment setup (NameError: 'torch' is not defined) BEFORE any evaluation. Root cause: runner imported as a module by harness, bypassing its `if __name__=='__main__': import torch` guard, so torch was never bound in runner module globals. All four bound hashes matched at pre-execution gate; no frozen artifacts modified; Stage 7 not reached. Re-authorized for exactly ONE corrected execution.",
+    "harness_fix": "Driver binds torch into the runner module namespace (import torch; R.torch = torch) - equivalent to the __main__ import guard. NO modification to runner or test source. Telemetry opt-in unchanged.",
+    "harness_invocation": "import run_phase_6e20_reevaluation as R; import torch; R.torch = torch; R.enable_6e20_7_telemetry(sens_enabled=True, sens_prompts=<authorization-bound 16 prompts>); R.main(['--execute','--out-dir','phase-6e20.7-observable-validation-output'])"
+  }
+}

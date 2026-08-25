@@ -1,0 +1,18 @@
+{
+  "ledger_id": "F-1",
+  "record_type": "hash_transcription_correction",
+  "subject": "Freeze-directive runner SHA-256 transcription error (L4 finding F-1)",
+  "artifact": "run_phase_6e20_fixed_subspace_readout.py",
+  "artifact_path": "theo-core/scripts/dataset_generator/run_phase_6e20_fixed_subspace_readout.py",
+  "original_quoted_sha256": "550FAA345721649225F32748C39053077B08BE165CF3FE38C2F6E276A1BD9",
+  "original_character_length": 61,
+  "original_valid_sha256": false,
+  "verified_sha256": "550FAA345721649225F32748C39053077B08BE165426EF3FE38C2F6E276A1BD9",
+  "verified_character_length": 64,
+  "disposition": "CORRECTED_RECORDED",
+  "verification_source": "L4 independent review, 2026-08-16, Get-FileHash -Algorithm SHA256 (independent re-hash)",
+  "status": "IMMUTABLE_DO_NOT_MODIFY",
+  "date": "2026-08-16",
+  "authority": "IMPLEMENTATION AUTHORIZED (L1-L3) ONLY; EXECUTION NOT AUTHORIZED",
+  "note": "Corrects the malformed 61-character SHA-256 transcription in the freeze directive. The frozen artifact itself is unchanged and verified byte-identical; this ledger corrects only the recorded digest."
+}

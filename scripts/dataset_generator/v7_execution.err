@@ -1,0 +1,37 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:  64%|######3   | 185/290 [00:00<00:00, 1844.34it/s]Loading weights: 100%|##########| 290/290 [00:00<00:00, 2009.19it/s]
+C:\Users\bs162\AppData\Roaming\Python\Python314\site-packages\torch\nn\modules\module.py:1096: UserWarning: expandable_segments not supported on this platform (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\c10/cuda/CUDAAllocatorConfig.h:40.)
+  return self._apply(lambda t: t.cuda(device))
+C:\Users\bs162\Desktop\THEO\theo-core\scripts\dataset_generator\run_phase_6e20_execution_v7.py:546: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:823.)
+  "loss": float(batch_loss), "proposal_rate": pr,
+Traceback (most recent call last):
+  File "C:\Users\bs162\Desktop\THEO\theo-core\scripts\dataset_generator\run_phase_6e20_execution_v7.py", line 1252, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "C:\Users\bs162\Desktop\THEO\theo-core\scripts\dataset_generator\run_phase_6e20_execution_v7.py", line 1207, in main
+    eval_result = run_evaluation(model, tokenizer, reg_result["reg"], out_dir,
+                                 void_conditions=void_conds)
+  File "C:\Users\bs162\Desktop\THEO\theo-core\scripts\dataset_generator\run_phase_6e20_execution_v7.py", line 809, in run_evaluation
+    ev = evaluate_checkpoint(model, tokenizer, reg,
+                             checkpoint_path=cp_path,
+                             void_conditions=void_conditions,
+                             panel_prompts=panel_prompts)
+  File "C:\Users\bs162\Desktop\THEO\theo-core\scripts\dataset_generator\run_phase_6e20_execution_v7.py", line 747, in evaluate_checkpoint
+    cos_h1 = compute_cos_H1_from_live_model(
+        model, s8_readout, tokenizer, panel_prompts,
+        device=next(model.parameters()).device, condition_name="S8")
+  File "C:\Users\bs162\Desktop\THEO\theo-core\scripts\dataset_generator\run_phase_6e20_execution_v7.py", line 358, in compute_cos_H1_from_live_model
+    g_pos.append(PER_SAMPLE_DECISION_GRADIENT(model, readout, item, lp, tokenizer))
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bs162\Desktop\THEO\theo-data\datasets\theo_slm_v0_artifacts\phase-6e18-causal-intervention\code_snapshot\run_phase_6e18_causal_intervention.py", line 1021, in per_sample_decision_gradient
+    z_pro, z_abs = readout.forward_logits(hL)
+                   ~~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\bs162\Desktop\THEO\theo-core\scripts\dataset_generator\run_phase_6e20_fixed_subspace_readout.py", line 253, in forward_logits
+    s = self.forward_margin(h)
+  File "C:\Users\bs162\Desktop\THEO\theo-core\scripts\dataset_generator\run_phase_6e20_fixed_subspace_readout.py", line 250, in forward_margin
+    return float(np.asarray(self.w, dtype=np.float64) @ np.asarray(h, dtype=np.float64)) + self.b
+                                                        ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bs162\AppData\Roaming\Python\Python314\site-packages\torch\_tensor.py", line 1247, in __array__
+    return self.numpy().astype(dtype, copy=False)
+           ~~~~~~~~~~^^
+TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.

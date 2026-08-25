@@ -1,0 +1,29 @@
+{
+  "authorization_id": "runtime-drift-diag-6E.20.3-001",
+  "authority": "L5 (principal investigator)",
+  "issued_at": "2026-08-20",
+  "scope": "Runtime Drift Root-Cause Localization (post 6E.20.3 closure)",
+  "authorized_activity": [
+    "Phase A: within-environment repeatability matrix (multiple independent process runs + same-process repeated B0 evaluations)",
+    "Phase B: first-divergence instrumentation at pipeline boundaries (readout reconstruction, PEFT wrap, model inference, raw outputs, intermediate metrics, B0 step-1..4)",
+    "Phase C: controlled-factor isolation (random state, model init/loading, inference mode, GPU numerical behavior, data/order instability)"
+  ],
+  "binding": {
+    "runner_sha256": "f424ecf64ae16eb669428d11120174cf575ad4d498462dc88cf8259df1fc9b38",
+    "test_sha256": "43889916354f7edb72c5be72fb9a672d6907537b42464eeda4637ccf8ee96dba",
+    "collect_nepr_sha256": "e2ee8afe6ee05bf9ad22d753de1c63a12108687eb5f2b86e44d493e4a123095a"
+  },
+  "prohibitions": [
+    "DO NOT modify NEPR, B0 tolerance (1e-4), historical anchor (0.428355), P1-P6 thresholds, evaluate_protocol_hypotheses, joint gate, or frozen 6E.20.1/6E.20.2 artifacts",
+    "DO NOT relax 1e-4 tolerance",
+    "DO NOT replace 0.428355 with any recomputed value",
+    "DO NOT average, best-of, or select closest among divergent runs",
+    "DO NOT modify B0 output to match 0.428355, add a correction factor, or alter the model",
+    "DO NOT change the scientific semantics of frozen 6E.18 machinery (psdg_fn, crgc_fn)",
+    "Diagnostic instrumentation only; any repair proposal must be deferred to a separate authorized phase"
+  ],
+  "frozen_reference_hashes": {
+    "frozen_6e18_machinery_sha256": "6bcaf1319ac551848ffdb55aea121d14d808408a192e05f2aa6171161decef96"
+  },
+  "disposition": "AUTHORIZED FOR DIAGNOSTIC INVESTIGATION ONLY"
+}

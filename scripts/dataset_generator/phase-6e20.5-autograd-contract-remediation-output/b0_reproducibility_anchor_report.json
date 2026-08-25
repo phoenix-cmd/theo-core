@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "description": "Historical B0+S8 path reproduced within 1e-4 tolerance. Validates evaluation environment.",
+  "results": {
+    "4": {
+      "checkpoint": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\B0\\checkpoint_4\\model.pt",
+      "historical_runs_json_cos_H1": 0.428355,
+      "recomputed_b0_s8_cos_H1": 0.428355,
+      "absolute_difference": 0.0,
+      "tolerance": 0.0001,
+      "pass": true
+    },
+    "6": {
+      "checkpoint": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\B0\\checkpoint_6\\model.pt",
+      "historical_runs_json_cos_H1": 0.409713,
+      "recomputed_b0_s8_cos_H1": 0.409713,
+      "absolute_difference": 0.0,
+      "tolerance": 0.0001,
+      "pass": true
+    },
+    "14": {
+      "checkpoint": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\B0\\checkpoint_14\\model.pt",
+      "historical_runs_json_cos_H1": 0.42747,
+      "recomputed_b0_s8_cos_H1": 0.42747,
+      "absolute_difference": 0.0,
+      "tolerance": 0.0001,
+      "pass": true
+    },
+    "15": {
+      "checkpoint": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\B0\\checkpoint_15\\model.pt",
+      "historical_runs_json_cos_H1": 0.41745,
+      "recomputed_b0_s8_cos_H1": 0.41745,
+      "absolute_difference": 0.0,
+      "tolerance": 0.0001,
+      "pass": true
+    }
+  },
+  "nepr_comparison": {
+    "nepr_hash": "sha256:d3da6e120704e32adb4d086b190d6c7fc06b3617764bd27785bd53e42593a172",
+    "note": "NEPR environment classification is non-gating metadata. Stage 5 halt logic is unchanged."
+  }
+}

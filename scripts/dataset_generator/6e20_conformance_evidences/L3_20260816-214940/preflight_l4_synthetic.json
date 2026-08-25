@@ -1,0 +1,75 @@
+{
+  "checks": [
+    {
+      "check": "hash_functions",
+      "pass": true,
+      "detail": "legacy=5665012d8e09.. canon=e718add56286.."
+    },
+    {
+      "check": "canonical_sign_convention",
+      "pass": true,
+      "detail": "all sign-pinned columns have non-negative largest-magnitude element"
+    },
+    {
+      "check": "nested_subspaces",
+      "pass": true,
+      "detail": "max|U8[:,:2]-U2|=0.00e+00 max|U8[:,:4]-U4|=0.00e+00"
+    },
+    {
+      "check": "kappa_gate_logic",
+      "pass": false,
+      "detail": "G1=True, G2=True, G3(k=2)=False, G3(k=4)=False, G3(k=8)=True, G4=True, G5=False, G6=True, G7=True, G8=True"
+    },
+    {
+      "check": "degenerate_s_scale_guard",
+      "pass": true,
+      "detail": "nan/-1/0 flagged; 0.5 accepted"
+    },
+    {
+      "check": "sign_assertion_g6",
+      "pass": true,
+      "detail": "cos([1,0],[-1,0])=-1.000000 cos([1,0],[1,0])=1.000000"
+    },
+    {
+      "check": "confinement_residual_g7",
+      "pass": true,
+      "detail": "S2/POS:res_ratio=9.255e-16; S2/ABS:res_ratio=8.865e-16; S4/POS:res_ratio=1.182e-15; S4/ABS:res_ratio=1.224e-15; S8/POS:res_ratio=1.348e-15; S8/ABS:res_ratio=1.255e-15"
+    },
+    {
+      "check": "zero_trainable_params",
+      "pass": true,
+      "detail": "total_trainable_readout_params=0"
+    },
+    {
+      "check": "common_gain_g8",
+      "pass": true,
+      "detail": "s_scale=0.210437 norms={'F1': 0.210437, 'S2': 0.210437, 'S4': 0.210437, 'S8': 0.210437, 'C4-Rand': 0.210437, 'R1-Rand': 0.210437}"
+    },
+    {
+      "check": "distinctness",
+      "pass": true,
+      "detail": "21 pairs checked"
+    },
+    {
+      "check": "metric_arithmetic",
+      "pass": true,
+      "detail": "rho=0.583522 in [-1,1]"
+    },
+    {
+      "check": "alpha_chain_rule",
+      "pass": true,
+      "detail": "a_pos=-1.000000 a_abs=1.000000"
+    },
+    {
+      "check": "config_assertions",
+      "pass": true,
+      "detail": "inherited config constants match frozen protocol \u00a710.3"
+    },
+    {
+      "check": "hash_convention_distinctness",
+      "pass": true,
+      "detail": "legacy != canonical (by design), no cross-convention equality asserted"
+    }
+  ],
+  "all_pass": false
+}

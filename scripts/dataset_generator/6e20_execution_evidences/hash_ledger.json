@@ -1,0 +1,58 @@
+{
+  "description": "Hash ledger for Phase 6E.20.1 execution extension artifacts",
+  "timestamp": "2026-08-16",
+  "new_artifacts": {
+    "execution_runner_v1": {
+      "file": "run_phase_6e20_execution.py",
+      "sha256": "B1152326C2972E4AEEAFBD500BBFC67250A19AA364DED1EBBF870B5A2966E347",
+      "status": "SUPERSEDED by v2"
+    },
+    "execution_harness_v1": {
+      "file": "run_phase_6e20_execution_conformance_harness.py",
+      "sha256": "2AB38CA1BF1C75E2AA03B420D7255AA23EAF161D4568CB6EE57B1BD8954291FA",
+      "status": "SUPERSEDED by v2"
+    },
+    "execution_runner_v2": {
+      "file": "run_phase_6e20_execution_v2.py",
+      "sha256": "E2628BDB8778F86ED546FA9B98C84D22AE7FF990984B9A3C065CC51DC84C9091",
+      "status": "ACTIVE — resolves M1-M4 findings"
+    },
+    "execution_harness_v2": {
+      "file": "run_phase_6e20_execution_conformance_harness_v2.py",
+      "sha256": "8C3FCE5335AE5C3E1E804B09DD9CE211C2E5C85CD593B9D3E2E79E792BDF9B65",
+      "status": "ACTIVE — C1-C34 battery"
+    },
+    "plan_v40": {
+      "file": "theo-slm-fixed-subspace-readout-authorization-protocol-v4.0-execution-extension-plan.md",
+      "sha256": "87C8E486572F0B9D42EE49E21B2E93A56AD1C7CB755DD9EFAE5A0F25F463304A",
+      "status": "ACTIVE"
+    }
+  },
+  "frozen_artifacts": {
+    "frozen_runner": {
+      "file": "run_phase_6e20_fixed_subspace_readout.py",
+      "sha256": "550FAA345721649225F32748C39053077B08BE165426EF3FE38C2F6E276A1BD9",
+      "status": "UNCHANGED"
+    },
+    "frozen_harness": {
+      "file": "run_phase_6e20_conformance_harness.py",
+      "sha256": "8239C2A16C2B886A3239845C3C28E2C2FC3F46DC71CFB059142ABB8CFCDAFE49",
+      "status": "UNCHANGED"
+    },
+    "frozen_plan_v321": {
+      "file": "theo-slm-fixed-subspace-readout-authorization-protocol-v3.2.1-pre-execution-implementation-plan.md",
+      "sha256": "F6A145DDA276621421A13E22215CBF5F9DE3052C712CD8CD4055076C3D3679F1",
+      "status": "UNCHANGED"
+    },
+    "frozen_protocol_v31": {
+      "file": "theo-slm-fixed-subspace-readout-authorization-protocol-draft-v3.1.md",
+      "sha256": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+      "status": "UNCHANGED"
+    },
+    "frozen_6e20_auth": {
+      "file": "execution_authorization.json",
+      "sha256": "4CFABC2FEE5F5170B6EACD3D9CCAC1FA70F3E0C8F877621707056E149B2DD60E",
+      "status": "ARCHIVED — MUST NOT be reused"
+    }
+  }
+}

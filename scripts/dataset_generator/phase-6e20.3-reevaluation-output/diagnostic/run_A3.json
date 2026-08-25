@@ -1,0 +1,89 @@
+{
+  "run_id": "A3",
+  "phase": "A-repeatability",
+  "device_str": "cuda:0",
+  "torch_version": "2.13.0+cu126",
+  "cuda_available": true,
+  "b0_run1": {
+    "per_step_cos": {
+      "4": 0.422904,
+      "6": 0.407642,
+      "14": 0.416044,
+      "15": 0.410382
+    },
+    "per_step_diff_vs_anchor": {
+      "4": 0.005450999999999984,
+      "6": 0.0020709999999999895,
+      "14": 0.011425999999999992,
+      "15": 0.007067999999999963
+    },
+    "decisive_step": "14",
+    "decisive_recomputed": 0.416044,
+    "decisive_anchor": 0.42747,
+    "decisive_diff": 0.011425999999999992,
+    "tolerance": 0.0001,
+    "halts": true
+  },
+  "b0_run2": {
+    "per_step_cos": {
+      "4": 0.428513,
+      "6": 0.403795,
+      "14": 0.417483,
+      "15": 0.410607
+    },
+    "per_step_diff_vs_anchor": {
+      "4": 0.00015799999999999148,
+      "6": 0.005917999999999979,
+      "14": 0.009987000000000024,
+      "15": 0.006842999999999988
+    },
+    "decisive_step": "14",
+    "decisive_recomputed": 0.417483,
+    "decisive_anchor": 0.42747,
+    "decisive_diff": 0.009987000000000024,
+    "tolerance": 0.0001,
+    "halts": true
+  },
+  "within_process_same": false,
+  "seed_before": {
+    "python": {
+      "error": "int() argument must be a string, a bytes-like object or a real number, not 'NoneType'"
+    },
+    "numpy": {
+      "alg": "MT19937",
+      "pos": 98,
+      "has_gauss": 0,
+      "size": 624
+    },
+    "torch_cpu": {
+      "hash": "e601d6be40112315417d4f6804eec155",
+      "size": 5056
+    },
+    "torch_cuda": [
+      "7766c15fbac10fb7"
+    ]
+  },
+  "seed_after": {
+    "python": {
+      "error": "int() argument must be a string, a bytes-like object or a real number, not 'NoneType'"
+    },
+    "numpy": {
+      "alg": "MT19937",
+      "pos": 98,
+      "has_gauss": 0,
+      "size": 624
+    },
+    "torch_cpu": {
+      "hash": "e601d6be40112315417d4f6804eec155",
+      "size": 5056
+    },
+    "torch_cuda": [
+      "7b4afdaeaf5e6213"
+    ]
+  },
+  "nepr_hash": "sha256:4c02811a5be0a6933e668dae2fe337f299500614d556b374ec89048cf67f4277",
+  "nepr_schema": "1.0.0",
+  "runner_sha256": "F424ECF64AE16EB669428D11120174CF575AD4D498462DC88CF8259DF1FC9B38",
+  "test_sha256": "43889916354F7EDB72C5BE72FB9A672D6907537B42464EEDA4637CCF8EE96DBA",
+  "collect_nepr_sha256": "E2EE8AFE6EE05BF9AD22D753DE1C63A12108687EB5F2B86E44D493E4A123095A"
+}

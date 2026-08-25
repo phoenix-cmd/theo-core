@@ -64,7 +64,8 @@ the training data so they are never *learned* as behaviors:
 - **modification of symbolic state** — no writes to beliefs, rules, or memory
 - **bypassing grounding** — every output id must resolve against the supplied grounding snapshot
 - **replacing symbolic inference** — deterministic inference/verification stays in the runtime
-- **replacing deterministic verification** — the provider pipeline's schema and grounding validation is non-negotiable
+  - **replacing deterministic verification** — the provider pipeline's schema and grounding validation is non-negotiable
+  - **hidden-state gradient-compatibility optimization** — no `cos(H1)`-style subspace-alignment training signals; the 6E.20.x fixed-subspace-readout experiment showed this observable is invalid and is **not a validated training or evaluation signal for THEO SLM v0** (see §H)
 
 **Boundary contract (unchanged from ADR-0028 / 6A.1):** model proposes;
 runtime disposes. `theo_core` never imports `torch`/`transformers`.
@@ -244,8 +245,38 @@ THEO SLM v1 ...
   (the 6A.2 rationale-ordering defect is a regression test).
 - The frozen 51-case benchmark and 15-case probe are evaluation-only, forever;
   newly discovered regression cases are appended to evaluation, never to training.
+- **Gradient-based compatibility probes are excluded from THEO SLM v0 evaluation
+  gates** (e.g., `cos(H1)`-style hidden-state gradient-cosine observables) unless they
+  first pass a pre-registered sensitivity control. The 6E.20.x experiment showed such
+  observables are not validated measurements (see §H).
 
 ---
+
+## H. Lesson from the fixed-subspace-readout experiment (6E.20.x)
+
+The 6E.20.x line (6E.20.1–6E.20.7) tested whether a fixed low-dimensional aligned readout
+subspace induces hidden-state gradient compatibility measurable by `cos(H1)`. It is
+**closed/inconclusive**: the `cos(H1)` observable failed its own pre-registered
+sensitivity control (`cos_H1(SENS) = 0.322966 < 0.95`), so the broader premise is
+**UNRESOLVED**, not refuted. The durable lesson for this design:
+
+> **`cos(H1)` is not a validated training/evaluation signal for THEO SLM v0.**
+
+1. Do **not** use hidden-state gradient-cosine compatibility (`cos(H1)`) as a training
+   signal, regularization term, or evaluation metric for THEO SLM v0.
+2. Evaluate candidate models on behavioral / structured-output gates — E0
+   (structured-output failure) rate, grounding rate, semantic-novelty rate,
+   decision-relevance — exactly as specified above in §G. This is the authority.
+3. Any future gradient-based probe must pass a pre-registered sensitivity control before
+   its output informs any conclusion (the 6E.20.7 lesson).
+4. Stopping rule: when a measurement instrument fails its validation control, stop and
+   redesign the measurement; do not increase training dose or iterate on the same metric
+   (rescue loop).
+
+Full outcome record: `docs/research/theo-slm-phase-6e20-outcome.md`. Authoritative closure:
+`theo-core/scripts/dataset_generator/6E.20_FINAL_RESEARCH_CONCLUSION.md`. 6E.20.8 is a
+separate, gated future branch requiring a materially different measurement strategy or
+question; it is not an automatic continuation.
 
 ## Review gate (before any implementation)
 

@@ -1,0 +1,24 @@
+{
+  "decision": "APPROVE",
+  "phase": "6E.20.1",
+  "date": "2026-08-16",
+  "authorization_timestamp": "2026-08-17T00:15:00+05:30",
+  "protocol_artifact": "theo-slm-fixed-subspace-readout-authorization-protocol-draft-v3.1.md",
+  "protocol_sha256": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+  "runner_artifact": "run_phase_6e20_execution_v3.py",
+  "runner_sha256": "8EE1C8F4B947A575EF4FC54764C59994F123B1A9B991C2E834B0C2AF81DA9102",
+  "conformance_harness_artifact": "run_phase_6e20_execution_conformance_harness_v2.py",
+  "conformance_harness_sha256": "8C3FCE5335AE5C3E1E804B09DD9CE211C2E5C85CD593B9D3E2E79E792BDF9B65",
+  "implementation_plan_artifact": "theo-slm-fixed-subspace-readout-authorization-protocol-v4.0-execution-extension-plan.md",
+  "implementation_plan_sha256": "87C8E486572F0B9D42EE49E21B2E93A56AD1C7CB755DD9EFAE5A0F25F463304A",
+  "human_authorization_record": "Explicit L5 human execution authorization for Phase 6E.20.1 v3. Decision: APPROVE. Authorization to execute only the pre-registered Phase 6E.20.1 execution-extension scope under frozen v3.1, plan v4.0, runner v3 (corpus-derived prompts), and harness v2 as recorded above. v3 fixes TASK_PROMPTS degenerate blocker by using corpus format_prompt() (6E.18 parity). No modification of protocol, thresholds, seeds, conditions, or decision rules. No reuse of any prior authorization artifact. All VOID, refusal, provenance, telemetry, and hard-stop safeguards must be maintained. No unregistered follow-up intervention is authorized. Freeze all execution artifacts and produce post-execution forensic report upon completion. Post-fix: bfloat16 numpy compatibility (float() cast added).",
+  "signature": "EXPLICIT_HUMAN_L5_AUTHORIZATION_2026-08-17T00:15:00+05:30",
+  "restrictions": [
+    "Execution only under the exact frozen artifacts and hashes recorded above",
+    "No modification of protocol, thresholds, seeds, conditions, or decision rules",
+    "Maintain all VOID, refusal, provenance, telemetry, and hard-stop safeguards",
+    "No unregistered follow-up intervention automatically",
+    "Freeze all execution artifacts and produce post-execution forensic report"
+  ],
+  "scope": "Phase 6E.20.1 Fixed-Subspace Readout execution extension v3 - corpus-derived prompts, pre-registered execution only (step-0 registration, training, evaluation per v3.1 / plan v4.0)"
+}

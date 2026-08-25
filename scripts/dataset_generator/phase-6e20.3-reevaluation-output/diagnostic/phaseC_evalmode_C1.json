@@ -1,0 +1,69 @@
+{
+  "run_id": "C1",
+  "phase": "C-inference-mode-isolation",
+  "device_str": "cuda:0",
+  "tolerance": 0.0001,
+  "lora_dropout": 0.05,
+  "train_mode": {
+    "step4_cos_a": 0.427624,
+    "step4_cos_b": 0.423261,
+    "step4_within_diff": 0.004363000000000006,
+    "step4_anchor": 0.428355,
+    "step4_diff_vs_anchor_a": 0.0007309999999999817,
+    "all_steps": {
+      "4": {
+        "cos_a": 0.427624,
+        "cos_b": 0.423261,
+        "within_diff": 0.004363000000000006
+      },
+      "6": {
+        "cos_a": 0.404735,
+        "cos_b": 0.399131,
+        "within_diff": 0.005603999999999998
+      },
+      "14": {
+        "cos_a": 0.419971,
+        "cos_b": 0.426656,
+        "within_diff": 0.0066849999999999965
+      },
+      "15": {
+        "cos_a": 0.414373,
+        "cos_b": 0.415962,
+        "within_diff": 0.001589000000000007
+      }
+    },
+    "max_within_diff": 0.0066849999999999965
+  },
+  "eval_mode": {
+    "step4_cos_a": 0.428355,
+    "step4_cos_b": 0.428355,
+    "step4_within_diff": 0.0,
+    "step4_anchor": 0.428355,
+    "step4_diff_vs_anchor_a": 0.0,
+    "all_steps": {
+      "4": {
+        "cos_a": 0.428355,
+        "cos_b": 0.428355,
+        "within_diff": 0.0
+      },
+      "6": {
+        "cos_a": 0.409713,
+        "cos_b": 0.409713,
+        "within_diff": 0.0
+      },
+      "14": {
+        "cos_a": 0.42747,
+        "cos_b": 0.42747,
+        "within_diff": 0.0
+      },
+      "15": {
+        "cos_a": 0.41745,
+        "cos_b": 0.41745,
+        "within_diff": 0.0
+      }
+    },
+    "max_within_diff": 0.0
+  },
+  "verdict_dropout_is_cause": true,
+  "verdict_gpu_nondeterminism": false
+}

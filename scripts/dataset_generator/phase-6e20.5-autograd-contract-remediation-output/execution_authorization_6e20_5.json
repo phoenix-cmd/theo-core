@@ -1,0 +1,42 @@
+{
+  "phase": "6E.20.5",
+  "title": "Stage 6 Autograd-Contract Remediation — dedicated graph-preserving tensor readout path",
+  "decision": "APPROVE",
+  "authorization_level": "L5",
+  "authorization_type": "EXECUTION",
+  "authorized_by": "Human reviewer (L5 Execution Authorization, 6E.20.5)",
+  "authorized_at": "2026-08-21T13:46:33+05:30",
+  "source_audit": "phase-6e20.5-autograd-contract-remediation-output/6E.20.5_INDEPENDENT_SOURCE_AUDIT.md",
+  "source_audit_verdict": "SOURCE AUDIT PASS (accepted by human review 2026-08-21)",
+  "specification_audit": "phase-6e20.5-autograd-contract-remediation-output/6E.20.5_INDEPENDENT_SPECIFICATION_AUDIT.md (PASS); Option B accepted; C1 (PreflightError guard) and C2 (Test D fake forward_logits_tensor) required; T1-T8 real-autograd acceptance criteria preserved",
+  "command": "python run_phase_6e20_reevaluation.py --execute --out-dir phase-6e20.5-autograd-contract-remediation-output",
+  "execution_count_limit": 1,
+  "bound_hashes": {
+    "run_phase_6e20_reevaluation.py": "f3915b258bfaa4fe6e45a4f756546b4b7ba3a1d16e48b37f81a22660be4cae65",
+    "test_phase_6e20_reevaluation.py": "2a64709e7a3e549c3e44ceee9bef9c457b0ef02df4a3466c56259b7e52e89d60",
+    "collect_nepr.py": "e2ee8afe6ee05bf9ad22d753de1c63a12108687eb5f2b86e44d493e4a123095a",
+    "frozen_6e18_run_phase_6e18_causal_intervention.py": "6bcaf1319ac551848ffdb55aea121d14d808408a192e05f2aa6171161decef96"
+  },
+  "pre_execution_requirements": [
+    "Recompute and independently verify all four bound hashes immediately before execution.",
+    "If any bound hash differs, do not execute; HALT and report the mismatch.",
+    "Do not modify source, tests, frozen artifacts, thresholds, anchors, tolerances, formulas, gates, or protocol logic after hash binding."
+  ],
+  "scope": "One execution only of the already reviewed and hash-bound 6E.20.5 implementation (add Readout.forward_margin_tensor/forward_logits_tensor; switch compute_live_rho_c consumer to forward_logits_tensor; extend Test D fake; add T1-T8).",
+  "prohibited": [
+    "retries or selective reruns",
+    "source modification after hash binding",
+    "tolerance changes",
+    "anchor changes or recomputation",
+    "changes to P1-P6",
+    "changes to evaluate_protocol_hypotheses, the joint gate, or outcome matrix",
+    "changes to the rho_c/sigma_c scientific formula",
+    "modification of Stage 5",
+    "modification of collect_nepr.py",
+    "modification of frozen 6E.18 machinery",
+    "averaging, best-of selection, correction factors, detached-tensor workarounds, or result alteration"
+  ],
+  "runtime_shim_note": "The runner's frozen AUTH_FILE_NAME='execution_authorization_6e20_3.json' and PHASE_ID='6E.20.3' require a runtime shim carrying runner_sha256=f3915b258bfaa4fe6e45a4f756546b4b7ba3a1d16e48b37f81a22660be4cae65 so check_authorization passes. That shim (execution_authorization_6e20_3.json) is updated for this run; this file (execution_authorization_6e20_5.json) is the authoritative human-facing L5 execution authorization. Same pattern as 6E.20.4 (documented in phase-6e20.4-remediation-output/6E.20.4_EXECUTION_RECORD.md).",
+  "post_execution_record": "phase-6e20.5-autograd-contract-remediation-output/6E.20.5_EXECUTION_RECORD.md (to be written after the single execution; kept separate from this authorization).",
+  "scientific_verdict": "NONE encoded. This file authorizes execution only."
+}

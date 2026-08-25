@@ -1,0 +1,230 @@
+{
+  "timestamp_utc": "2026-08-18T00:00:00Z",
+  "phase": "6E.20.3",
+  "files": {
+    "protocol": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\docs\\research\\theo-slm-fixed-subspace-readout-authorization-protocol-draft-v3.1.md",
+      "sha256": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+      "expected": "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+      "match": true
+    },
+    "plan_v40": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\docs\\research\\theo-slm-fixed-subspace-readout-authorization-protocol-v4.0-execution-extension-plan.md",
+      "sha256": "87C8E486572F0B9D42EE49E21B2E93A56AD1C7CB755DD9EFAE5A0F25F463304A",
+      "expected": "87C8E486572F0B9D42EE49E21B2E93A56AD1C7CB755DD9EFAE5A0F25F463304A",
+      "match": true
+    },
+    "frozen_6e18_snapshot": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-data\\datasets\\theo_slm_v0_artifacts\\phase-6e18-causal-intervention\\code_snapshot\\run_phase_6e18_causal_intervention.py",
+      "sha256": "6BCAF1319AC551848FFDB55AEA121D14D808408A192E05F2AA6171161DECEF96",
+      "expected": "6BCAF1319AC551848FFDB55AEA121D14D808408A192E05F2AA6171161DECEF96",
+      "match": true
+    },
+    "runner_6e20_base": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\run_phase_6e20_fixed_subspace_readout.py",
+      "sha256": "550FAA345721649225F32748C39053077B08BE165426EF3FE38C2F6E276A1BD9",
+      "expected": "550FAA345721649225F32748C39053077B08BE165426EF3FE38C2F6E276A1BD9",
+      "match": true
+    },
+    "runner_6e20_1_v7": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\run_phase_6e20_execution_v7.py",
+      "sha256": "C8E298C85294B8CC5737D5A8EE44679C7A778EEF09187894F1FE1CF435115A8B",
+      "expected": "C8E298C85294B8CC5737D5A8EE44679C7A778EEF09187894F1FE1CF435115A8B",
+      "match": true
+    },
+    "auth_6e20_1_v7": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\execution_authorization_v7.json",
+      "sha256": "5214DA997764F62C9370238E055CD5394925FBFE8F0C61478B8D192B198C4F91",
+      "expected": "5214DA997764F62C9370238E055CD5394925FBFE8F0C61478B8D192B198C4F91",
+      "match": true
+    },
+    "auth_6e20_1_v6": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\execution_authorization_v6.json",
+      "sha256": "5214DA997764F62C9370238E055CD5394925FBFE8F0C61478B8D192B198C4F91",
+      "expected": "5214DA997764F62C9370238E055CD5394925FBFE8F0C61478B8D192B198C4F91",
+      "match": true
+    },
+    "corpus": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-data\\datasets\\theo_slm_v0_deduplicated\\candidate_records.json",
+      "sha256": "A7B4E84509B1C0DC03B81425125F061CEDAFE288CB18F153E8399B19CF717EB0",
+      "expected": "A7B4E84509B1C0DC03B81425125F061CEDAFE288CB18F153E8399B19CF717EB0",
+      "match": true
+    },
+    "step0/H_16.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\H_16.npy",
+      "sha256": "A4593E4AAD2BFAB0CBBB4A2257CFE60AE9CCFE0A7CD2BF04CE8FC014EB23A1F5",
+      "expected": "A4593E4AAD2BFAB0CBBB4A2257CFE60AE9CCFE0A7CD2BF04CE8FC014EB23A1F5",
+      "match": true
+    },
+    "step0/y16.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\y16.npy",
+      "sha256": "D8E9B87393A6EE9C24D56C7EB2D8C301030BEAFAF0E723D38EC922E8A8CB7737",
+      "expected": "D8E9B87393A6EE9C24D56C7EB2D8C301030BEAFAF0E723D38EC922E8A8CB7737",
+      "match": true
+    },
+    "step0/u_lda.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\u_lda.npy",
+      "sha256": "B72C6C215D40A76E33E1755FF88AD1CDE12FCA8D7B8270A638EB39385B6B0113",
+      "expected": "B72C6C215D40A76E33E1755FF88AD1CDE12FCA8D7B8270A638EB39385B6B0113",
+      "match": true
+    },
+    "step0/U_8.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\U_8.npy",
+      "sha256": "7C99C57787078AE6B3AA82ACF86972AA485AA89C436497B78CA0EA6D9747D4A7",
+      "expected": "7C99C57787078AE6B3AA82ACF86972AA485AA89C436497B78CA0EA6D9747D4A7",
+      "match": true
+    },
+    "step0/R_4.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\R_4.npy",
+      "sha256": "87EAFB205D6CA713BE314BB30AC91F1483F471A6769560C089C9B2CC16EE6E8E",
+      "expected": "87EAFB205D6CA713BE314BB30AC91F1483F471A6769560C089C9B2CC16EE6E8E",
+      "match": true
+    },
+    "step0/n_rand.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\n_rand.npy",
+      "sha256": "7EA2B434CE81C66AB18D153E2FB6D5BC4AC344A36EB0D5FF1B7780AFADCC0EF2",
+      "expected": "7EA2B434CE81C66AB18D153E2FB6D5BC4AC344A36EB0D5FF1B7780AFADCC0EF2",
+      "match": true
+    },
+    "step0/w_B0.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\w_B0.npy",
+      "sha256": "6ABCE8497339BB6254D856A226C386EFDE19929F1CF702AA2FFDDD073C6147DA"
+    },
+    "checkpoint/B0/t4": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\B0\\checkpoint_4\\model.pt",
+      "sha256": "F92C097B2FE04669491BBB06B38DDAE73800D11FFA91AC24CC2E8E4660BAF42D"
+    },
+    "checkpoint/B0/t6": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\B0\\checkpoint_6\\model.pt",
+      "sha256": "11E8E814C4D24183B539FB33B6A70B8833F70D68A88F38C1B8AA26474305A9DF"
+    },
+    "checkpoint/B0/t14": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\B0\\checkpoint_14\\model.pt",
+      "sha256": "0E2EDB611C5AD6F7D3892817F97AC9E51AA5C62B94874B526318FBD185AC6F76"
+    },
+    "checkpoint/B0/t15": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\B0\\checkpoint_15\\model.pt",
+      "sha256": "F9DE50353B3814BE219B276698002FA83A6D1F3E2F9E23EB7FD329944F72EB5C"
+    },
+    "step0/w_F1.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\w_F1.npy",
+      "sha256": "A091434E583A1C35F964B9E3AEB552D3A3515D2E2EDDB8E1FADA9944FA6AC294"
+    },
+    "checkpoint/F1/t4": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\F1\\checkpoint_4\\model.pt",
+      "sha256": "6076945CB388522DFC56B5B121EC8FADAD811DC435754760B726F9E5E0A1CF01"
+    },
+    "checkpoint/F1/t6": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\F1\\checkpoint_6\\model.pt",
+      "sha256": "22656B0ADD1E06710189C94A4AC4DC39F1292C6337AD4F0AAE86627F019DB0BB"
+    },
+    "checkpoint/F1/t14": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\F1\\checkpoint_14\\model.pt",
+      "sha256": "FEADD13989E60B75FF1B7C143057FFBE2DFBB631ABCF60190EFB8FBE257DFD6E"
+    },
+    "checkpoint/F1/t15": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\F1\\checkpoint_15\\model.pt",
+      "sha256": "AB2F22B5B22357A0A0D0E1A890EC8EEB5BC221D122B9215BF7FBC2D9560EF2E7"
+    },
+    "step0/w_S2.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\w_S2.npy",
+      "sha256": "99902FE7A21AC239947F3AD9E524B5AAEA191B3D120B2CD791FDA559F771A9DD"
+    },
+    "checkpoint/S2/t4": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S2\\checkpoint_4\\model.pt",
+      "sha256": "D5660F104B2CEA1A931A2E34A4DBCBB7B9760F0F0886E9C7E55E924BBA9C51A0"
+    },
+    "checkpoint/S2/t6": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S2\\checkpoint_6\\model.pt",
+      "sha256": "7BCF4117DFE25C82355F5322A4F77EDBAF1BBF30ABC9E4663026ABDFB76BB0BF"
+    },
+    "checkpoint/S2/t14": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S2\\checkpoint_14\\model.pt",
+      "sha256": "5438C2B1CCCC6036512CC68452755A804E8657A18676D2E7C50B150A35B9D626"
+    },
+    "checkpoint/S2/t15": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S2\\checkpoint_15\\model.pt",
+      "sha256": "093B43BFEB769C58AA5C13F0BED377546711BEEF04909F38008AF798A665B270"
+    },
+    "step0/w_S4.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\w_S4.npy",
+      "sha256": "50407E8F017F0F4822498D42BBFA4CC84D1074032EE0B55CB52A2A9CA2F3E512"
+    },
+    "checkpoint/S4/t4": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S4\\checkpoint_4\\model.pt",
+      "sha256": "98655A9880C8630195A3DF5259C86D49CAD116766CB129AB43926DE9EAE40B55"
+    },
+    "checkpoint/S4/t6": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S4\\checkpoint_6\\model.pt",
+      "sha256": "77D35F5AA0EDB8F85B5FE6FC6D31DD34EFEF1C53D17B3D3BE4863E9C396ED1F3"
+    },
+    "checkpoint/S4/t14": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S4\\checkpoint_14\\model.pt",
+      "sha256": "2FEA912F384BE63F65EC760AC12578842B35EE5A930DE32F3432D9914E64B97D"
+    },
+    "checkpoint/S4/t15": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S4\\checkpoint_15\\model.pt",
+      "sha256": "FAB28EE2DA5482C18F07B9B7B96E19ED17890916D041AADD1B481D5125D891E7"
+    },
+    "step0/w_S8.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\w_S8.npy",
+      "sha256": "C6A70365D032644491EF19689D41E886241D29D8ACD0A2D76D1064C2D627678E"
+    },
+    "checkpoint/S8/t4": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S8\\checkpoint_4\\model.pt",
+      "sha256": "9BB67217089C7859878CAFD9E52D490E7FBFD828DD2BA63974E0CD9975E19B61"
+    },
+    "checkpoint/S8/t6": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S8\\checkpoint_6\\model.pt",
+      "sha256": "C9E79F5CE1A7DCB782F7F41351B3539C5B40C059F9F39632E176ECDDC59E3F1E"
+    },
+    "checkpoint/S8/t14": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S8\\checkpoint_14\\model.pt",
+      "sha256": "B6D0A11FAF9CF3EB3E3522C88701B9CA9FDC2B9DB8DA534432F4A9BC10CE6845"
+    },
+    "checkpoint/S8/t15": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\S8\\checkpoint_15\\model.pt",
+      "sha256": "21E55A327EF6E6194B5B3F9CBD0B59DAC160C17C25260286A23D830C64C1CA93"
+    },
+    "step0/w_C4-Rand.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\w_C4-Rand.npy",
+      "sha256": "055CD0C3F8AFB3E17A499D27F666CA554491EA75D97D28C1CD1B4741796759AA"
+    },
+    "checkpoint/C4-Rand/t4": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\C4-Rand\\checkpoint_4\\model.pt",
+      "sha256": "A423708315885B8DE851D13818195D71721E21EA38DDE294F2E80AB482F4DFCA"
+    },
+    "checkpoint/C4-Rand/t6": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\C4-Rand\\checkpoint_6\\model.pt",
+      "sha256": "BCE89C7B28E5A29480B41BC088A830E04E049689FAF47A3B563B6B57987A53AA"
+    },
+    "checkpoint/C4-Rand/t14": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\C4-Rand\\checkpoint_14\\model.pt",
+      "sha256": "7CF13A75173394DA46033913097AB36F5DC04A85554193AE274FE16454B13746"
+    },
+    "checkpoint/C4-Rand/t15": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\C4-Rand\\checkpoint_15\\model.pt",
+      "sha256": "E71BD8257BC0698014F705388108A10EBBB233D7A461CA9E744CF08E8D49FF48"
+    },
+    "step0/w_R1-Rand.npy": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\step0\\w_R1-Rand.npy",
+      "sha256": "34103FE1935DCE2D9965CECC15391B27E7781506E24CFA57A9EF03BC77660AFA"
+    },
+    "checkpoint/R1-Rand/t4": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\R1-Rand\\checkpoint_4\\model.pt",
+      "sha256": "9CE8C4EBFBD9CB97770F552B7318F2637B36F2D627F098D768C6F66239387E79"
+    },
+    "checkpoint/R1-Rand/t6": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\R1-Rand\\checkpoint_6\\model.pt",
+      "sha256": "830566E39F912A7549C6579FF4381096A40D07C3409B16642103EDFEA461993F"
+    },
+    "checkpoint/R1-Rand/t14": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\R1-Rand\\checkpoint_14\\model.pt",
+      "sha256": "7AE833C0FDD0035AF7E27950D2CF4E1C83D783058C6EEBFD02AA19C8B309B9D6"
+    },
+    "checkpoint/R1-Rand/t15": {
+      "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-core\\scripts\\dataset_generator\\phase-6e20.1-execution-output\\R1-Rand\\checkpoint_15\\model.pt",
+      "sha256": "A3844CC77289C15F009E320FD8999FA3E8B1C9C35AC2945AF8E31B7A0A02E1AD"
+    }
+  }
+}

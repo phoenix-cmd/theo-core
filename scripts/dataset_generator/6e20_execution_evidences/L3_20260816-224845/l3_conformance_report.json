@@ -1,0 +1,28 @@
+﻿{
+    "hashes":  {
+                   "execution_harness":  "2AB38CA1BF1C75E2AA03B420D7255AA23EAF161D4568CB6EE57B1BD8954291FA",
+                   "frozen_harness":  "8239C2A16C2B886A3239845C3C28E2C2FC3F46DC71CFB059142ABB8CFCDAFE49",
+                   "frozen_protocol_v31":  "E16CA4F1496AD21C99A81C94CD3EBE2CFB810B89C8A2EC2A97D08A02A5073F85",
+                   "frozen_runner":  "550FAA345721649225F32748C39053077B08BE165426EF3FE38C2F6E276A1BD9",
+                   "frozen_plan_v321":  "F6A145DDA276621421A13E22215CBF5F9DE3052C712CD8CD4055076C3D3679F1",
+                   "execution_runner_v1":  "9D53812BB6B9106F1BB2365984D81A4C1D360D1B49181ACD79170FCFB2897E1C",
+                   "plan_v40":  "87C8E486572F0B9D42EE49E21B2E93A56AD1C7CB755DD9EFAE5A0F25F463304A"
+               },
+    "timestamp":  "2026-08-16T22:48:59Z",
+    "l3_conformance":  {
+                           "total_checks":  26,
+                           "status":  "PASS",
+                           "g_plan_1":  "PASS",
+                           "failed":  [
+
+                                      ],
+                           "passed":  26
+                       },
+    "frozen_verification":  {
+                                "protocol_unchanged":  true,
+                                "plan_unchanged":  true,
+                                "runner_unchanged":  true,
+                                "harness_unchanged":  true
+                            },
+    "phase":  "6E.20.1"
+}
