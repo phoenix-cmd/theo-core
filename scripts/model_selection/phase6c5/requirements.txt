@@ -1,0 +1,10 @@
+# 6C.5 cloud run — pinned dependency baseline (must match exactly or cloud_6c5.py HALTs)
+# NOTE: install torch from the cu126 index so the resolved build is 2.13.0+cu126.
+# The cloud runner hard-gates these versions + CUDA runtime 12.6 and binds the
+# actual Linux bitsandbytes wheel SHA at runtime.
+
+python==3.14.3
+torch==2.13.0+cu126
+transformers==5.8.0
+peft==0.20.0
+bitsandbytes==0.50.1

@@ -1,0 +1,93 @@
+{
+  "generated_by": "prepare_6c5_cloud_bundle.py",
+  "root": "C:\\Users\\bs162\\Desktop\\THEO",
+  "bundle_sha256": "ace20fc0f9d5c8a1ac4fb8e718614986f0cbef2122c8524501a7b721e4163db6",
+  "excluded_count": 2484,
+  "files": [
+    {
+      "relpath": "theo-data/models/6c_acquired/M1_Qwen2.5-0.5B-Instruct/model.safetensors",
+      "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+      "size": 988097824
+    },
+    {
+      "relpath": "theo-data/models/6c_acquired/M1_Qwen2.5-0.5B-Instruct/config.json",
+      "sha256": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+      "size": 659
+    },
+    {
+      "relpath": "theo-data/datasets/theo_slm_v0_review/adjudication.json",
+      "sha256": "97bc6bc6a0addbd35faa77a9437f63458240c45ae7bb1668bf4c2da01573ede4",
+      "size": 220846
+    },
+    {
+      "relpath": "theo-data/datasets/theo_slm_v0_review/6b3_batch2/6c4_mapping_manifest.json",
+      "sha256": "b9a9b8e6a3e6bd545306e541a87697429d9b301ddad00da8fa80eca0f60d40c4",
+      "size": 201384
+    },
+    {
+      "relpath": "theo-data/datasets/theo_slm_v0_review/6b3_batch2/candidate_records_batch2_remediated.json",
+      "sha256": "6b743d0006d43a891553e24f30c1d1adbecaa03332a946a20d92f19b60c00277",
+      "size": 106130
+    },
+    {
+      "relpath": "theo-data/datasets/theo_slm_v0_review/6b3_batch2/6c5_binding_manifest.json",
+      "sha256": "65da7405c3f4ebd9726cf14418f4ea0c3296c155bf6f59bcc59bf5631adde717",
+      "size": 3822
+    },
+    {
+      "relpath": "theo-data/datasets/theo_slm_v0_review/6b3_batch2/6c5_split_manifest.json",
+      "sha256": "eda4cb6695b6651a7cef8bdee0a7a990f4f799a6bf9148269ee758d0704ee232",
+      "size": 10880
+    },
+    {
+      "relpath": "theo-data/datasets/theo_slm_v0_deduplicated/candidate_records.json",
+      "sha256": "a7b4e84509b1c0dc03b81425125f061cedafe288cb18f153e8399b19cf717eb0",
+      "size": 1063884
+    },
+    {
+      "relpath": "theo-data/datasets/theo_slm_v0_review/6b3_batch1/candidate_records_batch1.json",
+      "sha256": "06fe6e59ea3175a151cdb4dd7f712faab1237f526e8b142847165f9252f77950",
+      "size": 66495
+    },
+    {
+      "relpath": "theo-data/datasets/theo_slm_v0_artifacts/phase-6e3/populated-evidence-corpus.json",
+      "sha256": "f99ca025eaaa3073e296e7cb734581f0871315553b5c145bb7f2fc27a4ac6457",
+      "size": 62408
+    },
+    {
+      "relpath": "theo-core/scripts/model_selection/phase6c5/experiment_spec.py",
+      "sha256": "dfe8ed5df1ca16fe7da883c77573e69e810dce67e111025e03d83da05409b8b3",
+      "size": 8023
+    },
+    {
+      "relpath": "theo-core/scripts/model_selection/phase6c5/train_6c5.py",
+      "sha256": "b1b5e9ca4b4917316d7d347addec67f8a7643c251437b54eae240c2b65a6c05d",
+      "size": 5198
+    },
+    {
+      "relpath": "theo-core/scripts/model_selection/phase6c5/cloud_6c5.py",
+      "sha256": "56fd6f6aaa68ef9ae238efccb3735cf8e275fa68b6b7816a0c54e358cd48198f",
+      "size": 9187
+    },
+    {
+      "relpath": "theo-core/scripts/model_selection/phase6c5/phase2_audit.py",
+      "sha256": "8bab7bd12162162dc87160ec63ee6f5d482807777474e93459cf3462ee40144f",
+      "size": 7673
+    },
+    {
+      "relpath": "theo-core/scripts/model_selection/phase6c5/amendment_audit.py",
+      "sha256": "ab750ddde5d4520448552f66a3e5d6ff677577cd70a80bb5d75c4dad6db81ee2",
+      "size": 5365
+    },
+    {
+      "relpath": "theo-core/scripts/model_selection/phase6c5/bind_6c5.py",
+      "sha256": "fc2c69efdf052b1893417a990997fb67922610e2f774f2fca6cab440252a185a",
+      "size": 4578
+    },
+    {
+      "relpath": "theo-core/scripts/model_selection/phase6c5/requirements.txt",
+      "sha256": "ddc24d6ba1219765f3cd6ec5a3d737dee54c5c4b2632c67e9dbbe620c1f13360",
+      "size": 392
+    }
+  ]
+}

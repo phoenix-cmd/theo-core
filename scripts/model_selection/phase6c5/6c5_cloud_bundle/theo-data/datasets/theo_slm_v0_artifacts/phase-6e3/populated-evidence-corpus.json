@@ -1,0 +1,1584 @@
+{
+  "corpus_name": "phase-6e3-populated-evidence-corpus",
+  "version": "1.0-frozen",
+  "created": "2026-08-26",
+  "basis": "Derived deterministically from the frozen 66-case instrument (15-probe + 51-benchmark). No historical records or 300-GOLD corpus modified; no evidence fields fabricated into historical records.",
+  "n_cases": 66,
+  "gate_reference": "theo-slm-phase-6c-model-selection-plan.md §7 (behavioral gates, unmodified)",
+  "cases": [
+    {
+      "case_id": "sp1://a/001",
+      "source": "probe",
+      "group": "A",
+      "capability": "paraphrase",
+      "percept": "The container shattered after hitting the floor.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://a/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The container shattered after hitting the floor."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://a/002",
+      "source": "probe",
+      "group": "A",
+      "capability": "paraphrase",
+      "percept": "The towel still feels damp after hanging all night.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://a/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The towel still feels damp after hanging all night."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://a/003",
+      "source": "probe",
+      "group": "A",
+      "capability": "paraphrase",
+      "percept": "She turned down the job offer.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://a/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "She turned down the job offer."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://b/001",
+      "source": "probe",
+      "group": "B",
+      "capability": "inference",
+      "percept": "Ravi picked up an umbrella before leaving. Dark clouds covered the sky. The street was already wet.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://b/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Ravi picked up an umbrella before leaving."
+        },
+        {
+          "id": "E2",
+          "text": "Dark clouds covered the sky."
+        },
+        {
+          "id": "E3",
+          "text": "The street was already wet."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://b/002",
+      "source": "probe",
+      "group": "B",
+      "capability": "inference",
+      "percept": "The lights went out. The microwave clock was blinking. The fridge hummed to life.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://b/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The lights went out."
+        },
+        {
+          "id": "E2",
+          "text": "The microwave clock was blinking."
+        },
+        {
+          "id": "E3",
+          "text": "The fridge hummed to life."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://b/003",
+      "source": "probe",
+      "group": "B",
+      "capability": "inference",
+      "percept": "A cake with candles was on the table. Balloons filled the room. Friends shouted 'Surprise!'",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://b/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "A cake with candles was on the table."
+        },
+        {
+          "id": "E2",
+          "text": "Balloons filled the room."
+        },
+        {
+          "id": "E3",
+          "text": "Friends shouted 'Surprise!'"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://c/001",
+      "source": "probe",
+      "group": "C",
+      "capability": "contradiction-inference",
+      "percept": "Nobody can enter through the door.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://c/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Nobody can enter through the door."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://c/002",
+      "source": "probe",
+      "group": "C",
+      "capability": "contradiction-inference",
+      "percept": "Someone just left the room.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://c/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Someone just left the room."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://c/003",
+      "source": "probe",
+      "group": "C",
+      "capability": "contradiction-inference",
+      "percept": "The tank has no water.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://c/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The tank has no water."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://d/001",
+      "source": "probe",
+      "group": "D",
+      "capability": "taxonomy-interpretation",
+      "percept": "The animal has fur, nurses its young, and has three toes.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://d/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The animal has fur, nurses its young, and has three toes."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://d/002",
+      "source": "probe",
+      "group": "D",
+      "capability": "taxonomy-interpretation",
+      "percept": "The vehicle has two wheels, pedals, a chain, and a bell.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://d/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The vehicle has two wheels, pedals, a chain, and a bell."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://d/003",
+      "source": "probe",
+      "group": "D",
+      "capability": "taxonomy-interpretation",
+      "percept": "The creature has feathers, lays eggs, and builds nests in trees.",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_sp1://d/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The creature has feathers, lays eggs, and builds nests in trees."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://e/001",
+      "source": "probe",
+      "group": "E",
+      "capability": "evidence-selection",
+      "percept": "The sky is blue. A red car is parked outside. The dog is sleeping in the sun. The road is wet. Pedestrians carry umbrellas.",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_sp1://e/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The sky is blue."
+        },
+        {
+          "id": "E2",
+          "text": "A red car is parked outside."
+        },
+        {
+          "id": "E3",
+          "text": "The dog is sleeping in the sun."
+        },
+        {
+          "id": "E4",
+          "text": "The road is wet."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://e/002",
+      "source": "probe",
+      "group": "E",
+      "capability": "evidence-selection",
+      "percept": "The house has three bedrooms. The kitchen has a food bowl and a litter box. The windows are large.",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_sp1://e/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The house has three bedrooms."
+        },
+        {
+          "id": "E2",
+          "text": "The kitchen has a food bowl and a litter box."
+        },
+        {
+          "id": "E3",
+          "text": "The windows are large."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "sp1://e/003",
+      "source": "probe",
+      "group": "E",
+      "capability": "evidence-selection",
+      "percept": "The building has blue walls. A group of people wear shin guards. A round black-and-white ball sits in a net. The carpet is grey.",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_sp1://e/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The building has blue walls."
+        },
+        {
+          "id": "E2",
+          "text": "A group of people wear shin guards."
+        },
+        {
+          "id": "E3",
+          "text": "A round black-and-white ball sits in a net."
+        },
+        {
+          "id": "E4",
+          "text": "The carpet is grey."
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "semantic-probe-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://ambiguity/001",
+      "source": "benchmark",
+      "domain": "ambiguity",
+      "name": "AMB-001: Sky Colour Ambiguity",
+      "percept": "what color is the sky",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://ambiguity/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "what color is the sky"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://ambiguity/002",
+      "source": "benchmark",
+      "domain": "ambiguity",
+      "name": "AMB-002: Door State Equal-Confidence Ambiguity",
+      "percept": "check the door",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://ambiguity/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "check the door"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://ambiguity/003",
+      "source": "benchmark",
+      "domain": "ambiguity",
+      "name": "AMB-003: Three-Way Weather Ambiguity",
+      "percept": "what is the weather today",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://ambiguity/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "what is the weather today"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://ambiguity/004",
+      "source": "benchmark",
+      "domain": "ambiguity",
+      "name": "AMB-004: Meeting Time Ambiguity",
+      "percept": "what time is the meeting",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://ambiguity/004",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "what time is the meeting"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://ambiguity/005",
+      "source": "benchmark",
+      "domain": "ambiguity",
+      "name": "AMB-005: Lexical Bank Ambiguity",
+      "percept": "which bank closes today",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://ambiguity/005",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "which bank closes today"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://ambiguity/006",
+      "source": "benchmark",
+      "domain": "ambiguity",
+      "name": "AMB-006: Graded Sky Interpretation",
+      "percept": "how is the sky looking",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://ambiguity/006",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "how is the sky looking"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://ambiguity/007",
+      "source": "benchmark",
+      "domain": "ambiguity",
+      "name": "AMB-007: Date Synonym Ambiguity",
+      "percept": "what is the date",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://ambiguity/007",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "what is the date"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://ambiguity/008",
+      "source": "benchmark",
+      "domain": "ambiguity",
+      "name": "AMB-008: False Association Light",
+      "percept": "how heavy is the light",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://ambiguity/008",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "how heavy is the light"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://causal_reasoning/001",
+      "source": "benchmark",
+      "domain": "causal_reasoning",
+      "name": "CAUSAL-001: Rain and Wet Ground",
+      "percept": "The sky is raining heavily outside",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://causal_reasoning/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The sky is raining heavily outside"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://causal_reasoning/002",
+      "source": "benchmark",
+      "domain": "causal_reasoning",
+      "name": "CAUSAL-002: Smoke Indicates Fire",
+      "percept": "Smoke is rising from the chimney",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://causal_reasoning/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Smoke is rising from the chimney"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://causal_reasoning/003",
+      "source": "benchmark",
+      "domain": "causal_reasoning",
+      "name": "CAUSAL-003: Drought and Crop Failure",
+      "percept": "There is a severe drought this season",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://causal_reasoning/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "There is a severe drought this season"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://causal_reasoning/004",
+      "source": "benchmark",
+      "domain": "causal_reasoning",
+      "name": "CAUSAL-004: Studying Builds Knowledge",
+      "percept": "I am studying every evening",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://causal_reasoning/004",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "I am studying every evening"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://causal_reasoning/005",
+      "source": "benchmark",
+      "domain": "causal_reasoning",
+      "name": "CAUSAL-005: Rain-to-Slippery Causal Chain",
+      "percept": "rain is falling",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://causal_reasoning/005",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "rain is falling"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://causal_reasoning/006",
+      "source": "benchmark",
+      "domain": "causal_reasoning",
+      "name": "CAUSAL-006: Sunrise and Daylight",
+      "percept": "The sun rises in the east",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://causal_reasoning/006",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "The sun rises in the east"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://causal_reasoning/007",
+      "source": "benchmark",
+      "domain": "causal_reasoning",
+      "name": "CAUSAL-007: Steam Is Not Smoke",
+      "percept": "I can see steam in the kitchen",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://causal_reasoning/007",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "I can see steam in the kitchen"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://causal_reasoning/008",
+      "source": "benchmark",
+      "domain": "causal_reasoning",
+      "name": "CAUSAL-008: Low-Confidence Premise Fails to Fire",
+      "percept": "check the road conditions",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://causal_reasoning/008",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "check the road conditions"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://causal_reasoning/009",
+      "source": "benchmark",
+      "domain": "causal_reasoning",
+      "name": "CAUSAL-009: Three-Hop Forecast Chain",
+      "percept": "what does the forecast mean",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://causal_reasoning/009",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "what does the forecast mean"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://causal_reasoning/010",
+      "source": "benchmark",
+      "domain": "causal_reasoning",
+      "name": "CAUSAL-010: Sleet Distractor Rule",
+      "percept": "snow is falling",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://causal_reasoning/010",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "snow is falling"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://commonsense/001",
+      "source": "benchmark",
+      "domain": "commonsense",
+      "name": "COMMON-001: Water Freezing Point",
+      "percept": "Water freezes in the winter",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://commonsense/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Water freezes in the winter"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://commonsense/002",
+      "source": "benchmark",
+      "domain": "commonsense",
+      "name": "COMMON-002: Birds Migrate South",
+      "percept": "Birds fly south",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://commonsense/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Birds fly south"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://commonsense/003",
+      "source": "benchmark",
+      "domain": "commonsense",
+      "name": "COMMON-003: Fire Needs Oxygen",
+      "percept": "Fire burns in the air",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://commonsense/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Fire burns in the air"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://commonsense/004",
+      "source": "benchmark",
+      "domain": "commonsense",
+      "name": "COMMON-004: Plants Seek Sunlight",
+      "percept": "Plants grow in the garden",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://commonsense/004",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Plants grow in the garden"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://commonsense/005",
+      "source": "benchmark",
+      "domain": "commonsense",
+      "name": "COMMON-005: Metal Expansion",
+      "percept": "Metal expands",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://commonsense/005",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Metal expands"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://commonsense/006",
+      "source": "benchmark",
+      "domain": "commonsense",
+      "name": "COMMON-006: Apple Distractor Evidence",
+      "percept": "is an apple healthy",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://commonsense/006",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "is an apple healthy"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://commonsense/007",
+      "source": "benchmark",
+      "domain": "commonsense",
+      "name": "COMMON-007: Bats False Association",
+      "percept": "what do bats eat",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://commonsense/007",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "what do bats eat"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://contradiction/001",
+      "source": "benchmark",
+      "domain": "contradiction",
+      "name": "CONT-001: Sky Colour Conflict",
+      "percept": "Look at the sky",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://contradiction/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Look at the sky"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://contradiction/002",
+      "source": "benchmark",
+      "domain": "contradiction",
+      "name": "CONT-002: Door State Conflict",
+      "percept": "Check the door",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://contradiction/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Check the door"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://contradiction/003",
+      "source": "benchmark",
+      "domain": "contradiction",
+      "name": "CONT-003: Day and Night Conflict",
+      "percept": "What time is it",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://contradiction/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "What time is it"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://contradiction/004",
+      "source": "benchmark",
+      "domain": "contradiction",
+      "name": "CONT-004: Market Trend Conflict",
+      "percept": "Check the market",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://contradiction/004",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Check the market"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://contradiction/005",
+      "source": "benchmark",
+      "domain": "contradiction",
+      "name": "CONT-005: Engine Temperature Conflict",
+      "percept": "Inspect the engine",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://contradiction/005",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Inspect the engine"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://contradiction/006",
+      "source": "benchmark",
+      "domain": "contradiction",
+      "name": "CONT-006: Light State Equal-Confidence Tie",
+      "percept": "check the light",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://contradiction/006",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "check the light"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://contradiction/007",
+      "source": "benchmark",
+      "domain": "contradiction",
+      "name": "CONT-007: Low-Confidence Signal Conflict",
+      "percept": "check the signal",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://contradiction/007",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "check the signal"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://contradiction/008",
+      "source": "benchmark",
+      "domain": "contradiction",
+      "name": "CONT-008: Graded Market Conflict",
+      "percept": "check the market",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://contradiction/008",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "check the market"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://contradiction/009",
+      "source": "benchmark",
+      "domain": "contradiction",
+      "name": "CONT-009: Low-Absolute-Confidence Conflict",
+      "percept": "read the gate signal",
+      "expected_decision": "SHOULD_ABSTAIN",
+      "snapshot_id": "SNAP_bm://contradiction/009",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "read the gate signal"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://taxonomy/001",
+      "source": "benchmark",
+      "domain": "taxonomy",
+      "name": "TAXO-001: Mammal Is A Animal",
+      "percept": "What is a mammal",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://taxonomy/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "What is a mammal"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://taxonomy/002",
+      "source": "benchmark",
+      "domain": "taxonomy",
+      "name": "TAXO-002: Car Is A Vehicle",
+      "percept": "Tell me about cars",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://taxonomy/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Tell me about cars"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://taxonomy/003",
+      "source": "benchmark",
+      "domain": "taxonomy",
+      "name": "TAXO-003: Plant Is A Organism",
+      "percept": "Describe plants",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://taxonomy/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Describe plants"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://taxonomy/004",
+      "source": "benchmark",
+      "domain": "taxonomy",
+      "name": "TAXO-004: Fruit Is A Food",
+      "percept": "Talk about fruit",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://taxonomy/004",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Talk about fruit"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://taxonomy/005",
+      "source": "benchmark",
+      "domain": "taxonomy",
+      "name": "TAXO-005: City Is A Place",
+      "percept": "Explain cities",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://taxonomy/005",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Explain cities"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://taxonomy/006",
+      "source": "benchmark",
+      "domain": "taxonomy",
+      "name": "TAXO-006: Inheritance Property Chain",
+      "percept": "tell me about dogs",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://taxonomy/006",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "tell me about dogs"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://taxonomy/007",
+      "source": "benchmark",
+      "domain": "taxonomy",
+      "name": "TAXO-007: Canine Synonym Ambiguity",
+      "percept": "is a canine a dog",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://taxonomy/007",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "is a canine a dog"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://taxonomy/008",
+      "source": "benchmark",
+      "domain": "taxonomy",
+      "name": "TAXO-008: Three-Level Property Spread",
+      "percept": "the family pet is a dog",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://taxonomy/008",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "the family pet is a dog"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://taxonomy/009",
+      "source": "benchmark",
+      "domain": "taxonomy",
+      "name": "TAXO-009: Sparse Knowledge Abstention",
+      "percept": "what is a platypus",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://taxonomy/009",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "what is a platypus"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://uncertainty/001",
+      "source": "benchmark",
+      "domain": "uncertainty",
+      "name": "UNC-001: Rain Confidence at Half",
+      "percept": "rain is falling",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://uncertainty/001",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "rain is falling"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://uncertainty/002",
+      "source": "benchmark",
+      "domain": "uncertainty",
+      "name": "UNC-002: Cloud Forecast Propagation",
+      "percept": "clouds gather",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://uncertainty/002",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "clouds gather"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://uncertainty/003",
+      "source": "benchmark",
+      "domain": "uncertainty",
+      "name": "UNC-003: Rain Confidence Propagation",
+      "percept": "rain is falling",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://uncertainty/003",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "rain is falling"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://uncertainty/004",
+      "source": "benchmark",
+      "domain": "uncertainty",
+      "name": "UNC-004: Weak Signal Propagation",
+      "percept": "signal detected",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://uncertainty/004",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "signal detected"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://uncertainty/005",
+      "source": "benchmark",
+      "domain": "uncertainty",
+      "name": "UNC-005: Low-Confidence Premise",
+      "percept": "market is volatile today",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://uncertainty/005",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "market is volatile today"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://uncertainty/006",
+      "source": "benchmark",
+      "domain": "uncertainty",
+      "name": "UNC-006: Strong Rule Calibration",
+      "percept": "a storm is approaching",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://uncertainty/006",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "a storm is approaching"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://uncertainty/007",
+      "source": "benchmark",
+      "domain": "uncertainty",
+      "name": "UNC-007: Sparse-Evidence Moderate Rule",
+      "percept": "the fog rolls in",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://uncertainty/007",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "the fog rolls in"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    },
+    {
+      "case_id": "bm://uncertainty/008",
+      "source": "benchmark",
+      "domain": "uncertainty",
+      "name": "UNC-008: Weak Rule Calibration",
+      "percept": "a tremor is felt",
+      "expected_decision": "SHOULD_PROPOSE",
+      "snapshot_id": "SNAP_bm://uncertainty/008",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "a tremor is felt"
+        }
+      ],
+      "provenance": {
+        "derived_from": "instrument-percept (phase-6e3 frozen 66-case instrument)",
+        "method": "percept sentence extraction (deterministic, no synthesis)",
+        "instrument_source_file": "benchmark-results.json",
+        "dataset": "phase-6e3-66-case",
+        "created": "2026-08-26",
+        "note": "Evaluation-time evidence index only; NOT part of any historical or 300-GOLD training record; original instrument files unmodified."
+      }
+    }
+  ]
+}

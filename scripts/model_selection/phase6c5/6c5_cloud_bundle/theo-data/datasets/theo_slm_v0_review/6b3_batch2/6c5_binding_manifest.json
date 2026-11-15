@@ -1,0 +1,74 @@
+{
+  "experiment": "6C.5 controlled B/C comparison",
+  "status": "PRE-EXECUTION BINDING (frozen before any training)",
+  "dataset_sha256": "6ec947711773e6488dd5221620b62a0c2dfe1ea46e8208b192ec4777275b3c7b",
+  "dataset_source": "6c4_mapping_manifest.json -> 300 training-included GOLD (44 REJECT excluded, unmodified)",
+  "fixture_sha256_computed": "f99ca025eaaa3073e296e7cb734581f0871315553b5c145bb7f2fc27a4ac6457",
+  "fixture_sha256_expected": "f99ca025eaaa3073e296e7cb734581f0871315553b5c145bb7f2fc27a4ac6457",
+  "fixture_match": true,
+  "adjudication_sha256_expected": "97bc6bc6a0addbd35faa77a9437f63458240c45ae7bb1668bf4c2da01573ede4",
+  "adjudication_sha256_computed": "97bc6bc6a0addbd35faa77a9437f63458240c45ae7bb1668bf4c2da01573ede4",
+  "adjudication_match": true,
+  "prompt_hash": "a29e12a2839b106d3a3632e1f353961d74182245a41602b445d06f71abb097ba",
+  "prompt_constants": {
+    "NORM_SYS": "You are a semantic interpretation engine. Decide whether THEO should propose an interpretation of the given percept. Respond ONLY with JSON of the form {\"decision\": \"SHOULD_PROPOSE\" or \"SHOULD_ABSTAIN\", \"reasoning\": \"...\", \"evidence_refs\": [\"E1\"]}.",
+    "NORM_USER": "Percept: {percept}\n\nAvailable evidence (cite the bracketed IDs in \"evidence_refs\"; only cite IDs that genuinely support your decision):\n{evlist}\n\nRespond ONLY with JSON: {{\"decision\": \"SHOULD_PROPOSE\" or \"SHOULD_ABSTAIN\", \"reasoning\": \"...\", \"evidence_refs\": [\"E1\"]}}",
+    "NORM_EVID_SYS": "You are an evidence-relevance encoder. Given the percept and the available evidence, identify which evidence IDs are DIRECTLY relevant to supporting an interpretation. Respond ONLY with JSON of the form {\"relevant_evidence\": [\"E1\"]}. Cite ONLY IDs from the provided evidence list.",
+    "NORM_EVID_USER": "<<EVIDENCE_HEAD>>\nPercept: {percept}\n\nAvailable evidence:\n{evlist}\n\nRespond ONLY with JSON: {{\"relevant_evidence\": [\"E1\"]}}. Cite ONLY IDs from the list above."
+  },
+  "split_manifest_path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-data/datasets/theo_slm_v0_review/6b3_batch2\\6c5_split_manifest.json",
+  "split_manifest_sha256": "eda4cb6695b6651a7cef8bdee0a7a990f4f799a6bf9148269ee758d0704ee232",
+  "split": {
+    "seed": 20260826,
+    "n_train": 269,
+    "n_dev": 31,
+    "stratified_by": "final_status (tgt)"
+  },
+  "seed": 20260826,
+  "base_model": {
+    "path": "C:\\Users\\bs162\\Desktop\\THEO\\theo-data/models/6c_acquired/M1_Qwen2.5-0.5B-Instruct",
+    "documented_revision": "@7ae55760 (frozen binding)",
+    "file_hashes": {
+      "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+      "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45"
+    }
+  },
+  "method": "QLoRA (nf4 4-bit + double quant, compute_dtype fp16)",
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "task_type": "CAUSAL_LM",
+    "bias": "none"
+  },
+  "aux_loss_weight": 1.0,
+  "aux_loss_locked": true,
+  "training_params": {
+    "epochs": 3,
+    "lr": 0.0002,
+    "lr_scheduler": "constant",
+    "warmup_steps": 0,
+    "per_device_train_batch_size": 4,
+    "gradient_accumulation_steps": 4,
+    "effective_batch": 16,
+    "max_length": 384,
+    "optim": "adamw_torch",
+    "fp16": true,
+    "max_grad_norm": 1.0,
+    "primary_supervision": "canonical SemanticInterpretation envelope (identical B/C)",
+    "c_auxiliary_head": "envelope + evidence-relevance head at aux_loss_weight (architectural mechanism)"
+  },
+  "firewall": {
+    "evidence_token": "<<EVIDENCE_HEAD>>",
+    "primary_turn_must_not_contain_token": true
+  }
+}

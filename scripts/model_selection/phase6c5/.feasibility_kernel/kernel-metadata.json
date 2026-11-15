@@ -1,0 +1,15 @@
+{
+  "id": "Anakinistic/theo-6c5-bc-feasibility",
+  "title": "theo-6c5-bc-feasibility",
+  "code_file": "script.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "Anakinistic/theo-6c5-inputs"
+  ],
+  "competition_sources": [],
+  "kernel_sources": []
+}

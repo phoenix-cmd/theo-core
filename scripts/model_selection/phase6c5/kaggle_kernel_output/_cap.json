@@ -1,0 +1,1 @@
+{"python": "3.14.3", "torch": "2.13.0+cu126", "cuda_runtime": "12.6", "cuda_available": true, "gpu_name": "Tesla P100-PCIE-16GB", "cuda_driver": [6, 0], "transformers": "5.8.0", "peft": "0.20.0", "bitsandbytes": "0.50.1", "bitsandbytes_package_sha256": "fdddb68ee4f6906045d1c211a01ede71e23582f650274247fbdc94af35d88eaa", "linux": "Linux", "glibc": "glibc 2.35"}

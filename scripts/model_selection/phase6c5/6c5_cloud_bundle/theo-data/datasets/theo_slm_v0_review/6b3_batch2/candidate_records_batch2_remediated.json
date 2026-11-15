@@ -1,0 +1,2887 @@
+{
+  "artifact": "theo-slm-v0-6b3-batch2-candidates",
+  "dataset_version": "ds-v0.4-candidates",
+  "generator": "gen_6b3_batch2",
+  "generator_version": "gen-v0.4.1",
+  "seed": 43,
+  "generated": "2026-08-25T12:10:37.551239Z",
+  "record_count": 50,
+  "records": [
+    {
+      "review_id": "rev://v0.3/b2/001",
+      "case_id": "td://v0/6b3/b2/sf_weather_cap02_01/001",
+      "percept": "The sidewalk is dry but the rooftops glisten and gutters drip; no rain fell here today.",
+      "task": "what interpretation is supported by the context?",
+      "concepts": [
+        {
+          "id": "concept://wx/roof_glisten",
+          "label": "rooftops_glisten"
+        },
+        {
+          "id": "concept://wx/gutter_drip",
+          "label": "gutters_drip"
+        },
+        {
+          "id": "concept://wx/dry_walk",
+          "label": "dry_sidewalk"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "A brief passing shower soaked the roofs while missing ground level here.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://wx/roof_glisten",
+          "concept://wx/gutter_drip",
+          "concept://wx/dry_walk"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://wx/roof_glisten"
+        ]
+      },
+      "capability_family": "CAP-02",
+      "capability_families_secondary": [],
+      "domain": "weather",
+      "group_key": "sf_weather_cap02_01",
+      "split_group": "sf_weather_cap02_01",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_weather_cap02_01",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap02_a",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap02_a",
+        "seed_case_id": "td://v0/6b3/sf_weather_cap02_01",
+        "generation_timestamp": "2026-08-25T15:00:01+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/002",
+      "case_id": "td://v0/6b3/b2/sf_household_cap02_02/002",
+      "percept": "The clock stopped at 3:07 and the power outage log shows a dip then.",
+      "task": "what interpretation is supported?",
+      "concepts": [
+        {
+          "id": "concept://household/clock_stop",
+          "label": "clock_stopped"
+        },
+        {
+          "id": "concept://household/power_dip",
+          "label": "power_dip"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The power interruption halted the clock.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://household/clock_stop",
+          "concept://household/power_dip"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://household/clock_stop",
+          "concept://household/power_dip"
+        ]
+      },
+      "capability_family": "CAP-02",
+      "capability_families_secondary": [],
+      "domain": "household",
+      "group_key": "sf_household_cap02_02",
+      "split_group": "sf_household_cap02_02",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_household_cap02_02",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap02_b",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap02_b",
+        "seed_case_id": "td://v0/6b3/sf_household_cap02_02",
+        "generation_timestamp": "2026-08-25T15:00:02+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/003",
+      "case_id": "td://v0/6b3/b2/sf_medical_cap02_03/003",
+      "percept": "The patient's scar is thin and pale; the surgical report notes closure one year ago.",
+      "task": "what interpretation is supported?",
+      "concepts": [
+        {
+          "id": "concept://medical/thin_scar",
+          "label": "thin_pale_scar"
+        },
+        {
+          "id": "concept://medical/surgery_year",
+          "label": "surgery_one_year"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The incision has matured normally over the past year.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://medical/thin_scar",
+          "concept://medical/surgery_year"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://medical/thin_scar"
+        ]
+      },
+      "capability_family": "CAP-02",
+      "capability_families_secondary": [],
+      "domain": "medical",
+      "group_key": "sf_medical_cap02_03",
+      "split_group": "sf_medical_cap02_03",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_medical_cap02_03",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap02_c",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap02_c",
+        "seed_case_id": "td://v0/6b3/sf_medical_cap02_03",
+        "generation_timestamp": "2026-08-25T15:00:03+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/004",
+      "case_id": "td://v0/6b3/b2/sf_engineering_cap02_04/004",
+      "percept": "The bridge shows rust at the joints and a survey notes a slight sag in the midpoint.",
+      "task": "what interpretation is supported?",
+      "concepts": [
+        {
+          "id": "concept://engineering/joint_rust",
+          "label": "joint_rust"
+        },
+        {
+          "id": "concept://engineering/mid_sag",
+          "label": "midpoint_sag"
+        },
+        {
+          "id": "concept://engineering/survey",
+          "label": "survey_note"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "Corrosion has weakened the joints and allowed the deck to settle.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://engineering/joint_rust",
+          "concept://engineering/mid_sag",
+          "concept://engineering/survey"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://engineering/joint_rust"
+        ]
+      },
+      "capability_family": "CAP-02",
+      "capability_families_secondary": [],
+      "domain": "engineering",
+      "group_key": "sf_engineering_cap02_04",
+      "split_group": "sf_engineering_cap02_04",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_engineering_cap02_04",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap02_d",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap02_d",
+        "seed_case_id": "td://v0/6b3/sf_engineering_cap02_04",
+        "generation_timestamp": "2026-08-25T15:00:04+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/005",
+      "case_id": "td://v0/6b3/b2/sf_physics_cap04_05/005",
+      "percept": "A book rests on a table; a cat walks by; the table is wooden.",
+      "task": "what is the support state of the book?",
+      "concepts": [
+        {
+          "id": "concept://physics/book_rest",
+          "label": "book_resting"
+        },
+        {
+          "id": "concept://physics/wood_table",
+          "label": "wooden_table"
+        },
+        {
+          "id": "concept://physics/cat",
+          "label": "cat_walking"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The book is supported by the table; the cat is irrelevant.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://physics/book_rest",
+          "concept://physics/wood_table",
+          "concept://physics/cat"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://physics/book_rest"
+        ]
+      },
+      "capability_family": "CAP-04",
+      "capability_families_secondary": [],
+      "domain": "physics",
+      "group_key": "sf_physics_cap04_05",
+      "split_group": "sf_physics_cap04_05",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_physics_cap04_05",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap04_a",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap04_a",
+        "seed_case_id": "td://v0/6b3/sf_physics_cap04_05",
+        "generation_timestamp": "2026-08-25T15:00:05+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/006",
+      "case_id": "td://v0/6b3/b2/sf_finance_cap04_06/006",
+      "percept": "The index rose two points; a politician gave a speech; volume was typical.",
+      "task": "what drives the move?",
+      "concepts": [
+        {
+          "id": "concept://finance/index_up",
+          "label": "index_rise"
+        },
+        {
+          "id": "concept://finance/speech",
+          "label": "political_speech"
+        },
+        {
+          "id": "concept://finance/vol",
+          "label": "typical_volume"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The gain reflects ordinary trading and is unrelated to the speech.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://finance/index_up",
+          "concept://finance/speech",
+          "concept://finance/vol"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://finance/index_up"
+        ]
+      },
+      "capability_family": "CAP-04",
+      "capability_families_secondary": [],
+      "domain": "finance",
+      "group_key": "sf_finance_cap04_06",
+      "split_group": "sf_finance_cap04_06",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_finance_cap04_06",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap04_b",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap04_b",
+        "seed_case_id": "td://v0/6b3/sf_finance_cap04_06",
+        "generation_timestamp": "2026-08-25T15:00:06+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/007",
+      "case_id": "td://v0/6b3/b2/sf_biology_cap04_07/007",
+      "percept": "The leaf is green and a bird sings nearby; soil is moist.",
+      "task": "what does the leaf color indicate?",
+      "concepts": [
+        {
+          "id": "concept://biology/green_leaf",
+          "label": "green_leaf"
+        },
+        {
+          "id": "concept://biology/bird",
+          "label": "bird_song"
+        },
+        {
+          "id": "concept://biology/moist_soil",
+          "label": "moist_soil"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The green leaf indicates healthy photosynthesis; the bird is incidental.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://biology/green_leaf",
+          "concept://biology/bird",
+          "concept://biology/moist_soil"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://biology/green_leaf"
+        ]
+      },
+      "capability_family": "CAP-04",
+      "capability_families_secondary": [],
+      "domain": "biology",
+      "group_key": "sf_biology_cap04_07",
+      "split_group": "sf_biology_cap04_07",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_biology_cap04_07",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap04_c",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap04_c",
+        "seed_case_id": "td://v0/6b3/sf_biology_cap04_07",
+        "generation_timestamp": "2026-08-25T15:00:07+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/008",
+      "case_id": "td://v0/6b3/b2/sf_conflict_cap04_08/008",
+      "percept": "A convoy halted at a checkpoint; vendors sell food beside the road; a child plays.",
+      "task": "what is the convoy status?",
+      "concepts": [
+        {
+          "id": "concept://conflict/convoy_halt",
+          "label": "convoy_halted"
+        },
+        {
+          "id": "concept://conflict/vendors",
+          "label": "road_vendors"
+        },
+        {
+          "id": "concept://conflict/child",
+          "label": "playing_child"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The convoy is paused at the checkpoint; the vendors indicate normal road activity.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://conflict/convoy_halt",
+          "concept://conflict/vendors",
+          "concept://conflict/child"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://conflict/convoy_halt"
+        ]
+      },
+      "capability_family": "CAP-04",
+      "capability_families_secondary": [],
+      "domain": "conflict",
+      "group_key": "sf_conflict_cap04_08",
+      "split_group": "sf_conflict_cap04_08",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_conflict_cap04_08",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap04_d",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap04_d",
+        "seed_case_id": "td://v0/6b3/sf_conflict_cap04_08",
+        "generation_timestamp": "2026-08-25T15:00:08+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/009",
+      "case_id": "td://v0/6b3/b2/sf_weather_cap05_09/009",
+      "percept": "Dark clouds return and the barometer falls again after this morning's storm.",
+      "task": "what weather is expected?",
+      "concepts": [
+        {
+          "id": "concept://wx/clouds_return",
+          "label": "clouds_return"
+        },
+        {
+          "id": "concept://wx/pressure_fall",
+          "label": "pressure_falling"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "Another storm is likely given the returning clouds and falling pressure.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://wx/clouds_return",
+          "concept://wx/pressure_fall"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://wx/clouds_return"
+        ]
+      },
+      "capability_family": "CAP-05",
+      "capability_families_secondary": [],
+      "domain": "weather",
+      "group_key": "sf_weather_cap05_09",
+      "split_group": "sf_weather_cap05_09",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_weather_cap05_09",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap05_a",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap05_a",
+        "seed_case_id": "td://v0/6b3/sf_weather_cap05_09",
+        "generation_timestamp": "2026-08-25T15:00:09+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/010",
+      "case_id": "td://v0/6b3/b2/sf_household_cap05_10/010",
+      "percept": "The faucet drips at night and the water bill rose for the third month.",
+      "task": "what explains the bill trend?",
+      "concepts": [
+        {
+          "id": "concept://household/faucet_drip",
+          "label": "faucet_drips"
+        },
+        {
+          "id": "concept://household/bill_up",
+          "label": "bill_rising"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "A persistent leak is inflating the water usage each month.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://household/faucet_drip",
+          "concept://household/bill_up"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://household/faucet_drip"
+        ]
+      },
+      "capability_family": "CAP-05",
+      "capability_families_secondary": [],
+      "domain": "household",
+      "group_key": "sf_household_cap05_10",
+      "split_group": "sf_household_cap05_10",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_household_cap05_10",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap05_b",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap05_b",
+        "seed_case_id": "td://v0/6b3/sf_household_cap05_10",
+        "generation_timestamp": "2026-08-25T15:00:10+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/011",
+      "case_id": "td://v0/6b3/b2/sf_biology_cap05_11/011",
+      "percept": "The same fungal spots appear on the leaves each spring without fail.",
+      "task": "what is predicted?",
+      "concepts": [
+        {
+          "id": "concept://biology/spring_spots",
+          "label": "spring_spots"
+        },
+        {
+          "id": "concept://biology/recur",
+          "label": "recurring"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The fungal outbreak will recur next spring as it has before.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://biology/spring_spots",
+          "concept://biology/recur"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://biology/recur"
+        ]
+      },
+      "capability_family": "CAP-05",
+      "capability_families_secondary": [],
+      "domain": "biology",
+      "group_key": "sf_biology_cap05_11",
+      "split_group": "sf_biology_cap05_11",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_biology_cap05_11",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap05_c",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap05_c",
+        "seed_case_id": "td://v0/6b3/sf_biology_cap05_11",
+        "generation_timestamp": "2026-08-25T15:00:11+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/012",
+      "case_id": "td://v0/6b3/b2/sf_engineering_cap05_12/012",
+      "percept": "The motor overheats every time load exceeds rated capacity.",
+      "task": "what is predicted under overload?",
+      "concepts": [
+        {
+          "id": "concept://engineering/overheat",
+          "label": "motor_overheats"
+        },
+        {
+          "id": "concept://engineering/load",
+          "label": "exceeds_load"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "Sustained overload will repeatedly overheat the motor.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://engineering/overheat",
+          "concept://engineering/load"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://engineering/overheat"
+        ]
+      },
+      "capability_family": "CAP-05",
+      "capability_families_secondary": [],
+      "domain": "engineering",
+      "group_key": "sf_engineering_cap05_12",
+      "split_group": "sf_engineering_cap05_12",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_engineering_cap05_12",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap05_d",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap05_d",
+        "seed_case_id": "td://v0/6b3/sf_engineering_cap05_12",
+        "generation_timestamp": "2026-08-25T15:00:12+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/013",
+      "case_id": "td://v0/6b3/b2/sf_medical_cap06_13/013",
+      "percept": "The monitor shows a steady pulse yet the patient has no detectable heartbeat by hand.",
+      "task": "how should the conflict be read?",
+      "concepts": [
+        {
+          "id": "concept://medical/monitor_pulse",
+          "label": "monitor_pulse"
+        },
+        {
+          "id": "concept://medical/no_handbeat",
+          "label": "no_palpable_beat"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The monitor likely faults; the absence of pulse suggests cardiac arrest.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://medical/monitor_pulse",
+          "concept://medical/no_handbeat"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://medical/monitor_pulse",
+          "concept://medical/no_handbeat"
+        ]
+      },
+      "capability_family": "CAP-06",
+      "capability_families_secondary": [],
+      "domain": "medical",
+      "group_key": "sf_medical_cap06_13",
+      "split_group": "sf_medical_cap06_13",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_medical_cap06_13",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap06_a",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap06_a",
+        "seed_case_id": "td://v0/6b3/sf_medical_cap06_13",
+        "generation_timestamp": "2026-08-25T15:00:13+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/014",
+      "case_id": "td://v0/6b3/b2/sf_household_cap06_14/014",
+      "percept": "The app says the door is locked but the latch is visibly retracted.",
+      "task": "how should the signals be read?",
+      "concepts": [
+        {
+          "id": "concept://household/app_lock",
+          "label": "app_locked"
+        },
+        {
+          "id": "concept://household/latch_open",
+          "label": "latch_retracted"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The lock has failed despite the app status; the door is open.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://household/app_lock",
+          "concept://household/latch_open"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://household/app_lock",
+          "concept://household/latch_open"
+        ]
+      },
+      "capability_family": "CAP-06",
+      "capability_families_secondary": [],
+      "domain": "household",
+      "group_key": "sf_household_cap06_14",
+      "split_group": "sf_household_cap06_14",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_household_cap06_14",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap06_b",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap06_b",
+        "seed_case_id": "td://v0/6b3/sf_household_cap06_14",
+        "generation_timestamp": "2026-08-25T15:00:14+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/015",
+      "case_id": "td://v0/6b3/b2/sf_physics_cap06_15/015",
+      "percept": "The scale reads zero yet a heavy box sits on it.",
+      "task": "how to interpret?",
+      "concepts": [
+        {
+          "id": "concept://physics/zero_scale",
+          "label": "scale_zero"
+        },
+        {
+          "id": "concept://physics/box",
+          "label": "heavy_box"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The scale is broken; the box still has weight.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://physics/zero_scale",
+          "concept://physics/box"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://physics/zero_scale"
+        ]
+      },
+      "capability_family": "CAP-06",
+      "capability_families_secondary": [],
+      "domain": "physics",
+      "group_key": "sf_physics_cap06_15",
+      "split_group": "sf_physics_cap06_15",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_physics_cap06_15",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap06_c",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap06_c",
+        "seed_case_id": "td://v0/6b3/sf_physics_cap06_15",
+        "generation_timestamp": "2026-08-25T15:00:15+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/016",
+      "case_id": "td://v0/6b3/b2/sf_finance_cap06_16/016",
+      "percept": "The ledger shows profit but the bank balance dropped sharply.",
+      "task": "how to read the conflict?",
+      "concepts": [
+        {
+          "id": "concept://finance/ledger_profit",
+          "label": "ledger_profit"
+        },
+        {
+          "id": "concept://finance/bank_drop",
+          "label": "bank_drop"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The recorded profit conflicts with the falling balance, implying a booking error.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://finance/ledger_profit",
+          "concept://finance/bank_drop"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://finance/ledger_profit",
+          "concept://finance/bank_drop"
+        ]
+      },
+      "capability_family": "CAP-06",
+      "capability_families_secondary": [],
+      "domain": "finance",
+      "group_key": "sf_finance_cap06_16",
+      "split_group": "sf_finance_cap06_16",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_finance_cap06_16",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap06_d",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap06_d",
+        "seed_case_id": "td://v0/6b3/sf_finance_cap06_16",
+        "generation_timestamp": "2026-08-25T15:00:16+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/017",
+      "case_id": "td://v0/6b3/b2/sf_engineering_cap07_17/017",
+      "percept": "Bearing temperature climbs and vibration grows; lubricant was last changed late.",
+      "task": "what explains the trend?",
+      "concepts": [
+        {
+          "id": "concept://engineering/temp_climb",
+          "label": "bearing_temp"
+        },
+        {
+          "id": "concept://engineering/vib",
+          "label": "rising_vibration"
+        },
+        {
+          "id": "concept://engineering/lube_old",
+          "label": "old_lube"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "Aged lubricant is letting the bearing overheat and vibrate.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://engineering/temp_climb",
+          "concept://engineering/vib",
+          "concept://engineering/lube_old"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://engineering/temp_climb",
+          "concept://engineering/lube_old"
+        ]
+      },
+      "capability_family": "CAP-07",
+      "capability_families_secondary": [],
+      "domain": "engineering",
+      "group_key": "sf_engineering_cap07_17",
+      "split_group": "sf_engineering_cap07_17",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_engineering_cap07_17",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap07_a",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap07_a",
+        "seed_case_id": "td://v0/6b3/sf_engineering_cap07_17",
+        "generation_timestamp": "2026-08-25T15:00:17+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/018",
+      "case_id": "td://v0/6b3/b2/sf_physics_cap07_18/018",
+      "percept": "The compass needle swings and the aurora brightens overhead.",
+      "task": "what explains the swing?",
+      "concepts": [
+        {
+          "id": "concept://physics/needle_swing",
+          "label": "compass_swing"
+        },
+        {
+          "id": "concept://physics/aurora",
+          "label": "aurora_bright"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "A geomagnetic disturbance is deflecting the needle and lighting the aurora.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://physics/needle_swing",
+          "concept://physics/aurora"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://physics/needle_swing",
+          "concept://physics/aurora"
+        ]
+      },
+      "capability_family": "CAP-07",
+      "capability_families_secondary": [],
+      "domain": "physics",
+      "group_key": "sf_physics_cap07_18",
+      "split_group": "sf_physics_cap07_18",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_physics_cap07_18",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap07_b",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap07_b",
+        "seed_case_id": "td://v0/6b3/sf_physics_cap07_18",
+        "generation_timestamp": "2026-08-25T15:00:18+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/019",
+      "case_id": "td://v0/6b3/b2/sf_biology_cap07_19/019",
+      "percept": "The coral pales and the water temperature log shows a steady climb.",
+      "task": "what explains the paling?",
+      "concepts": [
+        {
+          "id": "concept://biology/coral_pale",
+          "label": "coral_paled"
+        },
+        {
+          "id": "concept://biology/temp_climb",
+          "label": "water_warming"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "Warming water is stressing the coral into bleaching.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://biology/coral_pale",
+          "concept://biology/temp_climb"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://biology/coral_pale",
+          "concept://biology/temp_climb"
+        ]
+      },
+      "capability_family": "CAP-07",
+      "capability_families_secondary": [],
+      "domain": "biology",
+      "group_key": "sf_biology_cap07_19",
+      "split_group": "sf_biology_cap07_19",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_biology_cap07_19",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap07_c",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap07_c",
+        "seed_case_id": "td://v0/6b3/sf_biology_cap07_19",
+        "generation_timestamp": "2026-08-25T15:00:19+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/020",
+      "case_id": "td://v0/6b3/b2/sf_conflict_cap07_20/020",
+      "percept": "Two radios report the unit at different grid squares minutes apart.",
+      "task": "what explains the discrepancy?",
+      "concepts": [
+        {
+          "id": "concept://conflict/radio_a",
+          "label": "radio_square_a"
+        },
+        {
+          "id": "concept://conflict/radio_b",
+          "label": "radio_square_b"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The unit moved between reports; the positions are not contradictory.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://conflict/radio_a",
+          "concept://conflict/radio_b"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://conflict/radio_a",
+          "concept://conflict/radio_b"
+        ]
+      },
+      "capability_family": "CAP-07",
+      "capability_families_secondary": [],
+      "domain": "conflict",
+      "group_key": "sf_conflict_cap07_20",
+      "split_group": "sf_conflict_cap07_20",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_conflict_cap07_20",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap07_d",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap07_d",
+        "seed_case_id": "td://v0/6b3/sf_conflict_cap07_20",
+        "generation_timestamp": "2026-08-25T15:00:20+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/021",
+      "case_id": "td://v0/6b3/b2/sf_biology_cap08_21/021",
+      "percept": "The animal has a beak, lays eggs, and has feathers.",
+      "task": "what classification is supported?",
+      "concepts": [
+        {
+          "id": "concept://biology/beak",
+          "label": "beak"
+        },
+        {
+          "id": "concept://biology/eggs",
+          "label": "lays_eggs"
+        },
+        {
+          "id": "concept://biology/feathers",
+          "label": "feathers"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The animal is a bird by its beak, eggs, and feathers.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://biology/beak",
+          "concept://biology/eggs",
+          "concept://biology/feathers"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://biology/beak",
+          "concept://biology/feathers"
+        ]
+      },
+      "capability_family": "CAP-08",
+      "capability_families_secondary": [],
+      "domain": "biology",
+      "group_key": "sf_biology_cap08_21",
+      "split_group": "sf_biology_cap08_21",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_biology_cap08_21",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap08_a",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap08_a",
+        "seed_case_id": "td://v0/6b3/sf_biology_cap08_21",
+        "generation_timestamp": "2026-08-25T15:00:21+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/022",
+      "case_id": "td://v0/6b3/b2/sf_conflict_cap08_22/022",
+      "percept": "The flagged convoy carries medical supplies and displays a white emblem.",
+      "task": "what classification applies?",
+      "concepts": [
+        {
+          "id": "concept://conflict/med_supplies",
+          "label": "medical_supplies"
+        },
+        {
+          "id": "concept://conflict/white_emblem",
+          "label": "white_emblem"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The convoy is a protected medical unit under the emblem.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://conflict/med_supplies",
+          "concept://conflict/white_emblem"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://conflict/med_supplies",
+          "concept://conflict/white_emblem"
+        ]
+      },
+      "capability_family": "CAP-08",
+      "capability_families_secondary": [],
+      "domain": "conflict",
+      "group_key": "sf_conflict_cap08_22",
+      "split_group": "sf_conflict_cap08_22",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_conflict_cap08_22",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap08_b",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap08_b",
+        "seed_case_id": "td://v0/6b3/sf_conflict_cap08_22",
+        "generation_timestamp": "2026-08-25T15:00:22+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/023",
+      "case_id": "td://v0/6b3/b2/sf_medical_cap08_23/023",
+      "percept": "The growth is smooth, mobile, and painless on exam.",
+      "task": "what classification is suggested?",
+      "concepts": [
+        {
+          "id": "concept://medical/smooth",
+          "label": "smooth_growth"
+        },
+        {
+          "id": "concept://medical/mobile",
+          "label": "mobile"
+        },
+        {
+          "id": "concept://medical/painless",
+          "label": "painless"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The growth is likely benign given its smooth mobile nature.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://medical/smooth",
+          "concept://medical/mobile",
+          "concept://medical/painless"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://medical/smooth",
+          "concept://medical/mobile"
+        ]
+      },
+      "capability_family": "CAP-08",
+      "capability_families_secondary": [],
+      "domain": "medical",
+      "group_key": "sf_medical_cap08_23",
+      "split_group": "sf_medical_cap08_23",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_medical_cap08_23",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap08_c",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap08_c",
+        "seed_case_id": "td://v0/6b3/sf_medical_cap08_23",
+        "generation_timestamp": "2026-08-25T15:00:23+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/024",
+      "case_id": "td://v0/6b3/b2/sf_finance_cap08_24/024",
+      "percept": "The asset pays fixed coupons and has a stated maturity date.",
+      "task": "what classification fits?",
+      "concepts": [
+        {
+          "id": "concept://finance/fixed_coupon",
+          "label": "fixed_coupon"
+        },
+        {
+          "id": "concept://finance/maturity",
+          "label": "maturity_date"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The asset is a bond by its fixed coupon and maturity.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://finance/fixed_coupon",
+          "concept://finance/maturity"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://finance/fixed_coupon",
+          "concept://finance/maturity"
+        ]
+      },
+      "capability_family": "CAP-08",
+      "capability_families_secondary": [],
+      "domain": "finance",
+      "group_key": "sf_finance_cap08_24",
+      "split_group": "sf_finance_cap08_24",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_finance_cap08_24",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap08_d",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap08_d",
+        "seed_case_id": "td://v0/6b3/sf_finance_cap08_24",
+        "generation_timestamp": "2026-08-25T15:00:24+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/025",
+      "case_id": "td://v0/6b3/b2/sf_biology_cap10_25/025",
+      "percept": "The specimen has a backbone, limbs, and mammary glands.",
+      "task": "what taxonomy is supported?",
+      "concepts": [
+        {
+          "id": "concept://biology/backbone",
+          "label": "backbone"
+        },
+        {
+          "id": "concept://biology/limbs",
+          "label": "limbs"
+        },
+        {
+          "id": "concept://biology/mammary",
+          "label": "mammary_glands"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The specimen is a vertebrate mammal.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://biology/backbone",
+          "concept://biology/limbs",
+          "concept://biology/mammary"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://biology/backbone",
+          "concept://biology/mammary"
+        ]
+      },
+      "capability_family": "CAP-10",
+      "capability_families_secondary": [],
+      "domain": "biology",
+      "group_key": "sf_biology_cap10_25",
+      "split_group": "sf_biology_cap10_25",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_biology_cap10_25",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap10_a",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap10_a",
+        "seed_case_id": "td://v0/6b3/sf_biology_cap10_25",
+        "generation_timestamp": "2026-08-25T15:00:25+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/026",
+      "case_id": "td://v0/6b3/b2/sf_medical_cap10_26/026",
+      "percept": "The cells show large nuclei and loss of normal architecture.",
+      "task": "what taxonomy is suggested?",
+      "concepts": [
+        {
+          "id": "concept://medical/large_nuclei",
+          "label": "large_nuclei"
+        },
+        {
+          "id": "concept://medical/arch_loss",
+          "label": "architecture_loss"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The cells are neoplastic by nuclear and architectural change.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://medical/large_nuclei",
+          "concept://medical/arch_loss"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://medical/large_nuclei",
+          "concept://medical/arch_loss"
+        ]
+      },
+      "capability_family": "CAP-10",
+      "capability_families_secondary": [],
+      "domain": "medical",
+      "group_key": "sf_medical_cap10_26",
+      "split_group": "sf_medical_cap10_26",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_medical_cap10_26",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap10_b",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap10_b",
+        "seed_case_id": "td://v0/6b3/sf_medical_cap10_26",
+        "generation_timestamp": "2026-08-25T15:00:26+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/027",
+      "case_id": "td://v0/6b3/b2/sf_weather_cap10_27/027",
+      "percept": "The cloud towers high with an anvil top and frequent lightning.",
+      "task": "what taxonomy fits?",
+      "concepts": [
+        {
+          "id": "concept://wx/tower_cloud",
+          "label": "towering_cloud"
+        },
+        {
+          "id": "concept://wx/anvil",
+          "label": "anvil_top"
+        },
+        {
+          "id": "concept://wx/lightning",
+          "label": "lightning"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The cloud is a cumulonimbus by its anvil and lightning.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://wx/tower_cloud",
+          "concept://wx/anvil",
+          "concept://wx/lightning"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://wx/tower_cloud",
+          "concept://wx/anvil"
+        ]
+      },
+      "capability_family": "CAP-10",
+      "capability_families_secondary": [],
+      "domain": "weather",
+      "group_key": "sf_weather_cap10_27",
+      "split_group": "sf_weather_cap10_27",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_weather_cap10_27",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap10_c",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap10_c",
+        "seed_case_id": "td://v0/6b3/sf_weather_cap10_27",
+        "generation_timestamp": "2026-08-25T15:00:27+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/028",
+      "case_id": "td://v0/6b3/b2/sf_physics_cap10_28/028",
+      "percept": "The particle has mass and responds to the field with acceleration.",
+      "task": "what taxonomy is supported?",
+      "concepts": [
+        {
+          "id": "concept://physics/mass",
+          "label": "particle_mass"
+        },
+        {
+          "id": "concept://physics/field_accel",
+          "label": "field_acceleration"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The particle is a massive charged body under the field.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://physics/mass",
+          "concept://physics/field_accel"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://physics/mass",
+          "concept://physics/field_accel"
+        ]
+      },
+      "capability_family": "CAP-10",
+      "capability_families_secondary": [],
+      "domain": "physics",
+      "group_key": "sf_physics_cap10_28",
+      "split_group": "sf_physics_cap10_28",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_physics_cap10_28",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap10_d",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap10_d",
+        "seed_case_id": "td://v0/6b3/sf_physics_cap10_28",
+        "generation_timestamp": "2026-08-25T15:00:28+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/029",
+      "case_id": "td://v0/6b3/b2/sf_household_cap11_29/029",
+      "percept": "The kettle is still warm and the tea is half full an hour after use.",
+      "task": "what does the warmth indicate?",
+      "concepts": [
+        {
+          "id": "concept://household/kettle_warm",
+          "label": "kettle_warm"
+        },
+        {
+          "id": "concept://household/tea_half",
+          "label": "tea_half"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The kettle was used recently and not fully emptied.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://household/kettle_warm",
+          "concept://household/tea_half"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://household/kettle_warm"
+        ]
+      },
+      "capability_family": "CAP-11",
+      "capability_families_secondary": [],
+      "domain": "household",
+      "group_key": "sf_household_cap11_29",
+      "split_group": "sf_household_cap11_29",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_household_cap11_29",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap11_a",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap11_a",
+        "seed_case_id": "td://v0/6b3/sf_household_cap11_29",
+        "generation_timestamp": "2026-08-25T15:00:29+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/030",
+      "case_id": "td://v0/6b3/b2/sf_weather_cap11_30/030",
+      "percept": "The snow melted by noon though morning was freezing; sun is strong now.",
+      "task": "what explains the melt?",
+      "concepts": [
+        {
+          "id": "concept://wx/melt_noon",
+          "label": "snow_melted"
+        },
+        {
+          "id": "concept://wx/strong_sun",
+          "label": "strong_sun"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "Midday sun melted the snow despite the cold start.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://wx/melt_noon",
+          "concept://wx/strong_sun"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://wx/melt_noon",
+          "concept://wx/strong_sun"
+        ]
+      },
+      "capability_family": "CAP-11",
+      "capability_families_secondary": [],
+      "domain": "weather",
+      "group_key": "sf_weather_cap11_30",
+      "split_group": "sf_weather_cap11_30",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_weather_cap11_30",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap11_b",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap11_b",
+        "seed_case_id": "td://v0/6b3/sf_weather_cap11_30",
+        "generation_timestamp": "2026-08-25T15:00:30+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/031",
+      "case_id": "td://v0/6b3/b2/sf_engineering_cap11_31/031",
+      "percept": "The weld cracked after the structure bore load beyond its rating.",
+      "task": "what explains the crack?",
+      "concepts": [
+        {
+          "id": "concept://engineering/weld_crack",
+          "label": "weld_cracked"
+        },
+        {
+          "id": "concept://engineering/overload",
+          "label": "bearing_overload"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The excess load fractured the weld.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://engineering/weld_crack",
+          "concept://engineering/overload"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://engineering/weld_crack",
+          "concept://engineering/overload"
+        ]
+      },
+      "capability_family": "CAP-11",
+      "capability_families_secondary": [],
+      "domain": "engineering",
+      "group_key": "sf_engineering_cap11_31",
+      "split_group": "sf_engineering_cap11_31",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_engineering_cap11_31",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap11_c",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap11_c",
+        "seed_case_id": "td://v0/6b3/sf_engineering_cap11_31",
+        "generation_timestamp": "2026-08-25T15:00:31+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/032",
+      "case_id": "td://v0/6b3/b2/sf_finance_cap11_32/032",
+      "percept": "The account balance fell after the large withdrawal was posted.",
+      "task": "what explains the fall?",
+      "concepts": [
+        {
+          "id": "concept://finance/balance_fall",
+          "label": "balance_fell"
+        },
+        {
+          "id": "concept://finance/withdrawal",
+          "label": "large_withdrawal"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The withdrawal caused the balance drop.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://finance/balance_fall",
+          "concept://finance/withdrawal"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://finance/balance_fall",
+          "concept://finance/withdrawal"
+        ]
+      },
+      "capability_family": "CAP-11",
+      "capability_families_secondary": [],
+      "domain": "finance",
+      "group_key": "sf_finance_cap11_32",
+      "split_group": "sf_finance_cap11_32",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_finance_cap11_32",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap11_d",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap11_d",
+        "seed_case_id": "td://v0/6b3/sf_finance_cap11_32",
+        "generation_timestamp": "2026-08-25T15:00:32+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/033",
+      "case_id": "td://v0/6b3/b2/sf_engineering_cap12_33/033",
+      "percept": "After the belt snapped, the conveyor stopped and packages piled up.",
+      "task": "what causal relation is supported?",
+      "concepts": [
+        {
+          "id": "concept://engineering/belt_snap",
+          "label": "belt_snapped"
+        },
+        {
+          "id": "concept://engineering/conveyor_stop",
+          "label": "conveyor_stopped"
+        },
+        {
+          "id": "concept://engineering/pileup",
+          "label": "packages_piled"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The belt failure caused the stoppage and the pileup.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://engineering/belt_snap",
+          "concept://engineering/conveyor_stop",
+          "concept://engineering/pileup"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://engineering/belt_snap",
+          "concept://engineering/conveyor_stop"
+        ]
+      },
+      "capability_family": "CAP-12",
+      "capability_families_secondary": [],
+      "domain": "engineering",
+      "group_key": "sf_engineering_cap12_33",
+      "split_group": "sf_engineering_cap12_33",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_engineering_cap12_33",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap12_a",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap12_a",
+        "seed_case_id": "td://v0/6b3/sf_engineering_cap12_33",
+        "generation_timestamp": "2026-08-25T15:00:33+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/034",
+      "case_id": "td://v0/6b3/b2/sf_physics_cap12_34/034",
+      "percept": "The brake was applied and the wheel slowed within seconds.",
+      "task": "what causal relation is supported?",
+      "concepts": [
+        {
+          "id": "concept://physics/brake",
+          "label": "brake_applied"
+        },
+        {
+          "id": "concept://physics/wheel_slow",
+          "label": "wheel_slowed"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "Braking caused the wheel to slow.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://physics/brake",
+          "concept://physics/wheel_slow"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://physics/brake",
+          "concept://physics/wheel_slow"
+        ]
+      },
+      "capability_family": "CAP-12",
+      "capability_families_secondary": [],
+      "domain": "physics",
+      "group_key": "sf_physics_cap12_34",
+      "split_group": "sf_physics_cap12_34",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_physics_cap12_34",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap12_b",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap12_b",
+        "seed_case_id": "td://v0/6b3/sf_physics_cap12_34",
+        "generation_timestamp": "2026-08-25T15:00:34+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/035",
+      "case_id": "td://v0/6b3/b2/sf_medical_cap12_35/035",
+      "percept": "After the antibiotic, the fever broke and the culture cleared.",
+      "task": "what causal relation is supported?",
+      "concepts": [
+        {
+          "id": "concept://medical/antibiotic",
+          "label": "antibiotic_given"
+        },
+        {
+          "id": "concept://medical/fever_break",
+          "label": "fever_broke"
+        },
+        {
+          "id": "concept://medical/culture_clear",
+          "label": "culture_cleared"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The antibiotic resolved the infection and broke the fever.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://medical/antibiotic",
+          "concept://medical/fever_break",
+          "concept://medical/culture_clear"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://medical/antibiotic",
+          "concept://medical/fever_break"
+        ]
+      },
+      "capability_family": "CAP-12",
+      "capability_families_secondary": [],
+      "domain": "medical",
+      "group_key": "sf_medical_cap12_35",
+      "split_group": "sf_medical_cap12_35",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_medical_cap12_35",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap12_c",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap12_c",
+        "seed_case_id": "td://v0/6b3/sf_medical_cap12_35",
+        "generation_timestamp": "2026-08-25T15:00:35+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/036",
+      "case_id": "td://v0/6b3/b2/sf_conflict_cap12_36/036",
+      "percept": "After the ceasefire, crossfire incidents dropped to near zero.",
+      "task": "what causal relation is supported?",
+      "concepts": [
+        {
+          "id": "concept://conflict/ceasefire",
+          "label": "ceasefire"
+        },
+        {
+          "id": "concept://conflict/crossfire_drop",
+          "label": "crossfire_dropped"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The ceasefire caused the drop in crossfire.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://conflict/ceasefire",
+          "concept://conflict/crossfire_drop"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://conflict/ceasefire",
+          "concept://conflict/crossfire_drop"
+        ]
+      },
+      "capability_family": "CAP-12",
+      "capability_families_secondary": [],
+      "domain": "conflict",
+      "group_key": "sf_conflict_cap12_36",
+      "split_group": "sf_conflict_cap12_36",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_conflict_cap12_36",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap12_d",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap12_d",
+        "seed_case_id": "td://v0/6b3/sf_conflict_cap12_36",
+        "generation_timestamp": "2026-08-25T15:00:36+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/037",
+      "case_id": "td://v0/6b3/b2/sf_medical_cap13_37/037",
+      "percept": "The scan shows a faint shadow; prior scans were clear; symptoms are mild.",
+      "task": "what confidence is warranted?",
+      "concepts": [
+        {
+          "id": "concept://medical/faint_shadow",
+          "label": "faint_shadow"
+        },
+        {
+          "id": "concept://medical/clear_prior",
+          "label": "prior_clear"
+        },
+        {
+          "id": "concept://medical/mild_sym",
+          "label": "mild_symptoms"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The shadow may be artifact but warrants a follow-up scan.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://medical/faint_shadow",
+          "concept://medical/clear_prior",
+          "concept://medical/mild_sym"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://medical/faint_shadow",
+          "concept://medical/clear_prior"
+        ]
+      },
+      "capability_family": "CAP-13",
+      "capability_families_secondary": [],
+      "domain": "medical",
+      "group_key": "sf_medical_cap13_37",
+      "split_group": "sf_medical_cap13_37",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_medical_cap13_37",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap13_a",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap13_a",
+        "seed_case_id": "td://v0/6b3/sf_medical_cap13_37",
+        "generation_timestamp": "2026-08-25T15:00:37+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/038",
+      "case_id": "td://v0/6b3/b2/sf_finance_cap13_38/038",
+      "percept": "Revenue rose slightly but the sample is one quarter and volatile.",
+      "task": "what confidence on growth?",
+      "concepts": [
+        {
+          "id": "concept://finance/slight_up",
+          "label": "slight_revenue"
+        },
+        {
+          "id": "concept://finance/volatile",
+          "label": "volatile"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "Growth is possible but uncertain given the thin volatile sample.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://finance/slight_up",
+          "concept://finance/volatile"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://finance/slight_up"
+        ]
+      },
+      "capability_family": "CAP-13",
+      "capability_families_secondary": [],
+      "domain": "finance",
+      "group_key": "sf_finance_cap13_38",
+      "split_group": "sf_finance_cap13_38",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_finance_cap13_38",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap13_b",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap13_b",
+        "seed_case_id": "td://v0/6b3/sf_finance_cap13_38",
+        "generation_timestamp": "2026-08-25T15:00:38+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/039",
+      "case_id": "td://v0/6b3/b2/sf_biology_cap13_39/039",
+      "percept": "The trait appears in some offspring but the sample is small.",
+      "task": "what confidence?",
+      "concepts": [
+        {
+          "id": "concept://biology/some_offspring",
+          "label": "trait_in_offspring"
+        },
+        {
+          "id": "concept://biology/small_sample",
+          "label": "small_sample"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "Inheritance is plausible but unconfirmed by the small sample.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://biology/some_offspring",
+          "concept://biology/small_sample"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://biology/some_offspring"
+        ]
+      },
+      "capability_family": "CAP-13",
+      "capability_families_secondary": [],
+      "domain": "biology",
+      "group_key": "sf_biology_cap13_39",
+      "split_group": "sf_biology_cap13_39",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_biology_cap13_39",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap13_c",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap13_c",
+        "seed_case_id": "td://v0/6b3/sf_biology_cap13_39",
+        "generation_timestamp": "2026-08-25T15:00:39+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/040",
+      "case_id": "td://v0/6b3/b2/sf_weather_cap13_40/040",
+      "percept": "Models hint at a storm but confidence is low and timing unclear.",
+      "task": "what confidence?",
+      "concepts": [
+        {
+          "id": "concept://wx/model_hint",
+          "label": "model_storm"
+        },
+        {
+          "id": "concept://wx/low_conf",
+          "label": "low_confidence"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "A storm is possible but confidence remains low.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://wx/model_hint",
+          "concept://wx/low_conf"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://wx/model_hint"
+        ]
+      },
+      "capability_family": "CAP-13",
+      "capability_families_secondary": [],
+      "domain": "weather",
+      "group_key": "sf_weather_cap13_40",
+      "split_group": "sf_weather_cap13_40",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_weather_cap13_40",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_cap13_d",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "GOLD_POSITIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_cap13_d",
+        "seed_case_id": "td://v0/6b3/sf_weather_cap13_40",
+        "generation_timestamp": "2026-08-25T15:00:40+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/041",
+      "case_id": "td://v0/6b3/b2/sf_household_neg_41/041",
+      "percept": "The window is cracked and the glass is on the floor.",
+      "task": "what interpretation is supported?",
+      "concepts": [
+        {
+          "id": "concept://household/window_crack",
+          "label": "window_cracked"
+        },
+        {
+          "id": "concept://household/glass_floor",
+          "label": "glass_floor"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The window is cracked and glass lies on the floor.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://household/window_crack",
+          "concept://household/glass_floor"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://household/window_crack"
+        ]
+      },
+      "capability_family": "CAP-01",
+      "capability_families_secondary": [],
+      "domain": "household",
+      "group_key": "sf_household_neg_41",
+      "split_group": "sf_household_neg_41",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_household_neg_41",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_neg_repeat_a",
+      "_masked_expected_novelty": "REPEAT",
+      "_masked_expected_derivability": "DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "HARD_NEGATIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_neg_repeat_a",
+        "seed_case_id": "td://v0/6b3/sf_household_neg_41",
+        "generation_timestamp": "2026-08-25T15:00:41+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/042",
+      "case_id": "td://v0/6b3/b2/sf_household_neg_42/042",
+      "percept": "The dog barked and the mail arrived.",
+      "task": "what interpretation is supported?",
+      "concepts": [
+        {
+          "id": "concept://household/dog_bark",
+          "label": "dog_barked"
+        },
+        {
+          "id": "concept://household/mail",
+          "label": "mail_arrived"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The dog barked and the mail arrived.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://household/dog_bark",
+          "concept://household/mail"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://household/dog_bark"
+        ]
+      },
+      "capability_family": "CAP-01",
+      "capability_families_secondary": [],
+      "domain": "household",
+      "group_key": "sf_household_neg_42",
+      "split_group": "sf_household_neg_42",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_household_neg_42",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_neg_repeat_b",
+      "_masked_expected_novelty": "REPEAT",
+      "_masked_expected_derivability": "DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "HARD_NEGATIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_neg_repeat_b",
+        "seed_case_id": "td://v0/6b3/sf_household_neg_42",
+        "generation_timestamp": "2026-08-25T15:00:42+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/043",
+      "case_id": "td://v0/6b3/b2/sf_weather_neg_43/043",
+      "percept": "Clear blue sky and calm wind at the hilltop.",
+      "task": "what severe event is imminent?",
+      "concepts": [
+        {
+          "id": "concept://wx/clear_sky2",
+          "label": "clear_blue_sky"
+        },
+        {
+          "id": "concept://wx/calm2",
+          "label": "calm_wind"
+        },
+        {
+          "id": "concept://wx/hill",
+          "label": "hilltop"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "A flash flood will engulf the valley within minutes.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://wx/clear_sky2",
+          "concept://wx/calm2",
+          "concept://wx/hill"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://wx/clear_sky2",
+          "concept://wx/hill"
+        ]
+      },
+      "capability_family": "CAP-09",
+      "capability_families_secondary": [],
+      "domain": "weather",
+      "group_key": "sf_weather_neg_43",
+      "split_group": "sf_weather_neg_43",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_weather_neg_43",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_neg_unsupp_a",
+      "_masked_expected_novelty": "UNSUPPORTED",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "HARD_NEGATIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_neg_unsupp_a",
+        "seed_case_id": "td://v0/6b3/sf_weather_neg_43",
+        "generation_timestamp": "2026-08-25T15:00:43+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/044",
+      "case_id": "td://v0/6b3/b2/sf_household_neg_44/044",
+      "percept": "The room is quiet and the lights are on.",
+      "task": "what disaster occurred?",
+      "concepts": [
+        {
+          "id": "concept://household/quiet",
+          "label": "quiet_room"
+        },
+        {
+          "id": "concept://household/lights",
+          "label": "lights_on"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "An earthquake destroyed the building an hour ago.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://household/quiet",
+          "concept://household/lights"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://household/quiet",
+          "concept://household/lights"
+        ]
+      },
+      "capability_family": "CAP-03",
+      "capability_families_secondary": [],
+      "domain": "household",
+      "group_key": "sf_household_neg_44",
+      "split_group": "sf_household_neg_44",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_household_neg_44",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_neg_unsupp_b",
+      "_masked_expected_novelty": "UNSUPPORTED",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "HARD_NEGATIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_neg_unsupp_b",
+        "seed_case_id": "td://v0/6b3/sf_household_neg_44",
+        "generation_timestamp": "2026-08-25T15:00:44+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/045",
+      "case_id": "td://v0/6b3/b2/sf_finance_neg_45/045",
+      "percept": "Bond yield rose one percent.",
+      "task": "interpret the yield.",
+      "concepts": [
+        {
+          "id": "concept://finance/yield_up2",
+          "label": "yield_risen"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The sky is green today.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://finance/yield_up2"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://finance/yield_up2"
+        ]
+      },
+      "capability_family": "CAP-03",
+      "capability_families_secondary": [],
+      "domain": "finance",
+      "group_key": "sf_finance_neg_45",
+      "split_group": "sf_finance_neg_45",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_finance_neg_45",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_neg_irrel_a",
+      "_masked_expected_novelty": "DECISION_IRRELEVANT",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "HARD_NEGATIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_neg_irrel_a",
+        "seed_case_id": "td://v0/6b3/sf_finance_neg_45",
+        "generation_timestamp": "2026-08-25T15:00:45+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/046",
+      "case_id": "td://v0/6b3/b2/sf_medical_neg_46/046",
+      "percept": "Patient has a rash and a fever; chart notes allergy history.",
+      "task": "what is the cardiac status?",
+      "concepts": [
+        {
+          "id": "concept://medical/rash",
+          "label": "skin_rash"
+        },
+        {
+          "id": "concept://medical/fever2",
+          "label": "patient_fever"
+        },
+        {
+          "id": "concept://medical/allergy",
+          "label": "allergy_history"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The patient enjoys classical music.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://medical/rash",
+          "concept://medical/fever2",
+          "concept://medical/allergy"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://medical/rash",
+          "concept://medical/fever2"
+        ]
+      },
+      "capability_family": "CAP-13",
+      "capability_families_secondary": [],
+      "domain": "medical",
+      "group_key": "sf_medical_neg_46",
+      "split_group": "sf_medical_neg_46",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_medical_neg_46",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_neg_irrel_b",
+      "_masked_expected_novelty": "DECISION_IRRELEVANT",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "HARD_NEGATIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_neg_irrel_b",
+        "seed_case_id": "td://v0/6b3/sf_medical_neg_46",
+        "generation_timestamp": "2026-08-25T15:00:46+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/047",
+      "case_id": "td://v0/6b3/b2/sf_medical_neg_47/047",
+      "percept": "Early data show a trend but no significance.",
+      "task": "what conclusion is supported?",
+      "concepts": [
+        {
+          "id": "concept://medical/trend2",
+          "label": "early_trend"
+        },
+        {
+          "id": "concept://medical/no_sig2",
+          "label": "no_significance"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The treatment is conclusively cured.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://medical/trend2",
+          "concept://medical/no_sig2"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://medical/trend2"
+        ]
+      },
+      "capability_family": "CAP-13",
+      "capability_families_secondary": [],
+      "domain": "medical",
+      "group_key": "sf_medical_neg_47",
+      "split_group": "sf_medical_neg_47",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_medical_neg_47",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_neg_prem_a",
+      "_masked_expected_novelty": "EPISTEMICALLY_PREMATURE",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "HARD_NEGATIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_neg_prem_a",
+        "seed_case_id": "td://v0/6b3/sf_medical_neg_47",
+        "generation_timestamp": "2026-08-25T15:00:47+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/048",
+      "case_id": "td://v0/6b3/b2/sf_biology_neg_48/048",
+      "percept": "A small pilot in ten subjects suggests improvement; no control group.",
+      "task": "what is proven?",
+      "concepts": [
+        {
+          "id": "concept://biology/pilot",
+          "label": "pilot_subjects"
+        },
+        {
+          "id": "concept://biology/improve",
+          "label": "suggested_improve"
+        },
+        {
+          "id": "concept://biology/no_control",
+          "label": "no_control"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The compound is definitively proven to extend lifespan in humans beyond doubt.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://biology/pilot",
+          "concept://biology/improve",
+          "concept://biology/no_control"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://biology/pilot",
+          "concept://biology/improve"
+        ]
+      },
+      "capability_family": "CAP-10",
+      "capability_families_secondary": [],
+      "domain": "biology",
+      "group_key": "sf_biology_neg_48",
+      "split_group": "sf_biology_neg_48",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_biology_neg_48",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_neg_prem_b",
+      "_masked_expected_novelty": "EPISTEMICALLY_PREMATURE",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "HARD_NEGATIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_neg_prem_b",
+        "seed_case_id": "td://v0/6b3/sf_biology_neg_48",
+        "generation_timestamp": "2026-08-25T15:00:48+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/050",
+      "case_id": "td://v0/6b3/b2/sf_physics_cap04_05/050",
+      "percept": "A book rests on a table; a cat walks by; the table is wooden.",
+      "task": "what is the support state of the book?",
+      "concepts": [
+        {
+          "id": "concept://physics/book_rest2",
+          "label": "book_resting"
+        },
+        {
+          "id": "concept://physics/wood_table2",
+          "label": "wooden_table"
+        },
+        {
+          "id": "concept://physics/cat2",
+          "label": "cat_walking"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The cat is holding the book up off the table.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://physics/book_rest2",
+          "concept://physics/wood_table2",
+          "concept://physics/cat2"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://physics/book_rest2",
+          "concept://physics/wood_table2"
+        ]
+      },
+      "capability_family": "CAP-04",
+      "capability_families_secondary": [],
+      "domain": "physics",
+      "group_key": "sf_physics_cap04_05",
+      "split_group": "sf_physics_cap04_05",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_physics_cap04_05",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_neg_neardup_a",
+      "_masked_expected_novelty": "UNSUPPORTED",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "HARD_NEGATIVE",
+      "near_of": 5,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_neg_neardup_a",
+        "seed_case_id": "td://v0/6b3/sf_physics_cap04_05",
+        "generation_timestamp": "2026-08-25T15:00:50+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    },
+    {
+      "review_id": "rev://v0.3/b2/051",
+      "case_id": "td://v0/6b3/b2/sf_weather_neg_51/051",
+      "percept": "Rain falls, a dog barks, and a car horn sounds.",
+      "task": "what is the weather interpretation?",
+      "concepts": [
+        {
+          "id": "concept://wx/rain2",
+          "label": "raining"
+        },
+        {
+          "id": "concept://wx/dog2",
+          "label": "barking_dog"
+        },
+        {
+          "id": "concept://wx/horn2",
+          "label": "car_horn"
+        }
+      ],
+      "beliefs": [],
+      "rules": [],
+      "candidate_proposition": "The car horn indicates heavy rainfall.",
+      "grounding_snapshot": {
+        "concept_ids": [
+          "concept://wx/rain2",
+          "concept://wx/dog2",
+          "concept://wx/horn2"
+        ],
+        "belief_ids": [],
+        "rule_ids": [],
+        "evidence_ids": [
+          "concept://wx/rain2",
+          "concept://wx/horn2"
+        ]
+      },
+      "capability_family": "CAP-04",
+      "capability_families_secondary": [],
+      "domain": "weather",
+      "group_key": "sf_weather_neg_51",
+      "split_group": "sf_weather_neg_51",
+      "human_review_status": "UNREVIEWED",
+      "_masked_original_case_id": "td://v0/6b3/sf_weather_neg_51",
+      "_masked_generator_id": "gen_6b3_batch2",
+      "_masked_template_id": "tmpl_6b3b2_neg_dist_a_remediated",
+      "_masked_expected_novelty": "SEMANTIC_NOVEL",
+      "_masked_expected_derivability": "NON_DERIVABLE",
+      "_masked_expected_abstention": "SHOULD_PROPOSE",
+      "target_disposition": "HARD_NEGATIVE",
+      "near_of": null,
+      "provenance": {
+        "generator_id": "gen_6b3_batch2",
+        "generator_version": "gen-v0.4.1",
+        "dataset_version": "ds-v0.4-candidates",
+        "random_seed": 43,
+        "template_id": "tmpl_6b3b2_neg_dist_a_remediated",
+        "seed_case_id": "td://v0/6b3/sf_weather_neg_51",
+        "generation_timestamp": "2026-08-25T15:10:51+00:00",
+        "deterministic": true,
+        "spec_ref": "theo-core/docs/research/theo-slm-dataset-v0.md"
+      }
+    }
+  ],
+  "remediated": true,
+  "replaced": {
+    "removed": "rev://v0.3/b2/049",
+    "added": "rev://v0.3/b2/051",
+    "reason": "near-paraphrase of Batch-1 rev://v0.3/b1/027 (token-Jaccard 0.818); replaced under 6B.3 Batch-2 remediation"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "purpose": "read-only runtime feasibility (no training, no dataset mutation)",
+  "required": {
+    "python": "3.14.3",
+    "torch": "2.13.0+cu126",
+    "cuda_runtime": "12.6",
+    "transformers": "5.8.0",
+    "peft": "0.20.0",
+    "bitsandbytes": "0.50.1"
+  },
+  "base_image_python": "3.12.13",
+  "hard_stopping_rule": "PASS -> consider fresh L5 training auth; FAIL -> abandon Kaggle path",
+  "base_image_is_3_12": true,
+  "realized": {
+    "python": "3.14.3",
+    "torch": "2.13.0+cu126",
+    "cuda_runtime": "12.6",
+    "cuda_available": true,
+    "gpu_name": "Tesla P100-PCIE-16GB",
+    "cuda_driver": [
+      6,
+      0
+    ],
+    "transformers": "5.8.0",
+    "peft": "0.20.0",
+    "bitsandbytes": "0.50.1",
+    "bitsandbytes_package_sha256": "fdddb68ee4f6906045d1c211a01ede71e23582f650274247fbdc94af35d88eaa",
+    "linux": "Linux",
+    "glibc": "glibc 2.35"
+  },
+  "mismatches": [],
+  "qlora_prereqs": {
+    "gpu_accessible": true,
+    "bitsandbytes_importable": true,
+    "4bit_available": true
+  },
+  "verdict": "FEASIBLE",
+  "fail_closed": false
+}
